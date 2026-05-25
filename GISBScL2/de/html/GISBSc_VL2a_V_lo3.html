@@ -1,0 +1,509 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Datenbankschemata und Datenbankinstanzen. Konzept und Umsetzung - Die 3-Schema-Architektur. Schema und Instanz. Datenunabhängigkeit. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Datenbankschemata und Datenbankinstanzen</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL2a_V_lo2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2a_V_lo4.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo1.html">Komponenten eines Informationssystems</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo2.html">Eigenschaften von Datenbanksystemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Schemata und Instanzen</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo4.html"> Das relationale Datenmodell</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo5.html">Datenintegrität</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo7.html">Datenbanksprachen und Datenbankschnittstellen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2a_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2a_V_lo3.html">Datenbankschemata und Datenbankinstanzen</h1>
+               <div id="d14e186.html" class="clarify">
+                  <p class="paragraph" id="d14e187"> Beim Entwurf einer Datenbank wird zwischen zwei Abstraktionsstufen und
+                     ihren entsprechenden Datenschemata, dem konzeptionellen und logischen
+                     Datenschema, unterschieden.
+                  </p>
+                  <ul class="list" id="d14e189">
+                     <li class="itemAlt">
+                        <p class="paragraph" id="d14e191">Ein konzeptionelles Datenschema ist eine systemunabhängige
+                           Datenbeschreibung, d.h. sie ist unabhängig von den eingesetzten
+                           Datenbank- und Computersystemen. <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3845">Zehnder</a> 1998)</span></p>
+                     </li>
+                     <li class="item">
+                        <p class="paragraph" id="d14e195">Ein logisches Datenschema beschreibt die Daten in der
+                           Datenbeschreibungssprache (DDL = Data Definition Language) eines
+                           bestimmten Datenbank-Verwaltungssystems. Es beschreibt (abgeleitet aus
+                           dem konzeptionellen Schema) formal den grundlegenden Aufbau der
+                           Datenstruktur. <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3845">Zehnder</a> 1998)</span></p>
+                     </li>
+                  </ul><span class="multimedia_paragraph_right"><img class="multimedia" id="d14e198" src="../image/schemas.gif" width="300"
+                          title="Abbildung 14: Schematische Darstellung der verschiedenen Schemas"
+                          alt="Abbildung 14: Schematische Darstellung der verschiedenen Schemas" /><span class="legend" style="display:block">Abbildung 14: Schematische Darstellung der verschiedenen Schemas (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="paragraph" id="d14e199">Das konzeptionelle Datenschema orientiert sich ausschließlich an der
+                     Datenbankanwendung und somit an der realen Welt, nicht aber an der
+                     datentechnischen Infrastruktur (DBMS und Computersysteme), die nur für die
+                     Implementierung zum Einsatz kommen. Üblicherweise sind Relationen die Werkzeuge
+                     für die Erstellung eines konzeptionellen Schemas. <br />Beim
+                     Datenbankentwurf wird aus dem konzeptionellen Datenschema das logische Schema
+                     abgeleitet. Am Ende dieser Ableitung steht das e Datenschema für eine spezielle
+                     Anwendung und ein spezielles DBMS. Ein DB-Entwicklungssystem setzt danach das e
+                     Schema direkt in Anweisungen für das DBMS um.
+                  </p>
+                  <h4>Konzept und Umsetzung - Die 3-Schema-Architektur</h4>
+                  <p class="paragraph" title="Konzept und Umsetzung - Die 3-Schema-Architektur"
+                     id="d14e203">Nachdem wir e
+                     Datenbankschemata kennengelernt haben, müssen noch zwei weitere Schemata ergänzt
+                     werden. Die Einführung eines externen und internen Schemas ist notwendig für das
+                     Verständnis der gegenwärtigen Informationssystem-Architekturen. Vor diesem
+                     Hintergrund wird bei Informationssystemen auch von einer <i>Drei-Schema-Architektur</i> gesprochen.
+                  </p><span class="multimedia_paragraph_center"><a href="../image/dreischemaarchitektur.gif" target="_blank" class="lightwindow"
+                        rel="Gallery[Schemata und Instanzen]"
+                        title="Abbildung 15: Die Drei-Schema-Architektur"><img class="multimedia" id="d14e208" src="../image/dreischemaarchitektur.gif"
+                             width="600"
+                             title="Abbildung 15: Die Drei-Schema-Architektur"
+                             alt="Abbildung 15: Die Drei-Schema-Architektur" /></a><span class="legend" style="display:block">Abbildung 15: Die Drei-Schema-Architektur (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="paragraph" id="d14e209"> Die Drei-Schema-Architektur beschreibt unterschiedliche Sichtweisen des
+                     Datenbankentwurfs:
+                  </p>
+                  <dl class="glossary">
+                     <dt>Logisches Schema: </dt>
+                     <dd>Das Logische Datenschema erweitert das
+                        Konzeptschema um datentechnische Angaben (z. B. Feldformate, identifizierende
+                        Suchbegriffe etc.). Das logische Datenbankschema gehorcht den Regeln einer durch das zu
+                        verwendende DBMS gegebenen Struktur, z.B. dem relationalen Datenmodell, bei dem alle
+                        Daten in Tabellen abgelegt werden (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3839">Wikipedia-Autoren</a> 2. November 2011)
+                     </dd>
+                  </dl>
+                  <dl class="glossary">
+                     <dt>Externes Schema: </dt>
+                     <dd> Ein externes Datenschema beschreibt die
+                        Benutzersichtdaten bestimmter Benutzer(gruppen) sowie die damit verbundenen spezifischen
+                        Operationen und Bedingungen. Da das externe Schema Abbild einer konkreten
+                        Nutzer-Anwendung ist, betrifft es im Allgemeinen nur den anwendungsrelevanten
+                        Teilbereich des logischen Schemas (Schnittstellen) <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3845">Zehnder</a> 1998)</span>. 
+                     </dd>
+                  </dl>
+                  <dl class="glossary">
+                     <dt>Internes Schema: </dt>
+                     <dd> Das interne Datenschema beschreibt den Inhalt der
+                        Datenbasis und die benötigten Dienstleistungsfunktionen, soweit dies für den Einsatz des
+                        DBMS nötig ist<span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3845">Zehnder</a> 1998)</span>. <br /> Das interne Schema
+                        beschreibt somit die Daten aus technischer Sicht des Systems. Es übersetzt das
+                        zugehörige logische Schema in konkrete datentechnische Aspekte, wie Speichermethoden
+                        oder Hilfskonstrukte zur Steigerung der Effizienz. 
+                     </dd>
+                  </dl>
+                  <p class="paragraph" id="d14e217">Daraus folgt, dass jede Datenbank genau ein internes und ein logisches
+                     Schema hat, während jeweils mehrere externe Schemata möglich sind. Das Ziel der
+                     Drei-Schema-Architektur ist, während des Entwurfs und der Implementierung einer
+                     Datenbank die Trennung der Benutzeranwendungen von der physischen Datenbank (den
+                     gespeicherten Daten), zu gewährleisten. Physisch sind die Daten lediglich auf
+                     der internen Ebene vorhanden, die anderen Repräsentationsformen werden jeweils
+                     bei Bedarf daraus berechnet bzw. abgeleitet. Das DBMS hat die Aufgabe, die
+                     Abbildung zwischen den einzelnen Ebenen zu realisieren.
+                  </p>
+               </div>
+               <div class="look">
+                  <h2 id="d14e219.html">Schema und Instanz</h2>
+                  <p class="paragraph" id="d14e220">Bei allen Datenbankmodellen ist es wichtig, zwischen der Beschreibung der
+                     Datenbank und der real implementierten Datenbank zu unterscheiden. Die
+                     Beschreibung einer Datenbank wird <i>Datenbankschema</i> genannt. Das Datenbankschema wird während des
+                     Datenbank-Design-Prozesses festgelegt und ändert sich später nur sehr selten und
+                     nach Möglichkeit nie. Die eigentlichen Daten einer Datenbank verändern sich im
+                     Laufe der Zeit häufig. Der Datenbankzustand zu einem bestimmten Zeitpunkt,
+                     gegeben durch die aktuell existierenden Inhalte und Beziehungen und deren
+                     Attribute, wird <i>Datenbankinstanz</i> genannt.
+                     Versuchen Sie sich anhand der nachfolgenden Abbildung zu verdeutlichen, dass das
+                     Datenbankschema als Schablone oder Bauplan für eine oder mehrere
+                     Datenbankinstanzen betrachtet werden kann.
+                  </p><span class="multimedia_paragraph_center"><a href="../image/analogie.gif" target="_blank" class="lightwindow"
+                        rel="Gallery[Schemata und Instanzen]"
+                        title="Abbildung 16: Beispielhafte Darstellung von Datenbankschema und Instanzen mit Hilfe einer Analogie aus dem Bauwesen. Der konkret ausgeführte Bauplan stellt kein Haus, sondern eben den zeichnerischen Entwurf eines Hauses - eben den Bauplan dar."><img class="multimedia" id="d14e228" src="../image/analogie.gif"
+                             title="Abbildung 16: Beispielhafte Darstellung von Datenbankschema und Instanzen mit Hilfe einer Analogie aus dem Bauwesen. Der konkret ausgeführte Bauplan stellt kein Haus, sondern eben den zeichnerischen Entwurf eines Hauses - eben den Bauplan dar."
+                             alt="Abbildung 16: Beispielhafte Darstellung von Datenbankschema und Instanzen mit Hilfe einer Analogie aus dem Bauwesen. Der konkret ausgeführte Bauplan stellt kein Haus, sondern eben den zeichnerischen Entwurf eines Hauses - eben den Bauplan dar." /></a><span class="legend" style="display:block">Abbildung 16: Beispielhafte Darstellung von Datenbankschema und Instanzen mit Hilfe einer Analogie aus dem Bauwesen. Der konkret
+                        ausgeführte Bauplan stellt kein Haus, sondern eben den zeichnerischen Entwurf eines Hauses - eben den Bauplan dar. (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><h4>Datenunabhängigkeit</h4>
+                  <p class="paragraph" title="Datenunabhängigkeit" id="d14e229">Mit Kenntnis der Drei-Schema-Architektur
+                     lässt sich der Begriff der Datenunabhängigkeit so erläutern, dass eine höhere
+                     Ebene dieser Datenarchitektur immun gegenüber Änderungen auf der nächst tieferen
+                     Ebene ist.
+                  </p>
+                  <dl class="glossary">
+                     <dt>Physikalische Unabhängigkeit: </dt>
+                     <dd> Das logische Schema kann demnach
+                        unverändert bleiben, wenn sich beispielsweise aus Gründen der Optimierung oder
+                        Reorganisation der Speicherort oder die Speicherform einzelner Daten ändern. 
+                     </dd>
+                  </dl>
+                  <dl class="glossary">
+                     <dt>Logische Unabhängigkeit: </dt>
+                     <dd> Ebenso können bei (den meisten) Änderungen des
+                        logischen Schemas die externen Schemas unverändert weiterbestehen. Dies ist besonders
+                        deshalb erwünscht, weil dadurch Anwendungsprogramme nicht modifiziert oder neu übersetzt
+                        werden müssen. 
+                     </dd>
+                  </dl>
+               </div>
+               <div id="d14e235.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e236">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d14e237">
+                        <li class="itemAlt">Machen Sie sich mit Hilfe der nachfolgenden Tabelle Gedanken welche
+                           Schemata Sie identifizieren können.
+                        </li>
+                     </ul><span class="multimedia_paragraph_center"><a href="../image/matrix2.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Schemata und Instanzen]"
+                           title="Abbildung 17: Bewertungsmatrix Schemata von DBS"><img class="multimedia" id="d14e240" src="../image/matrix2.png" width="470"
+                                title="Abbildung 17: Bewertungsmatrix Schemata von DBS"
+                                alt="Abbildung 17: Bewertungsmatrix Schemata von DBS" /></a><span class="legend" style="display:block">Abbildung 17: Bewertungsmatrix Schemata von DBS (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3843">GIS.MA</a> 2009)</span></span></div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL2a_V_lo2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2a_V_lo4.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

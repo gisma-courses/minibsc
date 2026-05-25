@@ -1,0 +1,500 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Wissens-Check. " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Wissens-Check</title>
+      		
+      <link href="selfCheck.css" type="text/css" rel="stylesheet" media="screen" />
+      		<script src="selfCheck.js" type="text/javascript">
+         <!----></script><link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSC_UE2b_summary.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBScL2_bibliography.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2b_U_lo1.html">Thematische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2b_U_lo2.html">Geometrische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2b_U_lo3.html">Topologische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2b_U_lo4.html">Lösungshilfen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSC_UE2b_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Wissens-Check</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSC_UE2b_WC_VL.html">Wissens-Check</h1>
+               <p class="paragraph" id="d14e3712">Sie möchten Freizeiteinrichtungen finden, mit denen Ihre Firma
+                  zusammenarbeiten könnte um Wasserfreizeitsaktivitäten anzubieten. Um die Wahl
+                  einzugrenzen, führen Sie mit den in der online verfügbaren Geodatabase enthaltenen
+                  Datensätzen folgende, aufeinander aufbauende Abfragen durch. Die Schritte sind
+                  sukzessiv. Wenn Sie alle Abfragen richtig durchgeführt haben, steht ledig noch eine
+                  Freizeiteinrichtung zur Wahl. Mehrfachnennungen sind möglich.
+               </p>
+               <div id="selfCheck2.html" class="singleChoice">
+                  <div class="itemQuestion"><b>1)</b> Zunächst finden Sie geeignete
+                     Fließgewässer, an denen Wasserfreizeitaktivitäten möglich wären. Dazu
+                     selektieren Sie alle Bäche, deren Länge größer ist als 350 m.
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="1" class="itemRadio"
+                            id="selfCheck2.html_d14e3720" /><div class="itemLabel"><label for="selfCheck2.html_d14e3720">Selection -&gt; Select by Attributes -&gt; Layer: Streams
+                           -&gt; Method: Create a new selection -&gt; "Shape_Length" &gt; 350 <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3722" /><div class="itemLabel"><label for="selfCheck2.html_d14e3722">Selection -&gt; Select by Attributes -&gt; Layer: Streams
+                           -&gt; Method: Create a new selection -&gt; "Stream_Ord" &gt;= 4 <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3724" /><div class="itemLabel"><label for="selfCheck2.html_d14e3724">Selection -&gt; Select by Location -&gt; I want to select
+                           layers from -&gt; Streams -&gt; that are within (Clementini) -&gt; the
+                           features in this layer: Insel -&gt; Apply a buffer to the features in Insel
+                           of 350 Meters <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck2.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck2.html_solution"
+                             onclick="solutionChoice('selfCheck2.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck3.html" class="multipleChoice">
+                  <div class="itemQuestion"><b>2)</b> Finden Sie alle
+                     Outdoor-Freizeitangebote, die weniger als 500 m von einem geeigneten
+                     (selektierten) Fluss entfernt sind.
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="1" class="itemRadio"
+                            id="selfCheck3.html_d14e3732" /><div class="itemLabel"><label for="selfCheck3.html_d14e3732">Selection -&gt; Select by Location -&gt; I want to select
+                           features from -&gt; Infra_Freizeit -&gt; that are within a distance of -&gt;
+                           the features in this layer: Streams -&gt; Use selected features -&gt; Apply
+                           a buffer to the features in Streams of 500 Meters -&gt; Select by Attributes
+                           -&gt; Layer: Infra_Freizeit -&gt; Method: Remove from current selection
+                           -&gt; "Typ" = 'Indoor' <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="1" class="itemRadio"
+                            id="selfCheck3.html_d14e3734" /><div class="itemLabel"><label for="selfCheck3.html_d14e3734">Selection -&gt; Select by Location -&gt; I want to select
+                           features from -&gt; Infra_Freizeit -&gt; that are within -&gt; the features
+                           in this layer: Streams -&gt; Use selected features -&gt; Apply a buffer to
+                           the features in Streams of 500 Meters -&gt; Select by Attributes -&gt;
+                           Layer: Infra_Freizeit -&gt; Method: Remove from current selection -&gt;
+                           "Typ" = 'Indoor' <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="0" class="itemRadio"
+                            id="selfCheck3.html_d14e3736" /><div class="itemLabel"><label for="selfCheck3.html_d14e3736">Selection -&gt; Select by Location -&gt; I want to select
+                           features from -&gt; Infra_Freizeit -&gt; that touch the boundary of -&gt;
+                           the features in this layer: Streams -&gt; Use selected features -&gt; Apply
+                           a buffer to the features in Streams of 400 Meters <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="0" class="itemRadio"
+                            id="selfCheck3.html_d14e3738" /><div class="itemLabel"><label for="selfCheck3.html_d14e3738">Selection -&gt; Select by Attributes -&gt; Layer:
+                           Infra_Freizeit -&gt; Method: Create a new selection -&gt; "Typ" &lt;&gt;
+                           'Indoor' <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck3.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck3.html_solution"
+                             onclick="solutionChoice('selfCheck3.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck4.html" class="multipleChoice">
+                  <div class="itemQuestion"><b>3)</b> Finden Sie alle geeigneten
+                     Outdoor-Angeboten, die weniger als 400 m von einer Gesundheitseinrichtungen
+                     entfernt sind.
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="1" class="itemRadio"
+                            id="selfCheck4.html_d14e3746" /><div class="itemLabel"><label for="selfCheck4.html_d14e3746">Selection -&gt; Selection by Attributes -&gt; Layer:
+                           Infra_Oeffentlich -&gt; Method: Add to current selection -&gt; "Typ" =
+                           'Gesundheit' -&gt; Select by Location -&gt; I want to select from the
+                           currently selected features in -&gt; Infra_Freizeit -&gt; that are within a
+                           distance of -&gt; the features in this layer: Infra_Oeffentlich -&gt; Use
+                           selected features -&gt; Apply a buffer to the features in Infra_Oeffentlich
+                           of: 400 Meters <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="1" class="itemRadio"
+                            id="selfCheck4.html_d14e3748" /><div class="itemLabel"><label for="selfCheck4.html_d14e3748">Select by Location -&gt; I want to select features from
+                           -&gt; Infra_Oeffentlich -&gt; that are within a distance of -&gt; the
+                           features in this layer: Infra_Freizeit -&gt; Use selected features -&gt;
+                           Apply a buffer to the features in Infra_Freizeit of: 400 Meters -&gt;
+                           Selection -&gt; Select by Attributes -&gt; Layer: Infra_Oeffentlich -&gt;
+                           Method: Remove from current selection -&gt; "Typ" &lt;&gt;'Gesundheit' -&gt;
+                           Selection -&gt; Select by Location -&gt; I want to select from the currently
+                           selected features in -&gt; Infra_Freizeit -&gt; that are within a distance
+                           of -&gt; the features in this layer: Infra_Oeffentlich -&gt; Use selected
+                           features -&gt; Apply a buffer to the features in Infra_Oeffentlich of: 400
+                           Meters <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="0" class="itemRadio"
+                            id="selfCheck4.html_d14e3750" /><div class="itemLabel"><label for="selfCheck4.html_d14e3750">Select by Location -&gt; I want to select features from
+                           -&gt; Infra_Oeffentlich -&gt; that are within a distance of -&gt; the
+                           features in this layer: Infra_Freizeit -&gt; Use selected features -&gt;
+                           Apply a buffer to the features in Infra_Freizeit of: 400 Meters -&gt;
+                           Selection -&gt; Select by Attributes -&gt; Layer: Infra_Oeffentlich -&gt;
+                           Method: Remove from current selection -&gt; "Typ" &lt;&gt; 'Gesundheit'
+                           -&gt; Selection -&gt; Select by Location -&gt; I want to select features
+                           from -&gt; Infra_Freizeit -&gt; that are within a distance of -&gt; the
+                           features in this layer: Infra_Oeffentlich -&gt; Use selected features -&gt;
+                           Apply a buffer to the features in Infra_Oeffentlich of: 400 Meters <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="0" class="itemRadio"
+                            id="selfCheck4.html_d14e3752" /><div class="itemLabel"><label for="selfCheck4.html_d14e3752">a.Select by Location -&gt; I want to select features from
+                           -&gt; Infra_Oeffentlich -&gt; that are within a distance of -&gt; the
+                           features in this layer: Infra_Freizeit -&gt; Use selected features -&gt;
+                           Apply a buffer to the features in Infra_Freizeit of: 400 Meters -&gt;
+                           Selection -&gt; Select by Attributes -&gt; Layer: Infra_Oeffentlich -&gt;
+                           Method: Remove from current selection -&gt; "Typ" &lt;&gt;
+                           'Gesundheit' <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck4.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck4.html_solution"
+                             onclick="solutionChoice('selfCheck4.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSC_UE2b_summary.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBScL2_bibliography.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

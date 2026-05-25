@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>wikilink2.kml</name>
+	<Style id="khStyle542">
+		<IconStyle id="khIconStyle546">
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pal5/icon30.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Placemark>
+		<name>wikipedia</name>
+		<LookAt>
+			<longitude>22.066667</longitude>
+			<latitude>49.5</latitude>
+			<altitude>0</altitude>
+			<range>3263.589610752394</range>
+			<tilt>4.960085062015398e-011</tilt>
+			<heading>1.051864229952577</heading>
+		</LookAt>
+		<styleUrl>#khStyle542</styleUrl>
+		<Point>
+			<coordinates>22.066667,49.50000000000001,0</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

@@ -1,0 +1,500 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Räumliche Analysemethoden: Funktionale Ableitungen aus kontinuierlichen Raumdaten. Hangneigung. Exposition. Kurvatur. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Marco                         Hugentobler (GITTA contributor) , Moe Myint (GITTA contributor) , Claude Collet (GITTA contributor) , Sandro Bischof (GITTA contributor) , Robert Weibel (GITTA contributor) , Suzette Hägi (GITTA contributor) , Joël                          Fisler (GITTA contributor) , Friedjoff Trautwein (GITTA contributor) , Marcel Frehner (GITTA contributor) , Eric Lorup (GITTA contributor) , Patrick                         Laube (GITTA contributor) " />
+      <meta name="keywords"
+            content="Räumliche Analysemethoden, Terrain Analysis, Eignungsanalyse, Entscheidungsunterstützung mit GIS, Boolesche Verschneidung, Boolesche Algebra, Standardisierung, Gewichtete Verschneidung, Proxyvariable, eLML" />
+      <title>Funktionale Ableitungen aus kontinuierlichen Raumdaten</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Räumliche Analysemethoden</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="VL3_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="VL3_V_lo5.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo1.html">Distanzbeziehungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo2.html">Distanz-basierte Interpolation</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo3.html">Informationen und Ableitungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Ableitung kontinuierlicher Datenfelder</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo5.html">Sichtbarkeitsanalyse</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo6.html">Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo7.html">Vertiefung Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo8.html">Ableitungen aus Abflussnetzwerken</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/VL3_selfAssessment9.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="VL3_V_lo4.html">Funktionale Ableitungen aus kontinuierlichen Raumdaten</h1>
+               <div id="d8e513.html" class="clarify">
+                  <p class="paragraph" id="d8e514"><span class="multimedia_inline_right"><a href="../image/terrainmatters.jpg" target="_blank" class="lightwindow"
+                           rel="Gallery[Ableitung kontinuierlicher Datenfelder]"
+                           title="Das Phänomen Gelände spielt häufig eine zentrale Rolle nicht nur auf Wanderwegen sondern auch in der skalenabhängigen Analyse von Oberflächenstrukturen, Standorten Versorgungsleitungen und vieles mehr"><img class="multimedia" id="d8e515" src="../image/terrainmatters_th.jpg" width="400"
+                                title="Das Phänomen Gelände spielt häufig eine zentrale Rolle nicht nur auf Wanderwegen sondern auch in der skalenabhängigen Analyse von Oberflächenstrukturen, Standorten Versorgungsleitungen und vieles mehr"
+                                alt="Das Phänomen Gelände spielt häufig eine zentrale Rolle nicht nur auf Wanderwegen sondern auch in der skalenabhängigen Analyse von Oberflächenstrukturen, Standorten Versorgungsleitungen und vieles mehr" /></a><span class="legend" style="display:block">Das Phänomen Gelände spielt häufig eine zentrale Rolle nicht nur auf Wanderwegen sondern auch in der skalenabhängigen Analyse
+                           von Oberflächenstrukturen, Standorten Versorgungsleitungen und vieles mehr (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1300">GIS.MA</a> 2009)</span></span></p>
+                  <p class="paragraph" id="d8e516"> Das Phänomen <i>Gelände</i> spielt in
+                     vielen räumlichen Vorstellungen eine zentrale Rolle. Diese reicht von der
+                     kognitiven Wahrnehmung z.b. der Frage Was ist eine Wanderweg? (vgl. Abbildung)
+                     bis zur zuvor skizzierten formalen, quantitativen Ableitung von
+                     Eigenschaften.<br /> In einem GIS werden die Informationen über die Form
+                     einer Geländeoberfläche in der Regel aus Höheninformationen abgeleitet. Diese
+                     Höheninformation wird in einem digitalen Geländemodell (DGM) gespeichert.
+                     Digitale Geländemodelle bestehen zunächst nur aus einer spezifischen
+                     Höheninformation für einen definierten Raumausschnitt (Rasterzelle, Punkt,
+                     Polygon). Auf der Basis dieser Primärinformation werden zahlreiche zusätzliche
+                     Informationen abgeleitet. Nachfolgend sollen am Beispiel der Hangneigung,
+                     Exposition und Kurvatur skizziert werden, wie die Ableitungen mit Hilfe von
+                     Funktionen berechnet werden. Entscheidend ist weniger die verwendete Mathematik
+                     als vielmehr die resultierenden Informationen, die für die unterschiedlichsten
+                     Fragestellungen verfügbar ist. 
+                  </p>
+                  <h4>Hangneigung</h4>
+                  <p class="paragraph" title="Hangneigung" id="d8e523"> Auf einer (Gelände-)Oberfläche ist die Neigung (oder
+                     auch: Hangneigung) an einem Punkt gegeben durch die Tangentialebene. Das
+                     steilste Gefälle auf dieser Tangentialebene bezeichnet man als Neigung (engl.
+                     slope). Die Neigung lässt sich aus den Ableitungen der Oberfläche in der
+                     Richtung der x-Koordinate und derjenigen in Richtung der y-Koordinate berechnen. 
+                  </p>
+                  <p class="paragraph" id="d8e525"> Um die Neigung aus einem Höhenmodell zu berechnen, braucht man daher
+                     eine Methode, mit der man Ableitungen aus den Höhenwerten schätzen kann. Die
+                     gängigste Art, dies für ein <b>gitterbasiertes
+                        Geländemodell</b> zu tun, ist unter dem Namen „finite Differenzen“
+                     bekannt <span class="citation"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1307">Horn</a> 1981)</span>. 
+                  </p>
+                  <p class="paragraph" id="d8e532"> Um das Prinzip der finiten Differenzen zu erläutern, sei zuerst auf den
+                     eindimensionalen Fall eines Profils (statt einer Oberfläche) zurückgegriffen.
+                     Die folgende Abbildung zeigt, wie durch Bildung des Quotienten der Differenzen
+                     der Höhe (dz) und in der Ebene (dx) zuerst die erste Ableitung (Slope), und
+                     davon ausgehend die zweite Ableitung (Curvature) geschätzt werden kann. Die
+                     gewählte Schrittweite in x-Richtung ist in diesem Fall gleich 4. Das heißt, es
+                     wird die finite Differenz bezgl. der beiden zweiten Nachbarn nach links bzw.
+                     nach rechts vom zentralen Punkt aus gebildet. Diesem zentralen Punkt wird sodann
+                     der Wert der Ableitung zugewiesen. In der Abbildung sind der Zentralpunkt sowie
+                     dz und dx entsprechend rot markiert. 
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e534" src="../image/Geomorphomet-hsc.png" alt="" /></span><p class="paragraph" id="d8e535"> Für den zweidimensionalen Fall einer Oberfläche gibt <span class="citation"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1307">Horn</a> 1981)</span> die Formeln zur Schätzung der Neigung
+                     mittels finiten Differenzen: 
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e539" src="../image/formula/slope.png" width="50%"
+                          alt="" /></span><p class="paragraph" id="d8e540"> mit </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e542" src="../image/formula/neigung_dx.png"
+                          width="50%"
+                          alt="" /></span><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e543" src="../image/formula/neigung_dy.png"
+                          width="50%"
+                          alt="" /></span><p class="paragraph" id="d8e545">Die Nummerierung der Punkte in der 3-3-Nachbarschaft um den Zentralpunkt
+                     (z5) zur Bildung der Differenzen ist aus der nachstehenden Abbildung
+                     ersichtlich. In den Formeln der finiten Differenzen oben fällt auf, dass die
+                     Differenzen, die durch den Zentralpunkt führen, doppelt gewichtet sind. 
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e547" src="../image/neigung_aufsicht.png" alt="" /></span><p class="paragraph" id="d8e548"> In einem linear interpolierten <b>dreiecksbasierten
+                        Geländemodell</b> können ebenfalls mit wenig Aufwand
+                     Richtungsableitungen berechnet werden. Die Höhe innerhalb einer Dreiecksfacette
+                     kann bestimmt werden durch die Ebenengleichung <code> z = ax +
+                        by + c </code>, wobei x, y und z die Koordinaten des Punktes sind, für
+                     den man die Höhe berechnen möchte. Durch die drei Eckpunkte einer
+                     Dreiecksfacette können a, b, c berechnet werden (3 Gleichungen, 3 Unbekannte).
+                     Somit hat man die Ableitung (Neigung) in x-Richtung (a) und die Ableitung in
+                     y-Richtung (b) bereits gefunden. 
+                  </p>
+                  <h4>Exposition</h4>
+                  <p class="paragraph" title="Exposition" id="d8e556"> Unter Exposition (engl. aspect) versteht man die
+                     Richtung (im Uhrzeigersinn von Norden = Azimut) des steilsten Gefälles der
+                     Tangentialebene. Wiederum benötigt man die Ableitungen in x- und y-Richtung zur
+                     Berechnung, wie sie für die Berechnung der Hangneigung schon gebildet wurden
+                     <span class="citation"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1307">Horn</a> 1981)</span>: 
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e560" src="../image/formula/aspect.png" width="169"
+                          alt="" /></span><p class="paragraph" id="d8e561"> mit </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e563" src="../image/formula/aspect_a.png" width="89"
+                          alt="" /></span><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e564" src="../image/formula/aspect_b.png" width="87"
+                          alt="" /></span><p class="paragraph" id="d8e565"> Zusätzlich muss man für die Berechnung unterscheiden, ob die Werte
+                     dieser Ableitungen negativ, null oder positiv sind (“mod” bezeichnet die
+                     Modulo-Division; ergibt den Divisionsrest): 
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e567" src="../image/formula/exposition.png"
+                          width="414"
+                          alt="" /></span><h4>Kurvatur</h4>
+                  <p class="paragraph" title="Kurvatur" id="d8e568"> Kurvatur (engl. curvature) ist die Krümmung (d. h. die
+                     zweite Ableitung) einer Oberfläche an einem bestimmten Punkt in eine bestimmte
+                     Richtung. <br />Bei digitalen Geländemodellen sind insbesondere die
+                     <b>Profilkurvatur</b> (Kurvatur in Richtung des
+                     steilsten Gefälles) und die <b>Plankurvatur</b>
+                     (Kurvatur in Richtung der Höhenlinie) von besonderem Interesse. Die
+                     Kurvaturwerte sind negativ bei Konvexität (erhabene Formen) und positiv bei
+                     Konkavität (Hohlformen). Die gebräuchlichste Methode, Kurvaturen in
+                     Rastermodellen zu berechnen, wird in <span class="citation"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1309">Zevenbergen et al.</a> 1987)</span> beschrieben. Es wird ein lokales Polynom vierter Ordnung mit
+                     neun Parametern verwendet, das durch alle neun Punkte in der 3x3-Nachbarschaft
+                     des Zentralpunktes geht, wie dies die folgende Abbildung schematisch zeigt
+                     (inkl. Nummerierung der Punkte für die Formeln). Dann können Plan- und
+                     Profilkurvatur für den Zentralpunkt z<sub>5</sub>
+                     mit folgenden Formeln berechnet werden: 
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e584" src="../image/TIN3D.png" alt="" /></span></div>
+               <div id="d8e585.html" class="look">
+                  <p class="paragraph" id="d8e586"></p>
+               </div>
+               <div id="d8e587.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d8e588">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><p class="paragraph" id="d8e589"> In der untenstehenden Abbildung sehen sie 3D-Ansichten eines
+                        Geländes. Finden Sie heraus, welche abgeleitete Information jeweils durch
+                        Einfärbung dargestellt ist. 
+                     </p><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="d8e591" width="600" height="333"
+                                class="multimedia"
+                                data="../multimedia/gelaende_wahl.swf">
+                           <param name="movie" value="../multimedia/gelaende_wahl.swf" />
+                           <param name="quality" value="best" />
+                           <param name="scale" value="exactfit" />
+                           <param name="menu" value="true" />
+                           <param name="play" value="false" />
+                           <param name="wmode" value="opaque" />
+                           <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                  type="application/x-shockwave-flash"
+                                  quality="best"
+                                  scale="exactfit"
+                                  menu="true"
+                                  play="false"
+                                  wmode="opaque"
+                                  src="../multimedia/gelaende_wahl.swf"
+                                  width="600"
+                                  height="333"
+                                  class="multimedia"></embed></object></span></div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="VL3_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="VL3_V_lo5.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 5.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL3.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

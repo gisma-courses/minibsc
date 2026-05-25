@@ -1,0 +1,2323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<lesson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="../../_config/validate.xsd" xmlns="http://www.elml.ch" label="GISBScL3"
+    title="Räumliche Analysemethoden">
+    <entry>
+        <paragraph> Bei Verwendung von GI-Systemen unterscheiden sich räumliche Analysen und
+            Abfragen nur durch den Grad der Komplexität und ihre Auswirkung auf die Datenbasis. Von
+            räumlichen Analysen spricht man wenn funktionale Zusammenhänge in gekoppelte bzw.
+            verschachtelte Abfragen eingebaut werden und die Ergebnisse physikalisch in die
+            Datenbank als eigener Datensatz eingespeist werden. Die unterschiedlichen Methoden
+            räumlicher Analyse sind nicht erst durch die Entwicklung der GI Systeme entstanden.
+            Viele Verfahren wurden bereits frühzeitig und häufig völlig unabhängig von GI-Systemen
+            entwickelt und erst später in die GIS-Software integriert. Allerdings ist erst durch
+            zunehmende Verbreitung und nutzerorientierter Entwicklung von GIS-Software das
+            Methodenspektrum der räumlichen Analyse effizient und wirkungsvoll anwendbar geworden.
+            Dies nicht zuletzt, da gegenwärtige GI-Systeme auch die weiteren notwendigen Dienste wie
+            Datenerfassung, Datenverwaltung oder Visualisierung anbieten. </paragraph>
+
+        <paragraph>Die Wurzeln der räumlichen Analyse reichen zeitlich weit zurück. Der Reader von
+                <citation bibIDRef="berry"/> enthält eine Auswahl von frühen Artikeln, die sich mit
+            Anwendungen der räumlichen Statistik und quantitativen Raumanalyse beschäftigen.
+            Teilweise gehen die Ansätze bis in die 1930er Jahre zurück sind aber vor allem aber auf
+            die erste fruchtbare Epoche in den 1950er und 1960er Jahre konzentriert. Die
+            Bereitschaft zur Verwendung statistischer und anderer quantitativer Methoden zur Analyse
+            von räumlichen Mustern und Prozessen war vor allem ausgeprägt in den Raumwissenschaften,
+            die die Beschreibung und Erklärung räumlicher Muster und Prozesse als zentralen
+            wissenschaftlichen Gegenstand beinhalten (z.B Landschaftsökologie). </paragraph>
+        <paragraph>In der deutschsprachigen Geographie hängt die quantitative Analyse von
+            Raumphänomenen eng mit dem durch studentische Initiative forcierten Paradigmenwechsel
+            des "Kieler Geographentag" 1969 zusammen <citation bibIDRef="monheim"/>. Die zentralen
+            Publikationen von <citation bibIDRef="bartels"/> und <citation bibIDRef="hard"/> stehen
+            repräsentativ für diesen entscheidenden und bis heute wirksamen Bruch in der Geographie.
+            Während im allgemeinen Lehrbetrieb bis heute von "<formatted style="italic"
+                >Landschaften</formatted>" gesprochen wird, ist seit den 1980er Jahren im Zuge der
+            Durchsetzung von GI-S als integrierende Arbeitsplattform eine zunehmende Konvergenz der
+            verwendeten Methoden der Raumanalyse in den an der Entwicklung der GIS-Technologie
+            beteiligten Wissenschaften zu beobachten. Dies kann etwa an der allgemein als Grundlage
+            anerkanntem Lehrbuch von <citation bibIDRef="bill"/> nachvollzogen werden. </paragraph>
+
+        <paragraph>Zum Einstieg in die Thematik der Raumanalyse haben wir die Integration des
+            einfachsten Raumkonzepts, der Voronoi Polygonisierung gestellt. Sie steht beispielhaft
+            für das Erzeugen von geometrisch begründeten raumkontinuierlichen
+            Interpolationskonzepten. Diese Betrachtung wird um einige komplexere
+            Interpolationsverfahren erweitert.<newLine/> Im zweiten Teil wird anahnd der
+            beispielhaften Analyse von Geländemodellen gezeigt, dass man aus digitalen
+            Geländemodellen neben den bekannten perspektivischen Ansichten eine Vielzahl weiterer
+            Informationen ableiten kann. Dies ist als leicht nachvollziehbares Beispielfür für das
+            Vorgehenes bei Ableitung von Informationen aus raumkontinuierlichen Datensätzen gedacht
+            . Neben der reinen Ableitung werden daher zudem mögliche funktionale Ableitungskonzepte
+            wie potentielle Massentransporte Feuchtigkeitsindizes angesprochen. </paragraph>
+
+        <multimedia type="gif"
+            src="http://dilbert.com/dyn/str_strip/000000000/00000000/0000000/000000/30000/0000/700/30772/30772.strip.gif"
+            legend="Dilbert and spatial analysis (http://dilbert.com/strips/comic/1991-09-19/)"
+            align="center"/>
+
+        <paragraph>Im dritten Themenblock adressieren wir folgende Fragen und Lernziele: </paragraph>
+
+    </entry>
+    <goals>
+
+        <lObjective>Welche grundlegenden Möglichkeiten räumlicher Analyse sind
+            verfügbar?</lObjective>
+
+        <lObjective>Wie können einfache geometrische bzw. topologische Raumkonzepte erweitert
+            werden?.</lObjective>
+
+        <lObjective>Wie werden methodisch räumliche Ableitung aus Primärdaten erstellt und was
+            bedeutet dies fachlich?</lObjective>
+        <lObjective>Sie lernen wie räumliche wirksame Prozesskonzepte in Ihre Analysen integrierbar
+            sind. </lObjective>
+
+
+
+    </goals>
+
+    <unit navTitle="Konzepte - Analysemethoden" title="Räumliche Analysemethoden" label="VL3a">
+        <entry>
+
+            <paragraph title="Fortgeschrittene geometrische Analysen">Der Hintergrund Geographische
+                Informationssysteme in der Geographie einzusetzen ist vielfältig. Zunächst kann es
+                jedoch als grundsätzliches Selbstverständnis einer quantitativ denkenden
+                Wissenschaftsdisziplin gelten, eine transparente, also belegbare und
+                nachvollziehbare, Basis für räumliche Informationen zu schaffen. Da nicht nur aus
+                konzeptionellen sondern auch aus praktischen Gründen Daten immer unvollständig sind
+                (und daher auch das Wissen), ist die Verbesserung dieser lückenhaften Daten ein
+                wichtiger und häufig grundlegender Schritt hin zur Kenntnis und
+                Information.</paragraph>
+
+            <paragraph> Wir haben bislang thematische (oder semantische), räumliche und zeitliche
+                Beziehungen (und Abfragen) kennengelernt. Räumliche Beziehungen können unterschieden
+                werden in: topologische Beziehungen und Distanzbeziehungen. In der Lerneinheit <link
+                    targetLessonLang="de" targetLesson="GISBSc_VL2">Abfragen in Relationen</link>
+                haben uns nicht nur die Eigenschaften der untersuchten Objekte interessiert, sondern
+                vor allem die unterschiedlichsten Verknüpfungsmöglichkeiten dieser Parameter. Neben
+                den Lagebeziehungen stellen vor allem die Distanzbeziehungen quantitative Methoden
+                zur Abgrenzung von im Raum <formatted style="italic">ähnlichen</formatted>
+                Merkmalswerten oder auch der Schließung von Lücken fehlender räumlicher Information
+                durch <formatted style="italic">Interpolation</formatted> zur Verfügung. </paragraph>
+
+
+
+
+        </entry>
+
+        <goals>
+
+
+            <lObjective>Sie verstehen das Prinzip der Ableitung räumlicher Informationen durch
+                mathematische oder thematische Umformung der Primärdaten</lObjective>
+
+
+            <lObjective>Sie kennen die unterschiedlichen Distanzbeziehungen zwischen den
+                verschiedenen geometrischen Primitiven (Punkte, Linien, Polygone)</lObjective>
+
+            <lObjective>Sie verstehen das Prinzip des Puffer und der
+                Distanztransformation</lObjective>
+
+
+        </goals>
+        <learningObject
+            title="Distanzbeziehugnen: Voronoi Polygone als Ableitung von Entfernung und Nachbarschft"
+            navTitle="Distanzbeziehungen" label="V_lo1">
+            <clarify>
+
+                <paragraph> Wir erweitern nun unser Wissen über die Analyse von Distanzen zwischen
+                    räumlichen Objekten. Es ist häufig sinnvoll, in einer ersten Analyse ohne
+                    räumlich einschränkende Bedingungen zu arbeiten, z.B. dann wenn diese
+                    Informationen fehlen. Die Bezeichnung „Nähe“ (Proximität) verweist auf eine
+                    gewisse <formatted style="underlined">Ungenauigkeit</formatted>. Als qualitative
+                    Begriffe können hierfür verwendet werden: „<formatted style="italic"
+                        >nah</formatted>“, „<formatted style="italic">weit</formatted>“ oder
+                        „<formatted style="italic">in der Nachbarschaft von</formatted>“. Für
+                    GI-Systeme müssen diese Begriffe objektiviert und operationalisiert werden.
+                    Diesem Maß muss folglich ein <formatted style="underlined"
+                        >Distanzkonzept</formatted> zugrunde gelegt werden z. B. die euklidische
+                    Distanz oder Wegzeiten. In einem zweiten <formatted style="underlined"
+                        >interpretativen</formatted> Schritt muss anschließend entschieden werden,
+                    welche Einheiten diese Art der Nähe definieren. Es gibt im Sinne der Zielsetzung
+                    einer Fragestellung nur geeignete und weniger geeignete Maße, nicht aber
+                    richtige oder falsche. Daher ist es von zentraler Bedeutung, dass man für die
+                    untersuchten Objekte eine sinnvolle Nachbarschaftsbeziehung definiert. In
+                    Abbildung 1 ist das Objekt B groß, und seine Nachbarschaft (grau eingefärbt) ist
+                    hauptsächlich bestimmt durch benachbarte große Objekte, während Objekt A
+                    (Abbildung 2) kleiner ist und sich auf eine andere Nachbarschaft bezieht,
+                    hauptsächlich bestimmt durch lokale kleinere Objekte. Es ist ersichtlich, dass A
+                    in die lokale Umgebung von B gehört, aber es ist nicht unbedingt der Fall, dass
+                    B in die lokale Umgebung von A gehört. </paragraph>
+                <multimedia src="../image/distanz-kontext1.gif" width="350"
+                    legend="Distanz und Nähe  ist
+                    kontextabhängig und nicht symmetrisch"
+                    type="gif" bibIDRef="worboys" align="center"/>
+                <multimedia src="../image/distanz-kontext2.gif"
+                    legend="Distanz und Nähe  ist
+                    kontextabhängig und nicht symmetrisch"
+                    type="gif" bibIDRef="worboys" width="350" align="center"/>
+                <paragraph>In Analysen der Nähe oder Nachbarschaft geht es häufig um Einflussgebiete
+                    oder Einzugsgebiete also um räumliche Wirkungs- oder Prozessmuster. Häufige
+                    Fragen in diesem Zusammenhang sind: </paragraph>
+                <list>
+                    <item> Welche oder wie viele Diskotheken liegen im Umkreis von 300m um einen
+                        bestimmten Standort (Outdoorcamp)?</item>
+
+                    <item> Wie viele Täler können von einem Aussichtspunkt eingesehen werden?</item>
+                    <item> Liegt ein bestimmter Standort in der Lärmzone eines Quad-Tracks?</item>
+                </list>
+                <paragraph> In der Folge werden einige Methoden zur Berechnung von Distanzen
+                    zwischen Raumobjekten etwas ausführlicher als bisher erörtert. Wegen der
+                    unterschiedlichen Art der Diskretisierung des Raums muss -wie bereits gewohnt-
+                    zwischen Vektor- und Rastermodell unterschieden werden. </paragraph>
+
+
+
+            </clarify>
+
+            <look>
+                <paragraph title="Voronoi-Polygone">Thiessen-Polygone – auch Voronoi-Polygone oder
+                    Voronoi-Diagramme genannt – sind eine wesentliche Methode, um Nähe (Proximität)
+                    bzw. Nachbarschaften zu analysieren. Thiessen-Polygone (vgl. Abbildung unten
+                    rechts) können verwendet werden, wenn Regionen gesucht sind, die am nächsten zu
+                    einem Punkt aus einer Menge von unregelmäßig verteilten Punkten liegen. Ein
+                    Thiessen-Polygon definiert im zweidimensionalen Fall eine Fläche um einen Punkt,
+                    in der jede Raumstelle näher an diesem Punkt liegt als an irgendeinem anderen
+                    Punkt. Solche Konstrukte können auch in höheren Dimensionen gebildet werden,
+                    wobei dann Thiessen- oder Voronoi-Polyeder entstehen statt Polygone. </paragraph>
+                <column>
+                    <columnLeft>
+                        <multimedia src="../image/thiessen-punkte.gif"
+                            legend="Unregelmäßig
+                            verteilte Punkte oder Stichproben"
+                            type="gif" bibIDRef="gittadbs"/>
+                    </columnLeft>
+                    <columnRight>
+                        <multimedia src="../image/thiessen-polygone2.gif"
+                            legend="Punkte mit den
+                            dazugehörenden Thiessen-Polygonen"
+                            type="gif" bibIDRef="gittadbs"/>
+                    </columnRight>
+                </column>
+                <paragraph>Man kann Voronoi-Diagramme auch um Linien bilden, was dann zu komplexeren
+                    Formen führt (siehe unten stehende Abbildung). In dieser Unit beschränken wir
+                    uns jedoch auf den einfachsten und am häufigsten verwendeten Fall von
+                    Thiessen-Polygonen für Punkte. Eine weiterführende Diskussion bietet <citation
+                        bibIDRef="boots" yearOnly="yes"/>.</paragraph>
+                <multimedia src="../image/thiessen-polygone3.gif"
+                    legend="Rasterzellen
+                    Thiessen-Polygone konstruiert um Linienzüge"
+                    type="gif" bibIDRef="gittadbs"/>
+                <paragraph title="Thiessen-Polygone">Da Thiessen-Polygone einem in der Natur (z. B.
+                    Pflanzenzellen) und in den Raumwissenschaften häufig beobachteten
+                    Organisationsprinzip (z.B. zentralle Orte nach Christaller) entsprechen, sind
+                    die Anwendungsmöglichkeiten mannigfaltig. Zum Beispiel können Thiessen-Polygone
+                    in erster Näherung verwendet werden, um aus unregelmäßig und isoliert erhobenen
+                    Bodenproben Bodenkarten zu erstellen. Dabei muß die Annahme getroffen werden,
+                    dass nichts weiter über den Raum zwischen den beprobten Orten bekannt ist und
+                    die Grenzlinie zwischen zwei Stichproben mit unterschiedlichem Bodentyp
+                    willkürlich auf halben Weg zwischen ihnen liegt (Beispiel aus <citation
+                        bibIDRef="jones" pageNr="48" yearOnly="yes"/>. Die Thiessen-Polygone können
+                    auch verwendet werden, um Einzugsgebiete von Geschäften oder
+                    Dienstleistungseinrichtungen abzugrenzen, wenn keine weiteren Informationen zur
+                    Verfügung stehen.</paragraph>
+                <column>
+                    <columnLeft>
+                        <paragraph title="Wie werden Thiessen-Polygone konstruiert?"> Da
+                            Thiessen-Polygone jeweils alle Raumstellen enthalten, die näher beim
+                            dazugehörigen Zentrum liegen als bei irgendeinem anderen Zentrum, bildet
+                            jede Kante eines Thiessen-Polygons jeweils die Isolinie der Entfenungen
+                            zu allen benachbarten Zentren. Weil dem so ist, können die Kanten von
+                            Thiessen-Polygonen als Mittelsenkrechte auf die Verbindungslinie
+                                <formatted style="italic">d</formatted> zwischen jeweils zwei
+                            Zentren gebildet werden. Mittelsenkrechte konstruiert man durch
+                            Schneiden zweier Kreise mit Radius <formatted style="italic"
+                                >d</formatted> um die betroffenen Paare von Zentren, wie dies die
+                            Abbildung unten zeigt. Die Schnittpunkte der verschiedenen
+                            Mittelsenkrechten bilden die Eckpunkte eines
+                            Thiessen-Polygons.</paragraph>
+                    </columnLeft>
+                    <columnRight width="240" units="pixels">
+                        <multimedia src="../image/thiessen-polgone.gif"
+                            legend="Konstruktion von
+                            Thiessen-Polygonen"
+                            type="gif" bibIDRef="hagett"/>
+                    </columnRight>
+                </column>
+                <column>
+                    <columnLeft>
+                        <paragraph title="Thiessen-Polygonen im Raster"> Die Ermittlung von
+                            Thiessen-Polygonen im Raster ist übrigens auch möglich. Im Raster kann
+                            zwar nicht mehr von Polygonen gesprochen werden, doch ist die Berechnung
+                            von Proximitätszonen sehr einfach zu bewerkstelligen. Von einer Anzahl
+                            von Punkten aus, gegeben als einzelne Zellen in einem Raster, kann ganz
+                            einfach eine Distanztransformation berechnet werden. Die Berechnung im
+                            Raster hat den Vorteil, dass auch sehr einfach nicht euklidische
+                            Metriken, Gewichtungsfaktoren usw. eingeführt werden können.
+                        </paragraph>
+                    </columnLeft>
+                    <columnRight width="240" units="pixels">
+                        <multimedia src="../image/thiessen-polygone4.gif"
+                            legend="Thiessen-Polygone in einem Raster mit
+                            kleiner Auflösung"
+                            type="gif" bibIDRef="gittadbs"/>
+                    </columnRight>
+                </column>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph title="Konstruktion von Thiessen-Polygonen"> Konstruieren Sie auf der
+                        folgenden Grafik aus den gegebenen Punkten auf einem Papier (ausdrucken) die
+                        dazugehörenden Thiessen-Polygone. Was für eine Metrik ist der Konstruktion
+                        unterlegt? </paragraph>
+                    <multimedia src="../image/voronoi_test.jpg" type="jpeg" width="400"
+                        align="center" bibIDRef="gittadbs"/>
+                </box>
+
+            </act>
+
+
+
+        </learningObject>
+        <learningObject
+            title="Füllen des leeren Raumes mit Informationen - Distanz-basierte Interpolation"
+            label="V_lo2" navTitle="Distanz-basierte Interpolation">
+            <clarify>
+                <paragraph>Betrachten Sie als Einstieg die folgende Abbildung die Ihnen eine
+                    Niederschlagsoberfläche der Schweiz zeigt: Die blauen Punkte sind die Positionen
+                    von Messstationen, ihre Größe entspricht der Niederschlagsmenge. Die
+                    unterschiedlichen Höhen der Oberfläche sowie ihre Farbgebung stehen ebenfalls in
+                    Zusammenhang mit der Niederschlagsmenge.</paragraph>
+                <multimedia src="../image/CH_Precip_Example_for_Intro.jpg" type="jpeg" width="600"
+                    legend="Niederschlagsoberfläche der Schweiz (oben), Karte der Messstationen
+                    (unten)"
+                    bibIDRef="gittadbs"/>
+
+                <list>
+                    <item>Wie kann aus den ca. 100 Messpunkten solch eine kontinuierliche Oberfläche
+                        erstellt werden?</item>
+                    <item>Welche Werkzeuge helfen uns dabei?</item>
+                    <item>Welches Wissen ist nötig und welche Methoden existieren dazu?</item>
+                </list>
+                <paragraph> In oben gezeigtem Beispiel ist die Variable der Niederschlag. Stellen
+                    Sie sich vor, Sie könnten den Niederschlag entlang einer Messstrecke auf jeder
+                    beliebigen Position messen. Sie hätten also eine räumlich-kontinuierliche
+                    Messung. Benachbarte Niederschlagswerte werden entweder identisch sein oder
+                    geringfügig variieren, je nach der gewählten <formatted style="italic"
+                        >Skala</formatted> der „<formatted style="italic"
+                    >Nachbarschaft</formatted>“. In der Praxis ist quasi jedes natürliche
+                    räumlich-kontinuierliche Phänomen von stochastischen Schwankungen bestimmt und
+                    lässt sich daher mathematisch nur annäherungsweise beschreiben.</paragraph>
+                <paragraph>Aus der Statistik kennen wir deterministische (exakt vorhersehbare und
+                    mathematisch beschreibbare) und stochastische (rein zufällige, nicht
+                    vorhersehbare) Phänomene. Betrachten Sie das Beispiel in der folgenden
+                    Flash-Animation. Die Punkte stellen Höhenmessungen dar. Die tatsächlichen Höhen
+                    zwischen unseren bekannten Messpunkten folgen einer Funktion, die wir jedoch
+                    nicht kennen. Wir werden aber davon ausgehen, dass die uns unbekannten Höhen des
+                    Profils nicht einfach zufällig verteilt sind, sondern denen der bekannten
+                    benachbarten Messpunkte ähneln. Stellen wir also ein Höhenprofil gemäß der
+                    blauen gestrichelten Linie her. Das heißt, zwischen die Messpunkte legen wir
+                    eine <formatted style="italic">lineare Funktion</formatted>. Die rote
+                    durchgezogene Linie zeigt Ihnen das <formatted style="italic"
+                        >tatsächliche</formatted> Höhenprofil. Im letzten Bild sehen Sie die beiden
+                    Profillinien im Vergleich. Die Höhe in unserem Beispiel ist eine
+                    Transfer-Funktion abgeleitet aus den bekannten Stützwerten – weder ist sie exakt
+                    mathematisch beschreibbar, noch ist sie rein zufällig. Bleibt darauf
+                    hinzuweisen, dass kontinuierliche räumliche Variablen sich in der Regel besser
+                    im Rastermodell abbilden lassen, wenngleich die Rastereinteilung eigentlich
+                    wiederum diskrete räumliche Einheiten bildet.</paragraph>
+                <multimedia src="../multimedia/random_function.swf" type="flash" width="380"
+                    height="295" bibIDRef="gittadbs"/>
+                <paragraph title="Wie beginnen wir nun mit der Analyse kontinuierlicher Variablen?">
+                    Der erste Schritt besteht in der Erstellung einer räumlichen Stichprobe. In dem
+                    zu Beginn erwähnten Beispiel des Schweizer Niederschlags sind dies
+                    meteorologische Messstationen. Ihre Positionen sind fest vorgegeben und nicht
+                    frei wählbar (es sei denn, Sie verwenden eine Untermenge aller existierenden
+                    Stationen). Wenn Sie aber z. B. die Verteilung chemischer Schadstoffe im Boden
+                    analysieren wollen, müssen Sie zunächst die Messpunkte festlegen. Dabei werden
+                    Sie auf folgende Eigenschaften der Stichprobe achten müssen: </paragraph>
+                <list>
+                    <item><formatted style="bold">Repräsentativität</formatted> - Das Phänomen, das
+                        analysiert wird, sollte in allen Ausprägungen in der Stichprobe vertreten
+                        sein. Insbesondere Minima und Maxima sind von Bedeutung. Für das
+                        Niederschlagsbeispiel bedeutet dies: Stationen mit Spitzenwerten sollten
+                        vertreten sein. Wenn wir allerdings ein eigenes Probenschema planen, wissen
+                        wir in der Regel nicht, ob wir die Standorte mit Minima und Maxima erfasst
+                        haben.</item>
+                    <item><formatted style="bold">Homogenität</formatted> - Wie zu Beginn erwähnt,
+                        ist die räumliche Abhängigkeit der Daten untereinander eine sehr wichtige
+                        Grundvoraussetzung für eine weitere sinnvolle Analyse. Dieser Zusammenhang
+                        sollte aber über das gesamte Untersuchungsgebiet homogen sein! Um bei den
+                        Niederschlagswerten zu bleiben: jeweils zwei Stationen im Abstand von z. B.
+                        2km sollten sowohl im Tessin ähnliche Messwerte aufweisen als auch im Jura,
+                        in Graubünden oder in Fribourg usw. Diese Voraussetzung nennt man auch
+                        „Stationarität“.</item>
+                    <item><formatted style="bold">Räumliche Verteilung der Messungen </formatted>-
+                        Die räumliche Verteilung ist von großer Bedeutung. Sie kann völlig zufällig
+                        sein, regelmäßig oder geclustert. Die Verteilungen sehen Sie an Beispielen
+                        weiter unten im Abschnitt „Typologie“. Einen Hinweis auf die räumliche
+                        Verteilung einer Stichprobe können wir statistisch z. B. mittels der
+                        „Nearest Neighbor“-Statistik erhalten. Sie zählt zu den „Point Pattern
+                        Analysis“-Techniken - Methoden, mit deren Hilfe sich die räumliche
+                        Verteilung von Punkten statistisch charakterisieren und analysieren lassen. </item>
+                    <item><formatted style="bold">Größe (= Anzahl der Messungen)</formatted> - Die
+                        Größe, also der Umfang einer Stichprobe, ist abhängig vom Phänomen und von
+                        der Arealfläche. In manchen Fällen unterliegt die Wahl der Stichprobengröße
+                        praktischen Einschränkungen. Denken Sie z. B. an Messungen in schwer
+                        zugänglichem Gelände, technisch aufwendigen und teuren Messungen usw. Eine
+                        ideale Größe für jegliche Aufgabe anzugeben, ist schlicht unmöglich.</item>
+                </list>
+                <paragraph>Repräsentativität, Homogenität, räumliche Verteilung und Größe hängen
+                    zusammen. So ist eine Größe von 5 Messstationen für die Schätzung des
+                    gesamtschweizerischen Niederschlags wohl kaum sinnvoll, daher auch nicht
+                    repräsentativ. Ebenso wenig repräsentativ wäre die Auswahl aller
+                    deutschschweizerischen Messstationen für die gesamtschweizerische Schätzung.
+                    Hier könnte wohl die Größe allein ausreichend sein, nicht aber die räumliche
+                    Verteilung. Wählen Sie nun alle Stationen unter 750 mNN aus, so könnte die
+                    Stichprobe zwar sowohl von der Größe her als auch von ihrer räumlichen
+                    Verteilung stimmen, das Phänomen ist jedoch nicht homogen in der Stichprobe
+                    repräsentiert. Eine nachfolgende Schätzung würde v. a. im Bereich von Gebieten
+                    über 750 mNN deutlich verzerrt ausfallen. </paragraph>
+
+
+
+                <paragraph
+                    title="Räumliche Stichprobenmuster am Beispiel schweizerischer Klimastationen">
+                    Sehen Sie in der nachfolgenden Flash-Animation Beispiele unterschiedlicher
+                    Sampling-Typen, angewandt auf das Gebiet der Schweiz. Als Hintergrunddaten wird
+                    das digitale Höhenmodell der Schweiz angezeigt. </paragraph>
+                <multimedia src="../multimedia/Sampling_Patterns_ch_example.swf" type="flash"
+                    legend="Stichproben-Muster am Beispiel der Schweiz" width="530" height="363"
+                    bibIDRef="gittadbs"/>
+
+
+
+
+                <paragraph title="Räumliche Interpolation von Daten"> Nachdem wir zuvor knapp den
+                    Zusammenhang räumlicher Abhängigkeiten dargestellt haben, kommen wir nun zu
+                    räumlichen Interpolationen. Was sind räumliche „Interpolationen“? Darunter
+                    versteht man die Berechnung unbekannter Werte auf der Basis benachbarter
+                    bekannter Werte. Die meisten dieser Techniken zählen zu den komplexeren Methoden
+                    räumlicher Analyse, darum beschränken wir uns hier bewusst auf einen
+                    prinzipiellen Überblick zu den Methoden. </paragraph>
+                <paragraph>„Inverse Distanz“-Gewichtung, „Radial Basis“-Funktionen, „Splines“,
+                    „Ordinary Kriging“, „Natural Neighbor“, „Polynomial Regression“-Methoden,
+                    „Universal Kriging“ usw. Dies sind lediglich einige Interpolations-Methoden, die
+                    in kommerzieller Software zu finden sind. Verwirrend sind die Vielfalt der
+                    Methoden und deren Parametrisierungen. Darum versuchen wir zunächst, die
+                    Methoden in Schemata einzuordnen: dazu gibt es verschiedene Ansätze, wie Sie aus
+                    folgender Zusammenstellung ersehen: </paragraph>
+                <paragraph title="Lokale vs. Globale Interpolation"> Globale Methoden werden auf
+                    ALLE Daten im Untersuchungsgebiet angewandt, lokale dagegen nur auf räumlich
+                    definierte Subsets. Globale Interpolation eignet sich daher nicht zur Ermittlung
+                    möglichst exakter Werte, sondern zur Beurteilung globaler räumlicher Strukturen. </paragraph>
+                <paragraph>Als Beispiele sehen Sie nachfolgend eine lineare Trend-Oberfläche – sie
+                    wurde mittels Regression aus schweizerischen Niederschlagsdaten ermittelt und
+                    zeigt einen Trend zum Anstieg der Niederschlagshöhen von SE nach NW – und eine
+                    lokale Interpolation mittels sogenannter Radial Basis Interpolation: </paragraph>
+                <multimedia src="../image/globale_interpolation.gif"
+                    legend="Beispiel einer globalen
+                    Interpolation – Lineare Trendoberfläche für Schweizer Niederschlagsdaten"
+                    type="gif" width="535" height="340" units="pixels" bibIDRef="gittadbs"/>
+                <multimedia src="../image/lokale_interpolation.gif"
+                    legend="Beispiel einer lokalen
+                    Interpolation – Radial Basis Interpolation für Schweizer Niederschlagsdaten"
+                    type="gif" width="535" height="340" units="pixels" bibIDRef="gittadbs"/>
+                <paragraph title="Exakte vs. Nicht-exakte Interpolation">Exakte Interpolation heißt:
+                    die geschätzte Oberfläche passiert die bekannten Punkte, während bei
+                    nicht-exakten Methoden die Schätzwerte für bekannte Beobachtungen von den realen
+                    Werten abweichen können. Letztere Methoden werden sinnvollerweise dann
+                    eingesetzt, wenn die bekannten Daten bereits gewisse Unschärfen
+                    aufweisen.</paragraph>
+                <multimedia src="../image/exakte_interpolation.jpg"
+                    legend="Exakter Interpolator:
+                    Schätzoberfläche passiert exakt die bekannten – schematisch als Säulen
+                    dargestellt – Punkte"
+                    bibIDRef="wyatt" width="600" height="318" units="pixels" type="jpeg"/>
+                <multimedia src="../image/nicht_exakte_interpolation.jpg"
+                    legend="Nicht-exakter
+                    Interpolator: Schätzoberfläche passiert die bekannten – schematisch als Säulen
+                    dargestellt – Punkte NICHT"
+                    bibIDRef="wyatt" width="600" height="277" units="pixels" type="jpeg"/>
+
+
+                <multimedia src="../image/interpolation_examples.gif"
+                    legend="Vergleich
+                    unterschiedlicher Interpolationsmethoden am Beipeil eines DGM"
+                    type="gif" width="590" height="700" units="pixels" bibIDRef="mitas"/>
+
+                <paragraph> Die dargestellten Beispiele visualisieren die Ergebnisse
+                    unterschiedlicher, etablierter Interpolationsverfahren. Aus diesen soll
+                    stellvertretend neben der bereits bekannten <formatted style="italic"
+                        >Voronoi-Tessellation</formatted> die <formatted style="italic">Inverse
+                        Distanz-Gewichtung Interpolation</formatted> aufgrund ihrer Einfachheit und
+                    häufigen Anwendung gesondert betrachtet werden. Bei der Inversen
+                    Distanz-Gewichtung (Inverse Distance Weighting, IDW), wird das Gewicht jedes
+                    bekannten Punktes invers proportional zu seiner Entfernung zum nächsten Punkt
+                    gesetzt. Die Berechnung erfolgt gemäß: </paragraph>
+                <table>
+                    <tablerow>
+                        <tabledata>
+                            <multimedia src="../image/IDW_Formula.gif"
+                                legend="Inverse Distanz-Gewichtung
+                                (IDW) – Grundformel"
+                                type="gif" width="128" height="134" units="pixels"/>
+                        </tabledata>
+                        <tabledata> &#x03BD; ... zu schätzender Wert, &#x03BD;<formatted
+                                style="subscript">i</formatted> ... bekannte
+                                Werte<newLine/><formatted style="italic">d</formatted><formatted
+                                style="subscript">i</formatted>..., <formatted style="italic"
+                                >d</formatted><formatted style="subscript">n</formatted>...
+                            Distanzen der <formatted style="italic">n</formatted> Datenpunkte zum
+                            geschätzten Punkt </tabledata>
+                    </tablerow>
+                </table>
+                <paragraph>Meist finden Sie die folgende Variante, in welcher der Einfluss der
+                    Distanz zusätzlich über einen Exponenten gesteuert werden kann (dieser wird in
+                    den meisten Programmen auf 2 voreingestellt): </paragraph>
+                <table>
+                    <tablerow>
+                        <tabledata>
+                            <multimedia src="../image/IDW_Formula_default.gif" type="gif"
+                                width="155" height="132" units="pixels"
+                                legend="Häufigste Form der
+                                IDW-Formel mit zusätzlichem Distanzgewichtungs-Exponenten"
+                            />
+                        </tabledata>
+                        <tabledata> &#x03BD; ... zu schätzender Wert, &#x03BD;<formatted
+                                style="subscript">i</formatted> ... bekannte
+                                Werte<newLine/><formatted style="italic">d</formatted><formatted
+                                style="superscript">p</formatted><formatted style="subscript"
+                                >i</formatted>..., <formatted style="italic">d</formatted><formatted
+                                style="superscript">p</formatted><formatted style="subscript"
+                                >n</formatted>... mit <formatted style="italic">p</formatted>
+                            exponenzierte Distanzen der <formatted style="italic">n</formatted>
+                            Datenpunkte zum geschätzten Punkt </tabledata>
+                    </tablerow>
+                </table>
+                <paragraph>Je niedriger der Exponent gesetzt wird, desto gleichförmiger gehen alle
+                    Nachbarn (ungeachtet ihrer Distanz) in die Berechnung ein, und desto „glatter“
+                    wird die Schätzoberfläche. Je höher der Exponent wird, desto akzentuierter und
+                    „unruhiger“ wird die Oberfläche, da nur mehr das Gewicht der <formatted
+                        style="italic">nächstgelegenen</formatted> Nachbarn in die Interpolation
+                    einfließt (siehe folgende interaktive Animation). </paragraph>
+                <multimedia src="../multimedia/IDW_CH_Precip.swf" width="472" height="345"
+                    units="pixels" type="flash"
+                    legend="IDW-Schätzoberflächen der Schweizerischen
+                    Niederschlagsdaten"/>
+                <list title="Vorteile der IDW-Interpolation:">
+                    <item> Sie ermöglicht sehr schnelle Berechnungen.</item>
+                    <item> Unterschiedliche Distanzen fließen in die Schätzung unterschiedlich
+                        ein.</item>
+                    <item> Über den Distanzgewichtungs-Exponent kann der Einfluss der Distanzen fein
+                        gesteuert werden.</item>
+                </list>
+                <list title="Nachteile der IDW-Interpolation:">
+                    <item> Es ist keine richtungsabhängige Gewichtung möglich, d. h. räumlich
+                        gerichtete Zusammenhänge werden ignoriert (z. B. Höhenpunkte entlang eines
+                        Bergrückens).</item>
+                    <item> Unschöne Artefakte sind die sogenannten „Bull-Eyes“ – dies sind
+                        kreisförmige Bereiche gleicher Werte um die bekannten Datenpunkte. Eine von
+                            <citation bibIDRef="shepard" yearOnly="yes"/> entwickelte Variante der
+                        IDW-Interpolation reduziert diese Bull-Eyes jedoch (siehe folgende
+                        Abbildungen).</item>
+                </list>
+                <column>
+                    <columnLeft>
+                        <multimedia src="../image/IDW_BullEyes.gif"
+                            legend="IDW „Bull Eyes“-Effekt:
+                            Um die bekannten Punkte sind konzentrische Bereiche gleicher Werte zu
+                            erkennen – ein unerwünschtes Artefakt der IDW-Interpolation"
+                            type="gif" width="302" height="238" bibIDRef="gittadbs"/>
+                    </columnLeft>
+                    <columnMiddle width="30"/>
+                    <columnRight>
+                        <multimedia src="../image/IDW_Shepard.gif"
+                            legend="IDW modifiziert nach
+                            SHEPARD: die Bull-Eyes sind deutlich reduziert"
+                            type="gif" width="302" height="238"/>
+                    </columnRight>
+                </column>
+            </clarify>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph> In der folgenden interaktiven Animation sehen Sie zehn räumlich
+                        verteilte Datenpunkte (blau) mit bekannten Messwerten (Ziffern neben den
+                        Punkten) und einen Punkt mit zu errechnendem Wert (rot). Beim Start der
+                        Animation wird dieser aus den vorgegebenen Werten und Distanzen ermittelt.
+                        Um die Prinzipien der IDW-Interpolation besser kennen zu lernen,
+                        experimentieren Sie nun: </paragraph>
+                    <list>
+                        <item> Verändern Sie mit Ihrem Mauszeiger die Positionen eines oder aller
+                            Punkte.</item>
+                        <item> Modifizieren Sie die vorgegebenen Werte für die bekannten Punkte
+                            (insgesamt sind max. 4 Stellen erlaubt).</item>
+                        <item> Setzen Sie für den Distanzgewichtungs-Exponenten einen anderen Wert
+                            als 2 ein (insg. max. 4 Stellen erlaubt).</item>
+                    </list>
+                    <multimedia src="../image/IDW.jpg"
+                        legend="Interaktive IDW Übung 
+                        " type="jpeg"
+                        width="300" align="center"/>
+                    <link uri="../multimedia/IDW_Interactive.swf">Starten Sie die Interaktive
+                        IDW-Animation </link>
+                    <paragraph>Beantworten Sie aus Ihren Experimenten heraus folgende Fragen: </paragraph>
+                    <list listStyle="ordered">
+                        <item> Welcher Messwert beeinflusst das Ergebnis umso mehr, je höher der
+                            Exponent gesetzt wird?</item>
+                        <item> Wenn der Exponent auf 0 gesetzt wird, wie beeinflussen dann
+                            unterschiedliche Distanzen das Schätzergebnis bzw. wovon ist dieses dann
+                            nur abhängig?</item>
+                    </list>
+                    <popup>
+                        <list listStyle="ordered">
+                            <item>
+                                <formatted style="bold">Der bzw. die Messwert(e) der nächst
+                                    benachbarten Punkte</formatted> beeinflussen das Ergebnis umso
+                                mehr, je höher der Distanzexponent gesetzt wird.</item>
+                            <item> Wird der Distanzexponent auf 0 (Null) gesetzt, dann ergibt sich
+                                für jegliche Distanz eine Gewichtung von 1, d. h. alle Entfernungen
+                                sind absolut gleichwertig, <formatted style="bold">das Resultat
+                                    hängt also nur mehr von den Messwerten selbst ab und nicht von
+                                    der Distanz.</formatted> Die Interpolation hat keinerlei
+                                räumliche Komponente mehr.</item>
+                        </list>
+                    </popup>
+                </box>
+            </act>
+        </learningObject>
+        <learningObject title="Geomorphometrie oder wie Informationen aus Ableitungen entstehen"
+            label="V_lo3" navTitle="Informationen und Ableitungen">
+            <clarify>
+                <paragraph> Die Geomorphometrie beschäftigt sich mit der quantitativen Beschreibung
+                    und Analyse der Erdoberfläche. Zu diesem Zweck werden aus digitalen
+                    Geländemodellen (DGM) verschiedene Geländeparameter abgeleitet. Neigung,
+                    Exposition und Kurvatur (Krümmung) des Geländes gehören zu den Informationen,
+                    die am häufigsten aus Geländemodellen extrahiert und in verschiedensten
+                    Anwendungen eingesetzt werden. Als Beispiele seien die Verwendung der Exposition
+                    in vegetationsgeographischen Fragestellungen, die Modellierung von potentiellem
+                    alpinem Permafrost (Höhe, Exposition und Neigung) oder die Modellierung von
+                    Lawinengefahren (Neigung, Exposition) genannt. </paragraph>
+            </clarify>
+            <look>
+                <paragraph title="Beispiele von impliziter Information"> Ein digitales Geländemodell
+                    enthält neben der reinen Höhe der Raumkoordinaten (oder Raumflächen) eine Reihe
+                    weiterer impliziter Information. &quot;Implizite Information&quot; heißt, dass
+                    zusätzliche Informationen aus der lagebezogenen Höheninformation eines
+                    Geländemodells abgeleitet werden kann, ohne explizit gespeichert zu sein. Zur
+                    Ableitung solcher impliziter Information sind in der Regel geeignete
+                    mathematische Methoden notwendig. Dieser Zusammenhang von impliziter und
+                    expliziter Information lässt sich analog auf eine Vielzahl von Datensätzen und
+                    Geoobjekten übertragen. Die nachfolgenden Abbildungen zeigen ein Geländemodell
+                    des <link uri="http://de.wikipedia.org/wiki/T%C3%BCrlersee">Türlersees</link>
+                    (bei Zürich in der Schweiz) und durch Ableitung erzeugte Information aus diesen
+                    Daten.</paragraph>
+
+
+                <table>
+                    <tablerow>
+                        <tabledata>
+                            <multimedia title="Primärdatensatz Höhe"
+                                src="../image/ExtracTopoOb-DGM.png" type="png"
+                                thumbnail="../image/ExtracTopoOb-DGM-thumb.png" bibIDRef="gittadbs"
+                            />
+                        </tabledata>
+                        <tabledata>Digitales Geländemodell vom Gebiet Türlersee als geschummerte
+                            Höhenschichtdarstellung <citation bibIDRef="hugentobler" yearOnly="no"
+                            /></tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata>
+                            <multimedia title="Profil" src="../image/ExtracTopoOb-Profil.png"
+                                type="png" bibIDRef="gittadbs"/>
+                        </tabledata>
+                        <tabledata>Auf Grundlage eines digitalen Geländemodells können durch
+                            Extraktion der Höhenwerte <formatted style="bold">Profile</formatted>
+                            zwischen zwei Punkten berechnet werden. Derartige Profile sind in vielen
+                            anwendungsorientierten Fragestellungen relevant, z. B. für die Planung
+                            im Straßenbau oder als Sichtlinien (Seilbahnen, Funkverbindungen).
+                            Erweitert man dieses Konzept können alle räumlich verteilten
+                            Informationen auf einer direkten also geometrisch kürzesten Verbindungen
+                            analysiert und dargestellt werden.</tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata>
+                            <multimedia title="Profilllinie als Pauschalgefälle "
+                                src="../image/ExtracTopoOb-PauschalG.png" type="png"
+                                bibIDRef="gittadbs"/>
+                        </tabledata>
+                        <tabledata>Das <formatted style="bold">Pauschalgefälle</formatted> ist eine
+                            weitere Ableitung aus der Profillinie. Es beschreibt die mittlere
+                            Neigung zwischen zwei Punkten im Gelände und ist folglich
+                            skalenabhängig. Ein wichtiges Anwendungsgebiet ist die einfache
+                            Abschätzung von Sturz-Prozessen (Steinschlag, Eisschlag).</tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata>
+                            <multimedia title="Falllinie" src="../image/ExtracTopoOb-Falllinie.png"
+                                type="png" bibIDRef="gittadbs"
+                                thumbnail="../image/ExtracTopoOb-Falllinie-thumb.png"/>
+                        </tabledata>
+                        <tabledata>In einem digitalen Geländemodell kennzeichnet die <formatted
+                                style="bold">Falllinie</formatted>, ausgehend von einem beliebigen
+                            Punkt, den Pfad (=verknüpfte Einzelstrecken) entlang dessen die
+                            Schwerkraft wirkt (=Vektor Oberlieger-Unterlieger). Oder konkret
+                            ausgedrückt den Weg des fließenden Wassers oder rollenden Steins. So
+                            können u. a. zur Modellierung von Eis- und Steinschlag, aber auch für
+                            die Berechnung von Einzugsgebieten verwendet werden. Erweitert man
+                            dieses Konzept indem z.B. statt Höhenwerte in Metern Kosten in Euro als
+                                <formatted style="italic">&quot;Kostengebirge&quot;</formatted>
+                            aufgefasst werden, Können so Pfade geringster Kosten (oder Widerstands)
+                            bestimmt werden.</tabledata>
+                    </tablerow>
+
+                    <tablerow>
+                        <tabledata>
+                            <multimedia title="Wassereinzugsgebiete"
+                                src="../image/ExtracTopoOb-catchment.png" type="png"
+                                bibIDRef="gittadbs"
+                                thumbnail="../image/ExtracTopoOb-catchment-thumb.png"/>
+                        </tabledata>
+                        <tabledata>Die Ableitung von <formatted style="bold"
+                                >Wassereinzugsgebieten</formatted> aus digitalen Geländemodellen
+                            nutzt das Konzept der Falllinie. Vernetzt man alle Falllinien die einen
+                            gemeinsamen Unterlieger als Ausflusspunkt haben und grenzt diesen Raum
+                            ab so erzeugt man ein durch die Oberflächenmorphologie determiniertes
+                            Wassereinzugsgebiet. Solche Wassereinzugsgebiete sind eine wichtige
+                            Komponente in vielen hydrologischen, geomorphologischen und
+                            landschaftskundlichen GIS-Anwendungen. </tabledata>
+                    </tablerow>
+                </table>
+                <paragraph> Die zuvor angesprochenen Beipiele sollen einen Eindruck von der
+                    Vielfältigkeit der Informationsgewinnung durch Ableitung vermitteln helfen. In
+                    der nachfolgenden Tabelle wird ein Überblick über weitere Informationsprodukte,
+                    die aus Geländemodellen ableitbar sind gegeben. Dieser Überblick ist keineswegs
+                    vollständig. Vielmehr stellt er in willkürlicher Mischung unterschiedliche
+                    Stufen der Ableitung zusammen. Versuchen Sie zu herauszufinden welche
+                    Information eine Ableitung erster bzw. zweiter Ordnung ist.</paragraph>
+                <table>
+                    <tablerow>
+                        <tableheading> Information </tableheading>
+                        <tableheading> Output-Typ </tableheading>
+                        <tableheading> Beschreibung </tableheading>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Neigung </tabledata>
+                        <tabledata> Zahl </tabledata>
+                        <tabledata> Neigung an einem Punkt </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Pauschalgefälle </tabledata>
+                        <tabledata> Zahl </tabledata>
+                        <tabledata> Gefälle zwischen zwei Punkten </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Exposition </tabledata>
+                        <tabledata> Zahl </tabledata>
+                        <tabledata> Ausrichtung des Hanges</tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Kurvatur </tabledata>
+                        <tabledata> Zahl </tabledata>
+                        <tabledata> Krümmung in eine bestimmte Richtung (z. B. Plan- oder
+                            Profilkurvatur) </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Intervisibilität </tabledata>
+                        <tabledata> Ja/ Nein </tabledata>
+                        <tabledata> Gibt an, ob der Betrachter einen bestimmten Punkt sehen kann
+                        </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Sichtbares Gebiet </tabledata>
+                        <tabledata> Polygone </tabledata>
+                        <tabledata> Gebiet, welches von einem oder mehreren Punkten aus sichtbar ist
+                        </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Reliefschatten </tabledata>
+                        <tabledata> Bild </tabledata>
+                        <tabledata> Schattenwurf durch das Gelände bei einer bestimmten
+                            Sonnenposition </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Flussnetzwerk </tabledata>
+                        <tabledata> Linien </tabledata>
+                        <tabledata> </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Einzugsgebiete </tabledata>
+                        <tabledata> Polygone </tabledata>
+                        <tabledata> </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Profil </tabledata>
+                        <tabledata> Linie </tabledata>
+                        <tabledata> Höhenprofil entlang einer bestimmten Linie </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Volumen </tabledata>
+                        <tabledata> Zahl </tabledata>
+                        <tabledata> Füllungs- oder Abtragsvolumen für ein Gebiet und für eine
+                            bestimmte Höhe </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Perspektivische Abbildung </tabledata>
+                        <tabledata> Bild </tabledata>
+                        <tabledata> </tabledata>
+                    </tablerow>
+                    <tablerow>
+                        <tabledata> Falllinie </tabledata>
+                        <tabledata> Linie </tabledata>
+                        <tabledata> Pfad entlang der steilsten Neigung </tabledata>
+                    </tablerow>
+                </table>
+            </look>
+            <look>
+                <paragraph> Mit Hilfe von Geländemodellen (oder wie zuvor bereits skizziert
+                    Werteoberflächen) können in einem GIS relativ komplexe Sachverhalte modelliert
+                    werden. Nachfolgend wird gezeigt, wie man mit Hilfe eines GI-S potenziell von
+                    Steinschlag betroffene Gebiete identifizieren kann. Als Ausgangsdaten sind
+                    folgende kontinuierliche Rauminformationen verfügbar: </paragraph>
+                <list listStyle="unordered">
+                    <item>Felsflächen</item>
+                    <item>Waldflächen</item>
+                    <item>Digitales Geländemodell</item>
+                </list>
+                <paragraph title="Beispiel Steinschlagmodellierung"> Nachfolgend ist die Konzeption
+                    einer GIS gestützten einfachen Steinschalgsgefärdungskarte dargestellt.
+                    Konzeptionell wird anstehender Fels (Felsflächen) als potenzielles Anrissgebiet
+                    betrachtet. Unter der schlichten Annahme, dass nach Newtons Gravitationsgesetz
+                    fallende Steine sich exakt entlang der Falllinie talwärts bewegen, wird zur
+                    Identifikation der gravitativ betroffenen Unterlieger von jeder Felsfläche
+                    (Pixel, Polygon) die <formatted style="bold">Falllinie</formatted> berechnet.
+                    Die gravitative Steinbewegung kommt, so die Annahme, zum Stillstand, wenn das
+                        <formatted style="bold">Pauschalgefälle</formatted> das erste Mal geringer
+                    als 31 Grad wird (empirischer Schwellwert). Weiterhin wird die Annahme
+                    getroffen, dass in Waldgebieten ein Stein schneller zum Stillstand kommt (Bäume
+                    wirken als Hindernisse). Daher wird dort den Schwellenwert des Pauschalgefälles
+                    höher gesetzt (z.B. auf 33 Grad). Die untenstehende Abbildung zeigt das Resultat
+                    einer solchen Analyse in der Umgebung der Gemeinde Saas Baalen. Rot eingefärbt
+                    sind die steinschlaggefährdeten Gebiete, wobei der Farbton das resultierende
+                    Pauschalgefälle in Grad repräsentiert. </paragraph>
+                <column>
+                    <columnLeft>
+                        <multimedia title="Steinschlaggefährungsanalyse der Gemeinde Saas Baalen"
+                            src="../image/steinschlagresult.jpg" type="jpeg" width="399"
+                            height="244"/>
+                    </columnLeft>
+                    <columnRight>
+                        <multimedia legend="Steinschlaglegende"
+                            src="../image/steinschlaglegende.gif" type="jpeg" width="186"
+                            height="362"/>
+                    </columnRight>
+                </column>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph>Vor dem Hintergrund der Ihnen bereits bekannten Abfragemöglichkeiten
+                        klingt der Begriff <formatted style="italic"
+                            >Steinschlagmodellierung</formatted> etwas zu gewichtig.</paragraph>
+                    <list>
+                        <item>Sehen Sie einen Unterschied zwischen Ihren bisherigen Abfragen und den
+                            Ergebnissen der Steinschlagmodellierung?</item>
+                        <item> Falls ja welche?</item>
+                        <item>Könnten Sie eine vergleichbare Modellierung auch mit den Ihnen
+                            bekannten Daten für Rarotonga durchführen? Benötigen Sie noch weitere
+                            Datensätze?</item>
+                    </list>
+                </box>
+            </act>
+
+
+        </learningObject>
+
+
+
+        <learningObject title="Funktionale Ableitungen aus kontinuierlichen Raumdaten" label="V_lo4"
+            navTitle="Ableitung kontinuierlicher Datenfelder">
+            <clarify>
+                <paragraph>
+                    <multimedia
+                        legend="Das Phänomen Gelände spielt häufig eine zentrale Rolle nicht nur auf Wanderwegen sondern auch in der skalenabhängigen Analyse von Oberflächenstrukturen, Standorten Versorgungsleitungen und vieles mehr"
+                        src="../image/terrainmatters.jpg" width="400" units="pixels" type="jpeg"
+                        thumbnail="../image/terrainmatters_th.jpg" bibIDRef="gisma" align="right"/>
+                </paragraph>
+                <paragraph> Das Phänomen <formatted style="italic">Gelände</formatted> spielt in
+                    vielen räumlichen Vorstellungen eine zentrale Rolle. Diese reicht von der
+                    kognitiven Wahrnehmung z.b. der Frage Was ist eine Wanderweg? (vgl. Abbildung)
+                    bis zur zuvor skizzierten formalen, quantitativen Ableitung von
+                    Eigenschaften.<newLine/> In einem GIS werden die Informationen über die Form
+                    einer Geländeoberfläche in der Regel aus Höheninformationen abgeleitet. Diese
+                    Höheninformation wird in einem digitalen Geländemodell (DGM) gespeichert.
+                    Digitale Geländemodelle bestehen zunächst nur aus einer spezifischen
+                    Höheninformation für einen definierten Raumausschnitt (Rasterzelle, Punkt,
+                    Polygon). Auf der Basis dieser Primärinformation werden zahlreiche zusätzliche
+                    Informationen abgeleitet. Nachfolgend sollen am Beispiel der Hangneigung,
+                    Exposition und Kurvatur skizziert werden, wie die Ableitungen mit Hilfe von
+                    Funktionen berechnet werden. Entscheidend ist weniger die verwendete Mathematik
+                    als vielmehr die resultierenden Informationen, die für die unterschiedlichsten
+                    Fragestellungen verfügbar ist. </paragraph>
+                <paragraph title="Hangneigung"> Auf einer (Gelände-)Oberfläche ist die Neigung (oder
+                    auch: Hangneigung) an einem Punkt gegeben durch die Tangentialebene. Das
+                    steilste Gefälle auf dieser Tangentialebene bezeichnet man als Neigung (engl.
+                    slope). Die Neigung lässt sich aus den Ableitungen der Oberfläche in der
+                    Richtung der x-Koordinate und derjenigen in Richtung der y-Koordinate berechnen. </paragraph>
+                <paragraph> Um die Neigung aus einem Höhenmodell zu berechnen, braucht man daher
+                    eine Methode, mit der man Ableitungen aus den Höhenwerten schätzen kann. Die
+                    gängigste Art, dies für ein <formatted style="bold">gitterbasiertes
+                        Geländemodell</formatted> zu tun, ist unter dem Namen „finite Differenzen“
+                    bekannt <citation bibIDRef="horn" yearOnly="no"/>. </paragraph>
+                <paragraph> Um das Prinzip der finiten Differenzen zu erläutern, sei zuerst auf den
+                    eindimensionalen Fall eines Profils (statt einer Oberfläche) zurückgegriffen.
+                    Die folgende Abbildung zeigt, wie durch Bildung des Quotienten der Differenzen
+                    der Höhe (dz) und in der Ebene (dx) zuerst die erste Ableitung (Slope), und
+                    davon ausgehend die zweite Ableitung (Curvature) geschätzt werden kann. Die
+                    gewählte Schrittweite in x-Richtung ist in diesem Fall gleich 4. Das heißt, es
+                    wird die finite Differenz bezgl. der beiden zweiten Nachbarn nach links bzw.
+                    nach rechts vom zentralen Punkt aus gebildet. Diesem zentralen Punkt wird sodann
+                    der Wert der Ableitung zugewiesen. In der Abbildung sind der Zentralpunkt sowie
+                    dz und dx entsprechend rot markiert. </paragraph>
+                <multimedia src="../image/Geomorphomet-hsc.png" type="png" align="center"/>
+                <paragraph> Für den zweidimensionalen Fall einer Oberfläche gibt <citation
+                        bibIDRef="horn" yearOnly="yes"/> die Formeln zur Schätzung der Neigung
+                    mittels finiten Differenzen: </paragraph>
+                <multimedia src="../image/formula/slope.png" type="png" width="50" units="percent"
+                    align="center"/>
+                <paragraph> mit </paragraph>
+                <multimedia src="../image/formula/neigung_dx.png" type="png" width="50"
+                    units="percent" align="center"/>
+                <multimedia src="../image/formula/neigung_dy.png" type="png" width="50"
+                    units="percent" align="center"/>
+                <paragraph>Die Nummerierung der Punkte in der 3-3-Nachbarschaft um den Zentralpunkt
+                    (z5) zur Bildung der Differenzen ist aus der nachstehenden Abbildung
+                    ersichtlich. In den Formeln der finiten Differenzen oben fällt auf, dass die
+                    Differenzen, die durch den Zentralpunkt führen, doppelt gewichtet sind. </paragraph>
+                <multimedia src="../image/neigung_aufsicht.png" type="png" align="center"/>
+                <paragraph> In einem linear interpolierten <formatted style="bold">dreiecksbasierten
+                        Geländemodell</formatted> können ebenfalls mit wenig Aufwand
+                    Richtungsableitungen berechnet werden. Die Höhe innerhalb einer Dreiecksfacette
+                    kann bestimmt werden durch die Ebenengleichung <formatted style="code"> z = ax +
+                        by + c </formatted>, wobei x, y und z die Koordinaten des Punktes sind, für
+                    den man die Höhe berechnen möchte. Durch die drei Eckpunkte einer
+                    Dreiecksfacette können a, b, c berechnet werden (3 Gleichungen, 3 Unbekannte).
+                    Somit hat man die Ableitung (Neigung) in x-Richtung (a) und die Ableitung in
+                    y-Richtung (b) bereits gefunden. </paragraph>
+
+                <paragraph title="Exposition"> Unter Exposition (engl. aspect) versteht man die
+                    Richtung (im Uhrzeigersinn von Norden = Azimut) des steilsten Gefälles der
+                    Tangentialebene. Wiederum benötigt man die Ableitungen in x- und y-Richtung zur
+                    Berechnung, wie sie für die Berechnung der Hangneigung schon gebildet wurden
+                        <citation bibIDRef="horn" yearOnly="no"/>: </paragraph>
+                <multimedia src="../image/formula/aspect.png" type="png" width="169" units="pixels"
+                    align="center"/>
+                <paragraph> mit </paragraph>
+                <multimedia src="../image/formula/aspect_a.png" type="png" width="89" units="pixels"
+                    align="center"/>
+                <multimedia src="../image/formula/aspect_b.png" type="png" width="87" units="pixels"
+                    align="center"/>
+                <paragraph> Zusätzlich muss man für die Berechnung unterscheiden, ob die Werte
+                    dieser Ableitungen negativ, null oder positiv sind (“mod” bezeichnet die
+                    Modulo-Division; ergibt den Divisionsrest): </paragraph>
+                <multimedia src="../image/formula/exposition.png" type="png" width="414"
+                    units="pixels" align="center"/>
+
+                <paragraph title="Kurvatur"> Kurvatur (engl. curvature) ist die Krümmung (d. h. die
+                    zweite Ableitung) einer Oberfläche an einem bestimmten Punkt in eine bestimmte
+                    Richtung. <newLine/>Bei digitalen Geländemodellen sind insbesondere die
+                        <formatted style="bold">Profilkurvatur</formatted> (Kurvatur in Richtung des
+                    steilsten Gefälles) und die <formatted style="bold">Plankurvatur</formatted>
+                    (Kurvatur in Richtung der Höhenlinie) von besonderem Interesse. Die
+                    Kurvaturwerte sind negativ bei Konvexität (erhabene Formen) und positiv bei
+                    Konkavität (Hohlformen). Die gebräuchlichste Methode, Kurvaturen in
+                    Rastermodellen zu berechnen, wird in <citation bibIDRef="zevenbergen"
+                        yearOnly="yes"/> beschrieben. Es wird ein lokales Polynom vierter Ordnung
+                    mit neun Parametern verwendet, das durch alle neun Punkte in der
+                    3x3-Nachbarschaft des Zentralpunktes geht, wie dies die folgende Abbildung
+                    schematisch zeigt (inkl. Nummerierung der Punkte für die Formeln). Dann können
+                    Plan- und Profilkurvatur für den Zentralpunkt z<formatted style="subscript"
+                        >5</formatted> mit folgenden Formeln berechnet werden: </paragraph>
+
+
+                <multimedia src="../image/TIN3D.png" type="png" align="center"/>
+            </clarify>
+
+            <look>
+                <paragraph/>
+            </look>
+            <act>
+                <box cssClass="denkensienachbox">
+                    <paragraph> In der untenstehenden Abbildung sehen sie 3D-Ansichten eines
+                        Geländes. Finden Sie heraus, welche abgeleitete Information jeweils durch
+                        Einfärbung dargestellt ist. </paragraph>
+                    <multimedia src="../multimedia/gelaende_wahl.swf" type="flash" width="600"
+                        height="333" units="pixels" align="center"/>
+                </box>
+            </act>
+
+        </learningObject>
+
+        <learningObject title="Vertiefungsbeispiel: Berechnung der Sichtbarkeit" label="V_lo5"
+            navTitle="Sichtbarkeitsanalyse">
+            <clarify>
+                <paragraph> Digitale Geländemodelle können für viele Ingenieur- und
+                    Planungsanwendungen eingesetzt werden. Als Beispiel wird in dieser Unit näher
+                    auf die Sichtbarkeitsanalyse eingegangen. Bei einer Sichtbarkeitsanalyse wird,
+                    ausgehend von einem digitalen Höhenmodell und einem gegebenen Punkt, berechnet,
+                    welche anderen Punkte im Gelände sichtbar sind. Das Prinzip von
+                    Sichtbarkeitsberechnungen wird zuerst im eindimensionalen Fall gezeigt und dann
+                    auf den zweidimensionalen Fall übertragen. </paragraph>
+                <paragraph>Im eindimensionalen Fall eines Profils wird zur Ermittlung der
+                    Sichtbarkeit eines Zielpunkts berechnet, ob ein Punkt zwischen dem Standort
+                        <formatted style="italic">V</formatted> und dem Zielpunkt <formatted
+                        style="italic">P</formatted> höher liegt als die Verbindungslinie (d. h. die
+                    Sichtlinie; engl. line of sight = LOS). Ist dies der Fall, so ist die Sichtlinie
+                        <formatted style="italic">LOS</formatted> blockiert und somit der Zielpunkt
+                    nicht sichtbar, andernfalls ist der Zielpunkt sichtbar. Am einfachsten
+                    programmiert man einen solchen Test, indem man prüft, ob die Neigung der Linie
+                    zwischen dem Standpunkt <formatted style="italic">V</formatted> und dem
+                    überprüften Zielpunkt <formatted style="italic">P</formatted> auf dem Profil
+                    grösser oder kleiner als diejenige der Linie zum letzt-gespeicherten
+                    Horizontpunkt <formatted style="italic">I</formatted><formatted style="italic">
+                        <formatted style="subscript">hor</formatted>
+                    </formatted> ist. Oder anders gesprochen, ob der Vertikalwinkel &#947;<formatted
+                        style="italic">
+                        <formatted style="subscript">i</formatted>
+                    </formatted> zum aktuell überprüften Punkt größer (= sichtbar) oder kleiner (=
+                    unsichtbar) ist als der Vertikalwinkel &#947;<formatted style="italic">
+                        <formatted style="subscript">hor</formatted>
+                    </formatted> des letzten Horizonts. </paragraph>
+
+
+                <multimedia src="../image/profil.png" width="514" units="pixels" type="png"
+                    align="center"/>
+
+                <paragraph>In einem linear interpolierten dreiecksbasierten Geländemodell müssen
+                    zuerst die Höhen der Verbindungslinien-Schnittpunkte (von Standort und
+                    Zielpunkt) und der Dreiecksvermaschung berechnet werden, wie dies die nächste
+                    Abbildung zeigt. </paragraph>
+                <multimedia src="../image/TIN.png" type="png" align="center"/>
+                <paragraph>Die Höhen an den Schnittpunkten S<formatted style="subscript"
+                        >1</formatted> bis S<formatted style="italic">
+                        <formatted style="subscript">n</formatted>
+                    </formatted> können durch lineare Interpolation aus den Höhen der beiden
+                    Dreieckspunkte berechnet werden, die die betreffende Dreieckskante beschließen.
+                    Als Resultat ergibt sich ein Profil wie im eindimensionalen Fall (siehe
+                    Abbildung unten). Auf diesem Profil kann nun derselbe Algorithmus für die
+                    LOS-Ermittlung wie oben angewendet werden. </paragraph>
+                <multimedia src="../image/TIN2.png" type="png" align="center"/>
+                <paragraph> Ermittlung der Profile zwischen Standpunkt V und Zielpunkt P in einem
+                    gitterbasierten Geländemodell (Raster): Hier kann, analog zum dreiecksbasierten
+                    Fall, die Verbindungslinie mit den Kanten der durch das Gitter gebildeten
+                    Quadrate geschnitten und ein Profil erstellt werden (Abbildung a). Da die
+                    Berechnung der Schnittpunkte sehr rechenintensiv sein kann, gibt es
+                    Näherungsalgorithmen, um ein Profil zu berechnen. In der untenstehenden
+                    Abbildung werden zwei davon gezeigt: In Abbildung b) wird entlang der
+                    Sichtbarkeitslinie die Höhe in regelmäßigen Abständen abgefragt und gespeichert.
+                    Da jede Rasterzelle genau eine Höhe hat, muss somit nur berechnet werden, in
+                    welcher Rasterzelle der betreffende Zwischenpunkt liegt. In der Lösung von
+                    Abbildung c) wird der Sichtstrahl zuerst gerastert und dann die Höhe der so
+                    entstandenen Rasterzellen mit denjenigen des Geländemodells
+                    verglichen.</paragraph>
+
+                <multimedia src="../image/computing_los.png" type="png" align="center"/>
+            </clarify>
+            <look>
+                <paragraph> Sichtbarkeitsberechnungen gelangen in verschiedenen Anwendungen zum
+                    Einsatz. Ein erstes Beispiel ist die Platzierung eines Aussichtsturms. Mit einem
+                    digitalen Geländemodell können innerhalb sehr kurzer Zeit verschiedene Standorte
+                    geprüft werden. Außerdem kann die Berechnung mit verschiedenen Turmhöhen
+                    durchgeführt werden (Variation von <formatted style="italic"
+                        >h</formatted><formatted style="italic">
+                        <formatted style="subscript">v</formatted>
+                    </formatted>). Ein weiteres Beispiel ist die Ausbreitung von elektromagnetischen
+                    Wellen (z. B. zur Planung von Mobilfunkantennen). Hier ist zu beachten, dass das
+                    Gebiet, in welchem elektromagnetische Signale empfangen werden können, nicht
+                    genau mit dem sichtbaren Gebiet übereinstimmt. Im GIS wird dies in der Regel
+                    dadurch korrigiert, dass die Höhe eines Punktes einen bestimmten Betrag unter
+                    der Sichtbarkeitslinie sein muss, damit an diesem Punkt das Signal nicht
+                    empfangen werden kann. Die Höhe dieses Betrages ist abhängig von der
+                    Wellenlänge. Ein letztes Beispiel stammt aus der Wildtierbiologie. Ein GIS kann
+                    hier eingesetzt werden, um ein optimales Gebiet zur Wiederansiedlung von
+                    Tierarten auszuwählen. Das Rocky-Mountain-Bighorn-Schaf beispielsweise hält sich
+                    (unter anderem) bevorzugt in Gebieten auf, welche nur von wenigen Orten aus
+                    gesehen werden können. Dies reduziert die Wahrscheinlichkeit, von einem Raubtier
+                    entdeckt zu werden. </paragraph>
+            </look>
+            <act metaSetUpInfo="none">
+                <paragraph> Der untenstehende Kartenausschnitt zeigt die Umgebung des Türlersees in
+                    der Nähe von Zürich (Schweiz). Wenn Sie in die topographische Karte
+                    hineinklicken, können Sie sehen, welche Punkte vom markierten Betrachterstandort
+                    (roter Punkt) aus sichtbar sind und welche nicht. Nach Eingabe einiger Punkte
+                    erscheint ein Knopf „Karte einblenden“, mittels dessen die gesamte
+                    Sichtbarkeitskarte eingeblendet wird. Ist der Ort Aeugst vom Betrachtungsort aus
+                    einsehbar? </paragraph>
+                <multimedia src="../multimedia/tuerler_punkt_karte.swf" type="flash" width="550"
+                    height="600" align="center"
+                    legend="Klicken Sie auf einen Punkt in der Karte um zu sehen ob er
+                    vom roten Punkt aus sichtbar ist oder nicht."
+                    bibIDRef="swisstopo1111"/>
+            </act>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph> Wie bereits erwähnt, werden (z.T. modifizierte)
+                        Sichtbarkeitsberechnungen unter Verwendung von digitalen Geländemodellen
+                        eingesetzt, um die Ausbreitung von elektromagnetischen Wellen zu berechnen.
+                        Dies wird von verschiedenen Mobiltelefonanbietern dazu genutzt, Karten zu
+                        erstellen, auf welchen die Gebiete eingefärbt sind, wo man mit einem
+                        Mobiltelefon Empfang hat. Auf der Internetseite der Telekommunikationsfirma
+                            <link
+                            uri="http://www.t-mobile.de/funkversorgung/inland/0,12418,15400-_,00.html"
+                            >T-Mobile</link> können Sie sich ein solches Beispiel anschauen. Geben
+                        Sie z.B. für Marburg 35037 ein und lesen Sie die <formatted style="italic"
+                            >"Wichtigen Informationen"</formatted>. </paragraph>
+                    <list>
+                        <item> Können Sie aus Ihrem Wissen über die Erzeugung solcher Karten
+                            beurteilen warum T.Mobile nicht zu wissen scheint wo es Empfang gibt und
+                            wo nicht?</item>
+                        <item>Suchen Sie weitere ähnliche Beispiele im Internet. </item>
+                    </list>
+                </box>
+            </act>
+        </learningObject>
+
+        <learningObject title="Ableitung von Abflussnetzwerken " label="V_lo6"
+            navTitle="Abflussnetzwerke">
+            <clarify>
+                <paragraph> Die Basis für die Ableitung vieler hydrologischer Parameter ist ein
+                    Gewässernetz, das manuell digitalisiert oder automatisch aus einem digitalen
+                    Geländemodell extrahiert werden kann. Lokale Abflussrichtungen in Rastern werden
+                    oft nach dem Zifferblock einer Tastatur kodiert. Ein Rasterpunkt (Pixel), von
+                    dem Wasser in Richtung Südwesten abfließt, hätte demnach den Wert 1, wobei ein
+                    Pixel mit der Abflussrichtung Westen den Wert 4 hätte, usw. </paragraph>
+                <multimedia src="../image/keyboardnumbers.gif"
+                    legend="Lokale Abflussrichtungen in einem Raster können mit den Ziffern einer Tastatur kodiert werden."
+                    width="149" height="149" type="gif" align="center"/>
+                <paragraph> Eine Karte, die die lokale Abflussrichtung für jeden Rasterpunkt
+                    enthält, wird als <formatted style="italic">lokales Netz der
+                        Fließrichtung</formatted> (local drain direction net bzw. ldd net)
+                    bezeichnet <citation bibIDRef="burrough"/>. Es gibt zahlreiche Algorithmen um
+                    LDD-Netze zu berechnen; jede geht von einer anderen Ausnahme über den
+                    Wasserabfluss im Gelände aus. Für eine (interaktive) Vertiefung sei auf die
+                    Software Landserf von <citation bibIDRef="wood" yearOnly="yes"/>
+                    verwiesen.</paragraph>
+            </clarify>
+            <clarify title="D8 Algorithmus">
+                <paragraph> Der einfachste und bekannteste ist der sogenannte D8-Algorithmus (oder
+                    8-Punkt-Schütt-Algorithmus) und beruht auf der Annahme, dass, in einer Umgebung
+                    von neun Rasterpunkten, das Wasser in Richtung der steilsten Neigung abfließt.
+                    Es wird dazu die Neigung zu jedem der acht umliegenden Punkten von einem
+                    zentralen Quellpunkt mit folgender Formel errechnet: </paragraph>
+                <multimedia align="center" src="../image/D8Algorithm.jpg" width="128" height="45"
+                    type="jpeg"/>
+                <paragraph>wobei <formatted style="italic">d</formatted> die Entfernung und
+                        <formatted style="italic">Δz</formatted> der Höhenunterschied zwischen den
+                    zwei Punkten ist. In einem Raster, bei dem die Pixelbreite 1 beträgt, müssen wir
+                    zwischen folgenden zwei Fällen unterscheiden: </paragraph>
+                <list>
+                    <item> Wenn wir die Neigung in Richtung Norden, Osten, Süden oder Westen
+                        errechnen, beträgt die Entfernung zwischen den Rasterpunkten <formatted
+                            style="italic">d</formatted> = 1.</item>
+                    <item> Wenn wir die Neigung in die diagonalen Richtungen (Nordosten, Südosten,
+                        Südwesten, Nordwesten) berechnen wollen, ist die Distanz <formatted
+                            style="italic">d</formatted> zwischen den Rasterpunkten
+                        Wurzel(2).</item>
+                </list>
+                <paragraph title="Das lokale Netz der Fließrichtung (LDD-Netz)"> Nun wissen wir, wie
+                    die Abflussrichtung für einen einzelnen Punkt in der Mitte einer Nachbarschaft
+                    von neun Punkten errechnet wird. Indem dieser Ausschnitt als Fenster
+                    schrittweise über die gesamte Rastermatrix bewegt wird, können wir jedem Punkt
+                    eine lokale Abflussrichtung zuweisen und so ein LDD-Netz erstellen. </paragraph>
+                <multimedia src="../image/ldd_clarify.gif" type="gif" height="237" width="528"
+                    legend="LDD-Netz für ein kleines DGM (Links) Lokale Abflussrichtungen sind als Pfeile gekennzeichnet, (Rechts) Lokale Abflussrichtungen nach dem Zeichenblock einer Tastatur gekennzeichnet."
+                    align="center"/>
+
+            </clarify>
+
+
+
+            <look>
+                <paragraph title="Beispiel Türler See"> Die nachfolgende Abbildung der
+                    Abflussrichtungen zeigt ein 25m-Raster-DGM vom Türlersee-Gebiet und das davon
+                    abgeleitete LDD-Netz. Die Seefläche im Süden der Karte muss aus dem Verfahren
+                    ausgeschlossen werden, weil die Fließrichtung einer horizontalen Ebene
+                    undefiniert ist. </paragraph>
+                <multimedia width="600" height="266" src="../image/flowDirection_look.gif"
+                    legend="Abflussrichtungen, die von einem 25m-Raster-DGM mit einem D8-Algorithmus errechnet wurden."
+                    type="gif" bibIDRef="swisstopo" align="center"/>
+                <paragraph> Analog dazu kann ein ldd net in einen Vektordatensatz transformiert und
+                    entsprechend visualisiert werden. </paragraph>
+                <multimedia width="480" height="288" src="../image/lddnetLook.gif"
+                    legend="Ein LDD-Netz als Vektorkarte.." type="gif" align="center"/>
+            </look>
+
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph> Betrachten wir das folgende Beispiel, in dem das Ursprungspixel und
+                        seine acht Nachbarn definierte Höhenwerte haben und die Zellenwerte 1, 2
+                        oder 3 beträgt. Wohin fließt das Wasser? Selektieren Sie die richtige Zelle,
+                        indem Sie darauf klicken. (Achtung: dieses kleine Beispiel ist nicht
+                        perfekt; wenn zwei Zellen als Ziele gleichermaßen geeignet sind, ist keine
+                        Konfliktregel implementiert – die Anwendung wählt einfach die erste der zwei
+                        Zellen.</paragraph>
+                    <paragraph title="Finden Sie die steilste Neigung unter den acht Nachbarn"/>
+                    <multimedia type="flash" width="450" height="230"
+                        src="../multimedia/Computing_Slope_ACT.swf" align="center"/>
+                </box>
+            </act>
+        </learningObject>
+        <learningObject
+            title="Vertiefungsbeispiele: Probleme und alternative Methoden bei der Ableitung von Abflussnetzwerken"
+            label="V_lo7" navTitle="Vertiefung Abflussnetzwerke">
+            <clarify>
+                <paragraph> Es gibt zwei Dinge, die man bei der Erstellung eines LDD-Netzes
+                    berücksichtigen muss. Der Informationsgehalt des Ergebnisses hängt oft von einer
+                    sinnvollen Wahl von Datenverarbeitungs- und Vorverarbeitungsmethoden ab. Einige
+                    werden nachfolgend beschrieben. Um eine sinnvolle Wahl der Verfahren zu treffen
+                    müssen die Analyseverfahren und die Metadaten des DGMs sorgfältig betrachtet
+                    werden. </paragraph>
+                <paragraph title="Stochastische Methoden"> Daten aus DGMs, wie die aus dem obigen
+                    Beispiel, enthalten viele Ungewissheiten. Die definierte Struktur eines
+                    Rasterdatensatzes berücksichtigt keine spezifischen geomorphologischen
+                    Strukturen, wie z.B. Höhenrücken oder Schluchten. Es kann auch Messfehler geben,
+                    oder Veränderungen in der Geländeoberfläche, die noch nicht aktualisiert wurden,
+                    sowie Fehler, die aus vorherigen Arbeitsschritten stammen. Wegen diesen
+                    Unsicherheiten im DGM werden häufig stochastische Methoden für die Erzeugung
+                    realistischerer Abflussnetze verwendet. So ist beispielsweise der <formatted
+                        style="bold">Rho8</formatted>-Algorithmus dem <formatted style="bold"
+                        >D8</formatted>-Algorithmus sehr ähnlich, verwendet aber, statt der
+                        <formatted style="bold">Quadratwurzel von 2</formatted>, <formatted
+                        style="bold">2-r</formatted>, wobei r eine gleichverteilte, zufällige Zahl
+                    zwischen 0 und 1 ist. Diese Betrachtung wird eingeführt um die diagonale
+                    Entfernung zwischen zwei nebeneinander liegenden Punkten zu schätzen. Daraus
+                    resultieren unterschiedliche, möglicherweise realistischere oder für spezifische
+                    Fragestellungen geeignetere LDD-Netze. <newLine space="long"/> Eine Alternative
+                    dazu ist eine Monte-Carlo-Simulation durchzuführen, indem die Höhenwerte des
+                    DGMs mehrfach randomisiert werden und das LDD-Netz daraus extrahiert wird. Das
+                    Netz, das am häufigsten vorkommt, wird als die wahrscheinlichste Lösung
+                    angenommen. Für weitergehende Informationen sei auf <citation
+                        bibIDRef="burrough" yearOnly="yes"/> verwiesen.</paragraph>
+
+                <paragraph title="Algorithmen mit mehreren Fließrichtungen"> Man kann auch annehmen,
+                    dass Wasser nicht nur in ein sondern in mehrere benachbarte Pixel fließt. Die
+                        <formatted style="bold">FD8</formatted>- und <formatted style="bold"
+                        >DRho8</formatted>-Algorithmen umgehen dieses Problem, indem Abfluss in
+                    mehreren Richtungen gleichzeitig stattfinden kann. <citation bibIDRef="moore"
+                        yearOnly="yes"/> empfiehlt, einen sogenannten <formatted style="bold"
+                        >Abflussdispersion</formatted>-Algorithmus statt des traditionellen
+                        <formatted style="bold">D8</formatted>-Algorithmus zu verwenden um bestimmte
+                    Einzugsgebiete einzuschätzen (vgl. auch <citation bibIDRef="wood"/>). </paragraph>
+                <paragraph title="Entfernung von abflußlosen Senken (Pits)"> DGMs können abflusslose
+                    Senken aufweisen. Senken stellen in seltenen Fällen eine echte geomorphologische
+                    Form dar (Glazialkar, Karst), aber viel öfter sind sie DGM-Artefakte, die in
+                    Raster-DGMs ausgeglichen werden müssen. Senken kommen oft in schmalen Tälern
+                    vor, in denen die Breite der Talsohle kleiner ist als die Pixelauflösung. Eine
+                    Senke ist ein einziges Pixel mit einer niedrigeren Höhe als alle umliegenden
+                    Pixel, in der untenstehenden Abbildung z.B. das Mittelpixel mit Höhe=2. Infolge
+                    ist die Abflusstopologie gestört. </paragraph>
+                <multimedia src="../image/pit_clarify.gif" width="354" height="354"
+                    legend="Die Zahlen in der obigen Abbildung geben die Höhe jedes Rasterpixels wider. Der Mittelpixel ist eine Grube, weil Wasser in keine Richtung abfließen kann."
+                    type="gif" align="center"/>
+                <paragraph><citation bibIDRef="burrough" yearOnly="yes"/> schlagen zwei
+                    Möglichkeiten vor um Senken zu entfernen (nächste Abbildung): </paragraph>
+                <list>
+                    <item><formatted style="bold">Durchschneiden</formatted>: Das Suchfenster um das
+                        Senkenpixel wird schrittweise vergrößert, bis ein Pixel oder einige Pixel
+                        gefunden werden, die dieselbe oder eine niedrigere Höhe als die der Grube
+                        haben. </item>
+                    <item><formatted style="bold">Auffüllen</formatted>: Die Höhe des Senkenpixels
+                        wird erhöht, bis das Wasser in einen Nachbarpixel abfließen kann.</item>
+                </list>
+                <multimedia src="../image/PitsAndPeaks.gif" type="gif" align="center"
+                    legend="Auffüllen oder Durchschneiden als Strategien um ein zusammenhängendes Abflussnetz zu erzeugen."
+                    width="526" height="373"/>
+                <paragraph>Nicht in jedem Fall muss das DGM auch tatsächlich physikalisch korrigiert
+                    werden. Für das Konzept von Oberflächenabfluss ist die wichtigste Determinante,
+                    dass das Abflussnetz zusammenhängend ist. Um dies zu erreichen könnte man, statt
+                    die Senke aufzufüllen oder zu durchschneiden, die Grube mit einem benachbarten
+                    Pixel topologisch verbinden ohne die zugrundeliegenden Höhenwerte zu ändern. </paragraph>
+                <paragraph title="Flache Stellen"> Nicht nur Senken, sondern auch flache Stellen
+                    können in DGMs Probleme verursachen, weil auch hier die Abflussrichtung
+                    unbestimmt ist. Flache Stellen können wie Senken behandelt werden, indem z.B.
+                    der nächste Punkt mit einem niedrigeren Höhenwert als Abflusspixel angenommen
+                    wird. Analog dazu können sie auch Seen sein, sodass Wasser von jedem Punkt auf
+                    der flachen Ebene in die gesamte Fläche abfließt. </paragraph>
+            </clarify>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph>Unten finden Sie ein sehr kleines Raster-DGM mit Höhenwerten für
+                        jeden Pixel</paragraph>
+                    <list>
+                        <item> Es gibt eine Senke. Finden Sie diese und füllen Sie sie auf, indem
+                            Sie darauf klicken.</item>
+                        <item>Aus welchem Pixel mündet das Wasser in den See? Klicken Sie auf den
+                            entsprechenden Pixel im See.</item>
+                    </list>
+                    <multimedia src="../multimedia/Computing_Drain_ACT.swf" type="flash"
+                        legend="Wenden Sie Ihr Wissen über lokale Fließrichtungen an" width="540"
+                        height="350"/>
+                </box>
+            </act>
+        </learningObject>
+        <learningObject title="Abgeleitete Informationen aus Abflussnetzwerken" label="V_lo8"
+            navTitle="Ableitungen aus Abflussnetzwerken">
+            <clarify>
+                <paragraph> Lokale Abflussnetzwerke sind zunächst nur zur Bestimmung der direkten
+                    Ober- und Unterlieger sinnvoll. Wie jedoch bereits im Kapitel Abgeleitete
+                    Informationen skizziert wurde, können solche ersten Ableitungen für weitere
+                    Informationsgewinnung sehr hilfreich sein. Falls für jedes Pixel bekannt ist von
+                    wie sich gravitative Zu- und Abflüsse verhalten können zum Beispiel alle
+                    Elemente gezählt oder markiert werden, die von einem bestimmten Pixel aus
+                    flussauf(ab)wärts liegen. Gleichgültig ob die räumliche Verteilung von
+                    Niederschlag als gleichmäßig oder variabel angenommen wird, kann mit dieser
+                    Information berechnet werden, wie viel Wasser sich in jedem Pixel ansammelt. Ein
+                    LDD-Netz kann in einer Vielzahl von spezifischen hydrologischen Analysen
+                    eingesetzt werden. Eine naheliegende Anwendung ist die Berechnung von
+                    flussaufwärts liegenden Elementen zur Ableitung von Einzugsgebieten,
+                    Wasseransammlung, Kämmen oder Flussbetten. Es gibt darüberhinaus zahlreiche
+                    weitere hydrologische Indikatoren. Die wichtigsten sind:</paragraph>
+                <list>
+                    <item> Feuchtigkeitsindex (Wetness Index, CTI)</item>
+                    <item> Flussintensitätsindex (Stream Power Index, SPI)</item>
+                    <item> Sedimenttransportindex (Sediment Transport Index, STI)</item>
+                </list>
+                <paragraph title="Elemente, die flussaufwärts liegen"> Die Fläche, die flussaufwärts
+                    liegt, ist ein wichtiger Faktor in der Berechnung von Stofftransporten. Die
+                    Anzahl der Elemente, die von einem bestimmten Pixel flussaufwärts liegen, lässt
+                    sich leicht mit der folgenden Formel berechnen. </paragraph>
+                <multimedia src="../image/Upstream_Formula.gif" type="gif" width="150" height="43"
+                    align="center"/>
+                <paragraph> Wobei <formatted style="italic">ci</formatted> der i-te Rasterpixel mit
+                    dem Wert <formatted style="italic">S(ci)</formatted> und <formatted
+                        style="italic">SUM(cu)</formatted> die Summe aller Elemente beträgt, von
+                    denen Wasser in <formatted style="italic">ci</formatted> abfließt <formatted
+                        style="italic">ci</formatted>. Natürlich können die flussaufwärtsliegenden
+                    Elemente je nach Fragestellung gewichtet werden. Zur Berechnung von
+                    Wasseransammlung kann die Gewichtung z.B. ein Gleichgewicht darstellen zwischen
+                    lokaler Niederschlagsmenge und dem Wasser, das durch Evaporation, Infiltration
+                    und Interzeption der Oberfläche verlorengeht.</paragraph>
+                <paragraph>In der nächsten Abbildung sieht man oben links ein LDD-Netz. Zusätzlich
+                    wird ein Indexwert für jedes Pixel vergeben (Raster oben rechts). Auf dieser
+                    Grundlage werden die flussaufwärtsliegenden Elemente für jedes Pixel gefunden
+                    und mit der Liste der Indexwerte identifiziert (Mitte links). Falls zusätzlich
+                    eine Gewichtung verwendet wird (Mitte rechts), entsteht das Einzugsgebietraster,
+                    das für jedes Pixel die Anzahl der flussaufwärtsliegenden Elemente aufweist
+                    (unten).</paragraph>
+                <multimedia src="../image/flowaccumulation2_clarify.gif" type="gif" width="561"
+                    height="592" align="center"
+                    legend="Berechnung der Anzahl von flussaufwärtsliegenden Elementen für jedes Pixel."
+                />
+            </clarify>
+            <look>
+                <paragraph>
+                    <multimedia src="../image/upstreamElements.gif" type="gif"
+                        legend="Wasseransammlungen können anhand eines ldd nets errechnet warden."
+                        width="400" height="255" bibIDRef="swisstopo" align="right"/>
+                </paragraph>
+                <paragraph title="Kanäle und Kämme"> In der nebenstehenden Abbildung wurden die
+                    flussaufwärtsliegenden Elemente für ein DGM berechnet. Das sichergebende Muster,
+                    korrespondiert weitgehend mit dem Flussnetz auf der entsprechenden
+                    topographischen Karte, da ein wasserführendes Pixel erst dann "sichtbar" wird
+                    fall es eine genügend große Zahl von Oberliegern aufweist. </paragraph>
+
+
+
+                <paragraph>Die zuvor abgeleitete Rastermatrix der absoluten Wasseransammlungen kann
+                    durch Verwendung eines Schwellenwerts zu einer Rastermatrix Karte der
+                    Wasserläufe und Kämme reklassifiziert werden. Eine solche Matrix enthält nur
+                    boolesche Werte, das heißt, ein Pixel gehört entweder zu einem Fließgewässer
+                    bzw. Kamm oder weist keine Information auf. Die Wahl sinnvoller Schwellenwerte
+                    ist abhängig von der Qualität des DGM und der räumlichen Auflösung. Solche
+                    Analyseabfragen zur Bestimmung von Wasserläufen können in Pseudo-Abfragesprache
+                    z.B. lauten: <newLine space="long"/><formatted style="italic"
+                        >if(upstreamelements >= 50) then streams=true; else streams=false;
+                        </formatted><newLine space="long"/>Die Berechnung von Kämmen in einem Raster
+                    kann als zweiseitiges Problem einer Wasserlaufberechnung betrachtet werden.
+                    Kämme sind per Definition Pixel, die keine flussaufwärtsliegenden Elemente
+                    besitzen <citation bibIDRef="braendli"/>. Die Abfrage in Pseudo-Abfragesprache
+                        <newLine space="long"/><formatted style="italic">if(upstreamelements = 0)
+                        then kaemme=true; else kaemme=false; </formatted><newLine space="long"/>
+                </paragraph>
+                <paragraph>
+                    <multimedia src="../image/wetnessIndex.gif" width="400" height="224" type="gif"
+                        legend="Der aus dem ldd net abgeleitete Feuchtigkeitsindex."
+                        bibIDRef="swisstopo" align="right"/>
+                </paragraph>
+
+                <paragraph title="Feuchtigkeitsindex (Wetness Index)"> Eine Karte der
+                    flussaufwärtsliegenden Elemente kann für weitere wichtige hydrologische Konzepte
+                    bzw. inhaltlich/thematische Fragestellungen herangezogen werden. Ein gutes
+                    Beispiel stellt der Feuchtigkeitsindex dar (siehe Beven and Kirkby zit. n.
+                        <citation bibIDRef="burrough" yearOnly="yes"/>). </paragraph>
+                <multimedia src="../image/Wetness_Formula.gif" width="155" height="21" type="gif"/>
+                <paragraph> wobei <formatted style="italic">As</formatted> die flussaufwärtsliegende
+                    Fläche und <formatted style="italic">ß</formatted> die Neigung jedes Pixels
+                    wiedergeben (vgl. Abbildung). Deutlich erkennbar ist die aus der Empirie
+                    bekannte relative Trockenheit der Kämme und Feuchte der Akkumulationsgebiete zu
+                    erkennen</paragraph>
+
+                <paragraph>
+                    <multimedia src="../image/streamPowerIndex.gif"
+                        legend="Das vom ldd net abgeleitete Flussintensitätsindex." width="400"
+                        height="230" type="gif" bibIDRef="swisstopo" align="right"/>
+                </paragraph>
+                <paragraph title="Flussintensitätsindex (Stream Power Index)"> Der
+                    Flussintensitätsindex <citation bibIDRef="burrough" yearOnly="yes"/>, der durch
+                    die untenstehende Gleichung berechnet wird, ist ein Maß für das
+                    Erosionspotential des Oberflächenabfluss.</paragraph>
+                <multimedia src="../image/StreamPower_Formula.gif" type="gif" width="184"
+                    height="21"/>
+                <paragraph>
+                    <formatted style="italic">As</formatted> stellt die flussaufwärtsliegende Fläche
+                        dar;<formatted style="italic"> ß</formatted> steht für die Neigung jedes
+                    Pixels. In der folgenden Abbildung sehen Sie, dass die
+                    Flussintensitätsindexkarte der Karte der flussaufwärtsliegenden Elemente
+                    ähnelt.</paragraph>
+
+                <paragraph>
+                    <multimedia src="../image/sedimentTransportIndex.gif"
+                        legend="Der vom ldd net abgeleitet Sedimenttransportindex ." type="gif"
+                        width="400" height="227" bibIDRef="swisstopo" align="right"/>
+                </paragraph>
+                <paragraph title="Sedimenttransportindex (Sediment Transport Index)"> Der
+                    Sedimenttransportindex beschreibt den Prozess der Erosion/Denudation und
+                    Ablagerung. Im Gegensatz zum Länge-Neigung-Faktor in der
+                    Universalbodenverlustgleichung (Universal Soil Loss Equation, USLE), kann man
+                    den Sedimenttransportindex auf dreidimensionale Flächen anwenden <citation
+                        bibIDRef="burrough"/>. </paragraph>
+                <multimedia src="../image/Sediment_Formula.gif" type="gif" width="250" height="24"/>
+                <paragraph>Der Sedimenttransportindex wird mit folgender Gleichung errechnet.
+                        <formatted style="italic">As</formatted> ist die Fläche, die von jedem Pixel
+                    flussaufwärts liegt, und <formatted style="italic">ß</formatted> ist die Neigung
+                    des Pixels. Die nachstehende Abbildung zeigt ein Beispiel einer
+                    Sedimenttransportindexkarte. Die flussaufwärtsliegende Fläche wird stärker
+                    gewichtet als die Neigung. Dadurch wird das Ergebnis entsprechend
+                    modifiziert.</paragraph>
+                <paragraph>
+                    <multimedia src="../image/maximumFlowPathLength.gif"
+                        legend="Maximaler Fließweg in Meter zu jedem flussaufwärts vorhandenen Pixel."
+                        type="gif" width="400" height="216" bibIDRef="swisstopo" align="right"/>
+                </paragraph>
+                <paragraph title="Maximale Fließweglänge (Maximum flow-path length)"> Der maximale
+                    Fließweg ist die Länge des längsten Fließwegs von der Grenze des Einzugsgebietes
+                    zu einem beliebigen Punkt im DGM. Statt Fläche anzusammeln, wie es für
+                    flussaufwärtsliegende Flächen gemacht wurde, wird der Weg angesammelt, den
+                    Wasser hinter sich lässt, wenn es von Pixel zu Pixel fließt. Nur der längste
+                    Fließweg aller flussaufwärtsliegenden Pixel wird an das flussabwärtsliegende
+                    Pixel gegeben, nicht die Summe aller Fließwege <citation bibIDRef="wilson"
+                        yearOnly="no"/>. </paragraph>
+                <paragraph>Die nebenstehende Abbildung zeigt ein Beispiel für den längsten Fließweg.
+                    Natürlich haben Hügel und Kämme niedrige Werte, wobei der Wert in einem
+                    Wasserlauf flussabwärts kontinuierlich zunimmt. </paragraph>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph>Die Indizien, die oben beschrieben wurden, beruhen auf der Anzahl der
+                        flussaufwärtsliegenden Elemente, die wir leicht berechnen können. Das
+                        Gegenteil (die Anzahl von Elementen, die flussabwärts von einem Element
+                        liegen) könnte aber auch interessant sein. Stellen Sie sich vor, Sie möchten
+                        die Entfernung zu einem Bach errechnen. </paragraph>
+                    <list>
+                        <item>Wie würden Sie vorgehen, ohne die schon bekannten Algorithmen
+                            anzupassen? </item>
+                    </list>
+                    <popup>
+                        <paragraph>Schlussendlich muss das DGM umgekehrt werden (siehe nächste
+                            Abbildung), sodass die Höhepunkte Tiefpunkte werden und umgekehrt. Das
+                            ist leicht getan, indem alle DGM-Werte von einem Wert abgezogen werden,
+                            der höher ist als der höchste Punkt im Ursprungs-DGM. Mit dem
+                            Algorithmus zur Errechnung flussaufwärtsliegender Elemente kann man die
+                            Elemente finden, die flussabwärts von jedem Punkt liegen. </paragraph>
+                        <multimedia src="../image/inversion.gif"
+                            legend="Das Ursprungs-DGM (links) und das invertierte DGM (rechts) ."
+                            type="gif" width="400" align="center" bibIDRef="swisstopo"/>
+                    </popup>
+                </box>
+            </act>
+        </learningObject>
+
+
+
+
+
+
+
+        <selfAssessment title="Wissens-Check">
+            <paragraph> In der untenstehenden Abbildung sehen Sie ein Profil mit Höhen und
+                Distanzen. Berechnen Sie mit dem Taschenrechner, ob der Zielpunkt vom Startpunkt aus
+                sichtbar ist oder nicht. </paragraph>
+            <multimedia src="../image/TIN_uebung.png" type="png"/>
+            <paragraph>Kehren Sie zu dem Fallbeipiel St. Gittal zurück. Versetzen Sie sich für diese
+                Aufgabe in die Rolle eines Wissenschaftlers/einer Wissenschaftlerin mit der Aufgabe,
+                eine Multikriterien-Analyse zur Bestimmung möglicher Lebensräume des Wolfes in der
+                Gemeinde St. Gittal durchzuführen. Ihre Aufgabe ist es, aus verschiedenen Quellen
+                die Kriterien zu bestimmen, die die gesuchten Räume charakterisieren. Studieren Sie
+                dazu die zwei angegebenen Texte: </paragraph>
+            <list listStyle="ordered">
+                <item> KORA: <link uri="../../../material/wolf_kora.pdf" type="pdf" size="200kb"
+                        >Dokumentation Wolf</link>
+                    <citation bibIDRef="kora_wolf"/>
+                </item>
+                <item>Facts: „<link uri="../../../material/facts1995_wolf.pdf" type="pdf"
+                        size="700kb">Die Räuber kommen wieder</link>“<citation bibIDRef="facts1995"
+                    />
+                </item>
+            </list>
+            <paragraph title="Aufgabe:">Formulieren Sie mindestens drei Kriterien zur
+                Charakterisierung potenzieller Wolfshabitate für die Gemeinde St. Gittal. Jedes
+                Ihrer Kriterien sollte in einer räumlichen Datenebene repräsentiert werden können.
+                Aus allen Layern soll anschließend die Gesamteignung errechnet werden. Woher Sie die
+                Daten bekommen können, soll Sie im Rahmen dieser Übung nicht interessieren. </paragraph>
+            <popup>
+                <list listStyle="unordered">
+                    <item>Topographie: steile und felsige Gebiete </item>
+                    <item>Vegetation: bewaldete Flächen </item>
+                    <item>Beuteangebot: hohe Dichte von Wildtieren (Gemsen, Rehe, Hirsche,
+                        Steinböcke) </item>
+                </list>
+            </popup>
+            <paragraph title="Addition vs. Multiplikation">Angenommen, die beiden Themenebenen aus
+                der Abbildung <link targetLabel="raster">Weighted Overlay im Raster- bzw.
+                    Vektormodell</link> werden nicht addiert, sondern multipliziert. Welche
+                wesentliche Änderung ergibt sich dann für die Resultatebene? Beurteilen Sie die
+                folgende Aussage: „Zellen mit 0 in der Eingangsebene erhalten einen kleineren
+                Einfluss, weil sie im Gegensatz zur Addition bei der Multiplikation in die
+                resultierende Eignungsebene übertragen werden.“ </paragraph>
+            <list listStyle="ordered">
+                <item>+ weil + (d. h. erster Satzteil richtig, zweiter Satzteil richtig, logische
+                    Verknüpfung richtig)</item>
+                <item>+ / + (d. h. erster Satzteil richtig, zweiter Satzteil richtig, logische
+                    Verknüpfung falsch)</item>
+                <item>+ / - (d. h. erster Satzteil richtig, zweiter Satzteil falsch, logische
+                    Verknüpfung falsch)</item>
+                <item>- / + (d. h. erster Satzteil falsch, zweiter Satzteil richtig, logische
+                    Verknüpfung falsch)</item>
+                <item>- / - (d. h. erster Satzteil falsch, zweiter Satzteil falsch, logische
+                    Verknüpfung falsch)</item>
+            </list>
+            <popup title="Lösung">4. Richtig ist, dass Zellen mit einer 0 bei der Multiplikation
+                einen höheren Einfluss erhalten, weil (b) gilt. </popup>
+            <paragraph title="Gewichte-Rechner">Zur Festigung Ihres Wissens über die gewichtete
+                Verschneidung sind Sie nun aufgefordert die Eignungswerte bestimmter Pixel in der
+                Resultatkarte rechts selbst nachzurechnen. Gesucht sind die Werte der gelben Felder
+                in der Resultatkarte ganz rechts. Tragen Sie die Werte in die Felder ein und klicken
+                Sie die Taste „Prüfen“. Falls Sie ungeübt im Kopfrechner sind, nehmen Sie ein Blatt
+                Papier zu Hilfe. </paragraph>
+            <multimedia src="../multimedia/TestWeight.swf" type="flash" align="center" width="600"
+                height="400" legend="Gewichte-Rechner"/>
+            <link uri="../multimedia/TestWeight.swf">Starten Sie die Interaktive Weight-Animation
+            </link>
+        </selfAssessment>
+    </unit>
+
+    <unit navTitle="Praxis - OuterRaro I" title="RaroCamp - Outdoor Stützpunkt für OuterRaro"
+        label="GISBSc_UE3a">
+        <entry>
+
+            <paragraph>Zum besseren Verständnis der Übungsgrundlage sei nochmals auf den Text <link
+                    uri="../../../material/AGIT_09_Beitrag_Kanwischer_Reudenbach_Schulze.pdf"
+                    type="PDF" targetLessonLang="de" targetLesson="GISBScL1" icon="text">Wie kommt
+                    der Transrapid nach Marburg?</link> verwiesen. Zentraler Aspekt der TM GIS ist
+                es die Lernenden zu unterstützen, weitgehend selbstständig, gisbasierte Lösungen für
+                geographische Fragestellungen zu erarbeiten. Diese eigenständige Auseinadersetzung
+                ist die wichtigste Grundlage für selbstbestimmtes und entdeckendes Lernen, eine
+                handlungsorientierte Ausbildung und letzlich für eine komplexe AHndlungskompetenz.
+                    <citation bibIDRef="rrm" yearOnly="yes"/> formulieren fünf Leitlinien für einen
+                problemorientierten Ausbildung:</paragraph>
+            <list listStyle="unordered">
+                <item>Situiert und anhand authentischer Probleme lernen </item>
+                <item>In multiplen Kontexten lernen</item>
+                <item>Unter multiplen Perspektiven lernen</item>
+                <item>In einem sozialen Kontext lernen</item>
+                <item>Mit instruktionaler Unterstützung lernen</item>
+            </list>
+            <paragraph> Die Entwicklung eines didaktischen Konzeptes von „Problembasiertem Lernen“
+                (PBL) geht maßgeblich auf H. Barrows (McMaster Universität Hamilton, Kanada) zurück.
+                    <citation bibIDRef="muell" pageNr="26f" yearOnly="yes"/> fasst die zentralen
+                Merkmale von PBL wie folgt zusammen: (a) Das Lernen ist studierendenzentriert und
+                erfolgt in Kleingruppen, (b) ein Tutor betreut und unterstützt den Lernprozess, (c)
+                Probleme bilden den Ausgangspunkt und Stimulus für den Lernprozess; an ihnen erwirbt
+                der Lernende die erforderlichen Problemlösefertigkeiten und (d) die Lernenden
+                erwerben neue Informationen durch selbstgesteuertes Lernen. </paragraph>
+
+
+            <paragraph title="Was unterscheidet eine Fallstudie vom Problembasierten Lernen?"> Ziel
+                    <citation bibIDRef="Kaiser" yearOnly="yes"/> definiert eine Fallstudie (engl.
+                „Case Study“) als eine Unterrichtsmethode bzw. Lernstrategie, bei der die Lernenden
+                mit „praktischen Fällen“ aus den unterschiedlichen Lebensbereichen konfrontiert
+                werden. Die Methodik ist dabei auf praktische Lösungsbewältigung und nicht auf
+                theoretische Wissensvermittlung ausgerichtet. Eine Fallstudie bezieht sich also auf
+                reale Verhältnisse. Das zur Bearbeitung notwendige Material (Literatur, Daten, etc.)
+                wird den Lernenden zur Verfügung gestellt. Es enthält alle wichtigen Informationen
+                z.B. in Form von Originaltexten jedoch wird das Material nicht lehrbuchhaft
+                aufbereitet und kann <formatted style="italic">unvollständig</formatted> oder
+                    <formatted style="italic">fehlerhaft</formatted> sein <citation
+                    bibIDRef="ETHFall"/>.</paragraph>
+            <paragraph> Bei der in TM GIS verfolgten didaktischen Konzeption des Problembasierten
+                Lernens (PBL) hingegen handelt es sich bei den präsentierten Fällen (Fragen)
+                vornehmlich um Anreize zur eigenverantwortlichen Lösung von geographischen
+                Fragestellungen. Entscheidend ist nicht die <formatted style="bold">eine</formatted>
+                korrekte Lösung sondern vielmehr stand der Weg dorthin - Ihre Strategie zur Lösung
+                des Problems- im Vordergrund. In den letzten beiden Übungseinheiten gehen wir diesen
+                Weg konsequent weiter. Sie bekommen nun zwar eine Geodatabase mit reichlich Inhalten
+                allerdings <formatted style="bold">ohne jede Garantie auf Vollständigkeit oder
+                    absolute Korrektheit</formatted>. Zur Fokussierung Ihrer Arbeit Sie umreissen
+                wir exemplarisch einige Fragestellungen und leiten Arbeitshyppothesen ab. Das heißt
+                wir haben für Sie das Problem strukturiert und konstruiert. Nun ist - instruiert
+                durch die Kursleitung und Tutoren- Ihre Kreativität zu Lösung gefragt. Der
+                Lösungsweg ist offen und nicht vorgegeben. Das bedeutet, dass Sie bei der Ihnen
+                vorliegenden Aufgabe nicht wie bei einer Übung Schritt für Schritt geführt werden,
+                sondern dass Sie zunehmend problemlösungorientiert denken und selbst einen oder
+                mehrere Lösungswege suchen, diese analysieren und umsetzen müssen. Bei auftretenden
+                Problemen und Fragen steht Ihnen unsere Online-Betreuung zur Verfügung. Fassen wir
+                zusammen so sind die Merkmale der folgenden Übungen:</paragraph>
+
+
+        </entry>
+        <goals>
+
+            <lObjective>Bearbeitung eines realen Problems</lObjective>
+            <lObjective>Offene Lösung; kein einheitlicher Lösungsweg</lObjective>
+            <lObjective>Arbeitsmaterial wird eingeschränkt zur Verfügung gestellt, ist jedoch nicht
+                vollständig</lObjective>
+            <lObjective>Lehrstoffwissen reicht für die Umsetzung nicht aus - Ihre Kreativität ist
+                gefragt</lObjective>
+            <lObjective>Sie sind in der Lage inhaltliche Fragestellungen zu analysieren und
+                Arbeitsthesen und Arbeitspakte zu gliedern und komplexe Probleme in Einzelschritte
+                zu gliedern um komplexe Analysen vorzunehmen</lObjective>
+
+
+            <lObjective>Sie können die notwendigen GIS Techniken gegebenenfalls durch selbständiges
+                Erarbeiten von neuem GIS-Wissen in geeigneter Weise zum Erreichen Ihrer Ziele
+                kombinieren.</lObjective>
+
+
+
+        </goals>
+        <learningObject title="Die Outdoortourismus-Marke OuterRaro" label="U_lo1"
+            navTitle="Outdoortourismus Rarotonga - Was ist das?">
+            <clarify>
+                <paragraph> Wir haben in der vorausgegangenen Lerneinheit das Angebot der
+                    touristischen Infrastruktur Rarotongas analysiert. Aufgrund dieser Analysen und
+                    zusätzlicher Internetrecherche folgern wir, dass es bereits ein großes
+                    strandbezogenes Tourismusangebot gibt (Schwimmen, Schnorcheln, Surfen, Angeln).
+                    Wir gehen zunächst davon aus, dass das Freizeitangebot in touristischen
+                    Verdichtungsräumen (Hotels, Bars, Kinos etc.) ausreichend und für unsere
+                    Outdoor-Tourismus Marke <formatted style="italic">OuterRaro </formatted> nicht
+                    geeignet ist. Für die weitergehende Analyse ist es nun notwendig einige Thesen
+                    zu formulieren:</paragraph>
+            </clarify>
+            <look>
+                <list>
+                    <item>These 1: In stark verdichteten Räumen existierender
+                        (Freizeit-)Infrastruktur ergibt sich keine gewinnbringende Nische für die
+                        neue Outdoorreisemarke.</item>
+                    <item>These 2: Es existieren weniger genutzte, naturnahe Zonen auf der Insel
+                        Rarotonga, die touristisch kaum erschlossen sind.</item>
+                    <item>These 3: Es ist möglich in diesen Gebieten ein Outdoorangebot zu schaffen
+                        werden, dass sich auf hiking, mountainbiking und raften bezieht und als
+                        Standort attraktive (naturnahe, landschaftlich anspruchsvolle) und
+                        nachhaltig bewirtschafte Camp(s) als Stützpunkt(e) nutzt.</item>
+                </list>
+            </look>
+            <act>
+                <paragraph>Im Rahmen der Entwicklung der neuen Outdoortourismus-Marke OuterRaro gilt
+                    es nun, die letzte These 3 zu überprüfen, welche der Vermutung folgt, dass es
+                    möglich ist, (in diesen Gebieten) ein Outdoorangebot zu schaffen, dass sich auf
+                    Hiking, Mountainbiking und Raften bezieht und attraktive, "naturnahe" und
+                    nachhaltig bewirtschaftete <formatted style="italic">Camps</formatted> als
+                    Stützpunkte nutzt. Basierend auf den von Ihnen bisher durchgeführten
+                    Analyseschritten <link targetLesson="GISBScL7" targetLessonLang="de">Lerneinheit
+                        7</link> und den daraus gewonnen (Teil-)Ergebnissen, bedeutet dies konkret,
+                    dass Sie nun im Rahmen der Multikriterienanalyse geeignete Standorte für
+                    Versorgungsstützpunkte (Camps) suchen müssen und deren Eignung im Gesamtkontext
+                    der Angebotsplanung verifizieren. </paragraph>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="tools">
+                    <paragraph> Die Arbeitsthesen dienen einer strukturierten Vorgehensweise. Zur
+                        Überprüfung der Thesen ist ein und ein adäquates Arbeitsprogramm zu
+                        erstellen.</paragraph>
+                    <list>
+                        <item>Versuchen Sie die Arbeitsthesen so zu formulieren dass Sie Ihrer
+                            Auffassung nach die in Lerneinheit 2 formulierten Ziele Ihres Chefs
+                            erfassen.</item>
+                        <item>Versuchen darauf aufbauend die einzelnen zu bearbeitenden
+                            Fragestellungen/Problembereiche zu identifizieren.</item>
+                        <item>Gliedern Sie diese Fragen sinnvoll, damit Sie auf dieser Grundlage
+                            Arbeitspakete definieren können.</item>
+                    </list>
+                </box>
+            </act>
+        </learningObject>
+        <learningObject title="Zonenmodell Verdichtungsraum" navTitle="Zonenmodell" label="U_lo2">
+            <clarify>
+                <paragraph> Zunächst gilt es die These 1 zu überprüfen. Konkret benötigenwir also
+                    ein Konzept das es uns ermöglicht herauszufinden ob und wenn ja wo sich
+                        Verdichtungs<formatted style="bold">räume</formatted> der
+                    Freizeitinfrastruktur befinden. Hierzu gilt es aus den entsprechenden Relationen
+                    diejenigen Attribute zu identifizieren die Freizeitangebote abbilden. In unserem
+                    Falle seien diese das Beherbergungsobjekte und Objekte des
+                    Freizeitangebots.</paragraph>
+            </clarify>
+            <look>
+                <paragraph> Welches Maß scheint Ihnen geeignet um räumliche Nähe von Objekten
+                    zueinander im Raum zu untersuchen?<newLine space="long"/> Mit Sicherheit ist das
+                    einfachste Maß die durchschnittliche Distanz zum benachbarten Objekt gleicher
+                    Art. Daneben gibt es aber auch in der Geographie den Begriff der
+                    Clusterung/Klumpung von Standorten. Suchen Sie nach beiden Begriffen (Distanz,
+                    Cluster) in der Hilfe der Werkzeugbox und treffen Sie dann eine Entscheidung
+                    über das/die Werkzeuge Ihrer Wahl. Probieren Sie mehrere aus und diskutieren Sie
+                    die Ergebnisse.</paragraph>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="tools">
+                    <list>
+                        <item>Wählen Sie auf der Grundlage Ihrer Auseinadersetzung mit den
+                            untersuchten Werkzeugen ein geeignetes Maß zur Abgrenzung von Räumen mit
+                            geringer bzw. stärker verdichteter Infrastruktur</item>
+                        <item>Schätzen Sie mit Hilfe einer Maßzahl ob man tatsächlich von
+                            verdichteter Infrastruktur reden darf.</item>
+                    </list>
+                </box>
+            </act>
+
+        </learningObject>
+
+        <learningObject title="Panoramaweg und Gewässer" navTitle="Panoramaweg und Wasser"
+            label="U_lo3">
+            <clarify>
+                <paragraph> In den für die Entwicklung unserer Marke identifizierten Gebieten gilt
+                    es nun Geobojekte zu identifizieren, die geeignete <term
+                        glossRef="Proxyvariable">Proxys</term> für unsere Untersuchung darstellen.
+                    Bezogen auf unsere Vorgaben erscheinen zunächst die Wanderwege (Zustieg zu den
+                    Camp(s), Mountainbike-Tracks) und Flüsse (Rafting, Stromproduktion) als sinnvoll
+                    Wahl. Nun heißt es geeignete Maße und Parameter zu entwickeln: Was macht einen
+                    attraktiven Wanderweg aus? Wann kann ein Fluß fürs Rafting interessant sein?
+                    Unter welchen Bedingungen ist er für die Stromproduktion geeignet?</paragraph>
+            </clarify>
+            <look>
+                <paragraph> Informieren Sie sich über die vorhandenen Daten. So können Sie
+                    beispielsweise die Aussicht während einer Wanderung über die Insel als Schätzmaß
+                    für die Attraktivität des Weges nutzen. Informieren Sie sich z.B. im Internet
+                    über typische Gefällstrecken von Flüßen die für das Rafting genutzt werden
+                    können. Welche Wasserführung benötigt ein solcher Fluss? Wie können sie
+                    zumindest in Annäherung die Wasserführung der Flüsse auf Rarotonge bestimmen?.
+                    Nutzen Sie die Werkzeug Hilfe und suchen Sie nach <formatted style="italic"
+                        >Hydrology</formatted> und <formatted style="italic"
+                    >Surface</formatted></paragraph>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="tools">
+                    <list>
+                        <item>Bestimmen Sie die Aussicht von den verfügbaren Wanderwegen.
+                            Identifizieren Sie den/die Wege mit der umfassendsten Aussicht.</item>
+                        <item>Identifizieren Sie ob und welche Gewässerstrecken a) fürs Rafting und
+                            b) für eine Stromversorgung geeignet wären.</item>
+                    </list>
+                </box>
+            </act>
+        </learningObject>
+        <learningObject title="Hiking- und Mountainbike" navTitle="UE Hiking- und Mountainbike"
+            label="U_lo1a">
+            <clarify>
+                <paragraph> Zwar haben Sie bereits eine Vielzahl von interessanten Aspekten für die
+                    Planung der OuterRaro-Marke vorliegen, dennoch fehlen zwei wichtige Aspekte; Sie
+                    benötigen sowohl attraktive und möglichst anspruchsvolle Mountainbike-Strecken.
+                    Für die Frage, welche Eigenschaften die gesuchten Strecken aufweisen müssen,
+                    sollten Überlegungen hinsichtlich Etappenlänge, unterschiedliche Steigungen für
+                    ein sportlich differenziertes Zielpublikum berücksichtig werden. </paragraph>
+
+            </clarify>
+            <look>
+                <paragraph>Doch wie können Sie die damit verbundenen Parameter aus den vorliegenden
+                    räumlichen Daten extrahieren? Letztendlich suchen ja Sie nach einer Vorauswahl
+                    von attraktiven Routen (Aussicht) nach Steigungen. Diese können auch als
+                        <formatted style="italic">Widerstände</formatted> oder <formatted
+                        style="italic">Kosten</formatted> betrachtet werden. MAn kann diese
+                    räumlichen Ausprägungen von Attraktivität und Widerständen welche über eine
+                        <formatted style="italic">Distanz</formatted>) eine Bilanz von "leicht oder
+                    beschwerlich", "billig oder teuer", "attraktiv oder unattraktiv" darsatellt
+                    auffassen..</paragraph>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="tools">
+                    <list>
+                        <item>Übersetzen Sie die gewünschten Anforderungen an die beiden
+                            Streckentypen a) Wanderweg und b) Mountainbike in konkrete Variablen
+                            bzw. Werte. </item>
+                        <item>Suchen nach geeigneten Werkzeugen, mit welchem Sie Distanzen in
+                            Abhängigkeit von Kosten errechnen können (Tipp: Suchen Sie nach Kosten
+                            und Distanzen).</item>
+                        <item> Identifizieren Sie einen Wanderweg, der die Insel durchquert und
+                            gleichzeitig möglichst viele Höhenmeter aufweist. </item>
+                        <item>Identifizieren Sie eine Mountainbike-Strecke, die flache Teilstücke
+                            zur Erwärmung bzw. Entspannung und anspruchsvolle aber fahrbare
+                            Steigungen aufweist.</item>
+                    </list>
+                </box>
+            </act>
+
+        </learningObject>
+        <learningObject title="Standortsuche OuterRaro-Camp" navTitle="Standortsuche OuterRaro-Camp"
+            label="U_lo2a">
+            <clarify>
+                <paragraph>Um geeignete Camp-Standorte zu finden, müssen Sie Ihre bisherigen
+                    Teilergebnisse miteinander in Verbindung bringen oder <formatted style="italic"
+                        >verschneiden</formatted>. Konkret bedeutet das, dass Sie durch eine
+                    sinnvolle Kombination von Abfragen, die Menge Ihrer zuvor gewonnenen
+                    (Teil-)Ergebnisse soweit reduzieren, bis Sie geeignete Standorte erhalten. </paragraph>
+
+            </clarify>
+            <look>
+                <paragraph>Nach Ihrer bisherigen Analyse stehen Ihnen folgende Selektionskriterien
+                    für die Standortsuche zur Verfügung:</paragraph>
+                <list>
+                    <item>ein einfaches Zonenmodell potentieller Nutzungsareale</item>
+                    <item>das hydrologische Netz Rarotongas und geeignete Abschnitte zur
+                        Energiegewinnung und Raften</item>
+                    <item>Alle aus dem Geländemodell ableitbaren Größen und Prozesse (Hangneigung,
+                        Exposition, Wetness-Index... )</item>
+                    <item>attraktive Wanderwege und Aussichtspunkte entlang bestehender Wege</item>
+                    <item>attraktive Mountainbike-Routen</item>
+                </list>
+
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="tools">
+                    <list>
+                        <item>Überlegen Sie nun konkret, welche Kriterien die gesuchten
+                            Camp-Standorte erfüllen sollten? </item>
+                        <item>Übersetzen Sie diese Kriterien in verfügbare Attribute bzw.
+                            Attributausprägungen </item>
+                        <item> Entwickeln Sie ein mögliches Anfrageschema, nach welchem Sie die
+                            Standortsuche durchführen und geeignete Räume eingrenzen können. </item>
+                        <item>Führen Sie die Standortsuche aus und bestimmen Sie geeignete
+                            Camp-Standorte. </item>
+                        <item>Erzeugen Sie eine thematische Karte als Grundlage für ein
+                            Ausstellungsposter, welche die Ergebnisse graphisch präsentiert und IHR
+                            Konzept der Outdoortourismus-Marke OuterRaro bestmöglich darstellt.
+                        </item>
+                    </list>
+                </box>
+            </act>
+
+        </learningObject>
+
+        <learningObject title="Lösungshilfen" navTitle="Lösungshilfen" label="U_lo4">
+
+            <clarify>
+                <paragraph title="Aufgabenteil 1: Zonenmodell"/>
+                <list>
+                    <item>Ein geeignetes Maß zur Einschätzung von Infrastrukturverdichtung wählen
+                        (in diesem Beispiel räumliche Nähe zu mehreren unterschiedlichen Arten von
+                        Infrastruktur)</item>
+                    <item>Räumliche Nähe jedes Pixels zu Infrastruktureinrichtungen verschiedener
+                        Arten errechnen lassen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?id=4935&amp;pid=4920&amp;topicname=Euclidean_Distance"
+                            >Euclidean Distance</link>) </item>
+                    <item>Gesamtentfernungen für jeden Pixel errechnen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Weighted_Sum"
+                            >Weighted Sum</link>; was ist der Unterschied zwischen Weighted Overlay
+                        und Weighted Sum?)</item>
+                    <item>Summierte Entfernungen in zwei Kategorien (geeignet / nicht geeignet)
+                        auftrennen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?id=5213&amp;pid=5206&amp;topicname=Reclassify"
+                            >Reclassify</link>)</item>
+                    <item>Entscheiden Sie, in welchen Feldern Sie die Eigenschaften der
+                        digitalisierten Objekte speichern wollen</item>
+                </list>
+                <paragraph title="Aufgabenteil 2: Panoramaweg und Wasser"/>
+                <list>
+                    <item>Wanderwege selektieren und in ein eigenes Shapefile exportieren</item>
+                    <item>Sichtbarkeit von jedem Pixel auf der Insel von den Wanderwegen aus
+                        bestimmen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Performing_a_viewshed_analysis"
+                            >Viewshed Analysis</link>)</item>
+                    <item>Gewässerstrecken identifizieren, die genügend Wasser führen um für
+                        Stromerzeugen oder Rafting geeignet zu sein (z.B. <link
+                            uri="
+                        http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=flow_accumulation"
+                            >Flow Accumulation</link>) oder nach Flussordnungszahl in
+                        Tabelle)</item>
+                    <item>Geeignete Gewässerstrecken als eigenes Raster/Shapefile exportieren (wenn
+                        sie als Raster vorliegen mit „Reclassify“, wenn als Linien über
+                        „Exportieren“)</item>
+                    <item>Neigung der Pixel auf der Insel errechnen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Slope"
+                            >Slope</link> )</item>
+                    <item>Raster aus nur den geeigneten Flächen erzeugen (Reclassify)</item>
+                    <item>us den geeigneten Gewässerstrecken Abschnitte identifizieren, die sowohl
+                        genug Wasser führen als auch eine geeignete Neigung aufweisen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Extract_by_Mask"
+                            >Extract by Mask</link>)</item>
+                </list>
+                <paragraph title="Aufgabenteil 3: Hiking- und Mountainbike"/>
+                <list>
+                    <item>Kosten anhand von z.B. Neigung errechnen (Neigung als Prozentwert
+                        errechnen, evtl. reklassifizieren um ein Kostenraster zu erzeugen)</item>
+                    <item>Punkte auswählen, die auf dem Wanderweg und der Mountainbike-Strecke
+                        verbunden werden sollen</item>
+                    <item>Punkte in einzelnen Shapefiles abspeichern, damit sie sowohl als Ziel- als
+                        auch Abbruchspunkt gelten können</item>
+                    <item>Cost-Distance-Tool benutzen um die Grundlage für ArcGIS zu schaffen, die
+                        Wanderwege und Mountainbike-Strecken zu erzeugen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.3/tutorials/spatial/Spatial_30.htm"
+                            >Cost Distance</link>)</item>
+                    <item>Den Wanderweg und die Mountainbike-Strecken errechnen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?id=6123&amp;pid=6117&amp;topicname=Cost_Path"
+                            >Cost Path</link>)</item>
+                </list>
+                <paragraph title="Aufgabenteil 4: Standortsuche OuterRaro-Camp">Hinweis: Dies stellt
+                    einen möglichen Lösungsweg dar. Es ist jedoch möglich, diese Aufgabe auf völlig
+                    anderem Wege zu bearbeiten!</paragraph>
+                <list>
+                    <item>Geeignete Nutzungsareale aus dem Zonenmodell extrahieren
+                        (Reclassify)</item>
+                    <item>us diesen Arealen geeignete Gebiete extrahieren, die in der Nähe von zur
+                        Energiegewinnung und zum Rafting geeignete Gewässerstrecken liegen (Raster
+                        to Polyline, Buffer, Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete extrahieren, die eine geeignete Hangneigung
+                        aufweisen (Reclassify, Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete extrahieren, die eine geeignete Exposition
+                        haben (Reclassify, Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete extrahieren, die an schönen Aussichtspunkten
+                        liegen (Puffer um gute Aussichtspunkte erzeugen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?id=1348&amp;pid=1347&amp;topicname=Buffer_%28Analysis%29"
+                            >Buffer Analysis</link>), Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete suchen, die in der Nähe von den Hiking- und
+                        Mountainbike-Routen liegen (Raster to Polyline, Buffer, Extract by
+                        Mask)</item>
+                    <item>Nun eine thematische Karte erzeugen, die einen Überblick über die Insel
+                        Rarotonga widergibt, sowie auch die Aussichtspunkte, Hiking- und
+                        Mountainbike-Wege, Rafting- und Stromerzeugungsgewässerstrecken und mögliche
+                        Campingplätze zeigt</item>
+                </list>
+            </clarify>
+        </learningObject>
+
+        <summary>
+            <paragraph>Mit dieser letzten Übung haben Sie nun alle grundlegend konzeptionellen und
+                technischen Arbeitsprozesse und -schritte kennen gelernt, mit deren Hilfe Sie
+                räumliche Information erfassen, verwalten, analysieren und präsentieren können. Auf
+                die Frage was GI-Systeme sind oder was damit anzufangen ist, können Sie nun schon
+                viel präziser antworten. </paragraph>
+            <box cssClass="bearbeitensiebox" title=" Zu guter Letzt ..."> Sie haben Ihr Konzept
+                einer nachhaltigen Outdoortourismus-Marke OuterRaro erfolgreich präsentiert.
+                Basierend auf Ihren Ergebnissen wurde ein Vorort-Termin organisiert und Sie hatten
+                Gelegenheit, eine Woche auf Rarotonga das bestehende touristische Angebot zu
+                    studieren.<paragraph> Obwohl Sie den Aufenthalt genießen sind Sie doch
+                    einigermaßen erstaunt über die Tücken Ihrer Analyse und der ein wenig von der
+                    vorgefundenen Realität abweichenden Bedeutung Ihrer Proxydaten
+                    </paragraph><popup title="Das andere Rarotonga"><multimedia type="flash"
+                        src="http://www.youtube.com/watch/v/d5iB41ni3-8" bibIDRef="coconut"
+                        visible="all" width="300"
+                        legend="Coconut tours 2009 - new tours and new adventures in Rarotonga"
+                        units="pixels" align="center" height="240"/>
+                    <multimedia type="flash" src="http://www.youtube.com/watch/v/dYIAKPEeG9A"
+                        bibIDRef="coconut" visible="all" width="300"
+                        legend="Avana Valley, Rarotonga - Coconut Tours" units="pixels"
+                        align="center" height="240"/>
+                    <multimedia type="flash" src="http://www.youtube.com/watch/v/Pb46Oii1QWY"
+                        bibIDRef="coconut" visible="all" width="300"
+                        legend="Jungle adventure in Rarotonga, Cook Islands - Coconut Tours"
+                        units="pixels" align="center" height="240"/></popup>
+            </box>
+        </summary>
+
+        <selfAssessment title="Wissens-Check" label="WC_UE">
+            <paragraph>Aufgrund der bevorstehenden Investitionen in Rarotongas Tourimussektor sind
+                sie als ansässiger Immobilienmakler interessiert, Land für Eigenheime zu erwerben.
+                Der Immobiliensektor Rarotongas ist stabil und wird sich ihrer Ansicht nach aufgrund
+                des Engagements von "<formatted style="italic">OuterRaro</formatted>" weiter positiv
+                entwickeln. Sie möchten nur attraktive Grundstücke auf der Insel kaufen. Ihre
+                Kriterien sind:</paragraph>
+            <list>
+                <item>Die Lage auf einem sonnenreichen Nordhang (auf der Nordhalbkugel ist der
+                    Südhang natürlich sonnenreicher).</item>
+                <item>Die Vermeidung feuchter Gebiete (Sie hatten bereits schlechte Erfahrung mit
+                    Schimmel in einigen ihrer Immobilien)</item>
+                <item>Die nahegelegene Anbindung an eine Strasse</item>
+                <item>Die Vermeidung von Ballungsräumen </item>
+            </list>
+            <selfCheck>
+                <multipleChoice>
+                    <question>Sie haben sich ein DGM der NASA heruntergeladen und es auf die
+                        geeignete Projektion gebracht. Mithilfe des Geländemodells möchten sie nun
+                        die die Gebiete mit nördlicher Ausrichtung bestimmen. Welches Tool ist
+                        hierfür geeignet? (Falls sie unsicher sind, lesen sie die dazugehörigen
+                        Mini-Hilfen in ArcMap oder recherchieren sie in der ESRI Webhelp)
+                            <multimedia type="jpeg" thumbnail="../image/WC_Abb_1.jpg"
+                            src="../image/WC_Abb_1.jpg" align="center" width="500"/>
+                    </question>
+                    <answer correct="no"> Spatial Analyst Tools - Hydrology - Flow Direction </answer>
+                    <answer correct="no"> Spatial Analyst Tools - Hydrology - Fill </answer>
+                    <answer correct="no"> Spatial Analyst Tools - Generalization - Region Group </answer>
+                    <answer correct="yes"> Spatial Analyst Tools - Surface - Aspect </answer>
+                    <answer correct="no"> Spatial Analyst Tools - Neighborhood - Focal Flow </answer>
+                    <answer correct="no"> Spatial Analyst Tools - Surface - Hillshade </answer>
+
+                    <solution> Lösung: <multimedia type="jpeg"
+                            thumbnail="../image/WC_Abb_1_solution.jpg"
+                            src="../image/WC_Abb_1_solution.jpg" align="center" width="500"
+                        /></solution>
+                </multipleChoice>
+            </selfCheck>
+
+            <selfCheck>
+                <multipleChoice>
+                    <question>Sie haben die Klassifikation der Hänge nach Expositionsrichtung
+                        durchgeführt und die potentiellen Grundstücke bereits erheblich reduziert.
+                        Nun wollen sie sichergehen, das sich potentielle Grundstücke nicht in
+                        feuchten Gebieten befinden. Sie möchten keine Grundstücke, die sich in
+                        unmittelbarer Nähe von größeren Flüssen und Bächen befinden. <newLine/> Wie
+                        generieren sie das Gewässersystem in Form eines Shapefiles auf Basis des
+                        vorhandenen DGM? Sie haben bereits: <list>
+                            <item>Die Fließrichtungen als Raster ausgegeben </item>
+                            <item>ie Akkumulation in Form von Flow Accumulation ausgegeben</item>
+                        </list>
+                        <newLine/>
+                        <multimedia type="jpeg" thumbnail="../image/WC_Abb_2.jpg"
+                            src="../image/WC_Abb_2.jpg" align="center" width="500"/>
+                        <newLine/> Um das Shapefile des Gewässernetzes mitsamt der Flußordnung
+                        auszugeben, müssen sie nun folgende Hydrology Tools nutzen (Schritt 1 -
+                        Schritt 2) : </question>
+                    <answer correct="no">Flow Length - Stream to Feature </answer>
+                    <answer correct="no">Stream Link - Stream Order</answer>
+                    <answer correct="no">Watershed - Stream to Feature</answer>
+                    <answer correct="yes">Stream Order - Stream to Feature </answer>
+
+                    <solution> Lösung: <multimedia type="jpeg"
+                            thumbnail="../image/WC_Abb_2_solution.jpg"
+                            src="../image/WC_Abb_2_solution.jpg" align="center" width="500"
+                        /></solution>
+                </multipleChoice>
+
+
+            </selfCheck>
+
+            <selfCheck>
+                <multipleChoice>
+                    <question>Um mindestens 30 Meter Entfernung zu den identifizierten großen Bächen
+                        zu wahren, gehen sie folgendermaßen vor:</question>
+                    <answer correct="yes">Shapefile der relevanten Bäche mit 30m Distanz Buffern </answer>
+                    <answer correct="no">Abdigitalisieren der Nordhänge und Mergen mit dem Shapefile
+                        des Gewässernetz </answer>
+                    <answer correct="no">Union des Rasterdatensatzen der Hangausrichtung mit dem
+                        Shapefile des Gewässernetz</answer>
+                    <answer correct="no">Rasterdatensatz der Hangneigung buffern</answer>
+                    <solution> Lösung: <multimedia type="jpeg"
+                            thumbnail="../image/WC_Abb_3_solution.jpg"
+                            src="../image/WC_Abb_3_solution.jpg" align="center" width="500"
+                        /></solution>
+                </multipleChoice>
+
+
+            </selfCheck>
+        </selfAssessment>
+    </unit>
+    <glossary visible="none">
+        <definition term="Eignungsanalyse">Die Eignungsanalyse (engl. Suitability Analysis) ist eine
+            Evaluation der Eignung eines Standortes oder eines Raumes für eine bestimmte Nutzung.
+            Die Eignungsanalyse erfolgt in der Regel durch eine Verschneidung sozialer,
+            ökologischer, ökonomischer, physikalischer, biologischer oder anderer Kriterien. Meist
+            bilden Eignungskarten das Resultat einer Eignungsanalyse. Sie stellen die räumliche
+            Verteilung der ermittelten Eignungswerte grafisch dar. </definition>
+        <definition term="Entscheidungsunterstützung mit GIS">Die Entscheidungsunterstützung mit GIS
+            (engl. Decision Support in GIS) ist ein auf der Eignungsanalyse beruhendes Verfahren zur
+            Unterstützung von Entscheidungsträgern in Fragen der Raum- und Umweltplanung. Räumliche
+            Modelle und Szenarien dienen der Beurteilung verschiedener Raumnutzungsvarianten. Bei
+            mehreren Eignungskriterien und nur einer Zielsetzung erfolgt eine
+            Multikriterien-Evaluation (Multi Criteria Evaluation, MCE). Im komplexeren Fall von
+            mehreren, sich möglicherweise gar ausschliessenden Zielsetzungen müssen die verschieden
+            Raumnutzungen gegeneinander abgewogen werden (Multi Objective Evaluation,
+            MOE).</definition>
+        <definition term="Boolesche Verschneidung">Die Boolesche Verschneidung (engl. Boolean
+            Overlay) ist eine Verschneidung von binär codierten Themenebenen unter Verwendung der
+            Booleschen Operatoren AND, OR, XOR und NOT. Resultat einer Booleschen Verschneidung ist
+            wiederum eine Themenebene mit Gebieten, für die „wahr“ resp. „falsch“ gilt.</definition>
+        <definition term="Boolesche Algebra">Die Boolesche Algebra (engl. Boolean algebra) ist eine
+            Art der Mathematik, die nicht mit Zahlen, sondern mit Wahrheitszuständen („wahr“,
+            „falsch“) umgeht. Anstelle der Grundrechenarten kennt die Boolesche Algebra Operationen,
+            die zwei Wahrheitszustände als Eingangswerte miteinander verknüpfen und als Ergebnis
+            wiederum einen Wahrheitszustand ergeben. Die wichtigsten Operatoren sind AND
+            (Schnittmenge), OR (Vereinigung), XOR (exklusive Vereinigung) und NOT
+            (Negation).</definition>
+        <definition term="Standardisierung">Bei der gewichteten Verschneidung bezeichnet
+            Standardisierung die Übersetzung der heterogenen Eingangsdaten in eine für alle Ebenen
+            einheitliche Skala (z. B. 0–1, 0–100, 0–255). </definition>
+        <definition term="Gewichtete Verschneidung">Die gewichtete Verschneidung (engl. Weighted
+            Overlay) ist eine Verschneidung standardisierter und unterschiedlich gewichteter
+            Themenebenen in einer Eignungsanalyse. Die Gewichte beziffern dabei die relative
+            Bedeutung der berücksichtigten Eignungskriterien. </definition>
+        <definition term="Proxyvariable">Ein sogenanntes Proxy ist eine Variable, die eine
+            Eigenschaft misst bzw. beschreibt, die einer direkten Messung nicht zugänglich ist bzw
+            für die es keine objektiv messbare Zuordnung gibt. Proxys werden vielfältig eingesetzt
+            da es enorm viele nicht ausreichend belastbare, nicht vollständig valide oder nicht mit
+            vertretbarem Aufwand zugänglich Attribute zur Repräsentation von Wirklichkeit
+            gibt.</definition>
+    </glossary>
+
+    <bibliography>
+        <map bibID="swisstopo" author="Swisstopo" publicationPlace="Bern" publicationYear="1991"
+            publisher="Swisstopo" downloadUrl="http://www.swisstopo.ch" scale="1:25000"
+            title="Digital Terrain Model DTM/DHM25">Reporduced with authorisation by swisstopo
+            (BA057224)</map>
+
+        <map bibID="swisstopo1111" author="Swisstopo" publicationPlace="Bern" publicationYear="2000"
+            publisher="Swisstopo" downloadUrl="http://www.swisstopo.ch" scale="1:25000"
+            title="Landeskarte der Schweiz - Blatt Albis 1111">Reproduziert mit Bewilligung von
+            swisstopo (BA057224)</map>
+
+        <journalArticle bibID="hard" publicationYear="1970"
+            title="Die Landschaft der Sprache und die Landschaft der Geographen
+            semantische und forschungslogische Studien zu einigen zentralen Denkfiguren in der deutschen geographischen Literatur."
+            journalTitle="Colloquium geographicum " volumeNr="11" author="Hard, G."/>
+
+        <book bibID="bartels" author="Bartels, D."
+            title="Zur wissenschaftstheo-
+            retischen Grundlegung einer Geographie des  Menschen"
+            publicationYear="1968" publisher="Steiner" publicationPlace="Wiesbaden"/>
+
+        <book bibID="burrough" author="Burrough, P.A.,  McDonnell, R.A." publicationYear="1998"
+            title="Principles of Geographical Information Systems"
+            publisher="Oxford University
+            Press" publicationPlace="New York"/>
+
+        <journalArticle bibID="fisher" author="Fisher, P." publicationYear="1996"
+            title="Reconsideration of the Viewshed Function in Terrain Modelling"
+            journalTitle="Geographical Systems" volumeNr="vol. 3, no.1."/>
+
+        <websites bibID="wood" author="Wood, J." url="http://www.landserf.org/" title="LandSerf"
+            accessedDate="2005-10-08"/>
+
+
+        <contributionInBook bibID="mitas" author="Mitas, L.; Mitasova, H,"
+            titleOfContribution="Spatial Interpolation"
+            title="Geographical Information Systems
+            (GIS): Principles, Techniques, Management and Applications"
+            pageNr="481–492" editor="Longley, P. A.; Goodchild, M. F.; Maguire, D. J.; Rhind, D. W."
+            publicationYear="1999" publisher="John Wiley" publicationPlace="New York"
+            downloadUrl="http://altair.physics.ncsu.edu/"/>
+
+
+        <thesis bibID="hugentobler" author="Hugentobler, M." publicationYear="2000"
+            title="Fortpflanzung von Unsicherheiten in dreiecksbasierten digitalen Geländemodellen
+            mit Intervallarithmetik"
+            type="Diplomarbeit"
+            institution="Geographisches Institut der
+            Universität Zürich" published="yes"/>
+
+
+        <book bibID="muell" title="Implementation von Problem-based Learning" author="Müller, C."
+            publicationYear="2007" publicationPlace="Bern" publisher="hep-verlag"/>
+
+        <contributionInBook bibID="rrm" publisher="BeltzPVU" editor=" Krapp,  A.   B.  Weidemann"
+            author="Reinmann-Rothmeier,  G. &amp; H. Mandl" publicationYear="2001"
+            publicationPlace="Weinheim"
+            titleOfContribution="Unterrichten und Lernumgebungen gestalten"
+            title="Pädagogische Psychologie.  Ein Lehrbuch."/>
+        <contributionInBook bibID="kanwischer" author="Kanwischer, D., Reudenbach, C., Schulze, U."
+            title="Learning with Geoinformation IV - Lernen mit Geoinformation IV"
+            titleOfContribution="Wie kommt der Transrapid nach Marburg? - GIS und problembasiertes Lernen in der Hochschule"
+            publisher="Wichmann" editor="Jekel, T., Donert, K., Koller, A." pageNr="200-211"
+            publicationPlace="Salzburg" publicationYear="2009"
+            downloadUrl="../../../material/AGIT_09_Beitrag_Kanwischer_Reudenbach_Schulze.pdf"/>
+        <book bibID="bill" author="Bill, R." publicationYear="1999"
+            title="Grundlagen der
+            Geo-Informationssysteme" publisher="Wichmann Verlag"
+            publicationPlace="Karlsruhe"/>
+
+        <websites bibID="gittadbs" url="http://www.gitta.info/website/en/html/modules_overview.html"
+            publicationYear="2005" accessedDate="19.3.2009" author="GITTA"
+            title="Geographic Information Technology Training Alliance"/>
+        <websites bibID="gisma" author="GIS.MA" title="GISMA" publicationYear="2009"
+            publicationPlace="Marburg" publisher="GISMA"/>
+
+        <conferencePaper bibID="worboys" author="Worboys, Michael F." publicationYear="1996"
+            titleOfContribution="Metrics and topologies for geographic space"
+            publisher="International Geographical Union" editor="Kraak, M. J., Molenaar, M."
+            pageNr="7A.1–7A.11"
+            proceedingsTitle="Advances in Geographical Information Systems
+            Research II: Proceedings of the International Symposium on Spatial Datat handling"
+            downloadUrl="http://www.spatial.maine.edu/~worboys/mywebpapers/sdh1996.pdf"/>
+
+
+        <newspaperArticle bibID="facts1995" author="Baumgartner, H." dayMonth="Nr. 29"
+            downloadUrl="../../../material/facts1995_wolf.pdf" newspaperTitle="Facts" pageNr="86"
+            publicationYear="1995" title="Wölfe: Die Räuber kommen wieder"/>
+        <publicationCorporateBody bibID="kora_wolf" author="KORA"
+            title=" Koordinierte
+            Forschungsprojekte zur Erhaltung und zum Management der Raubtiere in der Schweiz"
+            downloadUrl="../../../material/wolf_kora.pdf" publisher="BUWAL" publicationPlace="Bern"
+            publicationYear="2005"/>
+        <journalArticle bibID="wyatt" author="Wyatt, P." title="The Interpolation Process"
+            publicationYear="2000" journalTitle="Directions Magazine"
+            downloadUrl="http://www.directionsmag.com/article.php?article_id=52"/>
+        <conferencePaper bibID="shepard" author="Shepard, D."
+            titleOfContribution="A two-dimensional
+            interpolation function for irregularly-spaced data"
+            publicationYear="1968"
+            proceedingsTitle="Proceedings of the 1968 23rd ACM national conference" pageNr="517–523"/>
+
+        <videoFilmBroadcast bibID="coconut" title="Coconut Tours"
+            downloadUrl="http://www.coconuttours.co.ck/" author="Coconut tours"
+            productionPlace="Rarotonga"/>
+
+
+        <conferencePaper bibID="horn" author="Horn, B."
+            titleOfContribution="Hill shading and the
+            reflectance map"
+            proceedingsTitle="Proceedings of the IEEE, vol. 69" pageNr="p. 14-47"
+            publicationYear="1981"/>
+        <book bibID="wilson" author="Wilson, J. , Gallant, J." publicationYear="2000"
+            title="Terrain Analysis: Principles and Applications" publisher="John Wiley and sons"
+            publicationPlace="New York"/>
+        <journalArticle bibID="zevenbergen" author="Zevenbergen, L.; Thorne, C."
+            title="Quantitative
+            analysis of land surface topography"
+            publicationYear="1987" journalTitle="Earth Surface
+            Processes and Landforms"
+            volumeNr="12 (1)" pageNr="p. 47-56"/>
+        <thesis bibID="braendli" author="Brändli, M." publicationYear="1997"
+            title="Modelle und Methoden für die Extraktion geomorphologischer und hydrologischer Objekte aus digitalen Geländemodellen"
+            institution="Geographisches Institut der Universität Zürich"/>
+
+
+
+        <book bibID="berry" author="Berry, B.J.L., Marble, D.F." publicationYear="1998"
+            title="Spatial Analysis: A Reader in Statistical Geography" publisher="Prentice Hall"
+            publicationPlace="Englewood Cliffs, New Jersey"/>
+
+        <contributionInBook bibID="moore" author="Moore, I. D." publicationYear="1996"
+            titleOfContribution="Hydrological Modeling and GIS"
+            editor="M. F. Goodchild, L. T. Steyaert, B. O. Parks, C. Johnston, D. Maidment, M. Crane, and S. Glendinning"
+            title="GIS and Environmental Modeling: Progress and Research Issues"
+            publisher="GIS World Books" publicationPlace="Fort Collins, Colorado"/>
+
+        <book bibID="Kaiser" author="Kaiser, F.J." publicationPlace="Bad Heilbrunn"
+            publicationYear="1983" publisher="Klinkhardt"
+            title="Die Fallstudie: Theorie und Praxis der Fallstudiendidaktik" edition="6"/>
+        <contributionInBook bibID="ETHFall"
+            author="Müller, J.;  Jäggi, M.; Katz, W.;; Petrascheck, A.; Zimmermann, M.; Vuilleumier, M."
+            editor="Frey, K." publicationPlace="Zürich" publicationYear="1991"
+            publisher="Orell-Füssli-Verlag" title="ETH-Fallstudien"
+            titleOfContribution="Fallstudie Hochwasser"/>
+        <journalArticle bibID="monheim" publicationYear="1999"
+            author="Monheim, H., Schwarte, M., Winkelkötter, C."
+            title="Die deutsche Geographie dreißig Jahre nach Kiel
+            Stadt-Land-Fluß oder ernstzunehmende Raumwissenschaft?"
+            journalTitle="Standort - Zeitschrift für angewandte Geographie"
+            volumeNr="Volume 23, Number 3" pageNr="46-49"/>
+        <book bibID="boots" author="Boots, B." publicationYear="1999"
+            title="Spatial
+            Tessellations"/>
+
+
+    </bibliography>
+    <metadata visible="online">
+        <organisation level="Basic" module="AN">
+            <creationPosition>
+                <previous>GISBScL2</previous>
+                <following>GISBScL4</following>
+            </creationPosition>
+        </organisation>
+        <prerequisites>
+            <preReqItem label="none"/>
+        </prerequisites>
+        <keywords>
+            <keywordItem>Terrain Analysis</keywordItem>
+        </keywords>
+        <technical>
+            <technicalRequirement>
+                <type>PlugIn</type>
+                <name>Flash</name>
+                <minimumVersion>5</minimumVersion>
+            </technicalRequirement>
+            <technicalRequirement>
+                <type>Browser</type>
+                <name>Firefox</name>
+                <minimumVersion>3.5</minimumVersion>
+                <downloadURL>http://download.mozilla.org/?product=firefox-3.6&amp;os=win&amp;lang=de</downloadURL>
+                <installationRemarks>See Firefox website for help with
+                    installation</installationRemarks>
+            </technicalRequirement>
+        </technical>
+        <lessonInfo>
+            <language language="de" derived="no"/>
+            <lifecycle>
+                <version creationDate="2009-11-20" modificationDate="2009-11-30">1</version>
+                <contribute>
+
+                    <person responsible="GISMA contributor" name="Chris Reudenbach"
+                        email="reudenbach@staff.uni-marburg.de" institute="PUM" departement="GISMA"
+                        >concept, content, recompilation of GITTA content, eLML translation. The
+                        lecture part is derived by using the GITTA lessons "Discrete Spatial
+                        variables", "Erreichbarkeit", Eignungsanalysen (Suitability),
+                        Kontinuierliche räumliche Variablen</person>
+                    <person responsible="GISMA contributor" name="Uwe Schulze"
+                        email="schulze6@staff.uni-marburg.de" institute="PUM" departement="GISMA">
+                        Practice course, concept, practice solutions content, revisions</person>
+
+                    <person responsible="GISMA contributor" name="Manuel Sudau"
+                        email="feedback@www.gis-ma.org" institute="PUM" departement="GISMA">Practice
+                        solutions, text revisions</person>
+                    <person responsible="GISMA contributor" name="Daniel Lee"
+                        email="feedback@www.gis-ma.org" institute="PUM" departement="GISMA">Text
+                        revisions, translation </person>
+
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Marco
+                        Hugentobler"
+                        email="mhugent@geo.unizh.ch">Overall GITTA lesson Geländeanalyse </person>
+                    <person responsible="GITTA contributor" name="Moe Myint" institute="UNIFR"
+                        departement="IGUF" email="dontknow@iguf.ch">GITTA lesson "Eignungsanalysen"
+                        overall</person>
+                    <person responsible="GITTA contributor" name="Claude Collet"
+                        email="claude.collet@unifr.ch" institute="UNIFR" departement="IGUF">GITTA
+                        lesson "Eignungsanalysen" Concept</person>
+                    <person responsible="GITTA contributor" name="Sandro Bischof"
+                        email="sbischof@geo.unizh.ch" departement="GIUZ" institute="UNIZH">GITTA
+                        lesson "Erreichbarkeit" Overall</person>
+                    <person responsible="GITTA contributor" name="Robert Weibel"
+                        email="robert.weibel@geo.uzh.ch" institute="UNIZH" departement="GIUZ"
+                        >Overall GITTA lesson Geländeanalyse; Concept GITTA lesson Geländeanalyse </person>
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Suzette Hägi" email="s_haegi@bluemail.ch">GITTA lesson Geländeanalyse
+                        Specials: Flashes; GITTA lesson "Eignungsanalysen" Specials:
+                        Flashes</person>
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Joël 
+                        Fisler" email="fisler@geo.unizh.ch"
+                        >GITTA lesson Geländeanalyse Specials: Responsible for the conversion Word
+                        into XML and transformation into eLML; GITTA lesson "Intermediate Terrain
+                        Analysis" Conversion into eLML format; GITTA lesson "Eignungsanalysen"
+                        Conversion into eLML format; GITTA lesson "Erreichbarkeit" Conversion into
+                        eLML format</person>
+                    <person responsible="GITTA contributor" name="Friedjoff Trautwein"
+                        email="trautwei@geo.uzh.ch" institute="UNIZH" departement="GIUZ">GITTA
+                        lesson Geländeanalyse Specials: Graphics</person>
+                    <person responsible="GITTA contributor" name="Marcel Frehner"
+                        email="frehnerm@swissonline.ch" institute="UNIZH" departement="GIUZ"> GITTA
+                        lesson "Intermediate Terrain Analysis" Content</person>
+                    <person responsible="GITTA contributor" name="Eric Lorup"
+                        email="eric.lorup@sdnag.com" institute="UNIZH" departement="GIUZ">GITTA
+                        lesson "Kontinuierliche räumliche Variablen" Overall </person>
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Patrick
+                        Laube" email="plaube@geo.unizh.ch"
+                        >GITTA lesson "Eignungsanalysen" Responsible author</person>
+
+
+                </contribute>
+            </lifecycle>
+            <educational>
+                <difficulty>Medium</difficulty>
+                <typicalLearningTime>
+                    <time>18 hours (feedback welcome).</time>
+                </typicalLearningTime>
+            </educational>
+        </lessonInfo>
+        <rights>
+            <cost>no</cost>
+            <copyright>GISMA Marburg 2009-11</copyright>
+        </rights>
+    </metadata>
+</lesson>

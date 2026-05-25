@@ -1,0 +1,824 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Abfragen in Relationen - eine Einführung. Auswahloperatoren. Vergleichsoperatoren. Arithmetische Operatoren. Logische Operatoren. Logische Operatoren und ihre Wirkungsweise. Vom Venn-Diagramm zum Fallbeispiel. Hintergrund Lebensraum Wolf... Kombination der Operatoren. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Abfragen in Relationen - eine Einführung</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="unit_GISBSc_VL2b.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2b_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Abfragen in Relationen</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo1.html">Thematische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo2.html">Geometrische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo3.html">Topologische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo4.html">Topologische Operatoren</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_W_check_VL.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2b_V_lo10.html">Abfragen in Relationen - eine Einführung</h1>
+               <div id="d14e1112.html" class="clarify">
+                  <p class="paragraph" id="d14e1113"> Bei aller Bedeutung für die GIS-Praxis sind sowohl relationale
+                     Datenmodelle als auch SQL für GIS-Anwender <i>nur</i> Mittel zum Zweck gezielte Abfragen und Auswertungen auf die
+                     in den Tabellen vorliegenden räumlich-inhaltichen Daten vorzunehmen. Gemeinhin
+                     wird dieser Vorgang <i>Datenanalyse</i> genannt.
+                     Datenanalysen werden mit Hilfe von SQL als Abfragen auf die Grundelemente der
+                     Relationen (Tabelle, Feld, Datensatz, Wert und Assoziation) durchgeführt und in
+                     Aussagen überführt. Prinzipiell sind drei Ansätze möglich: 
+                  </p>
+                  <ul class="list" id="d14e1121">
+                     <li class="itemAlt"> Thematische Abfragen: <br />Selektiert die Objekte, deren
+                        Eigenschaften (Attribute) die gestellten Bedingungen erfüllen. Z. B.:
+                        „Selektiere alle Bäume der Art Fichte.“ 
+                     </li>
+                     <li class="item"> Geometrische Abfragen: <br /> Selektiert die Objekte, welche die
+                        gestellten räumlichen Bedingungen erfüllen. Z. B.: „Selektiere alle Häuser,
+                        die weniger als 250 m vom Fluss entfernt sind.“ 
+                     </li>
+                     <li class="itemAlt"> Topologische Abfragen: <br /> Selektiert die Objekte, welche die
+                        gestellten Bedingungen bezüglich den räumlichen Beziehungen zwischen den
+                        Objekten erfüllen. Z. B.: „Selektiere alle Gebäude, die vollständig in der
+                        Wohnzone II (WII) liegen.“ 
+                     </li>
+                  </ul><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e1134" src="../image/abfrage2.jpg" width="600"
+                          height="600"
+                          title="Gliederung der nicht-manipulativen GI-Abfragen"
+                          alt="Gliederung der nicht-manipulativen GI-Abfragen" /><span class="legend" style="display:block">Gliederung der nicht-manipulativen GI-Abfragen (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><h4>Auswahloperatoren</h4>
+                  <p class="paragraph" title="Auswahloperatoren" id="d14e1135"> Zentrales Hilfsmittel von Abfragen an
+                     GI-Systeme sind sogenannte Auswahloperatoren auch algebraische Operatoren
+                     genannt. Sie gliedern sich in: 
+                  </p>
+                  <ul class="list" id="d14e1137">
+                     <li class="itemAlt"><b>Vergleichende Operatoren</b>: Für die
+                        Formulierung von Fragen können neben dem Gleichheitszeichen auch
+                        Vergleichsoperatoren verwendet werden. 
+                     </li>
+                     <li class="item"><b>Arithmetische Operatoren</b>: Diese
+                        Operatoren werden für numerische Attribute verwendet. Z. B. aus einer Reihe
+                        ausgewählter Objekte können Mittelwerte von einem Attribut, Summen von
+                        Attributwerten usw. berechnet werden. 
+                     </li>
+                     <li class="itemAlt"><b>Logische Operatoren</b>: Mit logischen
+                        Operatoren werden Bedingungen formuliert. 
+                     </li>
+                  </ul>
+                  <h4>Vergleichsoperatoren</h4>
+                  <p class="paragraph" title="Vergleichsoperatoren" id="d14e1150"> Die Vergleichsoperatoren können für
+                     unterschiedlich skalierte Attribute (numerisch, Text) verwendet werden. Bei
+                     nicht numerischen Attributen beziehen sich Vergleiche „größer als“, „kleiner
+                     als“ usw. auf die Position in einer internen vom Computer verwendeten
+                     „alphabetischen“ Ordnung (z.B. ASCII-Code Tabelle). 
+                  </p>
+                  <table class="table" id="d14e1152">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e1154"> Vergleichende Operatoren </th>
+                           <th class="tableheading" id="d14e1156"> Bedeutung </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1159"> = </td>
+                           <td class="tabledata" id="d14e1161"> EQ (gleich) </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1164"> &gt; </td>
+                           <td class="tabledata" id="d14e1166"> GT (größer) </td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1169"> &gt;= </td>
+                           <td class="tabledata" id="d14e1171"> GE (größer gleich) </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1174"> &lt; </td>
+                           <td class="tabledata" id="d14e1176"> LT (kleiner) </td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1179"> &lt;= </td>
+                           <td class="tabledata" id="d14e1181"> LE (kleiner gleich) </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1184"> &lt;&gt; </td>
+                           <td class="tabledata" id="d14e1186"> NE (ungleich) </td>
+                        </tr>
+                     </tbody>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><p class="paragraph" id="d14e1188"><br /></p>
+                  <h4>Arithmetische Operatoren</h4>
+                  <p class="paragraph" title="Arithmetische Operatoren" id="d14e1190"> Die arithmetischen Operatoren werden
+                     für numerische Attribute verwendet. Z. B. aus einer Reihe ausgewählter Objekte
+                     können Mittelwerte von einem Attribut, Summen von Attributwerten usw. berechnet
+                     werden. Als arithmetische Operatoren können der Multiplikations- (*), der
+                     Divisions- (/), der Additions- (+) und der Subtraktionsoperator (-), der
+                     Exponent (exp) sowie der Modulo-Operator (%) verwendet werden. Die
+                     Modulo-Operation liefert den Rest einer ganzzahligen Division. Dazu zwei
+                     Beispiele: <br />5 % 2 = 1 <br />6 % 2 = 0 
+                  </p>
+                  <h4>Logische Operatoren</h4>
+                  <p class="paragraph" title="Logische Operatoren" id="d14e1196"> Logische Operatoren verbinden Attribute oder
+                     Teilabfragen als logische Ausdrücke (mit den zwei möglichen Werten „wahr“ oder
+                     „falsch“). Sie eigenen sich daher für eine effiziente Gestaltung komplexer
+                     Abfragen. Die logischen Operatoren werden auch Boolesche Algebra genannt. Sie
+                     basiert auf der binären Struktur, die auf den Werten 1 (wahr) und 0 (falsch)
+                     beruht. Dazu bietet die eine Reihe verschiedener Verknüpfungen, die „wahr“ oder
+                     „falsch“ sein können, nie aber beides. Die in GIS für die Verknüpfung von zwei
+                     räumlichen Auswahlkriterien verwendeten Booleschen (oder logischen) Operatoren
+                     sind AND, OR, XOR und NOT: Die nachfolgende Tabelle listet die 4 logischen
+                     Grundoperatoren und Ihre Wirkungsweise auf: 
+                  </p>
+                  <p class="paragraph" id="d14e1198"> Zur Verdeutlichung sind in der rechten Spalte die Venn-Diagramme der
+                     Booleschen Operatoren dargestellt. Die Darstellung wird verständlicher wenn man
+                     sich vorstellt, dass die Kreis 1 und Kreis 2 jeweils graphisch zwei Bedingungen
+                     (oder Untermengen der Relation) darstellen. Die schraffierte Fläche
+                     repräsentiert jeweils die wahre Aussage. In dieser Grundform entspricht der Teil
+                     außerhalb der Kreise keinem Abfrageresultat. 
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e1201" src="../image/kreis_1_2.jpg" width="200"
+                          height="120"
+                          alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="paragraph" id="d14e1202"><b>Kreis 1 :</b> GEBIET = „bewaldet“<br /><b>Kreis 2 : </b>GEBIET = steil
+                  </p>
+                  <table class="table" id="d14e1210" width=" 720">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e1212" width="50"><b>Logische Operatoren </b></th>
+                           <th class="tableheading" id="d14e1215" width="80"><b>Bedeutung</b></th>
+                           <th class="tableheading" id="d14e1218" width="220"><b>Ergebnis</b></th>
+                           <th class="tableheading" id="d14e1221" width="120"><b>Frage</b></th>
+                           <th class="tableheading" id="d14e1224" width="180"><b>Venn-Diagramme</b></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1228"><span id="d14e1229" class="indexItem">AND</span></td>
+                           <td class="tabledata" id="d14e1231">Schnittmenge </td>
+                           <td class="tabledata" id="d14e1233">Ergibt „wahr“ für alle Gebiete, die sowohl das erste als auch das
+                              zweite Kriterium erfüllen. 
+                           </td>
+                           <td class="tabledata" id="d14e1235">„Welche Gebiete sind bewaldet und steil?“ </td>
+                           <td class="tabledata" id="d14e1237"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1238" src="../image/and.jpg" width="140"
+                                      height="140"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1240"><span id="d14e1241" class="indexItem">OR</span></td>
+                           <td class="tabledata" id="d14e1243">Vereinigung </td>
+                           <td class="tabledata" id="d14e1245">Ergibt „wahr“ für alle Gebiete, die entweder das erste oder das
+                              zweite Kriterium erfüllen, unabhängig davon, ob sich die Gebiete
+                              überlagern oder nicht. Anders ausgedrückt, muss mindestens eines der
+                              beiden Kriterien „wahr“ sein. 
+                           </td>
+                           <td class="tabledata" id="d14e1247">„Welche Gebiete sind bewaldet oder steil?“ </td>
+                           <td class="tabledata" id="d14e1249"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1250" src="../image/or.jpg" width="140" height="140"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1252"><span id="d14e1253" class="indexItem">XOR</span></td>
+                           <td class="tabledata" id="d14e1255">exklusive Vereinigung </td>
+                           <td class="tabledata" id="d14e1257">Ergibt „wahr“ für alle Gebiete, die entweder das erste oder das
+                              zweite Kriterium erfüllen, aber nicht beide. 
+                           </td>
+                           <td class="tabledata" id="d14e1259">„Welche Gebiete sind entweder bewaldet oder steil, aber nicht
+                              beides?“ 
+                           </td>
+                           <td class="tabledata" id="d14e1261"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1262" src="../image/xor.jpg" width="140"
+                                      height="140"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1264"><span id="d14e1265" class="indexItem">NOT</span></td>
+                           <td class="tabledata" id="d14e1267">Negation </td>
+                           <td class="tabledata" id="d14e1269">Ergibt „wahr“ für alle Gebiete, die das erste Kriterium erfüllen,
+                              nicht aber das zweite. 
+                           </td>
+                           <td class="tabledata" id="d14e1271">„Welche Gebiete sind bewaldet, aber nicht steil?“ </td>
+                           <td class="tabledata" id="d14e1273"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1274" src="../image/not.jpg" width="140"
+                                      height="140"
+                                      alt="" /></span></td>
+                        </tr>
+                     </tbody>
+                  </table><span class="legend" style="display:block">Die vier Boolschen Operatoren (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><p class="paragraph" id="d14e1275"><br /></p>
+                  <p class="paragraph" id="d14e1277">In vielen GIS-Programmen entsprechen die Booleschen Operatoren direkt
+                     aufrufbaren Funktionen und tragen oft vergleichbare Namen. So gibt es in vielen
+                     GIS-Produkten die Funktionen INTERSECT (AND), UNION (OR) und ERASE (NOT). Die
+                     letzte Funktion wird auch sehr anschaulich „cookie cutting“ genannt, weil die
+                     Form des zweiten Kriteriums wie beim Plätzchen-Backen aus dem ausgerollten Teig
+                     des ersten „ausgestochen“ wird. 
+                  </p>
+                  <p class="paragraph" id="d14e1279"><br /><br /></p>
+               </div>
+               <div class="look">
+                  <h2 id="d14e1281.html">Logische Operatoren und ihre Wirkungsweise</h2>
+                  <p class="paragraph" id="d14e1282">Am einfachsten lassen sich die Booleschen Operatoren mit Hilfe der oben
+                     bereits gezeigten Venn-Diagramme veranschaulichen. Die Menge, für die der
+                     jeweilige Boolesche Ausdruck „wahr“ ergibt, wird in der nachfolgenden
+                     Interaktiven Grafik blau hervorgehoben. Wählen Sie im Venn-Diagramm eine Menge
+                     aus und vergleichen Sie den entsprechenden Booleschen Ausdruck. Sie können auch
+                     umgekehrt vorgehen: Wählen Sie einen Booleschen Ausdruck und vergleichen Sie die
+                     selektierte Menge. 
+                  </p><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="d14e1284" width="500" height="285"
+                             class="multimedia"
+                             title="Animation des Venn-Diagrammes zur Erläuterung      der Booleschen Ausdrücke"
+                             data="../multimedia/Bool_VENN.swf">
+                        <param name="movie" value="../multimedia/Bool_VENN.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/Bool_VENN.swf"
+                               width="500"
+                               height="285"
+                               class="multimedia"
+                               title="Animation des Venn-Diagrammes zur Erläuterung      der Booleschen Ausdrücke"></embed></object><span class="legend" style="display:block">Animation des Venn-Diagrammes zur Erläuterung      der Booleschen Ausdrücke (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><h4>Vom Venn-Diagramm zum Fallbeispiel</h4>
+                  <p class="paragraph" title="Vom Venn-Diagramm zum Fallbeispiel" id="d14e1285">Die nachfolgende Animation
+                     illustriert die Boolesche Verschneidung an einem vereinfachten Fallbeispiel
+                     einer hypothetischen „Eignungsanalyse Wolfslebensraum“. 
+                     <p id="d14e1287" class="popupTitle" style="cursor: pointer;"
+                        onclick="onBlock('solutiond14e1287')">Hintergrund Lebensraum Wolf... (Klicken Sie hier für mehr Informationen) </p>
+                     <div id="solutiond14e1287text" style="display: none; cursor: pointer;"
+                          class="optional"
+                          title="Hintergrund Lebensraum Wolf..."
+                          onclick="off('solutiond14e1287')">
+                        <p class="paragraph" id="d14e1288"><span class="citation" style="display:inline">"<i>Der Wolf hat wieder
+                                 zugeschlagen, dieses Mal im Tessin. Drei Ziegen zerfleischte er am
+                                 10. Januar auf einer Weide oberhalb von Bellinzona. Damit gibt sich
+                                 das Raubtier noch bescheiden: Der berüchtigte Wolf vom Val d'Hérens
+                                 im Wallis hatte angeblich 300 Schafe auf dem Gewissen und wurde
+                                 deshalb letzten Sommer erschossen. [...]</i>" (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3842">Kittl</a> 2001)</span> Den behördlichen
+                           Entscheidungsträgern stellt sich eine Reihe von Fragen:
+                        </p>
+                        <ul class="list" id="d14e1292">
+                           <li class="itemAlt">Wo findet der Wolf überhaupt Lebensräume?</li>
+                           <li class="item">Welche Räume sind besonders gut geeignet, welche weniger?</li>
+                           <li class="itemAlt">In welchen Räumen treten Nutzungskonflikte etwa mit Schafzüchtern
+                              oder Bergbahnbetreibern auf?
+                           </li>
+                        </ul>
+                        <p class="paragraph" id="d14e1299">Zur Beantwortung dieser und ähnlicher Fragen bietet die
+                           Kombination von Entscheidungsunterstützungs-Techniken mit GIS eine ganze
+                           Palette interessanter Ansätze. Wie ermittelt man mit GIS die Eignung von
+                           Räumen für eine bestimmte Nutzung? Der Fachbegriff für dieses Feld
+                           heisst Eignungsanalyse. Die hypothetische Berggemeinde St. Gittal möchte
+                           abklären, wo auf ihrem Gemeindegebiet der Wolf Lebensräume finden
+                           könnte. Weiter gilt es abzuklären, ob und wo Konflikte zwischen
+                           verschiedenen Interessengruppen wie etwa den Umweltschützern, den
+                           Schafzüchtern und den Bergbahnbetreibern auftreten könnten.
+                           Hintergrundinformationen zur Rückeroberung der Alpen durch den Wolf
+                           finden Sie unter folgenden Internet-Adressen: <br /> KORA:
+                           Koordinierte Forschungsprojekte zur Erhaltung und zum Management der
+                           Raubtiere in der Schweiz. (http://www.kora.ch) BUWAL: Für viele Fragen
+                           des Umgangs mit großen Wildtieren ist das Bundesamt für Umwelt, Wald und
+                           Landschaft der zuständige Entscheidungsträger
+                           (http://www.umwelt-schweiz.ch/buwal/de/fachgebiete/fg_wild/facts_figures/wildinfos/wolf/index.html).
+                        </p>
+                     </div>Als
+                     Eingangsdaten stehen die Kriterien Landnutzung und Hangneigung zur Verfügung.
+                     Zur Verdeutlichung der unterschiedlichen Logik wird dem Vektormodell das
+                     Rastermodell gegenübergestellt. Bestimmen Sie zunächst, welche Landnutzungs-
+                     resp. Hangneigungskategorien Sie verschneiden wollen (Ankreuzfelder in
+                     Legendenfenster). Wählen Sie anschließend den logischen Operator. Der Schalter
+                     „Berechnen“ zeigt das Resultat. Benutzen Sie die beiden Animationen, um Ihr
+                     Verständnis der Booleschen Verschneidung zu vertiefen. Vergleichen Sie außerdem
+                     jeweils die Vektor- mit der Rasterlösung. 
+                  </p>
+                  <table class="column" id="d14e1304">
+                     <tr valign="top">
+                        <td class="columnLeft" width="290"><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="d14e1306" width="290" height="362"
+                                      class="multimedia"
+                                      data="../multimedia/VectorBooleanOverlay.swf">
+                                 <param name="movie" value="../multimedia/VectorBooleanOverlay.swf" />
+                                 <param name="quality" value="best" />
+                                 <param name="scale" value="exactfit" />
+                                 <param name="menu" value="true" />
+                                 <param name="play" value="false" />
+                                 <param name="wmode" value="opaque" />
+                                 <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                        type="application/x-shockwave-flash"
+                                        quality="best"
+                                        scale="exactfit"
+                                        menu="true"
+                                        play="false"
+                                        wmode="opaque"
+                                        src="../multimedia/VectorBooleanOverlay.swf"
+                                        width="290"
+                                        height="362"
+                                        class="multimedia"></embed></object><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="link"><a class="link" href="../multimedia/VectorBooleanOverlay.swf" title="">Starten Sie die Interaktive
+                                 Boolean-Overlay-Animation </a></p>
+                        </td>
+                        <td class="columnRight" width="290"><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="d14e1310" width="290" height="362"
+                                      class="multimedia"
+                                      data="../multimedia/BooleanOverlay.swf">
+                                 <param name="movie" value="../multimedia/BooleanOverlay.swf" />
+                                 <param name="quality" value="best" />
+                                 <param name="scale" value="exactfit" />
+                                 <param name="menu" value="true" />
+                                 <param name="play" value="false" />
+                                 <param name="wmode" value="opaque" />
+                                 <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                        type="application/x-shockwave-flash"
+                                        quality="best"
+                                        scale="exactfit"
+                                        menu="true"
+                                        play="false"
+                                        wmode="opaque"
+                                        src="../multimedia/BooleanOverlay.swf"
+                                        width="290"
+                                        height="362"
+                                        class="multimedia"></embed></object><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="link"><a class="link" href="../multimedia/BooleanOverlay.swf" title="">Vergrößern</a></p>
+                        </td>
+                     </tr>
+                  </table>
+                  <h4>Kombination der Operatoren</h4>
+                  <p class="paragraph" title="Kombination der Operatoren" id="d14e1313"> Durch die Kombination von Operatoren
+                     ist es möglich, mehrere Bedingungen zu verknüpfen. allerdings sind Boolesche
+                     Operatoren <b>nicht</b> kommutativ, d. h. das
+                     Ergebnis ihrer Anwendung in komplizierteren Ausdrücken hängt von der definierten
+                     Reihenfolge der Teilausdrücke ab. Betrachten Sie die nachfolgenden Beispiele und
+                     versuchen Sie anhand Ihrer bisherigen Kenntnisse die Abfragen mit ihren
+                     Komponenten nachzuvollziehen. 
+                  </p>
+                  <table class="table" id="d14e1318" width="750">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e1320" width="80" style="text-align: center; "> Ebene 1 </th>
+                           <th class="tableheading" id="d14e1322" width="80" style="text-align: center; "> Ebene 2 </th>
+                           <th class="tableheading" id="d14e1324" width="80" style="text-align: center; "> Inputs </th>
+                           <th class="tableheading" id="d14e1326" width="150" style="text-align: center; "> Abfrage </th>
+                           <th class="tableheading" id="d14e1328" width="50" style="text-align: center; "> Typ </th>
+                           <th class="tableheading" id="d14e1330" width="130" style="text-align: center; "> Erg. Tabelle </th>
+                           <th class="tableheading" id="d14e1332" width="130" style="text-align: center; "> Erg. Grafik </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1335"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1336" src="../image/houses.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1337"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e1338" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e1339"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1340" src="../image/houses.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1341"> Suche die Gebäude, die eine Fläche größer als 100m<sup>2</sup> haben. 
+                           </td>
+                           <td class="tabledata" id="d14e1346"><b>THEM</b></td>
+                           <td class="tabledata" id="d14e1349"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1350" src="../image/tab4_1.jpg" width="110"
+                                      height="158"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1351"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1352" src="../image/houses_yell_2.jpg" width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1354"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1355" src="../image/houses.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1356"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1357" src="../image/river.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1358"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1359" src="../image/river_houses.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1360"> Suche die Gebäude, die eine Fläche größer als 100m<sup>2</sup> haben, und die weniger als 100m
+                              vom Adelbach entfernt liegen. 
+                           </td>
+                           <td class="tabledata" id="d14e1365"><b>GEOM + THEM</b></td>
+                           <td class="tabledata" id="d14e1368"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1369" src="../image/tab4_2.jpg" width="110"
+                                      height="158"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1370"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1371" src="../image/river_houses_100.jpg" width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1373"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1374" src="../image/houses.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1375"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1376" src="../image/fields.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1377"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1378" src="../image/houses_fields.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1379"> Suche die Gebäude, die sich vollständig im Wald befinden. </td>
+                           <td class="tabledata" id="d14e1381"><b>TOPO</b></td>
+                           <td class="tabledata" id="d14e1384"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1385" src="../image/tab4_3.jpg" width="110"
+                                      height="158"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1386"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1387" src="../image/houses_yell_in_wald.jpg"
+                                      width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1389"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e1390" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e1391"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1392" src="../image/river.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1393"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1394" src="../image/river.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1395"> Suche die Fläche, die weniger als 100m vom Adelbach entfernt
+                              liegt. 
+                           </td>
+                           <td class="tabledata" id="d14e1397"><b>GEOM</b></td>
+                           <td class="tabledata" id="d14e1400"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1401" src="../image/tab4_4.jpg" width="110"
+                                      height="31"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1402"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1403" src="../image/river_buff.jpg" width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1405"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1406" src="../image/houses.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1407"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1408" src="../image/river.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1409"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1410" src="../image/river_houses.jpg" width="50"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1411"> Suche das Gebäude das dem Adelbach am nächsten liegt. </td>
+                           <td class="tabledata" id="d14e1413"><b>GEOM</b></td>
+                           <td class="tabledata" id="d14e1416"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1417" src="../image/tab4_5.jpg" width="110"
+                                      height="158"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e1418"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1419" src="../image/river_houses_1.jpg" width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                     </tbody>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><p class="paragraph" id="d14e1420"><br /><br /></p>
+               </div>
+               <div id="d14e1422.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e1423">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d14e1424">
+                        <li class="itemAlt">Warum ist eine Unterscheidung in vergleichende, arithmetische und
+                           logische Operatoren Ihrer Meinung nach sinnvoll?
+                        </li>
+                        <li class="item">Können Sie noch spontan den Unterschied zwischen "<i>ist gleich</i>" (=) und logischem <i>UND</i> erläutern?
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="unit_GISBSc_VL2b.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2b_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

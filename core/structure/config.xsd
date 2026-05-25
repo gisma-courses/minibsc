@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch" targetNamespace="http://www.elml.ch" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:annotation>
+		<xs:documentation>
+			----------------------------------------------------------------------------------------------------------------------------------------------------
+			eLesson Markup Language eLML - config.xsd
+			v1.0, 19.03.2007
+			----------------------------------------------------------------------------------------------------------------------------------------------------
+			This schema defines how the project specific config.xml file has to be structured.
+			More information can be found on the Website at
+			http://sourceforge.net/projects/elml
+			
+			!! Type definitions such as YesNoType, EmailType and LabelType have been redefined for this schema.
+			Original types can be found in the files elml.xsd and metadata_elml.xsd.
+			----------------------------------------------------------------------------------------------------------------------------------------------------
+			
+			Important: All the elements within the config.xsd file are optional. If you don't use an element then a default 
+			value might be used (e.g. the Sourceforge bugtracker). If you use an element but leave it empty (e.g. an
+			empty element bugtracker) then the element will not be used (e.g. no bugtracker link in the lesson). If you
+			leave an element empty that is needed for the transformation then also the default value will be used.
+		</xs:documentation>
+	</xs:annotation>
+	<!-- ===========================================================================================
+																	ELEMENT DEFINITIONS
+============================================================================================== -->
+	<!-- **********   root element config   ********** -->
+	<xs:element name="config">
+		<xs:annotation>
+			<xs:documentation>The root element of the project specific config.xml file.
+			Important: All the elements within the config.xsd file are optional. If you don't use an element then a default value might be used (e.g. the Sourceforge bugtracker). If you use an element but leave it empty (e.g. an	empty element bugtracker) then the element will not be used (e.g. no bugtracker link in the lesson). If you leave an element empty that is needed for the transformation then also the default value will be used.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="5">
+				<xs:element ref="elml:general" minOccurs="0"/>
+				<xs:element ref="elml:online" minOccurs="0"/>
+				<xs:element ref="elml:print" minOccurs="0"/>
+				<xs:element ref="elml:latex" minOccurs="0"/>
+				<xs:element ref="elml:modules" minOccurs="0"/>
+				<xs:element ref="elml:terms" minOccurs="0"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<!-- **********   element general and subelements  ********** -->
+	<xs:element name="general">
+		<xs:annotation>
+			<xs:documentation>The element general contains general information needed for the transformation of a eLML lesson (not specific for an online or print version, are used in all versions).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:contact" minOccurs="0"/>
+				<xs:element ref="elml:server" minOccurs="0"/>
+				<xs:element ref="elml:role" minOccurs="0"/>
+				<xs:element ref="elml:pagebreak_level" minOccurs="0"/>
+				<xs:element ref="elml:chapter_numeration" minOccurs="0"/>
+				<xs:element ref="elml:manifest_type" minOccurs="0"/>
+				<xs:element ref="elml:optional_units" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="contact" type="elml:EmailType">
+		<xs:annotation>
+			<xs:documentation>The element contact contains an contact email address that allows the students to contact the tutor of a lesson or course.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="server" type="xs:anyURI">
+		<xs:annotation>
+			<xs:documentation>The element server contains the URL to the homepage of your server (e.g. http://www.gitta.info).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="role">
+		<xs:annotation>
+			<xs:documentation>The element role defines if the transformation is to be made for a 'tutor' or a 'student' view of the content.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="tutor"/>
+				<xs:enumeration value="student"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="pagebreak_level">
+		<xs:annotation>
+			<xs:documentation>The element pagebreak_level allows defining on which levels page breaks in the html, pdf, ... version are generated. Possible values are 'oneoutput', 'lesson', 'unit' or 'lo'. For a single lesson the values 'oneoutput' and 'lesson' generate the same output. There is a difference between these two values when transforming several lessons to a course.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="oneoutput"/>
+				<xs:enumeration value="lesson"/>
+				<xs:enumeration value="unit"/>
+				<xs:enumeration value="lo"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="chapter_numeration" type="elml:YesNoType">
+		<xs:annotation>
+			<xs:documentation>The element chapter_numeration allow switching on ('yes') and off ('no') the numeration of the chapters, units, ... within a lesson or course.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="manifest_type">
+		<xs:annotation>
+			<xs:documentation>The element manifest_type allows defining which type of imsmanifest.xml file will be produced: IMS CP or SCORM compatible. Accepted values are 'ims', 'scorm' or 'both'.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ims"/>
+				<xs:enumeration value="scorm"/>
+				<xs:enumeration value="both"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="optional_units">
+		<xs:annotation>
+			<xs:documentation>The element optional_units allows defining the units that should be marked/highlighted as optional for the student. Insert for each optional unit a separate subelement labelname.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:labelname" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- **********   element online and subelements   ********** -->
+	<xs:element name="online">
+		<xs:annotation>
+			<xs:documentation>The element online contains information specific to the transformation of an eLML lesson into html (an online version).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="bugtracker" type="xs:anyURI" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element bugtracker contains the URL to your bugtracker form. Leave the element empty if you don't have a bugtracker.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="use_navigation" type="elml:YesNoType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element use_navigation allows switching on ('yes') or off ('no') the creation of a navigation in the transformation to an online version.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="use_labelReferences" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element use_labelReferences allows using the specific java script (or similar) files for referencing and/or highlighting specific parts of a lesson. Interpreted are the values 'no' (no highlighting), 'yes' (highlighting with a default colour) or a colour value such as #FEF456 or red (highlighting with the specified colour value).</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="use_embed" type="elml:YesNoType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element use_embed allows specifying of the deprecated HTML 1.0 element 'embed' should be used for embedding multimedia objects in HTML pages. Set it to 'no' if you want to create XHTML 1.1 code (may need adjustements of your layout). Set it to 'yes' (default, used if you don't use this element in the config.xml file) if you don't care, if you want to use your old layouts, etc...</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="html_version" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element html_version allows specifying if XHTML 1.0 or XHTML 1.1 shall be created when transforming a lesson to HTML. Default is 1.0.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+						    <xs:enumeration value="1.0"></xs:enumeration>
+						    <xs:enumeration value="1.1"></xs:enumeration>
+						    <xs:enumeration value="5"></xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="css_framework" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element css_framework allows defining a css framework to be used for the layout of the lesson transformed into html. At the moment the values 'none' and 'yaml' (see www.yaml.de for more information) are supported.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="none"/>
+							<xs:enumeration value="yaml"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="icon_filetype" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element css_framework allows defining a css framework to be used for the layout of the lesson transformed into html. At the moment the values 'none' and 'yaml' (see www.yaml.de for more information) are supported.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="gif"/>
+							<xs:enumeration value="png"/>
+							<xs:enumeration value="jpg"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			    <xs:element name="lightwindow" type="elml:YesNoType" minOccurs="0">
+			        <xs:annotation>
+			            <xs:documentation>The element lightwindow allows the use of Kevin Millers lightwindow-script (www.stickmanlabs.com). To use it create a multimedia element and add a thumbnail attribute. If you click on the thumbnail the large version opens full screen and the background dimms down.</xs:documentation>
+			        </xs:annotation>
+			    </xs:element>
+			    <xs:element name="glossaryMousoverWithHTML" type="elml:YesNoType" minOccurs="0">
+			        <xs:annotation>
+			            <xs:documentation>Use HTML in Glossary Term Mouseover? If no, only the text is displayed as mouseover, if yes, images, tables etc. are all displayed in mouseover.</xs:documentation>
+			        </xs:annotation>
+			    </xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- **********   element print and subelements   ********** -->
+	<xs:element name="print">
+		<xs:annotation>
+			<xs:documentation>The element print contains information specific to the transformation of an eLML lesson into pdf (a print version).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:display_links" minOccurs="0"/>
+				<xs:element ref="elml:hyphenation" minOccurs="0"/>
+				<xs:element ref="elml:fop_version" minOccurs="0"/>
+				<xs:element ref="elml:pageheight" minOccurs="0"/>
+				<xs:element ref="elml:pagewidth" minOccurs="0"/>
+				<xs:element ref="elml:fontsize" minOccurs="0"/>
+				<xs:element ref="elml:lineheight" minOccurs="0"/>
+				<xs:element ref="elml:fontweighttitle" minOccurs="0"/>
+				<xs:element ref="elml:converter_pixel_mm" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="display_links" type="elml:YesNoType">
+		<xs:annotation>
+			<xs:documentation>In the PDF version of a lesson or course the links are clickable. The element display_links allows defining if additionally the link URI shall be written in brackets after the link text (useful when the digital version is printed out an the links are no longer visible and useable): 'yes' writes the links URI in the PDF, 'no' does not.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="hyphenation" type="elml:YesNoType">
+		<xs:annotation>
+			<xs:documentation>The element hyphenation activates hyphenation in the PDF (yes) or not (no).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fop_version" default="0.9">
+		<xs:annotation>
+			<xs:documentation>The element fop_version allows specifying the FOP version used for transformation. If you use the latest FOP version enter the value '0.9' otherwise use '0.2'.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+			    <xs:enumeration value="0.2"/>
+			    <xs:enumeration value="0.9"/>
+			    <xs:enumeration value="0.95"/>
+			    <xs:enumeration value="1.0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="pageheight" type="xs:string" default="29.7cm">
+		<xs:annotation>
+			<xs:documentation>The element pageheight allows defining the height of your page, e.g. '29.7cm' for an A4 portrait format.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pagewidth" type="xs:string" default="21cm">
+		<xs:annotation>
+			<xs:documentation>The element pagewidth allows defining the width of your page, e.g. '21cm' for an A4 portrait format.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fontsize" type="xs:string" default="11pt">
+		<xs:annotation>
+			<xs:documentation>The element fontsize allows defining your default font size, e.g. '11pt'.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="lineheight" type="xs:string" default="15pt">
+		<xs:annotation>
+			<xs:documentation>The element lineheight allows defining your default line height, e.g. '15pt'. This value needs to be bigger than the fontsize value.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="fontweighttitle" type="xs:string" default="bold">
+		<xs:annotation>
+			<xs:documentation>The element fontweighttitle allows defining your default font weight for titles, e.g. 'bold'.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="converter_pixel_mm" fixed="0.2646">
+		<xs:annotation>
+			<xs:documentation>The element converter_pixel_mm contains the conversion factor from pixel to mm. This value is set fix to '0.2646'.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- **********   element latex and subelements   ********** -->
+	<xs:element name="latex">
+		<xs:annotation>
+			<xs:documentation>The element latex contains information specific to the transformation of an eLML lesson into latex (another print version).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:documentclass"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="documentclass">
+		<xs:annotation>
+			<xs:documentation>The element documentclass allows defining the type of document created in latex. The values are 'article' (e.g. for a single lesson) or 'book' (e.g. for the transformation of a course consisting of several lessons).</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="article"/>
+				<xs:enumeration value="book"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- **********   element modules and subelements   ********** -->
+	<xs:element name="modules">
+		<xs:annotation>
+			<xs:documentation>The element modules contains information specific to the transformation of several eLML lessons into one course.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:course" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="course">
+		<xs:annotation>
+			<xs:documentation>The element course defines through its subelements labelname which lessons belong together in one course.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:labelname" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="title" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The attribute title allows specifying a specific title for the course. This title will be visible on the title page of the print (PDF) version but not in the online version.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="subnavigation" type="elml:YesNoType" use="optional" default="no">
+				<xs:annotation>
+					<xs:documentation>The attribute subnavigation allows switching on ('yes') or off ('no', default value) that all the entries in the navigation are shown. 'no' shows only the navigation entries of the first lesson and the titles of the following lessons. Clicking one of those titles will open the navigation of that lesson and close the one of the first/open lesson.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="authors" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>The element authors allows specifying all the authors that have created the lessons of a course. This information will be shown on the title page of the print (PDF) version but not in the online version. The authors information in the metadata is still visible.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="labelname" type="elml:LabelType">
+		<xs:annotation>
+			<xs:documentation>The element labelname contains the label of an existing lesson (for course definitions) or unit (for defining optional units).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- **********   element terms and subelements   ********** -->
+	<xs:element name="terms">
+		<xs:annotation>
+			<xs:documentation>The element terms allows redefining the preset names for the different titles within the lesson, such as bibliography or learning objectives. Use for each redefinition a new subelement msg.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:msg" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="msg">
+		<xs:annotation>
+			<xs:documentation>The element msg redefines a preset title. The new title is written in plain text within the element msg.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="name" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The attribute name defines the name of the title to be redefined.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="lang" type="elml:LanguageType" use="optional">
+						<xs:annotation>
+							<xs:documentation>The attribute lang allow defining the language of the redefined title.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ===========================================================================================
+																	ATTRIBUTE DEFINITIONS
+============================================================================================== -->
+	<!-- YesNoType -->
+	<xs:simpleType name="YesNoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="no"/>
+			<xs:enumeration value="yes"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- EmailType -->
+	<xs:simpleType name="EmailType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[^@]+@[^\.]+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- LabelType -->
+	<xs:simpleType name="LabelType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+			<xs:pattern value="([A-Za-z0-9_])*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- LanguageType -->
+	<xs:simpleType name="LanguageType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="de"/>
+			<xs:enumeration value="fr"/>
+			<xs:enumeration value="it"/>
+			<xs:enumeration value="en"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

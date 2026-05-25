@@ -1,0 +1,495 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="GIS als räumliches Denken in der Geographie: Geographie als räumliche Interpretation der Welt. Kartographie als Bild der Erde. Intention von Karten. Exkurs Kommunikation: Das Verständnis von und                     somit die Verwendung der als Karten... Automatisierte Informationsverarbeitung. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-2011" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (Practice solutions) " />
+      <meta name="keywords"
+            content="GIS als räumliches Denken in der Geographie, definition GIS , information systems, SRTM 90m Digital Elevation Data, NASA, Datenmodell, DGM, Open Source, NUTS, eLML" />
+      <title>Geographie als räumliche Interpretation der Welt</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>GIS als räumliches Denken in der Geographie</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="unit_GISBSc_VL1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL1_V_lo0.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Räumliche Interpretation</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL1_V_lo0.html">GIS Definition</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL1_V_lo2.html">GIS und geographische Abstraktion</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL1_V_lo4.html">Geoobjekte</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL1_V_lo3.html">Geodaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL1_V_lo1.html">Geographie als räumliche Interpretation der Welt</h1>
+               <div id="d10e78.html" class="clarify">
+                  <p class="paragraph" id="d10e79">Die Annäherung an die Thematik der Geographischen Informationssysteme
+                     (GIS) wirkt, im Kontext der vielfältigen Verwendung des Begriffs unklar für
+                     Einsteiger. Es ist daher notwendig einige Begriffe, sowohl aus dem alltäglichen
+                     als auch aus dem etablierten geographischen Sprachgebrauch, zu erläutern und zu
+                     definieren. Dies beginnt bereits mit den Begriffen "Geographie" und
+                     "geographisch", die mit der Wahrnehmung der Erde bzw. Erdoberfläche und ihrem
+                     Verständnis und ihrer Beschreibung verbunden sind. Das rückt die professionelle
+                     <i>Beschreibung der Erde</i>, also eine
+                     geographisch abstrahierte kognitive Welterfahrung, in den Fokus einer ersten
+                     Beschäftigung mit GIS. Für den Einsatz von Informationssystemen in der
+                     Geographie sollten zunächst einige Grundkonzepte zur Wahrnehmung und Abstraktion
+                     sowie zur Kommunikation <i>geographischer
+                        Welterfahrung</i> verstanden sein. 
+                  </p>
+                  <p class="paragraph" id="d10e87">Das Verständnis der Bedeutung von GIS für das Fach Geographie soll mit
+                     Hilfe eines kurzen Rückgriff auf die bekannten Konzepte der Kartographie
+                     erleichtert werden.
+                  </p>
+                  <h4>Kartographie als Bild der Erde</h4>
+                  <p class="paragraph" title="Kartographie als Bild der Erde" id="d10e89">Kartographie als Bild der Erde
+                     Nach allgemeiner Auffassung ist die Karte ein orientiertes, verkleinertes,
+                     verebnetes Grundrissbild eines Teils der Erdoberfläche, das die Gesamtheit der
+                     für diesen Teil bedeutungsvollen Erscheinungen oder eine beschränkte Auswahl
+                     daraus wiedergibt<span class="citation"> (<a class="bibLink" href="GISBScL1_bibliography.html#d10e2006">Bartelme</a> 2005)</span>. Lehmann spricht
+                     die Probleme, die dieser Definition zugrunde liegen, folgendermaßen an:<span class="citation" style="display:inline">"<i>Die Karten geben kein Abbild der
+                           Wirklichkeit, sondern nur die Möglichkeit, sich die Wirklichkeit
+                           vorzustellen [...]. Sie reden eine eigene Sprache, die übersetzt sein
+                           will</i>" (<a class="bibLink" href="GISBScL1_bibliography.html#d10e2019">Lehmann</a> 1952, S. 73)</span>. Integriert man diese Auffassung in eine geographische
+                     Definition der Karte, so ist sie:
+                  </p>
+                  <ul class="list" id="d10e96">
+                     <li class="itemAlt">ein <b>Bild</b> der Erde
+                     </li>
+                     <li class="item">eine Darstellung der als <b>wesentlich
+                           aufgefassten</b> Erscheinungen
+                     </li>
+                     <li class="itemAlt"> ein Produkt der Kartographie, die je nach <b>Zielsetzung</b> und den als <b>wesentlich
+                           identifizierten</b> Erscheinungen unterschiedliche
+                        Darstellungsverfahren anwendet 
+                     </li>
+                  </ul>
+               </div>
+               <div id="d10e115.html" class="look">
+                  <h4>Intention von Karten</h4>
+                  <p class="paragraph" title="Intention von Karten" id="d10e116"><span class="multimedia_inline_right"><a href="../image/ptolo.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Räumliche Interpretation]"
+                           title="Abbildung 1: Weltkarte des Ptolemäus. Die hier gezeigte Weltkarte ist mit den zwölf Winden illustriert und eine der 32 Karten aus der „Cosmographia“ die von                         Lienhart Holle aus Ulm am 6. Juli 1482 herausgegeben wurde. Dies war die erste gedruckte Kartenausgabe nördlich der Alpen"><img class="multimedia" id="d10e117" src="../image/ptolo.png" width="400"
+                                height="230"
+                                title="Abbildung 1: Weltkarte des Ptolemäus. Die hier gezeigte Weltkarte ist mit den zwölf Winden illustriert und eine der 32 Karten aus der „Cosmographia“ die von                         Lienhart Holle aus Ulm am 6. Juli 1482 herausgegeben wurde. Dies war die erste gedruckte Kartenausgabe nördlich der Alpen"
+                                alt="Abbildung 1: Weltkarte des Ptolemäus. Die hier gezeigte Weltkarte ist mit den zwölf Winden illustriert und eine der 32 Karten aus der „Cosmographia“ die von                         Lienhart Holle aus Ulm am 6. Juli 1482 herausgegeben wurde. Dies war die erste gedruckte Kartenausgabe nördlich der Alpen" /></a><span class="legend" style="display:block">Abbildung 1: Weltkarte des Ptolemäus. Die hier gezeigte Weltkarte ist mit den zwölf Winden illustriert und eine der 32 Karten
+                           aus der „Cosmographia“ die von                         Lienhart Holle aus Ulm am 6. Juli 1482 herausgegeben wurde. Dies war
+                           die erste gedruckte Kartenausgabe nördlich der Alpen (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1998">Lienhart</a> 1482)</span></span> Um diesen Zusammenhang an
+                     einem Beispiel zu verdeutlichen betrachten Sie bitte die berühmte "Cosmographie"
+                     des Ptolemäus (erstmalig gedruckt um 1410 in Italien, hier die Ulmer
+                     "Druckausgabe" (Lienhart 1482) von 1492) (Abb. 1). Diese kann als frühes
+                     idealtypisches Beispiel für die zuvor definierten Eigenschaften einer Karte
+                     betrachtet werden. Dargestellt ist die zu diesem Zeitpunkt gültige, europäische
+                     Wahrnehmung der Welt. Wenige Jahre später wurde mit Kolumbus und seinen
+                     Entdeckungsfahrten diese Weltsicht revolutioniert und umfassend korrigiert.
+                     Monmonier (dessen Monographie überaus empfehlenswert ist) sagt in diesem
+                     Kontext: <span class="citation" style="display:inline">"<i>that maps, like speeches and paintings,
+                           are authored collections of information and also subject to distortions
+                           arising from ignorance, greed, ideological blindness, or malice
+                           [...]</i>" (<a class="bibLink" href="GISBScL1_bibliography.html#d10e2007">Monmonier</a> 1991)</span>. Hier wird deutlich, wie sehr die Abstraktion von
+                     (räumlicher) Wirklichkeit abhängig ist von der Intention des Senders und der
+                     verwendeten Kodierung bzw. Rekodierung durch den Empfänger. 
+                  </p>
+                  <p id="d10e122" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond10e122')">Exkurs Kommunikation: Das Verständnis von und                     somit die Verwendung der als Karten... (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond10e122text" style="display: none; cursor: pointer;"
+                       class="optional"
+                       title="Exkurs Kommunikation: Das Verständnis von und                     somit die Verwendung der als Karten..."
+                       onclick="off('solutiond10e122')">
+                     <p class="paragraph" id="d10e123"> Das Verständnis von und somit die Verwendung der als Karten
+                        aufbereiteten Resultate von Geoinformationssystemen fällt aufgrund der
+                        Analogie zur konventionellen Kartographie in der Regel leicht. Eine
+                        nützliche Erklärung dieses scheinbar <i>intuitiven</i> Verstehens kartographischer Abbildungen liefert
+                        die Kommunikationstheorie. Anhand des leicht verständlichen
+                        Sender-Empfängermodells kann verdeutlicht werden, warum wir Karten
+                        <i>verstehen</i>. 
+                     </p>
+                     <p class="paragraph" id="d10e131"><span class="multimedia_inline_right"><a href="../image/bartelme_kommunikation.png" target="_blank" class="lightwindow"
+                              rel="Gallery[Räumliche Interpretation]"
+                              title="Abbildung 2: Das Sender-Empfänger-Modell definiert Kommunikation als Übertragung einer Nachricht von einem Sender zu einem Empfänger. Quelle: Eigene Darstellung verändert nach "><img class="multimedia" id="d10e132" src="../image/bartelme_kommunikation.png"
+                                   width="350"
+                                   title="Abbildung 2: Das Sender-Empfänger-Modell definiert Kommunikation als Übertragung einer Nachricht von einem Sender zu einem Empfänger. Quelle: Eigene Darstellung verändert nach "
+                                   alt="Abbildung 2: Das Sender-Empfänger-Modell definiert Kommunikation als Übertragung einer Nachricht von einem Sender zu einem Empfänger. Quelle: Eigene Darstellung verändert nach " /></a><span class="legend" style="display:block">Abbildung 2: Das Sender-Empfänger-Modell definiert Kommunikation als Übertragung einer Nachricht von einem Sender zu einem
+                              Empfänger. Quelle: Eigene Darstellung verändert nach  (<a class="bibLink" href="GISBScL1_bibliography.html#d10e2006">Bartelme</a> 2005)</span></span> Das Sender-Empfänger-Modell fasst den Vorgang der
+                        Verständigung von 2 Subjekten (Kommunikation) als Übermittlung einer
+                        Information von einem Sender zu einem Empfänger auf. Zur Abstraktion
+                        (=Vereinfachung) und Übertragung (=Übermittlung) muss diese Information
+                        kodiert werden. Ein zur Kodierung adäquates Medium transportiert die
+                        Information zum Empfänger (z.B. Karte, Text, etc.). Die zentrale
+                        Voraussetzung für eine erfolgreiche Kommunikation ist in diesem Konzept,
+                        dass sowohl dem Sender als auch dem Empfänger die Kodierungs- bzw.
+                        Dekodierungsregeln bekannt sind. Die kartographische Modellbildung (also das
+                        Abstrahieren räumlicher Zusammenhänge und ihre Übertragung zu
+                        Kommunikationszwecken in eine Karte) kann folglich als formalisierter
+                        Transfer von Wissen und/oder Informationen zwischen Sender und Empfänger
+                        betrachtet werden (vgl. Abb. 2).
+                     </p>
+                     <p class="paragraph" id="d10e134">Diese kartographischen Dekodierungsfähigkeiten erwerben wir bereits
+                        frühzeitig (quasi nebenbei) durch Schulbildung und Lebenserfahrung
+                        (Wetterkarten, Straßenkarten, etc.) und können daher scheinbar ohne
+                        spezielle Kenntnis Karten interpretieren. Wie eingeschränkt dieses
+                        allgemeine Wissen ist, sollte allerdings bereits zu Beginn des
+                        BSc.-Studiengangs in den Modulen zur konventionellen und digitalen
+                        Kartographie deutlich geworden sein.
+                     </p>
+                     <h4>Automatisierte Informationsverarbeitung</h4>
+                     <p class="paragraph" title="Automatisierte Informationsverarbeitung" id="d10e136">Das Sender-Empfänger
+                        Modell ist aufgrund seiner einfachen Konzeption besonders geeignet, um
+                        automatisierte Informationsverarbeitung mit Hilfe von computerbasierten
+                        Informationssystemen zu beschreiben. Anders als in der stark kognitiv und
+                        bildhaft geprägten kartographischen Abstraktion der Realwelt, basiert das
+                        Modellierungskonzept der Informatik (Geoinformatik) auf Daten (Geodaten) und
+                        wiederholbarer, regelhafter Umwandlung dieser Daten in Informationen. Sowohl
+                        die kartographische als auch die geoinformationsverarbeitende Abstraktion
+                        der Welt sind formale Abstraktionswege. Jedoch müssen die zugrunde liegenden
+                        Abstraktionskonzepte in der Geoinformatik notwendigerweise explizit sein, da
+                        die automatisierte Datenverarbeitung nicht auf die intuitiven
+                        Assoziationsfähigkeiten der menschlichen Kognition zurückgreifen kann
+                        sondern an die binäre Logik der<span class="citation" style="display:inline">"<i>von Neumann
+                              Maschine</i>" (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1991">Kelling</a> 1996)</span> (Computer) gebunden sind. Erst mit der GIS-basierten
+                        Erstellung von Karten wird der uns vertraute holistische
+                        Interpretationszusammenhang wiederhergestellt (zum Begriff holistisch siehe
+                        auch Zick <span class="citation"> (<a class="bibLink" href="GISBScL1_bibliography.html#d10e2013">2003</a>)</span>). 
+                     </p>
+                     <p class="paragraph" id="d10e143">Anders ausgedrückt: Trotz des völlig unterschiedlichen Abstraktions-
+                        und Produktionsprozesses sind uns die GIS- basierten Kartenansichten nicht
+                        fremd, im Gegenteil, wir können Sie aufgrund verfügbarer
+                        Interpretationsvorschriften der uns bekannten analogen Karten und Pläne
+                        interpretieren.
+                     </p>
+                  </div>
+               </div>
+               <div id="d10e145.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d10e146">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d10e147">
+                        <li class="itemAlt"> Ist die Behauptung einer spezifischen Weltsicht im oben
+                           angesprochenen Zusammenhang gerechtfertigt?
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="unit_GISBSc_VL1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL1_V_lo0.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL1.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

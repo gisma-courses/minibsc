@@ -1,0 +1,485 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="GIS als räumliches Denken in der Geographie: Desktop-GIS leicht gemacht. ESRI Software... Ihr neuer Job im Outdoor-Reiseunternehmen. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-2011" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (Practice solutions) " />
+      <meta name="keywords"
+            content="GIS als räumliches Denken in der Geographie, definition GIS , information systems, SRTM 90m Digital Elevation Data, NASA, Datenmodell, DGM, Open Source, NUTS, eLML" />
+      <title>Desktop-GIS leicht gemacht</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>GIS als räumliches Denken in der Geographie</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="unit_GISBSc_UE1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_UE1_U_lo2.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Desktop-GIS leicht gemacht</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_UE1_U_lo2.html">Daten ins GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_UE1_U_lo3.html">Projektionen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_UE1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_UE1_U_lo1.html">Desktop-GIS leicht gemacht</h1>
+               <div id="d10e1172.html" class="clarify">
+                  <p class="paragraph" id="d10e1173">Nachdem Sie bereits unterschiedliche webbasierte GIS-Applikationen
+                     kennen, sollte der Einstieg in ein sogenanntes Desktop GI-System ohne große
+                     Probleme gelingen. Das Angebot von Desktop GI-Software ist groß. Es gibt
+                     verschiedene Produkte, die sich in ihrer Leistungsfähigkeit, den
+                     Anwendungsmöglichkeiten und dem -umfang sowie der Bedienung unterscheiden. Neben
+                     den kommerziellen Produkten etabliert sich derzeit <a class="link"
+                        href="http://www.giswiki.org/wiki/Open_Source_GIS#Open_Source_GIS_.28allgemein.29"
+                        target="_blank"
+                        title="OpenSource- GIS-Software">OpenSource- GIS-Software</a> als eine leistungsstarke Alternative in der
+                     Praxis. 
+                  </p>
+                  <p id="d10e1178" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond10e1178')">ESRI Software... (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond10e1178text" style="display: none; cursor: pointer;"
+                       class="optional"
+                       title="ESRI Software..."
+                       onclick="off('solutiond10e1178')">
+                     <p class="paragraph" id="d10e1179">Für die Ausbildung wird derzeit (03/2010) das Desktop-GIS <i>ArcView/ArcEditor</i> aus der GIS-Produktfamilie
+                        der Firma ESRI eingesetzt. Die im Übungsteil verwendeten Daten,
+                        Aufgabenstellungen und Lösungshilfen sind entsprechend vorbereitet worden.
+                        Dies bedeutet im Zweifelsfall, dass proprietäre Datenformate Verwendung
+                        finden. Die alternative Bearbeitung mit Open Source-Software ist ungeachtet
+                        dieser Vorgaben möglich und wird auf Wunsch auch unterstützt.
+                     </p>
+                  </div>
+               </div>
+               <div id="d10e1184.html" class="look">
+                  <h4>Ihr neuer Job im Outdoor-Reiseunternehmen</h4>
+                  <p class="paragraph" title="Ihr neuer Job im Outdoor-Reiseunternehmen"
+                     id="d10e1185">Sie arbeiten bei dem
+                     Outdoor-Reiseunternehmen <i>Flott billig &amp;
+                        gut</i> und Ihr Chef kommt morgens ins Büro und stellt Ihnen die
+                     Aufgabe sich in Kürze einen Überblick über <b>Rarotonga</b> zu verschaffen. Vermutlich wissen Sie nicht was mit
+                     Rarotonga gemeint sein könnte. Ihr Chef schickt Ihnen den unten stehenden Link
+                     zum Youtube Beitrag <a class="link" href="http://www.youtube.com/v/7bY-qlxhRaM" target="_blank"
+                        title=""><i>Aitutaki Rarotonga Relax</i></a>, der in
+                     angeregt hat, dort eine differenzierte, umweltschonende Outdoorreisemarke zu
+                     entwickeln. 
+                  </p>
+                  <p class="paragraph" id="d10e1197"><span class="multimedia_inline_right"><object type="application/x-shockwave-flash" id="d10e1198" width="300" height="240"
+                                class="multimedia"
+                                title="Aitutaki Rarotonga Relax"
+                                data="http://www.youtube.com/v/7bY-qlxhRaM">
+                           <param name="movie" value="http://www.youtube.com/v/7bY-qlxhRaM" />
+                           <param name="quality" value="best" />
+                           <param name="scale" value="exactfit" />
+                           <param name="menu" value="true" />
+                           <param name="play" value="false" />
+                           <param name="wmode" value="opaque" />
+                           <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                  type="application/x-shockwave-flash"
+                                  quality="best"
+                                  scale="exactfit"
+                                  menu="true"
+                                  play="false"
+                                  wmode="opaque"
+                                  src="http://www.youtube.com/v/7bY-qlxhRaM"
+                                  width="300"
+                                  height="240"
+                                  class="multimedia"
+                                  title="Aitutaki Rarotonga Relax"></embed></object><span class="legend" style="display:block">Aitutaki Rarotonga Relax (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1983">MindbreakOne</a> 2007)</span></span></p>
+                  <p class="paragraph" id="d10e1199"> Natürlich ist für ein derartiges Vorhaben ein 5 Minuten Clip keine
+                     ausreichende Informationsquelle. Doch wie gehen Sie nun konkret vor? Vermutlich
+                     würden Sie zunächst Google nach "Rarotonga" befragen oder -falls Sie wissen,
+                     dass es sich um einen Ort handelt- mit dem digitalen Atlas <i>Google Earth</i> direkt auf diesen Ort zoomen.
+                     Natürlich liefert Ihnen <i>Google Earth</i> eine
+                     Vielfalt an Eindrücken und Informationen. Doch sind die ausreichend für die
+                     Wünsche Ihres Chefs? Wie lautet eigentlich der genaue Arbeitsauftrag an Sie?
+                     Nach einem kurzen Briefing ist Ihnen die Zielrichtung Ihrer Aufgabenstellung
+                     klarer. Ihr Chef wünscht sich:
+                  </p>
+                  <p class="paragraph" id="d10e1207"> "<i>Anspruchsvolle Wander- bzw.
+                        Mountainbike-Routen mit interessanten Naturerlebnissen, Wellness-Stützpunkte
+                        und ein sportives Indoor und Outdoor Unterhaltungsangebot wie etwa Beach
+                        Volleyball, Surfen oder andere Sportangebote. Das ganze Paket soll
+                        individuell, nachhaltig und umweltschonend sein.</i>"
+                  </p>
+               </div>
+               <div id="d10e1212.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d10e1213">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/tools.gif" title="tools" alt="tools"
+                          class="icon"
+                          style="padding-right:1.5em" />Laden Sie
+                     die Datei <a class="link" href="../../../material/datensatz1.zip" title="&#34;Datensatz1.zip&#34;">"Datensatz1.zip"</a>
+                     auf Ihr lokales Laufwerk herunter. Entpacken Sie diese Datei in ein lokales
+                     Verzeichnis Ihrer Wahl. Im Wurzelverzeichnis des von Ihnen festgelegten
+                     Zielordners finden Sie eine Datei namens &lt;<code>Mein_erstes_ArcGIS_Projekt.mxd</code>&gt;. Öffnen Sie diese durch
+                     einen Doppelklick. Willkommen in der Arbeitsumgebung des Desktop-GIS ArcGIS das
+                     Sie bereits aus dem Modul Thematische Computerkartographie kennen.
+                     
+                     <p class="paragraph" id="d10e1221">Der erste Schritt sollte sein dass Sie evtl. verfügbare
+                        Informationen zu Rarotonga auch tatsächlich auf Ihrem Bildschirm sichtbar
+                        machen. Wie gehen Sie vor?
+                     </p>
+                     <p id="d10e1223" class="popupTitle" style="cursor: pointer;"
+                        onclick="onBlock('solutiond10e1223')">Klicken Sie hier für mehr Informationen</p>
+                     <div id="solutiond10e1223text" style="display: none; cursor: pointer;" class="popup"
+                          onclick="off('solutiond10e1223')">
+                        <p class="paragraph" id="d10e1224"> Mit zunehmender Komplexität von Fragestellungen wird es
+                           schwieriger direkt den richtigen Lösungsweg zu finden. Das nachfolgende
+                           Schema soll Ihnen daher eine allgemeine, strukturelle Hilfe bieten,
+                           Problemstellungen kreativ zu analysieren und in individuelle Lösungswege
+                           zu überführen.
+                        </p>
+                        <p class="paragraph" id="d10e1226"> Im ersten Schritt analysieren, diskutieren und reflektieren Sie
+                           die Problemstellung, im Anschluss entwickeln Sie einen ersten Plan zur
+                           Lösung. Es ist meistens sinnvoll die Fragestellung in kleinere
+                           Teilprobleme zu gliedern, die dann schrittweise gelöst werden. Falls Sie
+                           - was sehr wahrscheinlich ist- auf weitere Probleme stoßen, so
+                           fokussieren Sie zunächst möglichst exakt Ihr konkretes Problem und
+                           recherchieren gezielt Lösungen bzw. Antworten auf Ihre Problemstellung.
+                           Erst wenn sich in der Analyse der Problemstellung keine weiteren Fragen
+                           ergeben können Sie mit der Erstellung eines Arbeitsplans beginnen. 
+                        </p><span class="multimedia_paragraph_center"><a href="../image/loesungskonzept_lesson_1.png" target="_blank"
+                              class="lightwindow"
+                              rel="Gallery[ Praxis -  Ein Einstieg]"
+                              title="Abbildung 38: Schematische Darstellung zur strukturellen, iterativen Lösung von Problemstellungen"><img class="multimedia" id="d10e1228" src="../image/loesungskonzept_lesson_1.png"
+                                   width="400"
+                                   title="Abbildung 38: Schematische Darstellung zur strukturellen, iterativen Lösung von Problemstellungen"
+                                   alt="Abbildung 38: Schematische Darstellung zur strukturellen, iterativen Lösung von Problemstellungen" /></a><span class="legend" style="display:block">Abbildung 38: Schematische Darstellung zur strukturellen, iterativen Lösung von Problemstellungen (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1980">Reudenbach</a> 2009)</span></span></div>
+                     <p id="d10e1229" class="popupTitle" style="cursor: pointer;"
+                        onclick="onBlock('solutiond10e1229')">Klicken Sie hier für mehr Informationen</p>
+                     <div id="solutiond10e1229text" style="display: none; cursor: pointer;" class="popup"
+                          onclick="off('solutiond10e1229')">
+                        <p><b>Desktop GIS:</b> Öffnen Sie die Datei
+                           &lt;<code>Mein_erstes_ArcGIS_Projekt.mxd</code>&gt; aus „<a class="link"
+                              href="http://www.gis-ma.org/gisbsc/GISBScL3/../../../material/Datensatz1.zip"
+                              target="_blank"
+                              title="Datensatz1.zip">Datensatz1.zip</a>“.
+                           <br /> Bereits auf den ersten Blick ist in dieser Aufgabe, im Vergleich
+                           zu webbasierten GIS-Applikationen, die Auswahl an Menüpunkten und Werkzeugen
+                           erheblich umfangreicher. Verschaffen Sie sich einen Überblick bzw frischen
+                           Sie Ihr Wissen über ArcGIS anhand der Tutorials und Ihrer Unterlagen aus
+                           Thematischer Computerkartographie auf.<br /><br /> Zunächst
+                           müssen Sie die Eigenschaften des Datenrahmens ändern damit Rarotonga
+                           überhaupt angezeigt werden kann (Tipp: Den Mittelmeridian anpassen) <br /><br />Bestimmen Sie nun in ArcMap den Mittelpunkt von Rarotonga.
+                           Auch hier werden Sie zunächst nur eine Schätzung mit Hilfe einer digitalen
+                           Messung vornehmen können. Später werden Sie feststellen, dass es
+                           leistungsstarke Werkzeuge für derartige Aufgaben gibt.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="unit_GISBSc_UE1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_UE1_U_lo2.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL1.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Datenintegrität von relationalen Datenbanken. Schlüsselintegrität. Gegenstands-Integritätsbedingung. Referentielle Integrität. Exkurs Normalisierung von Relationen... Funktionale Abhängigkeit. Identifikationsschlüssel. Volle funktionale Abhängigkeit. Transitive Abhängigkeit. Erste Normalform. Zweite Normalform. Dritte Normalform. Vertiefen Sie ihr Wissen. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Datenintegrität von relationalen Datenbanken</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL2a_V_lo4.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2a_V_lo7.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo1.html">Komponenten eines Informationssystems</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo2.html">Eigenschaften von Datenbanksystemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo3.html">Schemata und Instanzen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo4.html"> Das relationale Datenmodell</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Datenintegrität</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo7.html">Datenbanksprachen und Datenbankschnittstellen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2a_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2a_V_lo5.html">Datenintegrität von relationalen Datenbanken</h1>
+               <div id="d14e324.html" class="clarify">
+                  <h4>Schlüsselintegrität</h4>
+                  <p class="paragraph" title="Schlüsselintegrität" id="d14e325">Unter dem Begriff der Integrität oder der
+                     Konsistenz von Daten versteht man die <i>Widerspruchsfreiheit</i> der Datenbestände. Eine Datenbank ist
+                     integer oder konsistent, wenn die gespeicherten Daten fehlerfrei erfasst sind
+                     und den gewünschten Informationsgehalt korrekt wiedergeben. Die Datenintegrität
+                     ist dagegen verletzt, wenn Mehrdeutigkeiten oder widersprüchliche Sachverhalte
+                     zutage treten. Definitionsgemäß sind Relationen Mengen von Tupeln, die allein
+                     durch ihre Werte unterschieden werden. Abgeleitet aus der Mengenlehre ist die
+                     Eindeutigkeit der Elemente (Tupel bzw. Datensätze) zwingend. Die Tupel müssen
+                     folglich eindeutig identifizierbar sein was durch eindeutige Schlüssel erreicht
+                     wird. Diese Integrität wird im relationalen Datenbankmodell durch sogenannte
+                     <a class="term" href="GISBScL2_glossary.html#d14e3813"
+                        onmouseover="Tip(' Jedes Attribut oder jede minimale Attributkombination,            die alle Tupel einer Relation eindeutig identifiziert, ist ein Schlüsselkandidat. Dabei            bedeutet „minimal“, dass kein Attribut ohne Verlust der eindeutigen Identifizierbarkeit            weggelassen werden kann. ', TITLE, 'Schlüsselkandidat')"
+                        onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                             alt="term"
+                             class="term_icon" />Schlüsselkandidaten</a><script src="wz_tooltip.js" type="text/javascript">
+                        <!----></script> bzw. <a class="term" href="GISBScL2_glossary.html#d14e3815"
+                        onmouseover="Tip(' Der unter den Schlüsselkandidaten ausgewählte            Identifikationsschlüssel wird zum Primärschlüssel der Relation.            Primärschlüssel werden meist unterstrichen dargestellt. ', TITLE, 'Primärschlüssel')"
+                        onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                             alt="term"
+                             class="term_icon" />Primärschlüssel</a><script src="wz_tooltip.js" type="text/javascript">
+                        <!----></script> gewährleistet. Man spricht
+                     dann auch von der <i>Schlüsselintegrität</i>.
+                  </p>
+                  <table class="table" id="d14e339" width="400">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e341"> ID </th>
+                           <th class="tableheading" id="d14e343"> Name </th>
+                           <th class="tableheading" id="d14e345"> Vorname </th>
+                           <th class="tableheading" id="d14e347"> Geburtsjahr </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e350"> 111 </td>
+                           <td class="tabledata" id="d14e352"> Meier </td>
+                           <td class="tabledata" id="d14e354"> Hans </td>
+                           <td class="tabledata" id="d14e356"> 1955 </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e359"> 222 </td>
+                           <td class="tabledata" id="d14e361"> Meier </td>
+                           <td class="tabledata" id="d14e363"> Hans </td>
+                           <td class="tabledata" id="d14e365"> 1985 </td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <p class="paragraph" id="d14e367"><br /><br /></p>
+                  <h4>Gegenstands-Integritätsbedingung</h4>
+                  <p class="paragraph" title="Gegenstands-Integritätsbedingung" id="d14e369">Die
+                     Gegenstands-Integritätsbedingung folgt direkt aus der
+                     Schlüssel-Integritätsbedingung und besagt, dass kein Primärschlüsselwert ohne
+                     Wert (=NULL oder {}) existieren darf. Falls Schlüssel ohne Wert (NULL) möglich
+                     wären könnten mehrere Tupel NULL als Schlüsselwert besitzen. Dies wiederspricht
+                     der Schlüsselintegrität da diese Tupel nicht mehr eindeutig identifizierbar
+                     sind.
+                  </p>
+                  <table class="table" id="d14e371">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e373"> ID </th>
+                           <th class="tableheading" id="d14e375"> Name </th>
+                           <th class="tableheading" id="d14e377"> Vorname </th>
+                           <th class="tableheading" id="d14e379"> Geburtsjahr </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e382"> NULL </td>
+                           <td class="tabledata" id="d14e384"> Meier </td>
+                           <td class="tabledata" id="d14e386"> Hans </td>
+                           <td class="tabledata" id="d14e388"> 1955 </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e391"> NULL </td>
+                           <td class="tabledata" id="d14e393"> Meier </td>
+                           <td class="tabledata" id="d14e395"> Hans </td>
+                           <td class="tabledata" id="d14e397"> 1985 </td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <p class="paragraph" id="d14e399">Da der Primärschlüsselwert (Attribut ID) bei beiden Tupeln leer (NULL)
+                     ist, können wir die beiden Tupel nicht direkt identifizieren.
+                  </p>
+                  <p class="paragraph" id="d14e401"><br /><br /></p>
+                  <h4>Referentielle Integrität</h4>
+                  <p class="paragraph" title="Referentielle Integrität" id="d14e403"> Beziehungen zwischen zwei Relationen
+                     werden im relationalen Modell nun so hergestellt, dass die Domänen des
+                     Primärschlüssels der einen Relation in die zweite Relation als <a class="term" href="GISBScL2_glossary.html#d14e3811"
+                        onmouseover="Tip('Ein Fremdschlüssel ist ein Attribut oder            eine Attributkombination einer Relation, welches auf einen Primärschlüssel (bzw.            Schlüsselkandidaten) einer anderen oder der gleichen Relation verweist.', TITLE, 'Fremdschlüssel')"
+                        onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                             alt="term"
+                             class="term_icon" />Fremdschlüssel</a><script src="wz_tooltip.js" type="text/javascript">
+                        <!----></script>domänen (mit entsprechenden
+                     Attributen) aufgenommen werden. referentielle Integritätsbedingungen verlangen,
+                     dass aktuelle Fremdschlüsselwerte sich immer nur auf Primärschlüsselwerte von
+                     existierenden Tupeln beziehen. Die meisten der heutigen relationalen <a class="term" href="GISBScL2_glossary.html#d14e3771"
+                        onmouseover="Tip(' Ein Datenbanksystem (DBS) ist ein System zur            elektronischen Datenverwaltung. Die wesentliche Aufgabe eines DBS ist es, große            Datenmengen effizient, widerspruchsfrei und dauerhaft zu speichern und benötigte            Teilmengen in unterschiedlichen, bedarfsgerechten Darstellungsformen für Benutzer und            Anwendungsprogramme bereitzustellen. Ein DBS besteht aus zwei Teilen: der            Verwaltungssoftware, genannt Datenbankmanagementsystem (DBMS) und der Menge der zu            verwaltenden Daten, der eigentlichen Datenbank (DB). ', TITLE, 'Datenbanksystem')"
+                        onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                             alt="term"
+                             class="term_icon" />Datenbanksysteme</a><script src="wz_tooltip.js" type="text/javascript">
+                        <!----></script> unterstützen die
+                     automatische Einhaltung der referentiellen Integrität.</p><span class="multimedia_paragraph_center"><img class="multimedia" id="_BspRefInteg.html" src="../image/ref_integ.gif"
+                          width="218"
+                          height="230"
+                          title="Beispiel zur referentiellen Integrität"
+                          alt="Beispiel zur referentiellen Integrität" /><span class="legend" style="display:block">Beispiel zur referentiellen Integrität</span></span><p class="paragraph" id="d14e412">Die Tabelle „Abteilung“ hat die Abteilungsnummer als Primärschlüssel.
+                     Dieser wird in der Tabelle „Mitarbeiter“ als Fremdschlüssel verwendet, um die
+                     Abteilungszugehörigkeit eines Mitarbeiters zu bestimmen. Im Beispiel erfüllt die
+                     Fremd-Primärschlüssel-Beziehung die Regel der referentiellen Integrität, da alle
+                     Abteilungsnummern des Fremdschlüssels aus der Tabelle „Mitarbeiter“ in der
+                     Tabelle „Abteilung“ als Primärschlüsselwerte existieren. In unserem Beispiel ist
+                     also die Regel der referentiellen Integrität nicht verletzt. Nehmen wir an, wir
+                     möchten in die Tabelle „Mitarbeiter“, ein neues Tupel einfügen: <br /><br /> „Id: 4, Weber, A5“ <br /><br /> Da in der Tabelle
+                     „Abteilung“ der Primärschlüssel „A5“ nicht existiert verstoßen wir gegen die
+                     Regel der referentiellen Integrität. Unsere Einfügeoperation wird abgewiesen,
+                     wenn das Datenbanksystem die referentielle Integrität unterstützt. 
+                  </p>
+               </div>
+               <div id="d14e418.html" class="look">
+                  <p id="d14e419" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond14e419')">Exkurs Normalisierung von Relationen... (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond14e419text" style="display: none; cursor: pointer;"
+                       class="optional"
+                       title="Exkurs Normalisierung von Relationen..."
+                       onclick="off('solutiond14e419')">
+                     <p class="paragraph" id="d14e420">Unter Normalisierung versteht man die systematische Untersuchung
+                        einer Relation mit dem Zweck, qualitativ hochwertige Relationen zu erhalten.
+                        Eine Relation ist dann normalisiert, wenn sie folgende Eigenschaften
+                        aufweist:
+                     </p>
+                     <ul class="list" id="d14e422">
+                        <li class="itemAlt"> Sie ist redundanzfrei. </li>
+                        <li class="item"> Sie verursacht keine Probleme bei der Datenpflege. </li>
+                        <li class="itemAlt"> Sie beschreibt einen Ausschnitt aus der Realität angemessen und
+                           richtig. 
+                        </li>
+                     </ul>
+                     <p class="paragraph" id="d14e429">Unnormalisierte Relationen enthalten nichtatomare Attribute, d. h.
+                        die Attribute selbst besitzen eine gewisse Struktur z. B. eine Menge von
+                        Werten. Das Ziel des Normalisierungsprozesses besteht darin, die zur
+                        Datenintegrität notwendige Einheitlichkeit in den Entwurf der Datenbank zu
+                        bringen. Es ist schon beim Design einfacher Relationen notwendig sich über
+                        die Normalisierungsprinzipien im Klaren zu sein, um eine korrekte
+                        Implementierung des logischen Schemas zu ermöglichen. Um die Umwandlung der
+                        Relationen in die drei Normalformen zu verstehen, müssen wir zuerst das
+                        Konzept der Abhängigkeiten zwischen Attributen dieser Relationen einführen. 
+                     </p>
+                     <h4>Funktionale Abhängigkeit</h4>
+                     <p class="paragraph" title="Funktionale Abhängigkeit" id="d14e431"></p>
+                     <table class="table" id="d14e432">
+                        <thead>
+                           <tr class="tablerowAlt">
+                              <th class="tableheading" id="d14e434"> ID </th>
+                              <th class="tableheading" id="d14e436"> Name </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="tablerowAlt">
+                              <td class="tabledata" id="d14e439"> S1 </td>
+                              <td class="tabledata" id="d14e441"> Meier </td>
+                           </tr>
+                           <tr class="tablerow">
+                              <td class="tabledata" id="d14e444"> S2 </td>
+                              <td class="tabledata" id="d14e446"> Weber </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <p class="paragraph" id="d14e448">Das Attribut Name ist <a class="term" href="GISBScL2_glossary.html#d14e3823"
+                           onmouseover="Tip('Wenn mehrere Attribute (Entitäten) eindeutig die            Werte anderer Attribute bestimmen spricht man von funktionaler Abhängigkeit. ', TITLE, 'Funktionale Abhängigkeit')"
+                           onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                                alt="term"
+                                class="term_icon" />funktional abhängig</a><script src="wz_tooltip.js" type="text/javascript">
+                           <!----></script> vom Attribut ID (ID --&gt; Name).</p>
+                     <p class="paragraph" id="d14e453"><br /><br /></p>
+                     <h4>Identifikationsschlüssel</h4>
+                     <p class="paragraph" title="Identifikationsschlüssel" id="d14e455"></p>
+                     <table class="table" id="d14e456">
+                        <thead>
+                           <tr class="tablerowAlt">
+                              <th class="tableheading" id="d14e458"> ID </th>
+                              <th class="tableheading" id="d14e460"> Name </th>
+                              <th class="tableheading" id="d14e462"> Vorname </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="tablerowAlt">
+                              <td class="tabledata" id="d14e465"> S1 </td>
+                              <td class="tabledata" id="d14e467"> Meier </td>
+                              <td class="tabledata" id="d14e469"> Hans </td>
+                           </tr>
+                           <tr class="tablerow">
+                              <td class="tabledata" id="d14e472"> S2 </td>
+                              <td class="tabledata" id="d14e474"> Weber </td>
+                              <td class="tabledata" id="d14e476"> Ueli </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <p class="paragraph" id="d14e478">Das Attribut ID ist der <a class="term" href="GISBScL2_glossary.html#d14e3819"
+                           onmouseover="Tip(' Ein Attribut, dessen Wert jede Entität einer            Entitätsmenge eindeutig identifiziert. Verändert nach:            http://www.computerlexikon.com/begriff-identifikationsschlüssel. Zugriff:            12.8.2009', TITLE, 'Identifikationsschlüssel')"
+                           onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                                alt="term"
+                                class="term_icon" />Identifikationssschlüssel</a><script src="wz_tooltip.js" type="text/javascript">
+                           <!----></script>.</p>
+                     <p class="paragraph" id="d14e483"><br /><br /></p>
+                     <p class="paragraph" id="d14e486"></p>
+                     <h4>Volle funktionale Abhängigkeit</h4>
+                     <table class="table" id="d14e487">
+                        <thead>
+                           <tr class="tablerowAlt">
+                              <th class="tableheading" id="d14e489"> IDStudent </th>
+                              <th class="tableheading" id="d14e491"> Name </th>
+                              <th class="tableheading" id="d14e493"> IDProfessor </th>
+                              <th class="tableheading" id="d14e495"> Note </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="tablerowAlt">
+                              <td class="tabledata" id="d14e498"> S1 </td>
+                              <td class="tabledata" id="d14e500"> Meier </td>
+                              <td class="tabledata" id="d14e502"> P2 </td>
+                              <td class="tabledata" id="d14e504"> 5 </td>
+                           </tr>
+                           <tr class="tablerow">
+                              <td class="tabledata" id="d14e507"> S2 </td>
+                              <td class="tabledata" id="d14e509"> Weber </td>
+                              <td class="tabledata" id="d14e511"> P1 </td>
+                              <td class="tabledata" id="d14e513"> 6 </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <p class="paragraph" id="d14e515">Das Attribut „Note“ ist <a class="term" href="GISBScL2_glossary.html#d14e3825"
+                           onmouseover="Tip(' Wenn Entität Y voll funktional von X            abhängt, dann müssen in allen Tupeln, in denen sowohl X als auch Y vorkommt, die Werte            der Attribute von X immer den selben Wert besitzen, ebenso wie die Werte von Y ', TITLE, 'Volle funktionale Abhängigkeit')"
+                           onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                                alt="term"
+                                class="term_icon" />voll funktional
+                           abhängig</a><script src="wz_tooltip.js" type="text/javascript">
+                           <!----></script> von den Attributen „IDStudent“ und „IDProffesor“ („IDSt,
+                        IDProf ==&gt; Note“).</p>
+                     <p class="paragraph" id="d14e520"><br /><br /></p>
+                     <h4>Transitive Abhängigkeit</h4>
+                     <p class="paragraph" title="Transitive Abhängigkeit" id="d14e522"></p>
+                     <table class="table" id="d14e523">
+                        <thead>
+                           <tr class="tablerowAlt">
+                              <th class="tableheading" id="d14e525"> ID </th>
+                              <th class="tableheading" id="d14e527"> Name </th>
+                              <th class="tableheading" id="d14e529"> Konto_Nr </th>
+                              <th class="tableheading" id="d14e531"> Bank_Clearing_Nr </th>
+                              <th class="tableheading" id="d14e533"> Bank </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="tablerowAlt">
+                              <td class="tabledata" id="d14e536"> L1 </td>
+                              <td class="tabledata" id="d14e538"> Meier </td>
+                              <td class="tabledata" id="d14e540"> 1234-5 </td>
+                              <td class="tabledata" id="d14e542"> 836 </td>
+                              <td class="tabledata" id="d14e544"> UBS </td>
+                           </tr>
+                           <tr class="tablerow">
+                              <td class="tabledata" id="d14e547"> L2 </td>
+                              <td class="tabledata" id="d14e549"> Weber </td>
+                              <td class="tabledata" id="d14e551"> 5432-1 </td>
+                              <td class="tabledata" id="d14e553"> 835 </td>
+                              <td class="tabledata" id="d14e555"> CS </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <p class="paragraph" id="d14e557">Die funktionale Abhängigkeit bezüglich „Bank_Clearing_Nr --&gt; Bank“
+                        ist eine <a class="term" href="GISBScL2_glossary.html#d14e3821"
+                           onmouseover="Tip('Abhängigkeit zwischen nicht Schlüsselattributen ', TITLE, 'Transitive Abhängigkeit')"
+                           onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                                alt="term"
+                                class="term_icon" />transitive
+                           Abhängigkeit</a><script src="wz_tooltip.js" type="text/javascript">
+                           <!----></script>, da „Bank_Clearing_Nr“ nicht Primärschlüssel der
+                        Relation ist.</p>
+                     <h4>Erste Normalform</h4>
+                     <p class="paragraph" title="Erste Normalform" id="d14e562"></p>
+                     <dl class="glossary">
+                        <dt>1. Normalform: </dt>
+                        <dd> Ein Relationenschema befindet sich in der 1. Normalform,
+                           wenn alle seine Attribute einfach und einwertig sind. 
+                        </dd>
+                     </dl>
+                     <p class="paragraph" id="d14e565"> Zur Verwaltung der Studenten sei folgende Relation gegeben: <br /><br /><code>Student(Vorname, Nachname,
+                           Informatikkentnisse)</code><br /><br />Im Attribut „Informatikkenntnisse“ können mehrere
+                        Werte stehen. <br /><br />Die Attribute „Vorname“ und „Nachname“
+                        sind einfach und einwertig. 
+                     </p><span class="multimedia_paragraph_center"><img class="multimedia" id="_Bsp_1NF.html" src="../image/1NF.gif" width="315"
+                             height="368"
+                             title="Beispiel 1. Normalform"
+                             alt="Beispiel 1. Normalform" /><span class="legend" style="display:block">Beispiel 1. Normalform (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="paragraph" id="d14e576"> Um die 1. Normalform zu erreichen, muss für jeden Wert eines
+                        mehrwertigen Attributes ein separates Tupel erzeugt werden. 
+                     </p>
+                     <h4>Zweite Normalform</h4>
+                     <p class="paragraph" title="Zweite Normalform" id="d14e578"></p>
+                     <dl class="glossary">
+                        <dt>2. Normalform: </dt>
+                        <dd> Ein Relationenschema ist in der 2. Normalform, wenn es in
+                           der 1. Normalform ist und wenn jedes nicht zum Identifikationsschlüssel gehörige
+                           Attribut von diesem voll funktional abhängig ist. 
+                        </dd>
+                     </dl>
+                     <p class="paragraph" id="d14e581"> Zur Verwaltung der Prüfungsnoten sei folgende Relation gegeben:
+                        <br /><br /><code>Student(IDSt, StudentNachname, IDProf,
+                           ProfessorNachname,Note)</code><br /><br /> Die Attribute IDSt und IDProf bilden den
+                        Identifikationsschlüssel. <br />Alle Attribute sind einfach und
+                        einwertig. <br /><br />Zudem ist bekannt, dass folgende
+                        funktionale Abhängigkeiten existieren:<br /><br />1. Das Attribut
+                        „ProfessorNachname“ ist funktional abhängig vom Attribut „IDProf“ („IDProf
+                        --&gt; ProfessorNachname“)<br /><br />2. Das Attribut
+                        „StudentNachname“ ist funktional abhängig vom Attribut „IDSt“ („IDSt --&gt;
+                        StudentNachname“)<br /><br />3. Das Attribut „Note“ ist voll
+                        funktional abhängig von den Attributen „IDSt“ und „IDProf“ („IDSt, IDProf
+                        ==&gt; Note“) 
+                     </p><span class="multimedia_paragraph_center"><img class="multimedia" id="_Bsp_2NF.html" src="../image/2NF.gif" width="455"
+                             height="390"
+                             title="Beispiel 2. Normalform"
+                             alt="Beispiel 2. Normalform" /><span class="legend" style="display:block">Beispiel 2. Normalform (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="paragraph" id="d14e600"> Die obere Tabelle ist in der 1. Normalform, da alle Attribute
+                        einfach und einwertig sind. Wenn jedoch der Student 1 von der Schule abgeht
+                        und gelöscht wird, gehen auch alle Informationen über den Professor Schmid
+                        verloren. Das Attribut „Professor“ ist nämlich nicht voll funktional
+                        abhängig vom Identifikationsschlüssel „IDSt“. Um dieses Problem zu lösen,
+                        wird eine neue Relation „Professoren“ mit den Attributen „ProfID“ und
+                        „Professor“ geschaffen. Die Relation „Noten“ dient dazu, die beiden
+                        Relationen „Studenten“ und „Professoren“ zu verbinden und die Noten zu
+                        verwalten. In die Relation „Noten“ wird die ID des Professors und des
+                        Studenten eingefügt. Auf diese Weise können die drei Relationen miteinander
+                        verknüpft werden. Das Problem des Verlusts von Professoren-Informationen
+                        beim Löschen von Studenten ist damit behoben. 
+                     </p>
+                     <h4>Dritte Normalform</h4>
+                     <p class="paragraph" title="Dritte Normalform" id="d14e602"></p>
+                     <dl class="glossary">
+                        <dt>3. Normalform: </dt>
+                        <dd> Ein Relationenschema befindet sich in der 3. Normalform,
+                           wenn es in der 2. Normalform ist und kein Attribut, das nicht zum
+                           Identifikationsschlüssel gehört, von diesem transitiv abhängt. 
+                        </dd>
+                     </dl>
+                     <p class="paragraph" id="d14e605"> Zur Verwaltung der Bankverbindung von Lieferanten sei folgende
+                        Relation gegeben: <br /><br /><code>Lieferant(ID, Name, Konto_Nr, Bank_Clearing_Nr,
+                           Bank)</code><br /><br />Das Attribut ID ist Identifikationsschlüssel. Alle
+                        Attribute sind einfach und einwertig.<br /><br />Zudem ist
+                        bekannt, dass folgende funktionale Abhängigkeiten existieren: 
+                     </p>
+                     <ol class="list" id="d14e614">
+                        <li class="itemAlt">Name, Konto_Nr, Bank_Clearing_Nr sind funktional abhängig von ID (ID
+                           --&gt; Name, Konto_Nr, Bank_Clearing_Nr)
+                        </li>
+                        <li class="item">Bank ist funktional abhängig von Bank_Clearing_Nr (Bank_Clearing_Nr
+                           --&gt; Bank)
+                        </li>
+                     </ol><span class="multimedia_paragraph_center"><img class="multimedia" id="_Beispiel_3NF.html" src="../image/3NF.gif" width="336"
+                             height="201"
+                             title="Beispiel 3. Normalform"
+                             alt="Beispiel 3. Normalform" /><span class="legend" style="display:block">Beispiel 3. Normalform (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><h4>Vertiefen Sie ihr Wissen</h4>
+                     <p class="paragraph" title="Vertiefen Sie ihr Wissen" id="d14e621">Die nachstehende Tabelle ist bereits
+                        in der 1. Normalform. Sie enthält pro Zeile und Spalte nur einen Eintrag.
+                        Ihre Aufgabe ist es, diese Relation so zu normalisieren, dass sie am Ende in
+                        der 3. Normalform vorliegt. <br />Dokumentieren Sie Ihre Lösung in einer
+                        Word- oder PDF-Datei und veröffentlichen Sie diese auf dem Diskussionsforum
+                        unter dem Thema „Normalisierungsübung“. Schauen Sie sich die Lösungen Ihrer
+                        Mitstudierenden an und kommentieren Sie diese gegebenenfalls. Wenn Sie
+                        Probleme oder Fragen haben, können Sie diese ebenfalls im Diskussionsforum
+                        stellen und diskutieren.<br />Die veröffentlichten Lösungen werden von
+                        einem Tutor angeschaut und in einem allgemeinen Feedback kommentiert.
+                        <br /><br />Relation zur Verwaltung der Noten von Studenten
+                        in den diversen Fächern
+                     </p>
+                     <p class="paragraph" id="d14e629"><br /><br /></p>
+                     <table class="table" id="d14e631">
+                        <thead>
+                           <tr class="tablerowAlt">
+                              <th class="tableheading" id="d14e633"> UnitID </th>
+                              <th class="tableheading" id="d14e635"> StudentID </th>
+                              <th class="tableheading" id="d14e637"> Datum </th>
+                              <th class="tableheading" id="d14e639"> TutorID </th>
+                              <th class="tableheading" id="d14e641"> Fach </th>
+                              <th class="tableheading" id="d14e643"> Raum </th>
+                              <th class="tableheading" id="d14e645"> Note </th>
+                              <th class="tableheading" id="d14e647"> Buch </th>
+                              <th class="tableheading" id="d14e649"> TutEmail </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr class="tablerowAlt">
+                              <td class="tabledata" id="d14e652"> U1 </td>
+                              <td class="tabledata" id="d14e654"> St1 </td>
+                              <td class="tabledata" id="d14e656"> 23.02.03 </td>
+                              <td class="tabledata" id="d14e658"> Tut1 </td>
+                              <td class="tabledata" id="d14e660"> GMT </td>
+                              <td class="tabledata" id="d14e662"> 629 </td>
+                              <td class="tabledata" id="d14e664"> 4.7 </td>
+                              <td class="tabledata" id="d14e666"> Deumlich </td>
+                              <td class="tabledata" id="d14e668"> tut1@fhbb.ch </td>
+                           </tr>
+                           <tr class="tablerow">
+                              <td class="tabledata" id="d14e671"> U2 </td>
+                              <td class="tabledata" id="d14e673"> St1 </td>
+                              <td class="tabledata" id="d14e675"> 18.11.02 </td>
+                              <td class="tabledata" id="d14e677"> Tut3 </td>
+                              <td class="tabledata" id="d14e679"> GIn </td>
+                              <td class="tabledata" id="d14e681"> 631 </td>
+                              <td class="tabledata" id="d14e683"> 5.1 </td>
+                              <td class="tabledata" id="d14e685"> Zehnder </td>
+                              <td class="tabledata" id="d14e687"> tut3@fhbb.ch </td>
+                           </tr>
+                           <tr class="tablerowAlt">
+                              <td class="tabledata" id="d14e690"> U1 </td>
+                              <td class="tabledata" id="d14e692"> St4 </td>
+                              <td class="tabledata" id="d14e694"> 23.02.03 </td>
+                              <td class="tabledata" id="d14e696"> Tut1 </td>
+                              <td class="tabledata" id="d14e698"> GMT </td>
+                              <td class="tabledata" id="d14e700"> 629 </td>
+                              <td class="tabledata" id="d14e702"> 4.3 </td>
+                              <td class="tabledata" id="d14e704"> Deumlich </td>
+                              <td class="tabledata" id="d14e706"> tut1@fhbb.ch </td>
+                           </tr>
+                           <tr class="tablerow">
+                              <td class="tabledata" id="d14e709"> U5 </td>
+                              <td class="tabledata" id="d14e711"> St2 </td>
+                              <td class="tabledata" id="d14e713"> 05.05.03 </td>
+                              <td class="tabledata" id="d14e715"> Tut3 </td>
+                              <td class="tabledata" id="d14e717"> PhF </td>
+                              <td class="tabledata" id="d14e719"> 632 </td>
+                              <td class="tabledata" id="d14e721"> 4.9 </td>
+                              <td class="tabledata" id="d14e723"> Dümmlers </td>
+                              <td class="tabledata" id="d14e725"> tut3@fhbb.ch </td>
+                           </tr>
+                           <tr class="tablerowAlt">
+                              <td class="tabledata" id="d14e728"> U4 </td>
+                              <td class="tabledata" id="d14e730"> St2 </td>
+                              <td class="tabledata" id="d14e732"> 04.07.03 </td>
+                              <td class="tabledata" id="d14e734"> Tut5 </td>
+                              <td class="tabledata" id="d14e736"> AVQ </td>
+                              <td class="tabledata" id="d14e738"> 621 </td>
+                              <td class="tabledata" id="d14e740"> 5.0 </td>
+                              <td class="tabledata" id="d14e742"> SwissTopo </td>
+                              <td class="tabledata" id="d14e744"> tut5@fhbb.ch </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <p class="paragraph" id="d14e746"><br /><br /></p>
+                  </div>
+               </div>
+               <div id="d14e748.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e749">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d14e750">
+                        <li class="itemAlt">Schützt das Konzept der Integrität vor falschen Attributwerten?</li>
+                        <li class="item">Sind Schlüsselfelder in Relationen zwingend notwendig?</li>
+                        <li class="itemAlt">Analysieren Sie unter Berücksichtigung Ihrer Antwort die Aussagen zur
+                           Gegenstands-Integritätsbedingung
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL2a_V_lo4.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2a_V_lo7.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

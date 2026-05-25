@@ -1,0 +1,474 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="GIS als räumliches Denken in der Geographie: Datenmodelle als Konstruktionskonzept zur Abbildung räumlicher Echtwelt . Das Vektordatenmodell. Das Rasterdatenmodell. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-2011" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (Practice solutions) " />
+      <meta name="keywords"
+            content="GIS als räumliches Denken in der Geographie, definition GIS , information systems, SRTM 90m Digital Elevation Data, NASA, Datenmodell, DGM, Open Source, NUTS, eLML" />
+      <title>Datenmodelle als Konstruktionskonzept zur Abbildung räumlicher Echtwelt </title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>GIS als räumliches Denken in der Geographie</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL2_V_lo5.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="unit_GISBSc_VL3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Datenmodelle</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2_V_lo6.html">Datenmodelle als Konstruktionskonzept zur Abbildung räumlicher Echtwelt </h1>
+               <div id="d10e614.html" class="clarify">
+                  <p class="paragraph" id="d10e615"><span class="multimedia_inline_right"><img class="multimedia" id="d10e616" src="../image/Geoobjekt1.png" width="450"
+                             title="Abbildung 18: Schematische Strukturierung eines Geoobjekts in räumliche, dynamische und inhaltliche Aspekte"
+                             alt="Abbildung 18: Schematische Strukturierung eines Geoobjekts in räumliche, dynamische und inhaltliche Aspekte" /><span class="legend" style="display:block">Abbildung 18: Schematische Strukturierung eines Geoobjekts in räumliche, dynamische und inhaltliche Aspekte (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1979">GIS.MA</a> 2009)</span></span></p>
+                  <p class="paragraph" id="d10e617">Wir haben festgestellt, dass binär als Geodaten gespeicherte,
+                     multidimensionale Merkmalsausprägungen von Raumkontinua und diskrete Geoobjekte,
+                     die mit Hilfe von Koordinaten verortet sind, die geographische Repräsentation
+                     von Wirklichkeit in GI-Systemen darstellen. 
+                  </p>
+                  <p class="paragraph" id="d10e619">Allerdings verdeutlicht dieses Konzept nicht die konkrete digitale bzw.
+                     technische Umsetzung. Die betrachteten Geoobjekte enthalten eine nach wie vor
+                     gegen unendlich strebende Fülle von Informationen. Gleiches gilt noch mehr für
+                     die Raumkontinua, die je nach Skala beliebig komplex sein können. Für die
+                     digitale Repräsentation <b>räumlicher</b> Merkmale
+                     benötigen wir eine effiziente und einfache Methode, Informations- bzw.
+                     Datenreduktion betreiben zu können.
+                  </p>
+                  <p class="paragraph" id="d10e624"><span class="multimedia_inline_right"><a href="../image/Geoobjekt2.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Datenmodelle]"
+                           title="Abbildung 19: Ausprägung unterschiedlicher Datenmodelle (Raster, Vektor) durch unterschiedliche räumliche Modellierung von Geoobjekten"><img class="multimedia" id="d10e625" src="../image/Geoobjekt2.png" width="450"
+                                title="Abbildung 19: Ausprägung unterschiedlicher Datenmodelle (Raster, Vektor) durch unterschiedliche räumliche Modellierung von Geoobjekten"
+                                alt="Abbildung 19: Ausprägung unterschiedlicher Datenmodelle (Raster, Vektor) durch unterschiedliche räumliche Modellierung von Geoobjekten" /></a><span class="legend" style="display:block">Abbildung 19: Ausprägung unterschiedlicher Datenmodelle (Raster, Vektor) durch unterschiedliche räumliche Modellierung von
+                           Geoobjekten (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1979">GIS.MA</a> 2009)</span></span></p>
+                  <p class="paragraph" id="d10e626"> Vor dem wiederholt erörterten Hintergrund der notwendigen Vereinfachung
+                     ist es daher naheliegend anzunehmen, dass auch räumliche Daten für eine
+                     effiziente Repräsentation abstrakte Konzepte bzw. Modelle benötigen. Solche
+                     Konzepte werden <b>Datenmodelle</b> genannt. Ein
+                     Datenmodell wird durch die Abstraktion von Objekten (Entitäten) und deren
+                     Eigenschaften (Attribute) gebildet. In diesem Vorgang werden gleiche Objektarten
+                     zusammengefasst. Da die Grundlage aller GI-Systeme auf einer <b>räumlichen Repräsentationen</b> beruht, muss Abbildung
+                     18 für das bessere Verständnis der Datenmodellierung etwas reorganisiert und
+                     angepasst werden.
+                  </p>
+                  <p class="paragraph" id="d10e634"><span class="multimedia_inline_right"><a href="../image/Datenmodell.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Datenmodelle]"
+                           title="Abbildung 20: Beispielhafter Ausschnitt der realen Welt und die schematische Repräsentation als Raster- bzw. Vektordatenmodell"><img class="multimedia" id="d10e635" src="../image/Datenmodell.png" width="450"
+                                title="Abbildung 20: Beispielhafter Ausschnitt der realen Welt und die schematische Repräsentation als Raster- bzw. Vektordatenmodell"
+                                alt="Abbildung 20: Beispielhafter Ausschnitt der realen Welt und die schematische Repräsentation als Raster- bzw. Vektordatenmodell" /></a><span class="legend" style="display:block">Abbildung 20: Beispielhafter Ausschnitt der realen Welt und die schematische Repräsentation als Raster- bzw. Vektordatenmodell (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1979">GIS.MA</a> 2009)</span></span><p class="paragraph" id="d10e636">In Abbildung 19 verdeutlicht diesen zentralen Aspekt der Modellierung
+                        räumlicher Daten. es besteht die Notwendigkeit, dass sowohl die in der Zeit
+                        festen Merkmalsausprägungen als auch sich zeitlich verändernden Merkmale der
+                        Geobjekte abgebildet werden sollen. In der Anwendung von GIS haben sich
+                        hierfür zwei vollständig unterschiedliche Datenmodelle etabliert, die
+                        <span style="text-decoration:underline;">Raster</span>- bzw. <span style="text-decoration:underline;">Vektordatenmodell</span> genannt werden. Beide
+                        Datenmodelle sind prinzipiell sowohl für die kontinuierliche als auch die
+                        diskrete Raumrepräsentation verwendbar. In der Praxis werden jedoch
+                        kontinuierliche Daten gewöhnlich im Rasterdatenmodell und diskrete Daten im
+                        Vektordatenformat abgebildet. Beide Datenmodelle unterscheiden sich
+                        vorrangig in der Art der räumlichen Repräsentation ihrer Merkmale. Betrachte
+                        wir unter diesem Blickwinkel einen Landschaftsausschnitt und nutzen zur
+                        räumlichen Abstraktion und Repräsentation jeweils Raster- bzw.
+                        Vektorddatenmodell ergibt sich ein Bild wie in der Abbildung 20.
+                        
+                     </p>
+                  </p>
+               </div>
+               <div id="d10e644.html" class="look">
+                  <h4>Das Vektordatenmodell</h4>
+                  <p class="paragraph" title="Das Vektordatenmodell" id="d10e645">In einem kartesischen Koordinatensystem,
+                     das zur Repräsentation einer euklidischen Geometrie notwendig ist, können, wie
+                     allgemein bekannt sein sollte, aus dem Grundelement Punkt (topologisch als
+                     Knoten bezeichnet) beliebig komplexe räumliche Strukturen zur Modellierung von
+                     Geoobjekten aufgebaut werden. Üblich ist es sowohl Linien (topol. Kanten), die
+                     durch zwei verbundene Punkte definiert sind, als auch einen geschlossenen
+                     Linienzug der als Fläche, bzw. Polygon (topol. Masche) bezeichnet wird, diesen
+                     Grundformen zuzurechnen. Die Abbildung 21 verdeutlicht die graphische und
+                     numerische Repräsentation des Vektordatenmodells.
+                  </p><span class="multimedia_paragraph_center"><a href="../image/vektormodell.png" target="_blank" class="lightwindow"
+                        rel="Gallery[Datenmodelle]"
+                        title="Abbildung 21: Graphische und numerische Darstellung der drei Grundobjekte (Punkt, Linie, Fläche) eines Vektordatenmodells mit Hilfe eines kartesischen Koordinatensystems."><img class="multimedia" id="d10e647" src="../image/vektormodell.png" width="650"
+                             title="Abbildung 21: Graphische und numerische Darstellung der drei Grundobjekte (Punkt, Linie, Fläche) eines Vektordatenmodells mit Hilfe eines kartesischen Koordinatensystems."
+                             alt="Abbildung 21: Graphische und numerische Darstellung der drei Grundobjekte (Punkt, Linie, Fläche) eines Vektordatenmodells mit Hilfe eines kartesischen Koordinatensystems." /></a><span class="legend" style="display:block">Abbildung 21: Graphische und numerische Darstellung der drei Grundobjekte (Punkt, Linie, Fläche) eines Vektordatenmodells
+                        mit Hilfe eines kartesischen Koordinatensystems. (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1979">GIS.MA</a> 2009)</span></span><h4>Das Rasterdatenmodell</h4>
+                  <p class="paragraph" title="Das Rasterdatenmodell" id="d10e648">Anders als beim Vektordatenmodell wird bei
+                     Rasterdatenmodellen der Raum grundsätzlich mit Hilfe zweidimensionaler Objekte
+                     in beliebiger Form und Größe aber ohne gegenseitige Überschneidung bzw. Lücken
+                     abgebildet. Die Merkmalsausprägungen werden als Zahlenwerte, die jeder Zelle
+                     zugeordnet sind, abgespeichert.
+                  </p><span class="multimedia_paragraph_center"><a href="../image/kartesisch_Rastermodell_umsetzungvektor1.png" target="_blank"
+                        class="lightwindow"
+                        rel="Gallery[Datenmodelle]"
+                        title="Abbildung 22: graphische und numerische Darstellung des Rasterdatenmodells. Zur besseren Vergleichbarkeit wurden die aus Abb. 21 bekannten Objekte gewählt"><img class="multimedia" id="d10e650"
+                             src="../image/kartesisch_Rastermodell_umsetzungvektor1.png"
+                             width="450"
+                             title="Abbildung 22: graphische und numerische Darstellung des Rasterdatenmodells. Zur besseren Vergleichbarkeit wurden die aus Abb. 21 bekannten Objekte gewählt"
+                             alt="Abbildung 22: graphische und numerische Darstellung des Rasterdatenmodells. Zur besseren Vergleichbarkeit wurden die aus Abb. 21 bekannten Objekte gewählt" /></a><span class="legend" style="display:block">Abbildung 22: graphische und numerische Darstellung des Rasterdatenmodells. Zur besseren Vergleichbarkeit wurden die aus Abb.
+                        21 bekannten Objekte gewählt (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1979">GIS.MA</a> 2009)</span></span><p class="paragraph" id="d10e651"> Obwohl möglich sind Rasterdatenmodelle mit unregelmäßig geformten Zellen
+                     in der GIS-Praxis quasi nicht existent. Meist sind die Zellen in einer
+                     gleichförmigen Matrix, z.B. einem Gitter (grid) aus Zeilen (horizontal) und
+                     Spalten (vertikal) angeordnet (vgl. Abbildung 22). Die Verwendung regelmäßiger
+                     Maschen im Rasterdatenmodell ist für die automatisierte Datenverarbeitung wenn
+                     nicht zwingend so doch ungleich besser geeignet. So sind z.B. Berechnungen und
+                     der Zugriff auf die Zellen bei regelhaften Rastern ohne Aufwand durchführbar. In
+                     der Praxis werden regelmäßige Maschen fast ausschließlich als Quadrate
+                     (gelegentlich auch als Dreiecke bzw. Sechsecke) verwendet. Diese Quadrate werden
+                     in Zusammenhang mit Rasterdaten als Rasterzelle oder Pixel (picture element)
+                     bezeichnet.
+                  </p>
+                  <p class="paragraph" id="d10e653"><span class="multimedia_inline_right"><a href="../image/kartesisch_Rastermodell_pluskoord.png" target="_blank"
+                           class="lightwindow"
+                           rel="Gallery[Datenmodelle]"
+                           title="Abbildung 23: Das implizite Raumkonzept der Zeilen- und Spaltenzählung (Laufvariablen) und des Kartesischen Koordinatensystems  für einen Rasterdatensatz"><img class="multimedia" id="d10e654"
+                                src="../image/kartesisch_Rastermodell_pluskoord.png"
+                                width="450"
+                                title="Abbildung 23: Das implizite Raumkonzept der Zeilen- und Spaltenzählung (Laufvariablen) und des Kartesischen Koordinatensystems  für einen Rasterdatensatz"
+                                alt="Abbildung 23: Das implizite Raumkonzept der Zeilen- und Spaltenzählung (Laufvariablen) und des Kartesischen Koordinatensystems  für einen Rasterdatensatz" /></a><span class="legend" style="display:block">Abbildung 23: Das implizite Raumkonzept der Zeilen- und Spaltenzählung (Laufvariablen) und des Kartesischen Koordinatensystems
+                           für einen Rasterdatensatz (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1979">GIS.MA</a> 2009)</span></span></p>
+                  <p class="paragraph" id="d10e655">Durch Anordnung, der sich nicht überschneidenden Zellen in Zeilen und
+                     Spalten entsteht ein impliziter Raumbezug jeder Zelle. Zu beachten ist dabei,
+                     dass der Ursprung eines Rasterbildes immer in der oberen linken Ecke liegt und
+                     von dort üblicherweise mit den beiden Laufindizes i,j durchgezählt wird.
+                     Hierdurch ist jedes Pixel eindeutig identifizierbar. Auf diese Weise ist bezogen
+                     auf jedes Pixel auch ein expliziter Raumbezug vorhanden. Allerdings nutzt der
+                     theoretische explizite Raum wenig für die Verortung in einem definierten
+                     kartesischen Koordinatensystem bzw. in der Echtwelt. Diese Verortung ist sowohl
+                     für die gemeinsame Verwendung von Rasterdaten mit Vektordaten notwendig, als
+                     auch unerlässlich für die geographischen Referenzierung der Rasterzellen bezogen
+                     auf die Echtwelt. Daher werden Rasterdatenmodelle grundsätzlich auch mit einem
+                     kartesischen Koordinatensystem versehen. Dieses hat allerdings den Ursprung (wie
+                     üblich) in der unteren linken Ecke. Die Rasterzellen können also sowohl über
+                     ihren Laufindex als auch über das kartesische Koordinatensystem im Raum
+                     identifiziert werden (vgl. Abbildung 23). 
+                  </p>
+               </div>
+               <div id="d10e657.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d10e658">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><p class="paragraph" id="d10e659">Öffnen Sie mit Google Earth die Datei <a class="link" href="../../material/RasteroderVektormodell3D.kmz"
+                           title="Raster oder&#xA;                            Vektor">Raster oder
+                           Vektor</a>. Versuchen Sie zu identifizieren, welches Datenmodell für
+                        welche der dargestellten Information verwendet wird. 
+                     </p>
+                     <ul class="list" id="d10e664">
+                        <li class="itemAlt">Welche(s) Datenmodell(e) nutzt ihrer Meinung nach Google Earth?</li>
+                        <li class="item">Lassen sich aus der am Bildschirm dargestellten Informationen nähere
+                           Eigenschaften des verwendeten Datenmodells ableiten? Wenn ja welche?
+                           Wenn nein warum nicht?
+                        </li>
+                        <li class="itemAlt">Schalten Sie auf Vertikalsicht und entfernen Sie die Option Gelände.
+                           Zoomen Sie sich langsam bis auf 10 Meter Höhe über Grund. Was beobachten
+                           Sie?
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL2_V_lo5.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="unit_GISBSc_VL3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL1.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

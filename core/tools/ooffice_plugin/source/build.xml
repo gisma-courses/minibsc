@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ElmlEditor" basedir="." default="main">
+    
+    <property name="dir.src" value="./source" />
+    <property name="dir.build" value="./classes" />
+    <property name="dir.lib" value="./release" />
+    <path id="cp">
+        <pathelement path="${classpath}"/>
+        <pathelement location="${dir.build}"/>
+    </path>
+    
+    <target name="main" depends="uninstall, prepare, compile, zip, install"/>
+ 
+    <target name="uninstall">
+        <exec executable="C:\Programme\OpenOffice.org 2.0\program\UNOPKG.exe">
+            <arg line="remove ElmlEditor.zip"/>
+        </exec>
+    </target>
+    
+    <target name="prepare">
+        <mkdir dir="${dir.build}"/>
+        <delete>
+            <fileset dir="${dir.build}" includes="**/*.java"/>
+        </delete>
+        <delete>
+            <fileset dir="${dir.lib}" includes="**/*.jar"/>
+        </delete>
+    </target>
+    
+    <target name="compile">
+        <javac classpathref="cp"
+            destdir="${dir.build}"
+            srcdir="${dir.src}"
+            includes="**/*.java"
+            source="1.4"
+            compiler="javac1.4"
+        />
+        <mkdir dir="${dir.lib}"/>
+        <jar destfile="${dir.lib}/ElmlEditor.jar" manifest="${dir.build}/ElmlEditor.manifest">
+            <fileset dir="${dir.build}" includes="**/*.class"/>
+        </jar>
+    </target>
+    
+    <target name="zip">
+        <zip destfile="${dir.lib}/ElmlEditor.zip">
+            <fileset dir="${dir.lib}">
+                <include name="*.*"/>
+                <include name="images/*.*"/>
+                <include name="META-INF/manifest.xml"/>
+                <exclude name="*.zip"/>
+            </fileset>
+        </zip>
+    </target>
+    
+    <target name="install">
+        <exec executable="C:\Programme\OpenOffice.org 2.0\program\UNOPKG.exe">
+            <arg line="add ${dir.lib}/ElmlEditor.zip"/>
+        </exec>
+        <property name="installed" value="true"/>
+    </target>
+    
+</project>

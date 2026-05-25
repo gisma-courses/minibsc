@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.elml.ch ../structure/config.xsd" xmlns="http://www.elml.ch">
+    <!--These parameters are used in all version (online and print) -->
+    <general>
+        <!--Enter the contact Email that students will use to contact the tutor -->
+        <contact>joelfisler@users.sourceforge.net</contact>
+        <!--Enter the URL to your servers home page -->
+        <server>http://www.elml.org</server>
+        <!--Would like to make a transformation for role 'tutor' or 'student'? -->
+        <role>student</role>
+        <!--On which level would like have the page break? To generate just one output use "oneoutput", else "lesson", "unit" or "lo" -->
+        <pagebreak_level>unit</pagebreak_level>
+        <!--If you would like to have chapter titles with numeration, set this to "yes" else to "no" -->
+        <chapter_numeration>yes</chapter_numeration>
+        <!-- Which type of imsmanifest.xml will be produced: IMS CP or SCORM compatible (accepted values are: 'ims' or 'scorm' or 'both') -->
+        <manifest_type>scorm</manifest_type>
+        <!--Define units that should be marked/highlighted as optional for the student. Enter unit-labels separated by a comma or leave empty. -->
+        <optional_units>
+            <labelname/>
+        </optional_units>
+    </general>
+    <!--These parameters are only used for the online version -->
+    <online>
+        <!--Enter an URL to your bugtracker form here (or leave empty if you dont have one) -->
+        <bugtracker>http://sourceforge.net/projects/elml/</bugtracker>
+        <!--Would you like to use a navigation in your online version? "yes" or "no" -->
+        <use_navigation>yes</use_navigation>
+        <!--If the labeRef Attribute is used to reference objects, eLML can automatically create JavaScript to highlight referenced objects. Enter color here e.g. black or #F4A400 or enter no if you dont want the mousoever effect -->
+        <use_labelReferences>no</use_labelReferences>
+        <!--Would you like to use the deprecated embed element? "yes" or "no" -->
+        <use_embed>yes</use_embed>
+        <!--Which XHTML version are you using? 1.0 or 1.1? -->
+        <html_version>1.0</html_version>
+        <!--It is possible to use the CSS Framework YAML (see http://www.yaml.de) by defining the value 'yaml'. If you dont know what this is leave it to 'none' -->
+        <css_framework>none</css_framework>
+        <!--Define the types of Icons you are using. Either gif, png or jpg. -->
+        <icon_filetype>gif</icon_filetype>
+        <!--Would you like to use the lightwindow script (www.stickmanlabs.com/lightwindow) to show large images? Works with the multimedia element if thumbnails are used. -->
+        <lightwindow>no</lightwindow>
+        <!--Use HTML in Glossary Term Mouseover? If no, only the text is displayed as mouseover, if yes, images, tables etc. are all displayed in mouseover -->
+        <glossaryMousoverWithHTML>no</glossaryMousoverWithHTML>
+    </online>
+    <!--These parameters are only used for the print version -->
+    <print>
+        <!--Links are also clickable in the PDF version. Should additionally the link URI be written in brackets after the link text? Choose "yes" or "no" -->
+        <display_links>no</display_links>
+        <!-- The hyphenation can be used within the PDF version. The language settings are used automatically according to $lang variable -->
+        <hyphenation>no</hyphenation>
+        <!--If you use the latest FOP version enter the value "1.0" or "0.9", otherwise use "0.2" - only needed for PDF-Bookmarks generator -->
+        <fop_version>0.9</fop_version>
+        <!--The height of your page (Eg. "29.7cm" for A4) -->
+        <pageheight>29.7cm</pageheight>
+        <!--The width of your page (Eg. "21cm" for A4) -->
+        <pagewidth>21cm</pagewidth>
+        <!--Your default font size (Eg. "11pt") -->
+        <fontsize>11pt</fontsize>
+        <!--Your default line height  (Eg. "15pt") -->
+        <lineheight>15pt</lineheight>
+        <!--Your default font weight for titles  (Eg. "bold") -->
+        <fontweighttitle>bold</fontweighttitle>
+        <!--The conversion factor from pixel to mm (do NOT change, should be "0.2646") -->
+        <converter_pixel_mm>0.2646</converter_pixel_mm>
+    </print>
+    <!--These parameters are only used for the latex version -->
+    <latex>
+        <!--The type of latex document created: Either article or book -->
+        <documentclass>article</documentclass>
+    </latex>
+</config>

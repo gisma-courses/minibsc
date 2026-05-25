@@ -1,0 +1,48 @@
+@import url(../yaml/core/base.css);
+@import url(../yaml/screen/content_default.css);
+
+.hidecol2 #col3 { margin-left: 0; margin-right: 0; }
+.hidecol2 #col3_content{ padding-right: 20px; }
+.hideboth #col1, .hideboth #col2, .hidecol1 #col1, .hidecol2 #col2 { display:none; }
+
+
+body         /* Used only to set the font style, size, color and other basic stuff. */  { color: black; font-size: 11px; font-family: Arial, Helvetica, sans-serif; background-color: white; text-align: justify; margin: 10px }
+h1    /* Use your own colors to represent titles. Be aware that margins are cumulating if you have eg. a H2 title follwoing a H1 title. */ { font-size: 1.6em; font-weight: bold; margin-bottom: 0.5em;  }
+h2   { font-size: 1.4em; margin-top: 1.5em; margin-bottom: 0.5em; }
+h3   { font-size: 1.2em; margin-top: 1.5em; margin-bottom: 0.5em; }
+h4   { font-size: 1.1em; margin-top: 1.5em; margin-bottom: 0; }
+h5   { font-size: 1em; }
+img   /* This overrides the border setting of the IMG tag. */  { border: none }
+code   /* Adjust the font size to your needs. */ { font-family: Courier, serif; font-weight: normal; line-height: 0.8em }
+tt { text-align: left }
+dt   /* Used for representing the glossary term (not the explanation!). */  { font-weight: bold; margin-top: 1em; clear: both }
+sub, sup   /* Used in the eLML element "formatted" */ { font-size: 0.6em }
+.background /* Define the background color of your layout  here. */  { background-color: #e5eff1 }
+.background_nav /* Define the background color of your navigation  here (if different from the main background color! Else just set this to the same value as .bacground). */  { background-color: #e8f6f8 ; text-align: left}
+.popupTitle   /* Defines the title of a eLML popup box. This is the part that you click on to open/close the box. */ { color: #efb77f; font-size: 1em; font-weight: bold; cursor: pointer; }
+.box, .popup     /* The eLML box or popup element. */ { background-color: #e0e0e0; margin: 1em 3em; padding: 0.5em 1em; border: solid 2px black  }
+.tutor      /* Paragraphs or parts only visible to tutors will be displayed like this. */ { color: red; font-weight: bold; background-color: yellow }
+.icon  /* The icon is used in paragraph types like table, list, box etc. where the remark attribute is set. */ { margin: 0.5em 1em 0.5em 0; float:left; padding-bottom: 3em; }
+.columnMiddle, .columnRight { padding-left: 1em; }
+.link_table, .link_table td { padding: 0.5em; border: solid 1px #000000; border-collapse: collapse; }
+.table  /* Define table cells for real tables here. */  { border-collapse: collapse ; }
+.tabledata, .tableheading { padding: 0.5em; border: solid 1px #000000; border-collapse: collapse; }
+.tabledata, .tableheading, .columnLeft, .columnMiddle, .columnRight  /* IE seems to ignore BODY settings and seems to need that within table cells... */  { font-size: 12px; text-align: justify; }
+.footer  /* Define the footer style. */ { font-size: 0.8em ; line-height: 1em; }
+.column { width: 100%; }
+.term  /* A glossary term that is used inline in the text. */  { font-weight: bold; cursor: help }
+.legend  /* eLML elements like tables, multimedia (image, flash), lists etc. can have legends displayed usally centered below the element. */   { font-size: 0.8em; line-height: 1em; text-align: inherit; margin-top: 0.5em; margin-bottom: 1em; }
+.bibTitle, .index, .indexItem  /* The title of a bibliography element (eg. book) in the bibliography list. Usually italic. */ { font-style: italic }
+.bibAuthor /* The author of a bibliography element (eg. book). Usually bold. */  { font-weight: bold; text-transform: uppercase }
+.bibCommentFurther    /* The comment of a bibliography element (eg. book) in the recommended/further reading list. Not displayed in the bibliography list! */  { font-size: 0.8em }
+.bibCommentSource   /* The comment of a bibliography element (eg. book) in the bibliography list. */  { font-size: 0.8em }
+.glossaryTooltip  { background-color: white;padding: 0.5em; margin: 0; border: solid 1px black; width:300px }
+.glossaryTooltip strong {margin: 0; font-weight: bold}
+
+.multimedia_paragraph_left  /* for multimedia objects that are used as paragraph and have no align or align=left */ { float: none; clear: both; padding: 1em 1em 1em 0; display: block; }
+.multimedia_paragraph_center  /* for multimedia objects that are used as paragraph and have align=center */ { text-align: center; width: 100%; float: none; clear: both; padding: 1em; display: block; }
+.multimedia_paragraph_right  /* for multimedia objects that are used as paragraph and have align=right */ { text-align: right; float: none; clear: both; padding: 1em 0 1em 1em; display: block; }
+.multimedia_inline_left  /* for multimedia objects that are used as inline and have align=left */ { float: left; padding-right: 1em; padding-left: 0; display: inline; }
+.multimedia_inline_center  /* for multimedia objects that are used as paragraph and have align=center */ { text-align: center; width: 100%; float: left; padding-right: 1em; padding-left: 1em; display: inline; }
+.multimedia_inline_right  /* for multimedia objects that are used as paragraph and have align=right */ { text-align: right; float: right; padding-right: 0; padding-left: 1em; display: inline; }
+.download_table .tabledata, .download_table  .tableheading { padding: 0 1.7em 0 0; border: 0; border-collapse: collapse; }

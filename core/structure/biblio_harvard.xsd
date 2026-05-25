@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch" targetNamespace="http://www.elml.ch" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+	<xs:annotation>
+		<xs:documentation>
+		----------------------------------------------------------------------------------------------------------------------------------------------------
+		                                                      Bibliography XML-Structure (Harvard Referencing Schema)
+		----------------------------------------------------------------------------------------------------------------------------------------------------
+		This Schema is part of the elml.xsd Schema. elml.xsd includes it. The reason for defining the following types outside the
+		basic schema is that it should be possible to replace this bibliography structure (harvard referencing system) with another
+		one.	
+		----------------------------------------------------------------------------------------------------------------------------------------------------
+		</xs:documentation>
+	</xs:annotation>
+	<!-- ============
+If you want to use eLML.xsd without a project (without a validate.xsd file) then uncomment the following XMLSchema code lines and reference the elml.xsd file directly from your xml files. 
+		============= 
+	<xs:attributeGroup name="BibPageNr">
+		<xs:attribute name="pageNr" type="xs:string">
+			</xs:attribute>
+	</xs:attributeGroup>-->
+	<!-- ============
+If you want to use biblio_harvard.xsd standalone then uncomment the above and the following XMLSchema code lines and reference the biblio_harvard.xsd file directly from your xml files. 
+		============= 
+	<xs:attributeGroup name="SortingImp">
+		<xs:attribute name="sorting">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="off"/>
+					<xs:enumeration value="byAuthor"/>
+					<xs:enumeration value="byYear"/>
+					<xs:enumeration value="groupByYear"/>
+					<xs:enumeration value="groupByType"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="VisibleImp">
+		<xs:attribute name="visible">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="all"/>
+					<xs:enumeration value="online"/>
+					<xs:enumeration value="print"/>
+					<xs:enumeration value="none"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>-->
+	<!-- ======================== Attribute Definitions ======================== -->
+	<!-- BibID required -->
+	<xs:attributeGroup name="BibIDReq">
+		<xs:attribute name="bibID" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The attribute bibID allows giving an unique id to a resource item in the bibliography. Bibliography items are referenced by the values of this attribute.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibAuthor -->
+	<xs:attributeGroup name="BibAuthor">
+		<xs:attribute name="author" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute author contains the name of the author of a source. Author is also used instead of originator and issuingBody.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibPublicationYear -->
+	<xs:attributeGroup name="BibPublicationYear">
+		<xs:attribute name="publicationYear" type="xs:gYear">
+			<xs:annotation>
+				<xs:documentation>The attribute publicationYear contains the year of publication of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibTitle -->
+	<xs:attributeGroup name="BibTitle">
+		<xs:attribute name="title" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute title contains the title of a source.	</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibEdition -->
+	<xs:attributeGroup name="BibEdition">
+		<xs:attribute name="edition" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute edition contains the number of the edition of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibPublicationPlace -->
+	<xs:attributeGroup name="BibPublicationPlace">
+		<xs:attribute name="publicationPlace" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute publicationPlace contains the place of publication of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibPublisher -->
+	<xs:attributeGroup name="BibPublisher">
+		<xs:attribute name="publisher" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute publisher contains the name of the publisher of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibTitleOfContribution -->
+	<xs:attributeGroup name="BibTitleOfContribution">
+		<xs:attribute name="titleOfContribution" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute titleOfContribution contains the title of a contribution within a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibEditor -->
+	<xs:attributeGroup name="BibEditor">
+		<xs:attribute name="editor" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute editor contains the name of the editor of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibJournalTitle -->
+	<xs:attributeGroup name="BibJournalTitle">
+		<xs:attribute name="journalTitle" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute journalTitle contains the title of the Journal.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibVolumeNr -->
+	<xs:attributeGroup name="BibVolumeNr">
+		<xs:attribute name="volumeNr" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute volumeNr contains the number of the volume of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibNewspaperTitle -->
+	<xs:attributeGroup name="BibNewspaperTitle">
+		<xs:attribute name="newspaperTitle" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute newspaperTitle contains the title of the newspaper.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibDayMonth -->
+	<xs:attributeGroup name="BibDayMonth">
+		<xs:attribute name="dayMonth" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute dayMonth contains the day and the month of publication of a source (eg. 25th March).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibScale -->
+	<xs:attributeGroup name="BibScale">
+		<xs:attribute name="scale" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute scale contains the scale of a map source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibProceedingsTitle -->
+	<xs:attributeGroup name="BibProceedingsTitle">
+		<xs:attribute name="proceedingsTitle" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute proceedingsTitle contains the title of the proceedings.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibDatePlace -->
+	<xs:attributeGroup name="BibDatePlace">
+		<xs:attribute name="datePlace" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute datePlace contains the date and place of a conference.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibReportNr -->
+	<xs:attributeGroup name="BibReportNr">
+		<xs:attribute name="reportNr" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute reportNr contains the number of the report.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibDesignation -->
+	<xs:attributeGroup name="BibDesignation">
+		<xs:attribute name="designation" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute designation contains the kind of material.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibInstitution -->
+	<xs:attributeGroup name="BibInstitution">
+		<xs:attribute name="institution" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute institution contains the institiution of production of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibPublished -->
+	<xs:attributeGroup name="BibPublished">
+		<xs:attribute name="published">
+			<xs:annotation>
+				<xs:documentation>The attribute published contains yes if a source is published and no if a source is unpublished.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="no"/>
+					<xs:enumeration value="yes"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibProductionPlace -->
+	<xs:attributeGroup name="BibProductionPlace">
+		<xs:attribute name="productionPlace" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute productionPlace contains the place of production of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibProductionOrganisation -->
+	<xs:attributeGroup name="BibProductionOrganisation">
+		<xs:attribute name="productionOrganisation" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute productionOrganisation contains the name of the organisation that produced the source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibUrl -->
+	<xs:attributeGroup name="BibUrl">
+		<xs:attribute name="url">
+			<xs:annotation>
+				<xs:documentation>The attribute url contains the url where one can find the source.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:anyURI">
+					<xs:minLength value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibDownloadUrl -->
+	<xs:attributeGroup name="BibDownloadUrl">
+		<xs:attribute name="downloadUrl">
+			<xs:annotation>
+				<xs:documentation>The attribute downloadUrl contains the url where one can download a PDF,... of the referenced source document.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:anyURI">
+					<xs:minLength value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibAccessedDate -->
+	<xs:attributeGroup name="BibAccessedDate">
+		<xs:attribute name="accessedDate" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute accessedDate contains the date when the source was last accessed.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibDayMonthYear -->
+	<xs:attributeGroup name="BibDayMonthYear">
+		<xs:attribute name="dayMonthYear" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute dayMonthYear contains the day, the month and the year when source was published (eg. 25th March 2003).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibSubject -->
+	<xs:attributeGroup name="BibSubject">
+		<xs:attribute name="subject" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute subject contains the subject of an email source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibDiscussionList -->
+	<xs:attributeGroup name="BibDiscussionList">
+		<xs:attribute name="discussionList" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute discussionList contains the name of the discussion list source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibEmailSender -->
+	<xs:attributeGroup name="BibEmailSender">
+		<xs:attribute name="emailSender" type="elml:EmailsType">
+			<xs:annotation>
+				<xs:documentation>The attribute emailSender contains the name of the sender of an email source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibRecipient -->
+	<xs:attributeGroup name="BibRecipient">
+		<xs:attribute name="recipient" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute recipient contains the name of the recipient of an email source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibEmailRecipient -->
+	<xs:attributeGroup name="BibEmailRecipient">
+		<xs:attribute name="emailRecipient" type="elml:EmailsType">
+			<xs:annotation>
+				<xs:documentation>The attribute emailRecipient contains the email address of the recipient of an email source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibSupplier -->
+	<xs:attributeGroup name="BibSupplier">
+		<xs:attribute name="supplier" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute supplier contains the name of the organisation that produced the source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- BibType -->
+	<xs:attributeGroup name="BibType">
+		<xs:attribute name="type" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The attribute type contains the type of a source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- ======================== Element Definitions ======================== -->
+	<!-- Element bibliography - includes book, contributionInBook, journalArticle, newspaperArticle, map, conferencePaper, publicationCorporateBody, thesis, patent, videoFilmBroadcast, websites, mailLists, personalMail, cdRom -->
+	<xs:element name="bibliography">
+		<xs:annotation>
+			<xs:documentation>The element bibliography is the parent element of all the sources used for the creation of a lesson. The detailed description of all the bibliography elements can be found in the guide at http://www.bournemouth.ac.uk/academic_services/documents/Library/Citing_References.pdf.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="elml:book"/>
+				<xs:element ref="elml:contributionInBook"/>
+				<xs:element ref="elml:journalArticle"/>
+				<xs:element ref="elml:newspaperArticle"/>
+				<xs:element ref="elml:map"/>
+				<xs:element ref="elml:conferencePaper"/>
+				<xs:element ref="elml:publicationCorporateBody"/>
+				<xs:element ref="elml:thesis"/>
+				<xs:element ref="elml:patent"/>
+				<xs:element ref="elml:videoFilmBroadcast"/>
+				<xs:element ref="elml:websites"/>
+				<xs:element ref="elml:eJournals"/>
+				<xs:element ref="elml:mailLists"/>
+				<xs:element ref="elml:personalMail"/>
+				<xs:element ref="elml:cdRom"/>
+			</xs:choice>
+			<xs:attributeGroup ref="elml:SortingImp"/>
+			<xs:attributeGroup ref="elml:VisibleImp"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element book -->
+	<xs:element name="book">
+		<xs:annotation>
+			<xs:documentation>The element book allows to list a book in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibEdition"/>
+					<xs:attributeGroup ref="elml:BibPublicationPlace"/>
+					<xs:attributeGroup ref="elml:BibPublisher"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element contributionInBook -->
+	<xs:element name="contributionInBook">
+		<xs:annotation>
+			<xs:documentation>The element contributionInBook allows to list a contribution in a book in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitleOfContribution"/>
+					<xs:attributeGroup ref="elml:BibEditor"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibPublicationPlace"/>
+					<xs:attributeGroup ref="elml:BibPublisher"/>
+					<xs:attributeGroup ref="elml:BibPageNr"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element journalArticle -->
+	<xs:element name="journalArticle">
+		<xs:annotation>
+			<xs:documentation>The element journalArticle allows to list a journal article in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibJournalTitle"/>
+					<xs:attributeGroup ref="elml:BibVolumeNr"/>
+					<xs:attributeGroup ref="elml:BibPageNr"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element newspaperArticle -->
+	<xs:element name="newspaperArticle">
+		<xs:annotation>
+			<xs:documentation>The element newspaperArticle allows to list a newspaper article in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibNewspaperTitle"/>
+					<xs:attributeGroup ref="elml:BibDayMonth"/>
+					<xs:attributeGroup ref="elml:BibPageNr"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element map -->
+	<xs:element name="map">
+		<xs:annotation>
+			<xs:documentation>The element map allows to list a map in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibScale"/>
+					<xs:attributeGroup ref="elml:BibPublicationPlace"/>
+					<xs:attributeGroup ref="elml:BibPublisher"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element conferencePaper -->
+	<xs:element name="conferencePaper">
+		<xs:annotation>
+			<xs:documentation>The element conferencePaper allows to list a conference paper in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitleOfContribution"/>
+					<xs:attributeGroup ref="elml:BibEditor"/>
+					<xs:attributeGroup ref="elml:BibProceedingsTitle"/>
+					<xs:attributeGroup ref="elml:BibDatePlace"/>
+					<xs:attributeGroup ref="elml:BibPublicationPlace"/>
+					<xs:attributeGroup ref="elml:BibPublisher"/>
+					<xs:attributeGroup ref="elml:BibPageNr"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element publicationCorporateBody -->
+	<xs:element name="publicationCorporateBody">
+		<xs:annotation>
+			<xs:documentation>The element publicationCorporateBody allows to list a publication of a corporate body in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibPublicationPlace"/>
+					<xs:attributeGroup ref="elml:BibPublisher"/>
+					<xs:attributeGroup ref="elml:BibReportNr"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element thesis -->
+	<xs:element name="thesis">
+		<xs:annotation>
+			<xs:documentation>The element thesis allows to list a thesis in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibDesignation"/>
+					<xs:attributeGroup ref="elml:BibType"/>
+					<xs:attributeGroup ref="elml:BibInstitution"/>
+					<xs:attributeGroup ref="elml:BibPublished"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element patent -->
+	<xs:element name="patent">
+		<xs:annotation>
+			<xs:documentation>The element patent allows to list a patent in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibDesignation"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element videoFilmBroadcast -->
+	<xs:element name="videoFilmBroadcast">
+		<xs:annotation>
+			<xs:documentation>The element videoFilmBroadcast allows to list a video, a film or a broadcast in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibDesignation"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibProductionPlace"/>
+					<xs:attributeGroup ref="elml:BibProductionOrganisation"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element websites -->
+	<xs:element name="websites">
+		<xs:annotation>
+			<xs:documentation>The element websites allows to list a website or electronic resource in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibEdition"/>
+					<xs:attributeGroup ref="elml:BibPublicationPlace"/>
+					<xs:attributeGroup ref="elml:BibPublisher"/>
+					<xs:attributeGroup ref="elml:BibUrl"/>
+					<xs:attributeGroup ref="elml:BibAccessedDate"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element eJournals -->
+	<xs:element name="eJournals">
+		<xs:annotation>
+			<xs:documentation>The element eJournals allows to list an article of an electronic journal in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibJournalTitle"/>
+					<xs:attributeGroup ref="elml:BibVolumeNr"/>
+					<xs:attributeGroup ref="elml:BibUrl"/>
+					<xs:attributeGroup ref="elml:BibAccessedDate"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element mailLists -->
+	<xs:element name="mailLists">
+		<xs:annotation>
+			<xs:documentation>The element mailLists allows to list an entry of a mail list in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibDayMonthYear"/>
+					<xs:attributeGroup ref="elml:BibSubject"/>
+					<xs:attributeGroup ref="elml:BibDiscussionList"/>
+					<xs:attributeGroup ref="elml:BibUrl"/>
+					<xs:attributeGroup ref="elml:BibAccessedDate"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element personalMail -->
+	<xs:element name="personalMail">
+		<xs:annotation>
+			<xs:documentation>The element personalMail allows to list personal mail contacts in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibEmailSender"/>
+					<xs:attributeGroup ref="elml:BibDayMonthYear"/>
+					<xs:attributeGroup ref="elml:BibSubject"/>
+					<xs:attributeGroup ref="elml:BibRecipient"/>
+					<xs:attributeGroup ref="elml:BibEmailRecipient"/>
+					<xs:attributeGroup ref="elml:BibPublished"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element cdRom -->
+	<xs:element name="cdRom">
+		<xs:annotation>
+			<xs:documentation>The element cdRom allows to list a CD-Rom in the bibliography.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="elml:BibIDReq"/>
+					<xs:attributeGroup ref="elml:BibAuthor"/>
+					<xs:attributeGroup ref="elml:BibPublicationYear"/>
+					<xs:attributeGroup ref="elml:BibTitle"/>
+					<xs:attributeGroup ref="elml:BibEdition"/>
+					<xs:attributeGroup ref="elml:BibPublicationPlace"/>
+					<xs:attributeGroup ref="elml:BibPublisher"/>
+					<xs:attributeGroup ref="elml:BibSupplier"/>
+					<xs:attributeGroup ref="elml:BibAccessedDate"/>
+					<xs:attributeGroup ref="elml:BibDownloadUrl"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ======================== General Type for Email Addresses  ======================== -->
+	<!-- EmailsType -->
+	<xs:simpleType name="EmailsType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[^@]+@[^\.]+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

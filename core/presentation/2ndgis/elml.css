@@ -1,0 +1,242 @@
+
+/* import core styles | Basis-Stylesheets einbinden */@import url(../yaml/core/base.css);
+/* import screen layout | Screen-Layout einbinden */@import url(../yaml/screen/content_default.css);
+/* import print layout | Druck-Layout einbinden */@import url(../yaml/print/print_003_draft.css);
+#nextBack { position:fixed;
+ right:3px;
+ bottom: 10px;
+ }#newsletter{ visibility: visible;
+ position: absolute;
+ left: 10px;
+ padding-top:50px;
+}#topnav{ color: #6B8517;
+ }#topnav a { color: #87A326;
+ }#body_about_success_stories\.html .look {clear: both;
+}td.paddingfixjoel, td.paddingfixjoel table { margin: 0 !important;
+padding: 1px !important;
+ }body { background-color: #e8f4a1;
+ }hr { color:#7d7e51;
+height:1px;
+ }sub, sup /* Used in the eLML element "formatted" */ { font-size: 0.6em }.element { font-family: "Courier New", Courier, Monaco, monospace;
+ font-weight: bold;
+ text-align: left;
+ }.box, .popup /* The eLML box or popup element. */ { background-color: #BADE17;
+ background-position: 0 100%;
+ padding: 0 1em 1em ;
+ border: solid 2px #747566}.fancylooking /* The eLML box example class. */ { background-color: red;
+ padding: 1em ;
+ border: solid 2px black;
+ margin-bottom:2em;
+ width: 100px;
+}.tutor/* Paragraphs or parts only visible to tutors will be displayed like this. */ { color: red;
+ font-weight: bold;
+ background-color: yellow }.icon/* The icon is used in paragraph types like table, list, box etc. where the remark attribute is set. */ { margin: 0.5em 1em 0.5em 0;
+ float:left;
+}.columnMiddle, .columnRight { padding-left: 1em;
+ }.link_table, .link_table td { padding: 0.5em;
+ border: solid 1px #000000;
+ border-collapse: collapse;
+ }.table/* Define table cells for real tables here. */{ border-collapse: collapse ;
+ }.tabledata, .tableheading { padding: 0.5em;
+ border: solid 1px #000000;
+ border-collapse: collapse;
+ }.tabledata, .tableheading, .columnLeft, .columnMiddle, .columnRight/* IE seems to ignore BODY settings and seems to need that within table cells... */{ font-size: 13px;
+ text-align: justify;
+ }.footer/* Define the footer style. */ { font-size: 0.8em ;
+ line-height: 1em;
+ }.column { width: 100%;
+ }.term/* A glossary term that is used inline in the text. */{ font-weight: bold;
+ cursor: help;
+ }.legend/* eLML elements like tables, multimedia (image, flash), lists etc. can have legends displayed usally centered below the element. */ { font-size: 0.8em;
+ line-height: 1em;
+ text-align: inherit;
+ margin-top: 0.5em;
+ margin-bottom: 1em;
+ }.bibTitle, .index, .indexItem/* The title of a bibliography element (eg. book) in the bibliography list. Usually italic. */ { font-style: italic }.bibAuthor /* The author of a bibliography element (eg. book). Usually bold. */{ font-weight: bold;
+ text-transform: uppercase }.bibCommentFurther/* The comment of a bibliography element (eg. book) in the recommended/further reading list. Not displayed in the bibliography list! */{ font-size: 0.8em }.bibCommentSource /* The comment of a bibliography element (eg. book) in the bibliography list. */{ font-size: 0.8em }.multimedia_paragraph_left/* for multimedia objects that are used as paragraph and have no align or align=left */ { float: none;
+ padding: 1em 1em 1em 0;
+ display: block;
+ }.multimedia_paragraph_center/* for multimedia objects that are used as paragraph and have align=center */ { text-align: center;
+ width: 100%;
+ float: none;
+ padding: 1em;
+ display: block;
+ }.multimedia_paragraph_right/* for multimedia objects that are used as paragraph and have align=right */ { text-align: right;
+ float: none;
+ padding: 1em 0 1em 1em;
+ display: block;
+ }.multimedia_inline_left/* for multimedia objects that are used as inline and have align=left */ { float: left;
+ padding-right: 1em;
+ padding-left: 0;
+ display: inline;
+ }.multimedia_inline_center/* for multimedia objects that are used as paragraph and have align=center */ { text-align: center;
+ width: 100%;
+ float: left;
+ padding-right: 1em;
+ padding-left: 1em;
+ display: inline;
+ }.multimedia_inline_right/* for multimedia objects that are used as paragraph and have align=right */ { text-align: right;
+ float: right;
+ padding-right: 0;
+ padding-left: 1em;
+ display: inline;
+ }#submenu { visibility: visible;
+ font-size: 14px;
+ text-align: left;
+ font-weight: bold;
+ text-transform: lowercase;
+}#submenu .navigationLink a { color: #585858;
+ text-decoration: none }#submenu li#title {visibility: hidden;
+list-style-type: none;
+ } #submenu li {visibility: visible;
+ list-style-image: url(navigation/navigation_off.gif);
+ }#submenu li.navigationActual { color: #88a526;
+ list-style-image: url(navigation/navigation_on.gif);
+ }#submenu :hover, #submenu .navigationActual{ color: #88a526;
+ list-style-image: url(navigation/navigation_on.gif);
+ }#nav_lo li { visibility: visible;
+ position: relative;
+ font-size: 0.8em;
+ margin-left: 0px;
+ list-style-image: url(navigation/navigation_off_klein.gif);
+ }#nav_lo li.navigationActual { color: #88a526;
+ list-style-image: url(navigation/navigation_on_klein.gif);
+ }#nav_lo :hover, .nav_lo .navigationActual { list-style-image: url(navigation/navigation_on_klein.gif);
+ }
+#freeNav_main{
+z-index: 2;
+}
+#header{
+position: relative; height: 70px;	width:1000px;
+	background-color:transparent;
+
+}
+#header_col1{
+width: 220.588px;	float:left;
+	margin-left:0px;
+	margin-right:0px;
+	background-color:transparent;
+
+}
+#im_fbbsc2{
+z-index: 0; top: 0pt; position: absolute; width: 219.588px; height: 100%; left: 0pt;
+}
+#header_col2{
+width: 279px;	float:right;
+	margin-left:0px;
+	margin-right:0px;
+	background-color:transparent;
+
+}
+#im_emo_{
+z-index: 0; top: 0pt; position: absolute; width: 278px; height: 100%;
+}
+#header_col3{
+position: relative; width: auto; left: 0px; margin-left: 221px; margin-right: 279px;	background-color:transparent;
+
+}
+#hcol3_content{
+left: 0px;	position:relative;
+
+}
+#im_stones3{
+z-index: 0; top: 0pt; position: absolute; width: 499px; height: 100%;
+}
+#nav_main{
+z-index: 2;
+}
+#col1{
+left:0px;	width:220px;
+	background-color:transparent;
+	float:left;
+
+}
+#im_baenke{
+z-index: 0; top: 0pt; position: absolute; width: 100%; height: 621.677px;
+}
+.nav{
+z-index: 2;
+}
+#col2{
+left:780px;
+}
+#col2_content{
+background-color: transparent;
+}
+#col3{
+margin: 0pt 0px 0pt 220px; width: auto;	background-color:transparent;
+
+}
+#footer{
+position: relative;	width:1000px;
+	height:75px;
+	background-color:transparent;
+
+}
+#fcol_alone{
+width: auto;	margin-left:0px;
+	margin-right:0px;
+	background-color:transparent;
+
+}
+#im_mandala{
+z-index: 0; top: 0px; position: absolute; width: 999px; height: 100%; left: 0px;
+}
+#header div, #footer div, #main div{
+height:100%;
+}
+#col1, #col2{
+position: absolute;
+}
+#col1_content, #col2_content, #col3_content, #main{
+position:relative;
+}
+#col1_content img{
+position:absolute;
+}
+#im_fbbsc2 img{
+	position:absolute;
+
+}
+#im_emo_ img{
+	position:absolute;
+
+}
+#im_stones3 img{
+	position:absolute;
+
+}
+#im_baenke img{
+	position:absolute;
+
+}
+#im_mandala img{
+	position:absolute;
+
+}
+#col3_content{
+
+}
+body{
+	background-color:rgb(232, 244, 161);
+
+}
+#hcol1_content{
+	position:relative;
+
+}
+#hcol2_content{
+	position:relative;
+
+}
+#page{
+margin-left:auto;margin-right:auto;position:relative;	width:1000px;
+	font-size:11px;
+	background-color:rgb(255, 255, 255);
+	margin-top:0px;
+
+}
+#main{
+	width:1000px;
+
+}

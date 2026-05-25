@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../../../_templates/gisma/online.xsl"?>
+<?xml-stylesheet type="text/css" href="../../../_templates/gisma/elml.css"?>
+<lesson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.elml.ch ../../../_config/validate.xsd" xmlns="http://www.elml.ch"
+	label="GISBScL5" title="Die Projektarbeit">
+
+	<entry>
+		<paragraph>Die Durchführung von Projektarbeiten wird sowohl auf nahezu allen Lernfeldern <citation
+				bibIDRef="frey"/> als auch der beruflichen Anwendung <citation
+				bibIDRef="motzelpannen"/> als eine zentrale <formatted style="italic">Methode</formatted>
+			eingesetzt. Daher existiert eine Vielzahl von Einschätzungen bezüglich
+			möglicher Abläufe und konkreter Realisationen von Projekten. </paragraph> <paragraph>Die
+			im TM GIS geforderten Rahmenbedingungen können folgendermaßen zusammengefasst werden:
+			Die zu bearbeitende Fragestellung soll aus der Lerngruppe entwickelt werden, eine
+			definierte Zielsetzung verfolgen und einen Arbeitsplan, der zumindest die erlernten
+			Methoden integriert, aufweisen. Die Projektgruppe verteilt Aufgaben und Verantwortung und
+			ist für die Durchführung des Projektes eigenverantwortlich. Am Ende der Arbeitsphase soll das Ergebnis
+			von der Gruppe präsentiert und bewertet werden. </paragraph>
+
+		<paragraph> Aufgrund der Teamorientierung sollte ein einheitliches
+			Verständnis der Begriffe und der Ablaufstrukturen bestehen. Folgt man der DIN-Definition
+			(zit. nach Wikipedia) so ist ein Projekt ein <citation bibIDRef="DIN69901">Vorhaben, das
+				im Wesentlichen durch die Einmaligkeit der Bedingungen in ihrer Gesamtheit
+				gekennzeichnet ist, wie z.B. Zielvorgabe, zeitliche, finanzielle, personelle und
+				andere Begrenzungen</citation>.</paragraph>
+		<paragraph>Projekte sollten spezifische Kriterien aufweisen: </paragraph>
+		<list>
+			<item>komplexe und innovative Problemstellungen </item>
+			<item>definierte Ziele und Erwartungen </item>
+			<item>definierte zeitliche Befristung und Aufwand</item>
+			<item>Einsatz begrenzter Ressourcen (personell, sachlich, fachlich)</item>
+			<item>Teamarbeit</item>
+		</list>
+
+
+		<paragraph>Projekte werden aufgrund definierter Zielsetzungen entwickelt und umgesetzt, indem
+			komplexe und innovative Problemstellungen im Team bewältigt werden. Im Bereich der
+			GI-Systeme haben wir verschiedene Beispiele kennengelernt - sei es in der Planung,
+			Analyse oder Informationsbeschaffung und Datenakquise. Natürlich sind darüber hinaus
+			noch viele Anwendugnsgebiete denkbar und bekannt. <newLine space="long"/> Die Entwicklung von GI-Projekten lässt
+			sich mit allen komplexen, kreativen Tätigkeiten vergleichen, die über einen gewissen Zeitraum nicht
+			genau vorher bestimmbare Tätigkeiten und Problemlösungen verlangen.</paragraph>
+
+		<paragraph>Obwohl es sich konkret um die Umsetzung des GIS-Projektes als Prüfungsleistung
+			handelt, stellen aus den zuvor skizzierten Gründen die meisten der Methoden akademische und
+			berufliche Kernkompetenzen dar; wie beispielsweise Konzeption und Realisation von wissenschaftlichen
+			Fragestellungen, anwendungsorientierte Projekte oder jede andere Art kreativer und strukturierter
+			Tätigkeit im Team.<newLine/> Darüberhinaus verlangen Projektarbeiten die Anwendung und
+			Optimierung übergeordnete Kompetenzen im kommunikativen und sozialen Bereich sowie des
+			Verständnisses von "lebenslangem Lernen das die Rollen von Lernendem und Lernberater
+			(anstelle Studierender und Lehrender). </paragraph>
+	</entry>
+	<goals>
+		<lObjective>Sie planen und realisieren Ihr eigenes GI-Projekt entlang dieser
+			Projektplanungsphasen</lObjective>
+		<lObjective>Sie werden mit den Durchführung einer Projektarbeit vertraut sein.</lObjective>
+
+	</goals>
+	<unit navTitle="Projekte und ihre Umsetzung" label="GISBSc_VL5"
+		title="Projekte und ihre Umsetzung">
+
+
+		<entry>
+
+			<paragraph>Naturgemäß liegt der Schwerpunkt einer GIS-Übung auf dem effektiven und
+				transparentem Einsatz verschiedener GIS-Techniken bzw. dem vertraut werden mit
+				Softwarewerkzeugen. Im Teilmodul GIS wird dies vor dem Hintergrund komplexe Themen
+				problembasiert zu analysieren und bearbeiten realisiert. Sowohl für die
+				wissenschaftliche als auch die gutachterliche Praxis ist es obligat, die jeweiligen
+				kreativen wie arbeitstechnischnischen Abläufe auf transparente und nachvollziehbare
+				Art und Weise zu dokumentieren und kommunizieren. <newLine/>Da Entstehung und
+				Durchführung einer wissenschaftlichen Arbeit oder auch eines Gutachtens eine
+				kreative Leistung, also kein linearer oder stringenter, sondern ein iterativer
+				Prozess ist, verläuft die Arbeit in der Regel nicht so geradlinig, wie dies die
+				abschließend formulierte Version vermuten lässt. Irrwege sind - insofern sie nicht
+				die Dauer der Arbeit unverhältnismäßig verlängern - Teil des Arbeitsprozesses. Es
+				gilt unter Beweis zu stellen, dass man befähigt ist, Lösungen auf eine
+				(selbst)gestellte Frage hin zu erarbeiten. Natürlich sollten Fehler möglichst
+				frühzeitig erkannt werden. Hierbei hilft eine klare Konzeption, die Strukturierung
+				der Arbeit und die Kommunikation mit den Arbeitsgruppenmitgliedern und Betreuern.
+				Eine <formatted style="italic">zureichend</formatted> intensive Recherche und
+				Lektüre ist die Voraussetzung für wissenschaftlich, rechtlich (etc.) fundiertes
+				Arbeiten.</paragraph>
+
+		</entry>
+
+		<goals>
+			<lObjective>Sie verstehen die Bedeutung einer klaren Zielsetzung und Ausrichtung einer
+				Projektarbeit/Studie</lObjective>
+			<lObjective>Sie sind in der Lage Ihre Motivation und Zielsetzung in
+				Arbeitsthesen/Hypothesen zu überführen</lObjective>
+			<lObjective>Sie können aus der von Ihnen formulierten Problemstellung Lösungswege
+				ableiten und formulieren</lObjective>
+			<lObjective>Sie halten Zeitpläne ein bzw. nutzen eine De-Eskalationstrategie um
+				zeitliche und organisatorische Engpässe zu vermeiden</lObjective>
+			<lObjective>Sie sind in der Lage teamorientiert zu arbeiten und können ihr Projekt
+				eigenverantwortlich strukturieren, durchführen und adäquat
+				kommunizieren</lObjective>
+
+		</goals>
+
+
+
+
+		<learningObject navTitle="Entwicklung einer Zielsetzung"
+			title="Zielsetzung - oder was will ich eigentlich warum machen?" label="V_lo1">
+			<clarify>
+
+				<paragraph>Während der Festlegung der Zielsetzung oder Fragestellung kommt es
+					letztlich darauf an die Fragestellung zu <formatted style="bold"
+						>fokussieren</formatted> und die zur Beantwortung <formatted style="bold"
+						>essentiellen</formatted> Methoden (GIS-Techniken) und Informationen
+					(Parameter) zu identifizieren. <newLine/>Im Rahmen des Ausbildungsprojekts
+					sollten die Informationen durch möglichst homogene und ubiquitär verfügbare
+					Datensätze verfügbar sein (Sekundärdaten). Müssen Daten und Parameter erhoben
+					werden (Primärdaten) sollte dies in einem genau definierten und zielgerichteten
+					Umfang erfolgen. Im Zenrum der Arbeit steht wie und warum diese Daten mit den
+					angewandten Methoden bearbeitet werden.</paragraph>
+
+				<paragraph>Um zu einer Fragestellung oder einem Projektarbeitsthema zu gelangen,
+					bestehen prinzipiell drei Möglichkeiten:</paragraph>
+				<list>
+					<item>ein bereits ausgeschriebenes Thema zu wählen</item>
+					<item>ein eigenes Thema frei zu wählen.</item>
+					<item>eine Mischung aus beiden Varianten</item>
+				</list>
+				<paragraph>Natürlich gibt es vor und Nachteile bei allen drei Varianten (vgl.
+						<citation bibIDRef="bänsch"/>). Es ist absolut gerechtfertig und sinnvoll
+					die eigenen Interessen und Fähigkeiten bei der Wahl eines Themas zu integrieren.
+					Nach <citation bibIDRef="but"/>, z.B.: </paragraph>
+				<list>
+					<item>Was kann ich besonders gut? </item>
+					<item>Habe ich eher praktische oder theoretische Interessen? </item>
+					<item>Will ich eher wissenschaftlich oder anwendungsorientiert arbeiten? </item>
+					<item>Welches Berufsfeld interessiert mich? </item>
+					<item>Brauche ich umfangreiche Betreuung oder bin ich lieber auf mich allein
+						gestellt?</item>
+				</list>
+
+				<paragraph title="Es muss nicht die
+					Neuerfindung des Rades sein"> Wählen Sie
+					ein Thema für das Sie Interessen und Stärken entwickeln und dass sie in der
+					festgelegten Zeitspanne nach realistischer Einschätzung erfolgreich bearbeiten
+					können. Sobald Sie eine Thematik eingegrenzt haben, sollten Sie sich um die
+						<formatted style="italic">Entwicklung</formatted> einer Problemstellung bzw.
+					Fragestellung kümmern. Projekte können der Lösung von Problemstellungen dienen
+					oder auch rein erkenntnisorientiert sein. Das heißt die Entwicklung <formatted
+						style="italic">Ihrer</formatted> Fragestellung kann den unterschiedlichsten
+					Motiven folgen. Allerdings muß im Rahmen Ihrer Projektarbeit die Fragestellung
+					auf GIS-geleitete Generierung von Wissen oder Kenntnis fokussiert sein <citation
+						bibIDRef="reudenbach"/>.</paragraph>
+				<paragraph>Die Entwicklung einer belastbaren Fragestellung gehört zu den an-
+					spruchsvollsten Aufgaben die Sie im Rahmen ihrer Ausbildung zu Erlernen haben.
+					Die Fragestellung bleibt der Dreh- und Angelpunkt ihrer weiteren Tätigkeit, da
+					Sie sich im Laufe der sich entwickelnden Arbeit immer wieder auf diese
+					rückbeziehen werden, entweder zur Fokussierung Ihrer Ausarbeitung oder zur
+					Anpassung der Fragestellung. Ohne eine klare und begrenzte Fragestellung besteht
+					die Gefahr der völligen Beliebigkeit und Orientierungslosigkeit während Ihres
+					Schaffensprozesses. Nehmen Sie sich die Muße alleine und in Ihrer Gruppe
+					iterativ eine verständliche und von allen getragene und verstandene
+					Fragestellung zu entwickeln. Dieser Prozess geht eng einher mit der Analyse der
+					verfügbaren Daten und Methoden. Fast immer sind gute Fragestellungen erst nach
+					längerer Beschäftigung mit der Thematik und häufiger Umarbeitung formulierbar.
+					Die Entwicklung einer Thematik hin zu einer belastbaren Fragestellung kann in
+					den folgenden Schritten ablaufen:</paragraph>
+				<list listStyle="ordered">
+					<item> Formulierung einer <formatted style="bold">Problemstellung</formatted> –
+						Sie soll verdeutlichen, dass sich die Arbeit einer interessanten Frage­
+						stellung oder Problematik widmet, die eine wissenschaftliche Bearbeitung
+						sinnvoll, wünschenswert aber vor allem interessant erscheinen lässt </item>
+					<item>Entwicklung der <formatted style="bold">leitende Fragestellung</formatted>
+						bzw. des <formatted style="bold">konzeptionellen Gerüstes</formatted> – Was
+						soll die Arbeit herausfinden Diese zielführende Fragestellung muss in der
+						Regel in Unterfragen oder Thesen differenziert werden. Sie sollte
+						strukturiert und nicht zu breit und umfassend gewählt werden </item>
+					<item> Ausarbeitung und Formulierung des <formatted style="bold">Ziels der
+							Arbeit</formatted> bzw. der <formatted style="bold"
+							>Arbeitshypothesen</formatted>: Die Zielsetzung der Arbeit lässt sich
+						nach der Aufarbeitung des Kenntnisstandes präziser eingrenzen. Die
+						Formulierung von Arbeitshypothesen (was kann erwartet werden, was ist
+						nachzuweisen?) ist ein essentielles Resultat dieses Prozesses.<newLine/>
+						<formatted style="bold">Ohne klare Zielsetzung und Hypothese kann keine
+							sinnvolle oder nachvollziehbare Studie durchgeführt
+						werden</formatted></item>
+
+				</list>
+
+				<paragraph>Es gibt auch weniger wissenschaftsfokussierte Inhalte, die bei der
+					Entwicklung einer Fragestellung zu berücksichtigen sind. Nicht nur der Zweck und
+					die Zielsetzung sondern auch fast immer sind die Adressaten von erheblicher
+					Bedeutung für die Entwicklung Ihrer Thematik. Es muss schon in der Fragestellung
+					differenziert werden ob sie ein "Produkt" für z.B. Ausbildung, Information,
+					Edutainment, Erkenntnisgewinn oder Verkauf auf einem existierenden Markt
+					entwickeln wollen.</paragraph>
+
+				<paragraph>Im Zentrum der Startphase jedes Projekts steht die Erstellung eines
+					schriftlichen Exposés (auch Projekthandbuch, Lasten-/Pflichtenheft), das die
+					Zielsetzung, Fragestellung und möglichen Lösungswege konkretisiert.</paragraph>
+
+			</clarify>
+			<act>
+				<box cssClass="denkensienachbox" title="Denken Sie nach...">
+					<paragraph>Sind Sie während Ihres bisherigen Studiums konsequent zu einer
+						ähnlichen oder vergleichbaren Vorgehensweise angehalten worden? </paragraph>
+					<list>
+						<item>Wenn ja: Hat Ihnen der kreative und iterative Umgang mit einem Thema
+							also die wiederholte Beschäftigung und das Fokussieren einer
+							Fragestellung Freude bereitet?</item>
+						<item>Welche inneren Prozess haben Sie durchlaufen? Ist Ihnen ein derartiges
+							vorgehen eher lästig? Lernen Sie etwas Neues während dieser
+							Auseinandersetzung Neues? Denken Sie es wäre sinnvoller den hohen
+							Zeitaufwand zu minimieren um andere wichtige Dinge zu bearbeiten</item>
+						<item>Wenn nein: können Sie Vorteil/Nachteile Ihrer bisherigen
+							Arbeitstechniken für die Umsetzung Ihres GIS-Projekts benennen?</item>
+					</list>
+				</box>
+			</act>
+
+
+
+
+
+		</learningObject>
+		<learningObject navTitle="Das Exposé" label="V_lo2"
+			title="Das Exposé als erprobtes Mittel zur Entwicklung einer Projektarbeit">
+			<clarify>
+				<paragraph>der anschließenden Planung des Projekts vor allem darauf an ein möglichst
+					effizientes und reproduzierbares Lösungsschema zu entwickeln. Zur Planung und
+					Durchführung eines Projektes werden sinnvollerweise Pojektplanungstechniken
+					eingesetzt die im Rahmen der des TM GIS jedoch nur am Rande behandelt werden
+					können. Da in der Realität an einer solchen Planung heterogene Gruppen mit
+					unterschiedlichem Wissen und üblicherweise kontroverser Interessenslage
+					beteiligt sind, bieten sich Verfahren, wie das weiterentwickelte ZOPP
+					(Zielorientierte Projektplanung) oder Problem- bzw. Zielbäume aus dem Logical
+					Framework Approach, an. Wer dieses Thema zumindest ein wenig vertiefen möchte
+					sei auf die <link uri="http://portals.wi.wur.nl/msp/?Introduction">knappe
+						Zusammenstellung </link> bzw. für einen Einstieg auf Wikipedia <link
+						uri="http://de.wikipedia.org/wiki/Projektmanagement"
+						>Projektmanagement</link> hingewiesen. </paragraph>
+				<paragraph>Im Rahmen von kreativen Schaffensprozessen die einer gewissen Struktur
+					folgen ist die Anfertigungen eines sogenanntes <formatted style="underlined"
+						>Exposés</formatted> ein erprobtes Mittel <citation bibIDRef="stangl"/>. In
+					einem Exposé wird eigenständig die Fragestellung entwickelt. Das Exposé dient
+					einer Gruppe zur Diskussion des Projektes und als Richtlinie für das spätere
+					Bearbeiten des Projekts. Die nachfolgende Struktur soll als Leitlinie zur
+					Entwicklung eines <formatted style="bold">maximal zweiseitigen
+						Exposés</formatted> (Beispiele unter <link
+						uri="https://ilias3.uni-marburg.de/repository.php?ref_id=237950&amp;cmd=sendfile"
+						>ILIAS</link>). Das dekonstruierte Exposé kann, zerlegt in einzelne
+					Arbeitspakete, als Projektplan aufgefasst werden. Ein solcher Plan ist als
+					komprimierter Leitfaden für die Konzeption und Vorgehensweise bei der
+					Entwicklung wissenschaftlicher/planerischer Fragestellungen gedacht. </paragraph>
+
+				<paragraph title=" Schrittweise Entwicklung eines Exposés"/>
+				<list listStyle="ordered">
+					<item>Die <formatted style="bold">Entwicklung der Thematik</formatted>
+						beinhaltet eine konzentrierte und aufwändige Beschäftigung mit den bereits
+						unter Zielsetzung genannten Inhalten: <list>
+							<item>Entwicklung einer Problemstellung</item>
+							<item>Ableitung einer leitenden Fragestellung bzw. eines konzeptionellen
+								Gerüstes </item>
+							<item>Formulierung des Ziels der Arbeit bzw. der Arbeitshypothesen
+							</item>
+						</list>
+					</item>
+
+					<item>Die Bearbeitung und Entwicklung der Thematik ist <formatted
+							style="underlined">eng gekoppelt</formatted> an die <formatted
+							style="bold">Aufarbeitung der Quellenlage bzw. des
+							Forschungsstandes</formatted> und der Berücksichtigung bzw. Integration
+						der theoretischen / rechtlichen / technischen Grundlagen. Es ist wichtig,
+						sowohl auf die Paradigmen, wie auf den theoretischen Kontext hinzuweisen,
+						die der Arbeit zugrunde liegen. Im Rahmen einer praktischen Arbeit wird dies
+						in der Regel durch Verordnungen, Gesetze, technische Blätter bzw.
+						Auschreibungstexte und Lastenhefte geregelt. Diese haben bindenden Charakter
+						und müssen berücksichtigt (=gekannt und zitiert werden). Dies ist sowohl
+						eine Grundlage zur Ableitung der Hypothese dient aber auch der Dokumentation
+						und Offenlegung der Quellen. Weiterhin ist es notwendig neben den Grundlagen
+						auch den aktuellen Stand der Forschung/Anwendung zu erfassen um ein
+						adäquates (=zeitgemäßes und valides) Resultat zu erzielen. </item>
+					<item><formatted style="bold">Arbeitskonzeption, methodischer
+						Ablauf</formatted>: Aufgrund der unter Punkt 1 festgelegten Arbeitsziele und
+						der unter Punkt 2 identifizierten Rahmenbedingungen ist eine
+						Arbeitskonzeption zu entwicklen. Der (potentielle) Arbeitsablauf und das
+						methodische Vorgehen sollten kurz beschrieben, nach Möglichkeit in einer
+						Grafik (Fließdiagramm) als Orientierungshilfe dargestellt werden. </item>
+					<item><formatted style="bold">Methodisches Vorgehen</formatted>: Das gewählte
+						methodische Konzept ist zu erläutern. Die Durchführung von der Berechnungen
+						Statistischen Ansätze und die Auswertungen etc. sind knapp
+						darzustellen.</item>
+					<item><formatted style="bold">Zusammenfassung der erwarteten Ergebnisse
+						</formatted>- Ergebnisse werden erst am Schluss der Bearbeitung erwartet,
+						dennoch ist es sehr hilfreich kurz zu artikulieren, was der Bearbeiter als
+						Ergebnis erwartet.</item>
+					<item>Überprüfung der <formatted style="bold">Machbarkeit</formatted> und
+						Festlegung eines <formatted style="bold">Zeitplans</formatted> - Der
+						verfügbare Zeitraum ist ein knappes Gut. Daher ist die Erstellung eines
+						„Projektplan“ sehr hilfreich um den Zeitbedarf und Forstschritt der
+						einzelnen Arbeitsschritte abzuschätzen zu können Auf jeden Fall sollte aus
+						dem Exposé hervorgehen, dass die geplanten Arbeitsschritte mit den
+						verfügbaren Ressourcen machbar sind. Dieser Plan gehört nicht in die
+						Ausarbeitung der Endergebnisse.</item>
+				</list>
+
+				<paragraph cssClass="importantbox" icon="important"> Das Exposé ist nicht der
+					Abschlussbericht oder das Berichtsposter. Vielmehr soll es einen klar
+					entwickelten und kommunizierten Gedankengang bezüglich der Ziele und
+					Vorgehensweisen sowie erwarteten Ergebnisse des geplanten Projektes
+					nachvollziehbar machen. Es bringt also den gruppeninternen Denkprozess in eine
+					nachvollziehbare und diskutierbare Form.</paragraph>
+			</clarify>
+
+			<act>
+				<box cssClass="denkensienachbox" title="Denken Sie nach...">
+					<paragraph>Welche Hilfsmittel zum Strukturieren und Ordnen Ihrer Ideen sind
+						Ihnen bekannt oder vertraut? </paragraph>
+					<list>
+						<item> Kennen Sie Mindmaps (z.B.<link
+								uri="http://www.laum.uni-hannover.de/ilr/lehre/Ptm/Ptm_KreaMindMap.htm, sein"
+								>Mindmap</link>) etwas?</item>
+						<item>Sind Sie vertraut mit kollaborativer Wissensorganisation (z.B. <link
+								uri="http://www.zotero.org/">Zotero</link>, <link
+								uri="http://www.mendeley.com/">Mendeley</link>, <link
+								uri="http://www.open-xchange.com/de/try-de">Open
+							Xchange</link>)</item>
+
+					</list>
+				</box>
+			</act>
+
+		</learningObject>
+
+
+		<learningObject navTitle="Die Projektplanung" label="V_lo3" title="Die Projektplanung ">
+			<clarify>
+				<paragraph>Die Projektplanung ist eine zentrale Aufgabe des Projektmanagements. Sie
+					folgt üblicherweise auf den Projektstart und bereitet die durchführung des
+					Projektes vor ist aber auch während der Projektdurchführung verantwortlich für
+					die flexible Um- und Neuplanung.</paragraph>
+				<paragraph>Die Projektplanung hat einen Anforderungskatalog -meistens als Lastenheft
+					ausgeführt- als Grundlage. Mit Hilfe einer formalisierten Planung wird auch
+					während der Abwicklung das weitere Vorgehen hinsichtlich organisatorischer und
+					inhaltlicher und personeller Ressourcen strukturiert. Aus dem Projektplan werden
+					die Aufgabenpakete abgeleitet, die wiederum die Grundlage für die Abschätzung
+					des Arbeitsaufwands darstellen. Schließlich basiert auf dieser Schätzung eine
+					erste Terminplanung (als Tabelle oder zb.als Gannt-Diagramm siehe
+						Materialien)<newLine space="long"/> Die Ergebnisse der Projektplanung werden
+					in einzelne Projektpläne überführt. Die wichtigsten sind Pläne für die
+					Organisation, Strukturierung und Durchführung (Verantwortlichkeiten) des
+					Projekts als auch die Dokumentation und Kommunikation der Termine, des
+					Arbeitsfortschritts und ganz wesentlich der Entscheidungen während der
+					Projektdurchführung. Zur Strukturierung von Projekten wird in der Planung häufig
+					auf Phasenmodelle mit definierten Meilensteinen zurück gegriffen ( verändert
+					nach <citation bibIDRef="wp_projektplanung" yearOnly="yes"/>.</paragraph>
+
+
+
+			</clarify>
+			<act>
+				<box cssClass="bearbeitensiebox" title="Vertiefen Sie Ihr Wissen...">
+					<paragraph>Eine knappe Einführung und Hinweise für eine intensivere
+						Beschäftigung finden Sie unter <citation bibIDRef="but" pageNr="7-41"/> und
+							<link uri="../../../material/PM_Rosner.pdf" type="PDF">Rosner (2000)
+							"Kurzdarstellung Projektplanung". </link></paragraph>
+				</box>
+			</act>
+		</learningObject>
+
+
+
+
+
+
+
+	</unit>
+
+
+
+
+
+
+
+
+	<bibliography>
+
+
+		<websites bibID="gittadbs" accessedDate="05.12.2005" author="GITTA"
+			title="Geographic
+			Information Technology Training Alliance"
+			url="http://www.gitta.info/website/en/html_reg/index.html"/>
+		<book bibID="bänsch" title="Wissenschaftliches Arbeiten.  Seminar-  und  Diplomarbeiten"
+			publicationPlace="München" publisher="Oldenbourg" publicationYear="1999"
+			edition="7. Aufl." author="Bänsch, A."/>
+		<book bibID="but" author="Backhaus, N. &amp; Tuor, R." publicationYear="2008"
+			downloadUrl="http://www.geo.uzh.ch/fileadmin/files/content/abteilungen/human/PDFs/Leitfaden_v7_0.pdf"
+			edition="Schriftenreihe Humangeographie 18" publicationPlace="Zürich"
+			publisher="Geographisches Institut der Universität Zürich"
+			title="Leitfaden für wissenschaftliches Arbeiten"/>
+		<websites bibID="stangl"
+			downloadUrl="http://arbeitsblaetter.stangl-taller.at/PRAESENTATION/expose.shtml"
+			author="Stangl, W." accessedDate="05.12.2009" publicationPlace="Linz-Auhof"
+			publicationYear="2009" publisher="" url="http://arbeitsblaetter.stangl-taller.at"/>
+		<websites bibID="wp_projektplanung" accessedDate="1.12.2009" author="Wikipedia"
+			downloadUrl="http://de.wikipedia.org/wiki/Projektplanung" publisher="Wikipedia"
+			publicationYear="2005" title="Projektplanung"/>
+		<websites bibID="DIN69901" accessedDate="1.12.2010" author="Wikipedia"
+			downloadUrl="http://de.wikipedia.org/wiki/Projekt"
+			url="http://de.wikipedia.org/wiki/Projekt" publisher="Wikipedia"/>
+		<book bibID="frey" author="Frey, K." publicationPlace="Weinheim, Basel" publisher="Beltz"
+			publicationYear="2002" title="Die Projektmethode. Der Weg zum bildenden Tun"/>
+		<book bibID="motzelpannen"
+			title="Projektmanagement-Kanon. Der deutsche Zugang zum Project Management Body of Knowledge"
+			publicationYear="1998" publisher="TÜV Verlag" author="Motzel, E.,  Pannenbäcker, O."/>
+		<eJournals bibID="reudenbach" accessedDate="27.10.2010" author="Reudenbach, C."
+			publicationYear="2010"
+			title="Bewertungsleitfaden -
+			Projektarbeit Teilmodul GIS BSc. (Bachelor) Geographie"
+			url="https://ilias3.uni-marburg.de/repository.php?ref_id=265056&amp;cmd=sendfile"/>
+	</bibliography>
+
+
+	<metadata visible="online">
+		<organisation level="Basic" module="AN">
+			<creationPosition>
+				<previous>GISBScL8</previous>
+				<following>none</following>
+			</creationPosition>
+		</organisation>
+		<prerequisites>
+			<preReqItem label="none"/>
+		</prerequisites>
+		<keywords>
+			<keywordItem/>
+		</keywords>
+		<technical>
+			<technicalRequirement>
+				<type>Browser</type>
+				<name>Firefox</name>
+				<minimumVersion>3.5</minimumVersion>
+				<downloadURL>http://download.mozilla.org/?product=firefox-3.6&amp;os=win&amp;lang=de</downloadURL>
+				<installationRemarks>See Firefox website for help with
+					installation</installationRemarks>
+			</technicalRequirement>
+		</technical>
+
+		<lessonInfo>
+			<language language="de" derived="no"/>
+			<lifecycle>
+				<version creationDate="2009-11-20" modificationDate="2009-11-30">1</version>
+				<contribute>
+
+					<person responsible="GISMA contributor" name="Chris Reudenbach"
+						email="reudenbach@staff.uni-marburg.de" institute="PUM" departement="GISMA"
+						>concept, content, recompilation of GITTA content, eLML translation. The
+						lecture part is derived by using the GITTA lessons "Discrete Spatial
+						variables", "Erreichbarkeit", Eignungsanalysen (Suitability),
+						Kontinuierliche räumliche Variablen</person>
+					<person responsible="GISMA contributor" name="Uwe Schulze"
+						email="schulze6@staff.uni-marburg.de" institute="PUM" departement="GISMA">
+						Practice course, concept, practice solutions content, revisions</person>
+
+				</contribute>
+			</lifecycle>
+			<educational>
+				<difficulty>Low</difficulty>
+				<typicalLearningTime>
+					<time>2 hours (feedback welcome).</time>
+				</typicalLearningTime>
+			</educational>
+		</lessonInfo>
+		<rights>
+			<cost>no</cost>
+			<copyright>GISMA Marburg 2009</copyright>
+		</rights>
+	</metadata>
+
+</lesson>

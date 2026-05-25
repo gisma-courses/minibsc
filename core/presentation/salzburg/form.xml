@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root xmlns="http://www.w3.org/1999/xhtml">
+	<div id="start">
+		<p>Type of membership:</p>
+		<select name="mitgliedsart" id="mitgliedstyp" onchange="onChange(this);">
+			<option>please choose...</option>
+			<option value="AI">active individual</option>
+			<option value="AC">active collective</option>
+			<option value="SI">sponsoring individual</option>
+			<option value="SC">sponsoring collective</option>
+		</select>
+	</div>
+	<div id="SISC">
+		<p>Prefix:</p>
+		<select name="anrede" id="prefix">
+			<option>please choose...</option>
+			<option value="Mr.">Mr.</option>
+			<option value="Ms.">Ms.</option>
+			<option value="Mrs.">Mrs.</option>
+			<option value="Dr.">Dr.</option>
+			<option value="Prof.">Prof.</option>
+		</select>
+		<p>First Name:</p>
+		<input id="firstname" name="vorname"/>
+		<p>Last Name:</p>
+		<input id="lastname" name="nachname"/>
+		<p>Affiliation:</p>
+		<input id="firm" name="hochschule"/>
+		<p>Institute/Departement:</p>
+		<input id="institute" name="institut"/>
+		<p>Street:</p>
+		<input id="street" name="strasse"/>
+		<p>Postal Code:</p>
+		<input id="zip" name="plz"/>
+		<p>City:</p>
+		<input id="city" name="ort"/>
+		<p>Country:</p>
+		<input id="country" name="land"/>
+		<p>Email:</p>
+		<input id="email" name="email"/>
+		<p></p>
+		<input name="test" type="submit" value=" Submit " align="right"/>
+	</div>
+	<div id="AIAC">
+		<p>Prefix:</p>
+		<select name="anrede" id="prefix">
+			<option>please choose...</option>
+			<option value="Mr.">Mr.</option>
+			<option value="Ms.">Ms.</option>
+			<option value="Mrs.">Mrs.</option>
+			<option value="Dr.">Dr.</option>
+			<option value="Prof.">Prof.</option>
+		</select>
+		<p>First Name:</p>
+		<input id="firstname" name="vorname"/>
+		<p>Last Name:</p>
+		<input id="lastname" name="nachname"/>
+		<p>Affiliation:</p>
+		<input id="firm" name="hochschule"/>
+		<p>Institute/Department:</p>
+		<input id="institute" name="institut"/>
+		<p>Street:</p>
+		<input id="street" name="strasse"/>
+		<p>Postal Code:</p>
+		<input id="zip" name="plz"/>
+		<p>City:</p>
+		<input id="city" name="ort"/>
+		<p>Country:</p>
+		<input id="country" name="land"/>
+		<p>Email:</p>
+		<input id="email" name="email"/>
+		<p>Please describe your motivation in participating in the GITTA project:</p>
+		<textarea name="interesse" id="interest" cols="61" rows="4"/>
+		<p>Have you already used GITTA lessons before:</p>
+		<textarea name="nutzung" id="use" cols="61" rows="4"/>
+		<p>Please describe your experiences concerning Geographic Information Science and/or -technology:</p>
+		<textarea name="erfahrungGIS" id="experienceGIS" cols="61" rows="4"/>
+		<p>Please describe your experiences concerning eLearning:</p>
+		<textarea name="erfahrungELearning" id="experienceELearning" cols="61" rows="4"/>
+		<p>Please describe your experiences concerning XML:</p>
+		<textarea name="erfahrungXML" id="experienceXML" cols="61" rows="4"/>
+		<p>Please describe your your contribution to the GITTA project:</p>
+		<textarea name="intentionen" id="intentions" cols="61" rows="4"/>
+		<p></p>
+		<input  name="test" type="submit" value=" Submit " align="right"/>
+	</div>
+	<div id="confirmation">
+		<p>Thank you very much for your interest. You will receive an email soon...</p>
+	</div>
+</root>

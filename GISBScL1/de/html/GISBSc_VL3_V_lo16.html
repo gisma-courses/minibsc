@@ -1,0 +1,606 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="GIS als räumliches Denken in der Geographie: Georeferenzieren von kontinuierlichen Feldern (Rasterdaten) mit Hilfe geometrischer Rektifikation. Exkurs: Das Verfahren der Geokodierung... Schritt 1: Schritt 2: Schritt 3: Schritt 4: Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-2011" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (Practice solutions) " />
+      <meta name="keywords"
+            content="GIS als räumliches Denken in der Geographie, definition GIS , information systems, SRTM 90m Digital Elevation Data, NASA, Datenmodell, DGM, Open Source, NUTS, eLML" />
+      <title>Georeferenzieren von kontinuierlichen Feldern (Rasterdaten) mit Hilfe geometrischer Rektifikation</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>GIS als räumliches Denken in der Geographie</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL3_V_lo14.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="unit_GISBSc_UE1.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL3_V_lo9.html">Namentliche Verortung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL3_V_lo10.html">Metrische Verortung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL3_V_lo11.html">Der Kataster</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL3_V_lo12.html">Geographische Koordinaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL3_V_lo13.html">Das geodätische Datum</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL3_V_lo14.html">Kartenprojektionen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Georeferenzieren</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo1.html">Distanzbeziehungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo2.html">Distanz-basierte Interpolation</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo3.html">Informationen und Ableitungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo4.html">Ableitung kontinuierlicher Datenfelder</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo5.html">Sichtbarkeitsanalyse</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo6.html">Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo7.html">Vertiefung Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo8.html">Ableitungen aus Abflussnetzwerken</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/VL3_selfAssessment9.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL3_V_lo16.html">Georeferenzieren von kontinuierlichen Feldern (Rasterdaten) mit Hilfe geometrischer Rektifikation</h1>
+               <div id="d10e1027.html" class="clarify">
+                  <p class="paragraph" id="d10e1028">Georeferenzieren heißt, einem Geodatenobjekt (Vektordaten, Rasterdaten)
+                     seine geographische Position anzufügen. In der Regel müssen Rasterbildobjekten
+                     georeferenziert werden, da durch das Fehlen eines geographischen oder
+                     kartesischen Bezugssystems eine explizite Raumzuordnung nicht existiert.
+                     Natürlich können auch Vektordatenobjekte georeferenziert oder rektifiziert
+                     werden. Jedoch liegen Vektordaten nahezu immer (mit Ausnahme von CAD-Daten!) in
+                     einem Referenzsystem vor. Hier ist die korrekte Zuweisung des Projektionssystems
+                     von zentraler Bedeutung. Im Einzelfall kann es jedoch notwendig werden auch
+                     Vektor-Objekte zu georeferenzieren.
+                  </p>
+                  <p class="paragraph" id="d10e1030"> Rasterdaten werden von den entsprechenden Aufnahmesystemen zunächst
+                     immer ohne expliziten Raumbezug also ohne Georeferenzierung erzeugt. Erst in
+                     einem zweiten Schritt wird dem Datensatz, falls notwendig, ein Raumbezug durch
+                     ein Koordinatensystem zugewiesen. Grundsätzlich werden unterschiedliche Begriffe
+                     und Ziele bei der Referenzierung und Rektifizierung von Rasterdaten verfolgt: 
+                  </p>
+                  <ul class="list" id="d10e1032">
+                     <li class="itemAlt"><i>Rektifizierung</i>: Korrektur der
+                        <i>systemaren</i> Aufnahmefehler eines
+                        Scannersystems (Aufnahmeverzerrung des Aufnahmesystems, evtl.
+                        Flugbahneigenschaften) und der Verzerrung durch die Ellipsoid-Gestalt der
+                        Erde mit Hilfe von Passpunkten und mathematischen
+                        Transformationsfunktionen
+                     </li>
+                     <li class="item"><i>Koreferenzierung</i>: Zuweisung einer
+                        <i>relativen Geometrie</i>
+                        unterschiedlicher Rasterdaten aufeinander (z.B. verschiedene spektrale,
+                        zeitliche Bildkanäle eines Satelliten oder Zeitserien verschiedener
+                        thematischer Karten) mit Hilfe von Passpunkten und mathematischen
+                        Transformationsfunktionen
+                     </li>
+                     <li class="itemAlt"><i>Georeferenzierung</i>: Erstellung einer
+                        <i>geometrischen Lageanpassung</i> eines
+                        digitalen Rasterbilds (z.B. Scanvorlage einer topographischen Karte) unter
+                        Verwendung eines existenten Bezugsrahmens mit Hilfe von Passpunkten und
+                        mathematischen Transformationsfunktionen
+                     </li>
+                  </ul>
+                  <p class="paragraph" id="d10e1054">Nach Erstellung des mathematischen Modells (durch die Software) erfolgt
+                     dann die Anwendung der ermittelten Rechenvorschrift auf den Rasterdatensatz, das
+                     sogenannte Resampling. Dies dient:
+                  </p>
+                  <ul class="list" id="d10e1056">
+                     <li class="itemAlt">zur Positionsberechnung der referenzierten Pixelmatrix.</li>
+                     <li class="item">Zur Werteberechnung der neuen Pixelwerte da durch die z.T. erheblichen
+                        Verzerrungen der Ursprungsmatrix für die Ziel-Pixel-Werte die sinnvollsten
+                        Werte ermittelt werden müssen.
+                     </li>
+                  </ul>
+               </div>
+               <p id="d10e1061" class="popupTitle" style="cursor: pointer;"
+                  onclick="onBlock('solutiond10e1061')">Exkurs: Das Verfahren der Geokodierung... (Klicken Sie hier für mehr Informationen) </p>
+               <div id="solutiond10e1061text" style="display: none; cursor: pointer;"
+                    class="optional"
+                    title="Exkurs: Das Verfahren der Geokodierung..."
+                    onclick="off('solutiond10e1061')">
+                  <p class="paragraph" id="d10e1062">Der gesamte Vorgang (Rektifizierung, Georeferenzierung und Resampling)
+                     wird häufig als <i>Geokodierung</i> von
+                     Rasterbilddaten bezeichnet. Das Verfahren der Geokodierung ist mathematisch
+                     relativ aufwendig und wird nachfolgend vereinfacht dargestellt <span class="citation"> (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1955">2007</a>)</span>. Es wird angenommen, dass zwei digitale
+                     Datensätze von denen ein Datensatz bereits georeferenziert ist (z.B. eine
+                     georeferenzierte topographische Karte) vorhanden sind: 
+                     <p class="paragraph" id="d10e1069"></p>
+                     <h4>Schritt 1:</h4>
+                     <p class="paragraph" title="Schritt 1:" id="d10e1070">Identifikation sogenannter Passpunkte (ground
+                        control points; GCP). Die Lage der Punkte muss sich sowohl im Bild als auch
+                        im Referenzbild möglichst genau entsprechen. Als Faustregel gilt je
+                        verzerrter desto mehr GCPs. Als Passpunkte in Frage kommen leicht
+                        identifizierbare Punkte, z.B. größere Straßenkreuzungen, Brücken,
+                        Geländeformen, Grundstücksgrenzen etc..
+                     </p>
+                     <p class="paragraph" id="d10e1072">Die Passpunktkoordinaten aus der Karte werden geometrisch durch ihre
+                        Koordinaten nach den Projektionsvorschriften des Datensatzes bestimmt. Die
+                        korrespondierenden Passpunkte in der Bildmatrix werden geometrisch durch
+                        ihre Zeilen- und Spaltenindizes aus dem Rastermodell definiert.
+                     </p>
+                     <h4>Schritt 2:</h4>
+                     <p class="paragraph" title="Schritt 2:" id="d10e1074">Nach Festlegen einer genügend großen Anzahl von
+                        Passpunkten werden die Transformationsfunktionen für die geometrische
+                        Transformation der Kartenkoordinaten in die Bildindizes und die geometrische
+                        Transformation der Bildindizes in die Kartenkoordinaten mit Hilfe der
+                        Passpunkte berechnet. Die resultierenden Transformationsfunktionen stellen
+                        aufgrund der Anzahl und der prinzipiellen Ungenauigkeit der Lage der
+                        Passpunkte eine möglichst gute Schätzung der neuen Koordinatenwerte dar.
+                        Generell wird dies mit Hilfe statistisch-numerischer Anpassungsrechnungen
+                        (iterative Optimierung) erreicht. Als Funktionstypen für die
+                        Transformationsfunktionen werden je nach Verzerrungsgrad und Qualität der
+                        Passpunkte unterschiedliche Verfahren angewendet:
+                     </p>
+                     <ul class="list" id="d10e1076">
+                        <li class="itemAlt">Lineare Rektifizierungsmethode: wird benutzt um ein bereits
+                           geometrisch korrekt vorliegendes Rasterbild in ein Koordinatensystem
+                           „einzuhängen“. Es werden mindestens 2 Passpunkte benötigt.
+                           Einschränkung: Mit dieser Methode können keinerlei Verzerrungen sondern
+                           nur linerare Skalierungen vorgenommen werden.
+                        </li>
+                        <li class="item">Affine Rektifizierungsmethode: Die affine Transformation ist eine
+                           Transformation 1.Ordnung. Mit ihr lassen sich Bilder spiegeln und
+                           rotieren. Einschränkung: Mit dieser Methode können keine nichtlinearen
+                           Verzerrungen korrigiert werden
+                        </li>
+                        <li class="itemAlt"> Polynominale Rektifizierungsmethode: Bei Polynom-Rektifizierungen
+                           kommt es auf die Ordnung des Polynoms an: 
+                           <ul class="list" id="d10e1083">
+                              <li class="itemAlt">Polynom 1. Ordnung: entspricht im Wesentlichen einer linearen
+                                 und affinen Transformation. Einschränkung: Die Wahl und die
+                                 Verteilung der Passpunkte erfordert viel Erfahrung 
+                              </li>
+                              <li class="item">Polynome 2. Ordnung eignet sich um einfache Verzerrung von
+                                 Länge und Breite in einer ebenen Projektion abzubilden. Es ist
+                                 eine nicht lineare Transformation, die einfache Verzerrungen
+                                 korrigiert. Einschränkung: Die Wahl und die Verteilung der
+                                 Passpunkte erfordert viel Erfahrung 
+                              </li>
+                              <li class="itemAlt">Polynome 3. Ordnung eignet sich zum Entzerren von nicht
+                                 regelhaft verzerrten Scanvorlagen, Satellitendaten und
+                                 Luftbildern. Einschränkung: Die Wahl und die Verteilung der
+                                 Passpunkte erfordert viel Erfahrung 
+                              </li>
+                              <li class="item">Polynome 4. und höherer Ordnung eigenen sich zur Entzerrung
+                                 von stark verzerrten Datenbeständen. Bei der Wahl eines
+                                 geeigneten höheren Polynoms kommt es vor allem auf die
+                                 Verteilung der Verzerrung und der Passpunkte an. Einschränkung:
+                                 Die Wahl und die Verteilung der Passpunkte erfordert viel
+                                 Erfahrung 
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="item">Triangulation: Üblicherweise wird bei einer Triangulation eine
+                           Dreiecksvermaschung der Kontrollpunkte durchgeführt. Innerhalb der
+                           Dreiecke wird jeweils eine separate Transformation bestimmt.
+                           Einschränkung: Die Wahl und die Verteilung der Passpunkte erfordert viel
+                           Erfahrung 
+                        </li>
+                     </ul>
+                     <h4>Schritt 3:</h4>
+                     <p class="paragraph" title="Schritt 3:" id="d10e1094">Über diesen Kartenausschnitt wird ein Gitternetz
+                        in der gewünschten Maschenweite (Pixelgröße) der Zielbildmatrix
+                        gelegt.
+                     </p>
+                     <h4>Schritt 4:</h4>
+                     <p class="paragraph" title="Schritt 4:" id="d10e1097">Auf den Mittelpunkt jeder Gittermasche werden die
+                        Transformationsfunktionen angewendet. Als Resultat erhält man den
+                        zugehörigen Zeilen- und Spaltenwert in der originalen
+                        Bildmatrix.
+                     </p>
+                     <p class="paragraph" id="d10e1099">Nun wird die geschätzte Position aus der originalen Bildmatrix ein
+                        bestmöglich repräsentativer numerischer Wert berechnet (resampling). Hierfür
+                        gibt es drei gängige Verfahren:
+                     </p>
+                     <ul class="list" id="d10e1101">
+                        <li class="itemAlt">das nearest-neighbour-Verfahren, bei dem numerische Wert der der
+                           Originalposition nächstgelegenen Rasterzelle in die Gittermasche
+                           Zielbildes übertragen wird (üblich bei Satelliten und anderen Messdaten
+                           da es zu keiner numerischen Veränderung der Messwerte kommt)
+                        </li>
+                        <li class="item">lineare (bilineare Interpolation) bei der die numerischen Werte der
+                           Nachbarpixel der der Originalposition nächstgelegenen Rasterzellen in
+                           eine oder zwei Raumrichtungen interpoliert und in die Gittermasche
+                           Zielbildes übertragen werden (Veränderung der Zahlenwerte aber
+                           gefälligeres, glatteres Bild) 
+                        </li>
+                        <li class="itemAlt"> quadratische Interpolationsmethoden (bikubische Konvolution). bei der
+                           die numerischen Werte der Nachbarpixel der der Originalposition
+                           nächstgelegenen Rasterzellen in kubisch interpoliert und in die
+                           Gittermasche Zielbildes übertragen werden (Veränderung der Zahlenwerte
+                           aber gefälligeres, glatteres Bild)
+                        </li>
+                     </ul>
+                     <p class="paragraph" id="d10e1108">Nachdem alle Gittermaschen im Kartenausschnitt dieser Berechnung
+                        unterzogen wurden, erhält man ein auf die Referenzdaten geometrisch
+                        angepasstes Bild mit der gewählten Wertezuweisung. War das Referenzsystem
+                        geographisch projiziert ist natürlich auch das Zielbild geographisch
+                        referenziert. Die Geokodierung ist ein allgemein anwendbares Verfahren, um
+                        raster- bzw. vektorbasierte Geodaten aus unterschiedlichen
+                        Koordinatensystemen empirisch aufeinander anzupassen.
+                     </p>
+                  </p>
+               </div>
+               <div id="d10e1110.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d10e1111">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d10e1112">
+                        <li class="itemAlt">Warum ist dieses Verfahren neben der Fernerkundung insbesondere in
+                           z.B. der historischen Geographie oder aber auch den Umweltwissenschaften
+                           von hoher Relevanz?
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL3_V_lo14.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="unit_GISBSc_UE1.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL1.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

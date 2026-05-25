@@ -1,0 +1,734 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Räumliche Analysemethoden: Füllen des leeren Raumes mit Informationen - Distanz-basierte Interpolation. Wie beginnen wir nun mit der Analyse kontinuierlicher Variablen? Räumliche Stichprobenmuster am Beispiel schweizerischer Klimastationen. Räumliche Interpolation von Daten. Lokale vs. Globale Interpolation. Exakte vs. Nicht-exakte Interpolation. Vorteile der IDW-Interpolation: Nachteile der IDW-Interpolation: Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Marco                         Hugentobler (GITTA contributor) , Moe Myint (GITTA contributor) , Claude Collet (GITTA contributor) , Sandro Bischof (GITTA contributor) , Robert Weibel (GITTA contributor) , Suzette Hägi (GITTA contributor) , Joël                          Fisler (GITTA contributor) , Friedjoff Trautwein (GITTA contributor) , Marcel Frehner (GITTA contributor) , Eric Lorup (GITTA contributor) , Patrick                         Laube (GITTA contributor) " />
+      <meta name="keywords"
+            content="Räumliche Analysemethoden, Terrain Analysis, Eignungsanalyse, Entscheidungsunterstützung mit GIS, Boolesche Verschneidung, Boolesche Algebra, Standardisierung, Gewichtete Verschneidung, Proxyvariable, eLML" />
+      <title>Füllen des leeren Raumes mit Informationen - Distanz-basierte Interpolation</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Räumliche Analysemethoden</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="VL3_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="VL3_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo1.html">Distanzbeziehungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Distanz-basierte Interpolation</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo3.html">Informationen und Ableitungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo4.html">Ableitung kontinuierlicher Datenfelder</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo5.html">Sichtbarkeitsanalyse</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo6.html">Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo7.html">Vertiefung Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo8.html">Ableitungen aus Abflussnetzwerken</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/VL3_selfAssessment9.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="VL3_V_lo2.html">Füllen des leeren Raumes mit Informationen - Distanz-basierte Interpolation</h1>
+               <div id="d8e133.html" class="clarify">
+                  <p class="paragraph" id="d8e134">Betrachten Sie als Einstieg die folgende Abbildung die Ihnen eine
+                     Niederschlagsoberfläche der Schweiz zeigt: Die blauen Punkte sind die Positionen
+                     von Messstationen, ihre Größe entspricht der Niederschlagsmenge. Die
+                     unterschiedlichen Höhen der Oberfläche sowie ihre Farbgebung stehen ebenfalls in
+                     Zusammenhang mit der Niederschlagsmenge.
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e136" src="../image/CH_Precip_Example_for_Intro.jpg"
+                          width="600"
+                          title="Niederschlagsoberfläche der Schweiz (oben), Karte der Messstationen                     (unten)"
+                          alt="Niederschlagsoberfläche der Schweiz (oben), Karte der Messstationen                     (unten)" /><span class="legend" style="display:block">Niederschlagsoberfläche der Schweiz (oben), Karte der Messstationen                     (unten) (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span><ul class="list" id="d8e137">
+                     <li class="itemAlt">Wie kann aus den ca. 100 Messpunkten solch eine kontinuierliche Oberfläche
+                        erstellt werden?
+                     </li>
+                     <li class="item">Welche Werkzeuge helfen uns dabei?</li>
+                     <li class="itemAlt">Welches Wissen ist nötig und welche Methoden existieren dazu?</li>
+                  </ul>
+                  <p class="paragraph" id="d8e144"> In oben gezeigtem Beispiel ist die Variable der Niederschlag. Stellen
+                     Sie sich vor, Sie könnten den Niederschlag entlang einer Messstrecke auf jeder
+                     beliebigen Position messen. Sie hätten also eine räumlich-kontinuierliche
+                     Messung. Benachbarte Niederschlagswerte werden entweder identisch sein oder
+                     geringfügig variieren, je nach der gewählten <i>Skala</i> der „<i>Nachbarschaft</i>“. In der Praxis ist quasi jedes natürliche
+                     räumlich-kontinuierliche Phänomen von stochastischen Schwankungen bestimmt und
+                     lässt sich daher mathematisch nur annäherungsweise beschreiben.
+                  </p>
+                  <p class="paragraph" id="d8e152">Aus der Statistik kennen wir deterministische (exakt vorhersehbare und
+                     mathematisch beschreibbare) und stochastische (rein zufällige, nicht
+                     vorhersehbare) Phänomene. Betrachten Sie das Beispiel in der folgenden
+                     Flash-Animation. Die Punkte stellen Höhenmessungen dar. Die tatsächlichen Höhen
+                     zwischen unseren bekannten Messpunkten folgen einer Funktion, die wir jedoch
+                     nicht kennen. Wir werden aber davon ausgehen, dass die uns unbekannten Höhen des
+                     Profils nicht einfach zufällig verteilt sind, sondern denen der bekannten
+                     benachbarten Messpunkte ähneln. Stellen wir also ein Höhenprofil gemäß der
+                     blauen gestrichelten Linie her. Das heißt, zwischen die Messpunkte legen wir
+                     eine <i>lineare Funktion</i>. Die rote
+                     durchgezogene Linie zeigt Ihnen das <i>tatsächliche</i> Höhenprofil. Im letzten Bild sehen Sie die beiden
+                     Profillinien im Vergleich. Die Höhe in unserem Beispiel ist eine
+                     Transfer-Funktion abgeleitet aus den bekannten Stützwerten – weder ist sie exakt
+                     mathematisch beschreibbar, noch ist sie rein zufällig. Bleibt darauf
+                     hinzuweisen, dass kontinuierliche räumliche Variablen sich in der Regel besser
+                     im Rastermodell abbilden lassen, wenngleich die Rastereinteilung eigentlich
+                     wiederum diskrete räumliche Einheiten bildet.
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d8e160" width="380" height="295"
+                             class="multimedia"
+                             data="../multimedia/random_function.swf">
+                        <param name="movie" value="../multimedia/random_function.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/random_function.swf"
+                               width="380"
+                               height="295"
+                               class="multimedia"></embed></object><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span><h4>Wie beginnen wir nun mit der Analyse kontinuierlicher Variablen?</h4>
+                  <p class="paragraph"
+                     title="Wie beginnen wir nun mit der Analyse kontinuierlicher Variablen?"
+                     id="d8e161">
+                     Der erste Schritt besteht in der Erstellung einer räumlichen Stichprobe. In dem
+                     zu Beginn erwähnten Beispiel des Schweizer Niederschlags sind dies
+                     meteorologische Messstationen. Ihre Positionen sind fest vorgegeben und nicht
+                     frei wählbar (es sei denn, Sie verwenden eine Untermenge aller existierenden
+                     Stationen). Wenn Sie aber z. B. die Verteilung chemischer Schadstoffe im Boden
+                     analysieren wollen, müssen Sie zunächst die Messpunkte festlegen. Dabei werden
+                     Sie auf folgende Eigenschaften der Stichprobe achten müssen: 
+                  </p>
+                  <ul class="list" id="d8e163">
+                     <li class="itemAlt"><b>Repräsentativität</b> - Das Phänomen, das
+                        analysiert wird, sollte in allen Ausprägungen in der Stichprobe vertreten
+                        sein. Insbesondere Minima und Maxima sind von Bedeutung. Für das
+                        Niederschlagsbeispiel bedeutet dies: Stationen mit Spitzenwerten sollten
+                        vertreten sein. Wenn wir allerdings ein eigenes Probenschema planen, wissen
+                        wir in der Regel nicht, ob wir die Standorte mit Minima und Maxima erfasst
+                        haben.
+                     </li>
+                     <li class="item"><b>Homogenität</b> - Wie zu Beginn erwähnt,
+                        ist die räumliche Abhängigkeit der Daten untereinander eine sehr wichtige
+                        Grundvoraussetzung für eine weitere sinnvolle Analyse. Dieser Zusammenhang
+                        sollte aber über das gesamte Untersuchungsgebiet homogen sein! Um bei den
+                        Niederschlagswerten zu bleiben: jeweils zwei Stationen im Abstand von z. B.
+                        2km sollten sowohl im Tessin ähnliche Messwerte aufweisen als auch im Jura,
+                        in Graubünden oder in Fribourg usw. Diese Voraussetzung nennt man auch
+                        „Stationarität“.
+                     </li>
+                     <li class="itemAlt"><b>Räumliche Verteilung der Messungen </b>-
+                        Die räumliche Verteilung ist von großer Bedeutung. Sie kann völlig zufällig
+                        sein, regelmäßig oder geclustert. Die Verteilungen sehen Sie an Beispielen
+                        weiter unten im Abschnitt „Typologie“. Einen Hinweis auf die räumliche
+                        Verteilung einer Stichprobe können wir statistisch z. B. mittels der
+                        „Nearest Neighbor“-Statistik erhalten. Sie zählt zu den „Point Pattern
+                        Analysis“-Techniken - Methoden, mit deren Hilfe sich die räumliche
+                        Verteilung von Punkten statistisch charakterisieren und analysieren lassen. 
+                     </li>
+                     <li class="item"><b>Größe (= Anzahl der Messungen)</b> - Die
+                        Größe, also der Umfang einer Stichprobe, ist abhängig vom Phänomen und von
+                        der Arealfläche. In manchen Fällen unterliegt die Wahl der Stichprobengröße
+                        praktischen Einschränkungen. Denken Sie z. B. an Messungen in schwer
+                        zugänglichem Gelände, technisch aufwendigen und teuren Messungen usw. Eine
+                        ideale Größe für jegliche Aufgabe anzugeben, ist schlicht unmöglich.
+                     </li>
+                  </ul>
+                  <p class="paragraph" id="d8e180">Repräsentativität, Homogenität, räumliche Verteilung und Größe hängen
+                     zusammen. So ist eine Größe von 5 Messstationen für die Schätzung des
+                     gesamtschweizerischen Niederschlags wohl kaum sinnvoll, daher auch nicht
+                     repräsentativ. Ebenso wenig repräsentativ wäre die Auswahl aller
+                     deutschschweizerischen Messstationen für die gesamtschweizerische Schätzung.
+                     Hier könnte wohl die Größe allein ausreichend sein, nicht aber die räumliche
+                     Verteilung. Wählen Sie nun alle Stationen unter 750 mNN aus, so könnte die
+                     Stichprobe zwar sowohl von der Größe her als auch von ihrer räumlichen
+                     Verteilung stimmen, das Phänomen ist jedoch nicht homogen in der Stichprobe
+                     repräsentiert. Eine nachfolgende Schätzung würde v. a. im Bereich von Gebieten
+                     über 750 mNN deutlich verzerrt ausfallen. 
+                  </p>
+                  <h4>Räumliche Stichprobenmuster am Beispiel schweizerischer Klimastationen</h4>
+                  <p class="paragraph"
+                     title="Räumliche Stichprobenmuster am Beispiel schweizerischer Klimastationen"
+                     id="d8e182">
+                     Sehen Sie in der nachfolgenden Flash-Animation Beispiele unterschiedlicher
+                     Sampling-Typen, angewandt auf das Gebiet der Schweiz. Als Hintergrunddaten wird
+                     das digitale Höhenmodell der Schweiz angezeigt. 
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d8e184" width="530" height="363"
+                             class="multimedia"
+                             title="Stichproben-Muster am Beispiel der Schweiz"
+                             data="../multimedia/Sampling_Patterns_ch_example.swf">
+                        <param name="movie" value="../multimedia/Sampling_Patterns_ch_example.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/Sampling_Patterns_ch_example.swf"
+                               width="530"
+                               height="363"
+                               class="multimedia"
+                               title="Stichproben-Muster am Beispiel der Schweiz"></embed></object><span class="legend" style="display:block">Stichproben-Muster am Beispiel der Schweiz (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span><h4>Räumliche Interpolation von Daten</h4>
+                  <p class="paragraph" title="Räumliche Interpolation von Daten" id="d8e186"> Nachdem wir zuvor knapp den
+                     Zusammenhang räumlicher Abhängigkeiten dargestellt haben, kommen wir nun zu
+                     räumlichen Interpolationen. Was sind räumliche „Interpolationen“? Darunter
+                     versteht man die Berechnung unbekannter Werte auf der Basis benachbarter
+                     bekannter Werte. Die meisten dieser Techniken zählen zu den komplexeren Methoden
+                     räumlicher Analyse, darum beschränken wir uns hier bewusst auf einen
+                     prinzipiellen Überblick zu den Methoden. 
+                  </p>
+                  <p class="paragraph" id="d8e188">„Inverse Distanz“-Gewichtung, „Radial Basis“-Funktionen, „Splines“,
+                     „Ordinary Kriging“, „Natural Neighbor“, „Polynomial Regression“-Methoden,
+                     „Universal Kriging“ usw. Dies sind lediglich einige Interpolations-Methoden, die
+                     in kommerzieller Software zu finden sind. Verwirrend sind die Vielfalt der
+                     Methoden und deren Parametrisierungen. Darum versuchen wir zunächst, die
+                     Methoden in Schemata einzuordnen: dazu gibt es verschiedene Ansätze, wie Sie aus
+                     folgender Zusammenstellung ersehen: 
+                  </p>
+                  <h4>Lokale vs. Globale Interpolation</h4>
+                  <p class="paragraph" title="Lokale vs. Globale Interpolation" id="d8e190"> Globale Methoden werden auf
+                     ALLE Daten im Untersuchungsgebiet angewandt, lokale dagegen nur auf räumlich
+                     definierte Subsets. Globale Interpolation eignet sich daher nicht zur Ermittlung
+                     möglichst exakter Werte, sondern zur Beurteilung globaler räumlicher Strukturen. 
+                  </p>
+                  <p class="paragraph" id="d8e192">Als Beispiele sehen Sie nachfolgend eine lineare Trend-Oberfläche – sie
+                     wurde mittels Regression aus schweizerischen Niederschlagsdaten ermittelt und
+                     zeigt einen Trend zum Anstieg der Niederschlagshöhen von SE nach NW – und eine
+                     lokale Interpolation mittels sogenannter Radial Basis Interpolation: 
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e194" src="../image/globale_interpolation.gif"
+                          width="535"
+                          height="340"
+                          title="Beispiel einer globalen                     Interpolation – Lineare Trendoberfläche für Schweizer Niederschlagsdaten"
+                          alt="Beispiel einer globalen                     Interpolation – Lineare Trendoberfläche für Schweizer Niederschlagsdaten" /><span class="legend" style="display:block">Beispiel einer globalen                     Interpolation – Lineare Trendoberfläche für Schweizer Niederschlagsdaten (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e195" src="../image/lokale_interpolation.gif"
+                          width="535"
+                          height="340"
+                          title="Beispiel einer lokalen                     Interpolation – Radial Basis Interpolation für Schweizer Niederschlagsdaten"
+                          alt="Beispiel einer lokalen                     Interpolation – Radial Basis Interpolation für Schweizer Niederschlagsdaten" /><span class="legend" style="display:block">Beispiel einer lokalen                     Interpolation – Radial Basis Interpolation für Schweizer Niederschlagsdaten (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span><h4>Exakte vs. Nicht-exakte Interpolation</h4>
+                  <p class="paragraph" title="Exakte vs. Nicht-exakte Interpolation" id="d8e196">Exakte Interpolation heißt:
+                     die geschätzte Oberfläche passiert die bekannten Punkte, während bei
+                     nicht-exakten Methoden die Schätzwerte für bekannte Beobachtungen von den realen
+                     Werten abweichen können. Letztere Methoden werden sinnvollerweise dann
+                     eingesetzt, wenn die bekannten Daten bereits gewisse Unschärfen
+                     aufweisen.
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e198" src="../image/exakte_interpolation.jpg"
+                          width="600"
+                          height="318"
+                          title="Exakter Interpolator:                     Schätzoberfläche passiert exakt die bekannten – schematisch als Säulen                     dargestellt – Punkte"
+                          alt="Exakter Interpolator:                     Schätzoberfläche passiert exakt die bekannten – schematisch als Säulen                     dargestellt – Punkte" /><span class="legend" style="display:block">Exakter Interpolator:                     Schätzoberfläche passiert exakt die bekannten – schematisch als Säulen         
+                        dargestellt – Punkte (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1304">Wyatt</a> 2000)</span></span><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e199" src="../image/nicht_exakte_interpolation.jpg"
+                          width="600"
+                          height="277"
+                          title="Nicht-exakter                     Interpolator: Schätzoberfläche passiert die bekannten – schematisch als Säulen                     dargestellt – Punkte NICHT"
+                          alt="Nicht-exakter                     Interpolator: Schätzoberfläche passiert die bekannten – schematisch als Säulen                     dargestellt – Punkte NICHT" /><span class="legend" style="display:block">Nicht-exakter                     Interpolator: Schätzoberfläche passiert die bekannten – schematisch als Säulen         
+                        dargestellt – Punkte NICHT (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1304">Wyatt</a> 2000)</span></span><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e200" src="../image/interpolation_examples.gif"
+                          width="590"
+                          height="700"
+                          title="Vergleich                     unterschiedlicher Interpolationsmethoden am Beipeil eines DGM"
+                          alt="Vergleich                     unterschiedlicher Interpolationsmethoden am Beipeil eines DGM" /><span class="legend" style="display:block">Vergleich                     unterschiedlicher Interpolationsmethoden am Beipeil eines DGM (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1293">Mitas et al.</a> 1999)</span></span><p class="paragraph" id="d8e201"> Die dargestellten Beispiele visualisieren die Ergebnisse
+                     unterschiedlicher, etablierter Interpolationsverfahren. Aus diesen soll
+                     stellvertretend neben der bereits bekannten <i>Voronoi-Tessellation</i> die <i>Inverse
+                        Distanz-Gewichtung Interpolation</i> aufgrund ihrer Einfachheit und
+                     häufigen Anwendung gesondert betrachtet werden. Bei der Inversen
+                     Distanz-Gewichtung (Inverse Distance Weighting, IDW), wird das Gewicht jedes
+                     bekannten Punktes invers proportional zu seiner Entfernung zum nächsten Punkt
+                     gesetzt. Die Berechnung erfolgt gemäß: 
+                  </p>
+                  <table class="table" id="d8e210">
+                     <tr class="tablerowAlt">
+                        <td class="tabledata" id="d8e212"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e213" src="../image/IDW_Formula.gif" width="128"
+                                   height="134"
+                                   title="Inverse Distanz-Gewichtung                                 (IDW) – Grundformel"
+                                   alt="Inverse Distanz-Gewichtung                                 (IDW) – Grundformel" /><span class="legend" style="display:block">Inverse Distanz-Gewichtung                                 (IDW) – Grundformel</span></span></td>
+                        <td class="tabledata" id="d8e214"> ν ... zu schätzender Wert, ν<sub>i</sub> ... bekannte
+                           Werte<br /><i>d</i><sub>i</sub>..., <i>d</i><sub>n</sub>...
+                           Distanzen der <i>n</i> Datenpunkte zum
+                           geschätzten Punkt 
+                        </td>
+                     </tr>
+                  </table>
+                  <p class="paragraph" id="d8e233">Meist finden Sie die folgende Variante, in welcher der Einfluss der
+                     Distanz zusätzlich über einen Exponenten gesteuert werden kann (dieser wird in
+                     den meisten Programmen auf 2 voreingestellt): 
+                  </p>
+                  <table class="table" id="d8e235">
+                     <tr class="tablerowAlt">
+                        <td class="tabledata" id="d8e237"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e238" src="../image/IDW_Formula_default.gif"
+                                   width="155"
+                                   height="132"
+                                   title="Häufigste Form der                                 IDW-Formel mit zusätzlichem Distanzgewichtungs-Exponenten"
+                                   alt="Häufigste Form der                                 IDW-Formel mit zusätzlichem Distanzgewichtungs-Exponenten" /><span class="legend" style="display:block">Häufigste Form der                                 IDW-Formel mit zusätzlichem Distanzgewichtungs-Exponenten</span></span></td>
+                        <td class="tabledata" id="d8e239"> ν ... zu schätzender Wert, ν<sub>i</sub> ... bekannte
+                           Werte<br /><i>d</i><sup>p</sup><sub>i</sub>..., <i>d</i><sup>p</sup><sub>n</sub>... mit <i>p</i>
+                           exponenzierte Distanzen der <i>n</i>
+                           Datenpunkte zum geschätzten Punkt 
+                        </td>
+                     </tr>
+                  </table>
+                  <p class="paragraph" id="d8e266">Je niedriger der Exponent gesetzt wird, desto gleichförmiger gehen alle
+                     Nachbarn (ungeachtet ihrer Distanz) in die Berechnung ein, und desto „glatter“
+                     wird die Schätzoberfläche. Je höher der Exponent wird, desto akzentuierter und
+                     „unruhiger“ wird die Oberfläche, da nur mehr das Gewicht der <i>nächstgelegenen</i> Nachbarn in die Interpolation
+                     einfließt (siehe folgende interaktive Animation). 
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d8e271" width="472" height="345"
+                             class="multimedia"
+                             title="IDW-Schätzoberflächen der Schweizerischen                     Niederschlagsdaten"
+                             data="../multimedia/IDW_CH_Precip.swf">
+                        <param name="movie" value="../multimedia/IDW_CH_Precip.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/IDW_CH_Precip.swf"
+                               width="472"
+                               height="345"
+                               class="multimedia"
+                               title="IDW-Schätzoberflächen der Schweizerischen                     Niederschlagsdaten"></embed></object><span class="legend" style="display:block">IDW-Schätzoberflächen der Schweizerischen                     Niederschlagsdaten</span></span><h4>Vorteile der IDW-Interpolation:</h4>
+                  <ul class="list" id="d8e272">
+                     <li class="itemAlt"> Sie ermöglicht sehr schnelle Berechnungen.</li>
+                     <li class="item"> Unterschiedliche Distanzen fließen in die Schätzung unterschiedlich
+                        ein.
+                     </li>
+                     <li class="itemAlt"> Über den Distanzgewichtungs-Exponent kann der Einfluss der Distanzen fein
+                        gesteuert werden.
+                     </li>
+                  </ul>
+                  <h4>Nachteile der IDW-Interpolation:</h4>
+                  <ul class="list" id="d8e279">
+                     <li class="itemAlt"> Es ist keine richtungsabhängige Gewichtung möglich, d. h. räumlich
+                        gerichtete Zusammenhänge werden ignoriert (z. B. Höhenpunkte entlang eines
+                        Bergrückens).
+                     </li>
+                     <li class="item"> Unschöne Artefakte sind die sogenannten „Bull-Eyes“ – dies sind
+                        kreisförmige Bereiche gleicher Werte um die bekannten Datenpunkte. Eine von
+                        <span class="citation"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1305">Shepard</a> 1968)</span> entwickelte Variante der
+                        IDW-Interpolation reduziert diese Bull-Eyes jedoch (siehe folgende
+                        Abbildungen).
+                     </li>
+                  </ul>
+                  <table class="column" id="d8e286">
+                     <tr valign="top">
+                        <td class="columnLeft"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e288" src="../image/IDW_BullEyes.gif" width="302"
+                                   height="238"
+                                   title="IDW „Bull Eyes“-Effekt:                             Um die bekannten Punkte sind konzentrische Bereiche gleicher Werte zu                             erkennen – ein unerwünschtes Artefakt der IDW-Interpolation"
+                                   alt="IDW „Bull Eyes“-Effekt:                             Um die bekannten Punkte sind konzentrische Bereiche gleicher Werte zu                             erkennen – ein unerwünschtes Artefakt der IDW-Interpolation" /><span class="legend" style="display:block">IDW „Bull Eyes“-Effekt:                             Um die bekannten Punkte sind konzentrische Bereiche gleicher Werte zu
+                                 erkennen – ein unerwünschtes Artefakt der IDW-Interpolation (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span></td>
+                        <td class="columnMiddle" width="30"></td>
+                        <td class="columnRight"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e291" src="../image/IDW_Shepard.gif" width="302"
+                                   height="238"
+                                   title="IDW modifiziert nach                             SHEPARD: die Bull-Eyes sind deutlich reduziert"
+                                   alt="IDW modifiziert nach                             SHEPARD: die Bull-Eyes sind deutlich reduziert" /><span class="legend" style="display:block">IDW modifiziert nach                             SHEPARD: die Bull-Eyes sind deutlich reduziert</span></span></td>
+                     </tr>
+                  </table>
+               </div>
+               <div id="d8e292.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d8e293">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><p class="paragraph" id="d8e294"> In der folgenden interaktiven Animation sehen Sie zehn räumlich
+                        verteilte Datenpunkte (blau) mit bekannten Messwerten (Ziffern neben den
+                        Punkten) und einen Punkt mit zu errechnendem Wert (rot). Beim Start der
+                        Animation wird dieser aus den vorgegebenen Werten und Distanzen ermittelt.
+                        Um die Prinzipien der IDW-Interpolation besser kennen zu lernen,
+                        experimentieren Sie nun: 
+                     </p>
+                     <ul class="list" id="d8e296">
+                        <li class="itemAlt"> Verändern Sie mit Ihrem Mauszeiger die Positionen eines oder aller
+                           Punkte.
+                        </li>
+                        <li class="item"> Modifizieren Sie die vorgegebenen Werte für die bekannten Punkte
+                           (insgesamt sind max. 4 Stellen erlaubt).
+                        </li>
+                        <li class="itemAlt"> Setzen Sie für den Distanzgewichtungs-Exponenten einen anderen Wert
+                           als 2 ein (insg. max. 4 Stellen erlaubt).
+                        </li>
+                     </ul><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e303" src="../image/idw.jpg" width="300"
+                             title="Interaktive IDW Übung                          "
+                             alt="Interaktive IDW Übung                          " /><span class="legend" style="display:block">Interaktive IDW Übung                          </span></span><p class="link"><a class="link" href="../multimedia/IDW_Interactive.swf" title="">Starten Sie die Interaktive
+                           IDW-Animation </a></p>
+                     <p class="paragraph" id="d8e306">Beantworten Sie aus Ihren Experimenten heraus folgende Fragen: </p>
+                     <ol class="list" id="d8e308">
+                        <li class="itemAlt"> Welcher Messwert beeinflusst das Ergebnis umso mehr, je höher der
+                           Exponent gesetzt wird?
+                        </li>
+                        <li class="item"> Wenn der Exponent auf 0 gesetzt wird, wie beeinflussen dann
+                           unterschiedliche Distanzen das Schätzergebnis bzw. wovon ist dieses dann
+                           nur abhängig?
+                        </li>
+                     </ol>
+                     <p id="d8e313" class="popupTitle" style="cursor: pointer;"
+                        onclick="onBlock('solutiond8e313')">Klicken Sie hier für mehr Informationen</p>
+                     <div id="solutiond8e313text" style="display: none; cursor: pointer;" class="popup"
+                          onclick="off('solutiond8e313')">
+                        <ol class="list" id="d8e314">
+                           <li class="itemAlt"><b>Der bzw. die Messwert(e) der nächst
+                                 benachbarten Punkte</b> beeinflussen das Ergebnis umso
+                              mehr, je höher der Distanzexponent gesetzt wird.
+                           </li>
+                           <li class="item"> Wird der Distanzexponent auf 0 (Null) gesetzt, dann ergibt sich
+                              für jegliche Distanz eine Gewichtung von 1, d. h. alle Entfernungen
+                              sind absolut gleichwertig, <b>das Resultat
+                                 hängt also nur mehr von den Messwerten selbst ab und nicht von
+                                 der Distanz.</b> Die Interpolation hat keinerlei
+                              räumliche Komponente mehr.
+                           </li>
+                        </ol>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="VL3_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="VL3_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 5.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL3.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

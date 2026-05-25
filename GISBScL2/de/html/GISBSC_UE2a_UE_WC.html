@@ -1,0 +1,915 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Wissens-Check. " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Wissens-Check</title>
+      		
+      <link href="selfCheck.css" type="text/css" rel="stylesheet" media="screen" />
+      		<script src="selfCheck.js" type="text/javascript">
+         <!----></script><link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSC_UE2a_summary.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSC_UE2a_furtherReading.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2a_U_lo1.html">Konzeptioneller Entwurf von Datenbanken</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2a_U_lo2.html">Digitalisieren von Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2a_U_lo5.html">Einführung in die Geodatabase</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSC_UE2a_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Wissens-Check</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSC_UE2a_furtherReading.html">Literaturempfehlungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSC_UE2a_UE_WC.html">Wissens-Check</h1>
+               <p class="paragraph" id="d14e3106">Sie möchten auf Basis dieser von Ihnen bereits rektifizierten Karte die
+                  Provinzgrenzen Thailands digitalisieren um diesen spätere sozioökonomische Attribute
+                  zuweisen zu können. Wie gehen Sie vor?
+               </p>
+               <div id="selfCheck2.html" class="singleChoice">
+                  <div class="itemQuestion">Welches der genannten Dateiformate halten Sie für geeignet (falls Sie
+                     nicht in einer Geodatabase arbeiten)?<br /><br /></div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="1" class="itemRadio"
+                            id="selfCheck2.html_d14e3113" /><div class="itemLabel"><label for="selfCheck2.html_d14e3113">Ein Shapefile vom Typ Polygon <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3115" /><div class="itemLabel"><label for="selfCheck2.html_d14e3115">Ein Shapefile vom Typ Punkt <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3117" /><div class="itemLabel"><label for="selfCheck2.html_d14e3117">Ein Shapefile vom Typ Linie <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3119" /><div class="itemLabel"><label for="selfCheck2.html_d14e3119">Ein Rasterbild vom Typ Geotiff <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3121" /><div class="itemLabel"><label for="selfCheck2.html_d14e3121">Eine Datei vom Typ Layer <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3123" /><div class="itemLabel"><label for="selfCheck2.html_d14e3123">Eine Datei vom Typ Feature <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck2.html" value="0" class="itemRadio"
+                            id="selfCheck2.html_d14e3125" /><div class="itemLabel"><label for="selfCheck2.html_d14e3125">Keine der Möglichkeiten <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck2.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck2.html_solution"
+                             onclick="solutionChoice('selfCheck2.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck3.html" class="multipleChoice">
+                  <div class="itemQuestion">Zur Erstellung der Datei können Sie folgenden Menupunkt/Button
+                     benutzen: <br /><br /><span class="multimedia_inline_center"><a href="../image/WC_Abb_1.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Praxis - Editieren von Datenentabellen und Geometrien]"
+                           title=" "><img class="multimedia" id="d14e3132" src="../image/WC_Abb_1.png" width="600"
+                                title=" "
+                                alt=" " /></a><span class="legend" style="display:block"> </span></span><br /><br /></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="0" class="itemRadio"
+                            id="selfCheck3.html_d14e3134" /><div class="itemLabel"><label for="selfCheck3.html_d14e3134">[1] File  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="0" class="itemRadio"
+                            id="selfCheck3.html_d14e3136" /><div class="itemLabel"><label for="selfCheck3.html_d14e3136">[2] Insert <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="1" class="itemRadio"
+                            id="selfCheck3.html_d14e3138" /><div class="itemLabel"><label for="selfCheck3.html_d14e3138">[3] ArcCatalog <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="1" class="itemRadio"
+                            id="selfCheck3.html_d14e3140" /><div class="itemLabel"><label for="selfCheck3.html_d14e3140">[4]
+                           Toolbox <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp" onmouseover="Tip('mit dem Werkzeug CREATE FEATURE CLASS')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="0" class="itemRadio"
+                            id="selfCheck3.html_d14e3142" /><div class="itemLabel"><label for="selfCheck3.html_d14e3142">[5] Editor <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck3.html" value="0" class="itemRadio"
+                            id="selfCheck3.html_d14e3144" /><div class="itemLabel"><label for="selfCheck3.html_d14e3144">[6] Add Data <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck3.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck3.html_solution"
+                             onclick="solutionChoice('selfCheck3.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div><script src="wz_tooltip.js" type="text/javascript">
+                  <!----></script><div id="selfCheck4.html" class="multipleChoice">
+                  <div class="itemQuestion">Bei der Erstellung achten Sie auf: <br /><br /></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="1" class="itemRadio"
+                            id="selfCheck4.html_d14e3151" /><div class="itemLabel"><label for="selfCheck4.html_d14e3151">Name der Datei <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="0" class="itemRadio"
+                            id="selfCheck4.html_d14e3153" /><div class="itemLabel"><label for="selfCheck4.html_d14e3153">Anlegen aller
+                           benötigten Attributfelder <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp" onmouseover="Tip('nicht zwingend aber sinnvoll')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="0" class="itemRadio"
+                            id="selfCheck4.html_d14e3155" /><div class="itemLabel"><label for="selfCheck4.html_d14e3155">Farbgrundlage <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="1" class="itemRadio"
+                            id="selfCheck4.html_d14e3157" /><div class="itemLabel"><label for="selfCheck4.html_d14e3157">Korrekter Raumbezug <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck4.html" value="0" class="itemRadio"
+                            id="selfCheck4.html_d14e3159" /><div class="itemLabel"><label for="selfCheck4.html_d14e3159">Passender Feature Type <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck4.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck4.html_solution"
+                             onclick="solutionChoice('selfCheck4.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div><script src="wz_tooltip.js" type="text/javascript">
+                  <!----></script><div id="selfCheck5.html" class="multipleChoice">
+                  <div class="itemQuestion">Das Einladen des Shapefiles in den Datenrahmen von ArcMap erfolgt mit
+                     Hilfe von: <br /><br /></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck5.html" value="0" class="itemRadio"
+                            id="selfCheck5.html_d14e3166" /><div class="itemLabel"><label for="selfCheck5.html_d14e3166">Toolbox <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck5.html" value="1" class="itemRadio"
+                            id="selfCheck5.html_d14e3168" /><div class="itemLabel"><label for="selfCheck5.html_d14e3168">File Add Data <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck5.html" value="0" class="itemRadio"
+                            id="selfCheck5.html_d14e3170" /><div class="itemLabel"><label for="selfCheck5.html_d14e3170">Editor <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck5.html" value="0" class="itemRadio"
+                            id="selfCheck5.html_d14e3172" /><div class="itemLabel"><label for="selfCheck5.html_d14e3172">File Open <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck5.html" value="1" class="itemRadio"
+                            id="selfCheck5.html_d14e3174" /><div class="itemLabel"><label for="selfCheck5.html_d14e3174">Add data <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck5.html" value="0" class="itemRadio"
+                            id="selfCheck5.html_d14e3176" /><div class="itemLabel"><label for="selfCheck5.html_d14e3176">Insert Datenrahmen <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck5.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck5.html_solution"
+                             onclick="solutionChoice('selfCheck5.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck6.html" class="singleChoice">
+                  <div class="itemQuestion">Zur Digitalisierung bzw. zum Editieren von Daten: <br /><br /></div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck6.html" value="0" class="itemRadio"
+                            id="selfCheck6.html_d14e3183" /><div class="itemLabel"><label for="selfCheck6.html_d14e3183">Öffnen Sie das Werkzeug <i>Edit
+                              Signatures</i> aus der Toolbox <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck6.html" value="0" class="itemRadio"
+                            id="selfCheck6.html_d14e3188" /><div class="itemLabel"><label for="selfCheck6.html_d14e3188">Öffnen Sie den Menupunkt <i>File Add
+                              Data</i> <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck6.html" value="1" class="itemRadio"
+                            id="selfCheck6.html_d14e3192" /><div class="itemLabel"><label for="selfCheck6.html_d14e3192">Starten Sie den <i>Editor</i> <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck6.html" value="0" class="itemRadio"
+                            id="selfCheck6.html_d14e3196" /><div class="itemLabel"><label for="selfCheck6.html_d14e3196">Öffnen Sie den Menupunkt <i>File
+                              Open</i> <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck6.html" value="0" class="itemRadio"
+                            id="selfCheck6.html_d14e3200" /><div class="itemLabel"><label for="selfCheck6.html_d14e3200">Klicken Sie auf den Button <i>Add
+                              data</i> <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck6.html" value="0" class="itemRadio"
+                            id="selfCheck6.html_d14e3204" /><div class="itemLabel"><label for="selfCheck6.html_d14e3204">Öffnen Sie den Menupunkt <i>Insert
+                              Datenrahmen</i> <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck6.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck6.html_solution"
+                             onclick="solutionChoice('selfCheck6.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck7.html" class="multipleChoice">
+                  <div class="itemQuestion">Welche Einstellungen müssen Sie zur Erfassung eines Polygons vor dem
+                     Digitalisieren des ersten Stützpunktes vornehmen? <br /><br /><span class="multimedia_inline_center"><a href="../image/WC_Abb_2.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Praxis - Editieren von Datenentabellen und Geometrien]"
+                           title=" "><img class="multimedia" id="d14e3213" src="../image/WC_Abb_2.png" width="600"
+                                title=" "
+                                alt=" " /></a><span class="legend" style="display:block"> </span></span><br /><br /></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck7.html" value="1" class="itemRadio"
+                            id="selfCheck7.html_d14e3215" /><div class="itemLabel"><label for="selfCheck7.html_d14e3215">[1] Sketch Tool  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck7.html" value="0" class="itemRadio"
+                            id="selfCheck7.html_d14e3217" /><div class="itemLabel"><label for="selfCheck7.html_d14e3217">[2] Task – Dropdownmenü <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('wenn Sie das Sketch Tool wählen wird automatisch CREATE NEW FEATURE eingestellt')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck7.html" value="1" class="itemRadio"
+                            id="selfCheck7.html_d14e3219" /><div class="itemLabel"><label for="selfCheck7.html_d14e3219">[7] Target Layer <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck7.html" value="0" class="itemRadio"
+                            id="selfCheck7.html_d14e3221" /><div class="itemLabel"><label for="selfCheck7.html_d14e3221">[3] Toolbox <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck7.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck7.html_solution"
+                             onclick="solutionChoice('selfCheck7.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div><script src="wz_tooltip.js" type="text/javascript">
+                  <!----></script><div id="selfCheck8.html" class="singleChoice">
+                  <div class="itemQuestion">Um einen nutzbaren Datensatz zu erzeugen, sollte auf ein korrekte
+                     Topologie der Polygone geachtet werden. Was ist damit gemeint? <br /><br /></div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck8.html" value="0" class="itemRadio"
+                            id="selfCheck8.html_d14e3228" /><div class="itemLabel"><label for="selfCheck8.html_d14e3228">Genauigkeit während der Digitalisierung (möglichst
+                           Pixelgenau) <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck8.html" value="1" class="itemRadio"
+                            id="selfCheck8.html_d14e3230" /><div class="itemLabel"><label for="selfCheck8.html_d14e3230">Überschneidungsfreie und lückenlose
+                           Digitalisierung <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck8.html" value="0" class="itemRadio"
+                            id="selfCheck8.html_d14e3232" /><div class="itemLabel"><label for="selfCheck8.html_d14e3232">Überprüfung durch die „Topologie-check“ Funktion der
+                           Toolbox <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck8.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck8.html_solution"
+                             onclick="solutionChoice('selfCheck8.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck9.html" class="singleChoice">
+                  <div class="itemQuestion">Zur lagegenauen Erfasung angrenzender Geometrien, sollte welche
+                     Funktion aktiviert sein? <br /><br /><span class="multimedia_inline_center"><a href="../image/WC_Abb_2.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Praxis - Editieren von Datenentabellen und Geometrien]"
+                           title=" "><img class="multimedia" id="d14e3239" src="../image/WC_Abb_2.png" width="600"
+                                title=" "
+                                alt=" " /></a><span class="legend" style="display:block"> </span></span><br /><br /></div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck9.html" value="1" class="itemRadio"
+                            id="selfCheck9.html_d14e3241" /><div class="itemLabel"><label for="selfCheck9.html_d14e3241">[6]Snapping <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck9.html" value="0" class="itemRadio"
+                            id="selfCheck9.html_d14e3243" /><div class="itemLabel"><label for="selfCheck9.html_d14e3243">[5] Clip <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck9.html" value="0" class="itemRadio"
+                            id="selfCheck9.html_d14e3245" /><div class="itemLabel"><label for="selfCheck9.html_d14e3245">[2] Create New Feature <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck9.html" value="0" class="itemRadio"
+                            id="selfCheck9.html_d14e3247" /><div class="itemLabel"><label for="selfCheck9.html_d14e3247">Einstellung unter Options – „Exact – Fit“ Funktion <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck9.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck9.html_solution"
+                             onclick="solutionChoice('selfCheck9.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck10.html" class="multipleChoice">
+                  <div class="itemQuestion"> Was ist an der vorhandenen Digitalisierung zweier Provinzen Thailands
+                     im folgenden Bild problematisch? <br /><br /><span class="multimedia_inline_center"><a href="../image/WC_Abb_3.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Praxis - Editieren von Datenentabellen und Geometrien]"
+                           title=" "><img class="multimedia" id="d14e3254" src="../image/WC_Abb_3.png" width="600"
+                                title=" "
+                                alt=" " /></a><span class="legend" style="display:block"> </span></span><br /><br /></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck10.html" value="1" class="itemRadio"
+                            id="selfCheck10.html_d14e3256" /><div class="itemLabel"><label for="selfCheck10.html_d14e3256">Zwei Polygone der gleichen Datenebene überschneiden sich  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck10.html" value="1" class="itemRadio"
+                            id="selfCheck10.html_d14e3258" /><div class="itemLabel"><label for="selfCheck10.html_d14e3258">Ungenaue Digitalisierung <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck10.html" value="1" class="itemRadio"
+                            id="selfCheck10.html_d14e3260" /><div class="itemLabel"><label for="selfCheck10.html_d14e3260">Schlechte Kartenqualität <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck10.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck10.html_solution"
+                             onclick="solutionChoice('selfCheck10.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck11.html" class="multipleChoice">
+                  <div class="itemQuestion"> Wie kann die Topologie bereinigt werden? Welches sind die Ihrer
+                     Meinung nach möglichen Lösungen? <br /><br /><span class="multimedia_inline_center"><a href="../image/WC_Abb_3.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Praxis - Editieren von Datenentabellen und Geometrien]"
+                           title=" "><img class="multimedia" id="d14e3267" src="../image/WC_Abb_3.png" width="600"
+                                title=" "
+                                alt=" " /></a><span class="legend" style="display:block"> </span></span><br /><br /></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck11.html" value="1" class="itemRadio"
+                            id="selfCheck11.html_d14e3269" /><div class="itemLabel"><label for="selfCheck11.html_d14e3269">Mit dem Werkzeug <i>Clip</i> Ausschneiden eines der beiden Polygone <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck11.html" value="1" class="itemRadio"
+                            id="selfCheck11.html_d14e3274" /><div class="itemLabel"><label for="selfCheck11.html_d14e3274">Löschen und erneutes editieren <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck11.html" value="0" class="itemRadio"
+                            id="selfCheck11.html_d14e3276" /><div class="itemLabel"><label for="selfCheck11.html_d14e3276">Mit dem Werkzeug <i>Merge</i> Zusammenfassen der Polygone <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck11.html" value="1" class="itemRadio"
+                            id="selfCheck11.html_d14e3281" /><div class="itemLabel"><label for="selfCheck11.html_d14e3281">Mit Hilfe des <i>Reshape
+                              Feature</i> die Polygone umformen <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck11.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck11.html_solution"
+                             onclick="solutionChoice('selfCheck11.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck12.html" class="singleChoice">
+                  <div class="itemQuestion"> Zur Erfassung der Bevölkerungszahl der Provinzen ist eine Anpassung
+                     der Attributtabelle notwendig. Wie gehen sie vor? <br /><br /></div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck12.html" value="0" class="itemRadio"
+                            id="selfCheck12.html_d14e3292" /><div class="itemLabel"><label for="selfCheck12.html_d14e3292">Editor – Options - Add Attribute <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck12.html" value="0" class="itemRadio"
+                            id="selfCheck12.html_d14e3294" /><div class="itemLabel"><label for="selfCheck12.html_d14e3294">Editor – Taskleiste – Create Attribute Field <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck12.html" value="1" class="itemRadio"
+                            id="selfCheck12.html_d14e3296" /><div class="itemLabel"><label for="selfCheck12.html_d14e3296">Shapefile Eigenschaften – Attributtabelle – Add
+                           Field <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck12.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck12.html_solution"
+                             onclick="solutionChoice('selfCheck12.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck13.html" class="multipleChoice">
+                  <div class="itemQuestion"> Die Bevölkerung der Provinzen schwankt zwischen 100.000 und
+                     6.000.000. Sie wollen diese Werte später in der Karte aufbereitet
+                     darstellen. Welche Eigenschaften weisen Sie dem Feld sinnvollerweise zu?
+                     <br /><br /></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="0" class="itemRadio"
+                            id="selfCheck13.html_d14e3303" /><div class="itemLabel"><label for="selfCheck13.html_d14e3303">Text – Length = 50  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('Da Sie Ganzzahlenwerte eintragen wollen ist dies keine sinvolle Option')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="1" class="itemRadio"
+                            id="selfCheck13.html_d14e3305" /><div class="itemLabel"><label for="selfCheck13.html_d14e3305">Short Integer - Precision = 7  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="0" class="itemRadio"
+                            id="selfCheck13.html_d14e3307" /><div class="itemLabel"><label for="selfCheck13.html_d14e3307">Float – Precision = 8, Scale = 2  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('Zwar können Sie Zahlenwerte eintragen aber weder der Domäne ist sinnvoll noch ist es vorteilhaft Fließkommazahlen zu erlauben')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="1" class="itemRadio"
+                            id="selfCheck13.html_d14e3309" /><div class="itemLabel"><label for="selfCheck13.html_d14e3309">Long Integer  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemQuestion">Nennen sie Eigenschaften die auf eine File Geodatabase
+                     zutreffen:
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="0" class="itemRadio"
+                            id="selfCheck13.html_d14e3314" /><div class="itemLabel"><label for="selfCheck13.html_d14e3314">komprimiert die Daten so das sehr viel weniger
+                           Speicherplatz verbraucht wird <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="1" class="itemRadio"
+                            id="selfCheck13.html_d14e3316" /><div class="itemLabel"><label for="selfCheck13.html_d14e3316">automatische Geometrieberechnung <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="0" class="itemRadio"
+                            id="selfCheck13.html_d14e3318" /><div class="itemLabel"><label for="selfCheck13.html_d14e3318">macht das Referenzieren von Grundlagenkarten
+                           überflüssig <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="1" class="itemRadio"
+                            id="selfCheck13.html_d14e3320" /><div class="itemLabel"><label for="selfCheck13.html_d14e3320">vorhandene Topologiebeziehungen <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="0" class="itemRadio"
+                            id="selfCheck13.html_d14e3322" /><div class="itemLabel"><label for="selfCheck13.html_d14e3322">dienen als Austauschformat, dies bedeutet das Sie von allen
+                           gängigen GIS Produkten lesbar sind <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="1" class="itemRadio"
+                            id="selfCheck13.html_d14e3324" /><div class="itemLabel"><label for="selfCheck13.html_d14e3324">ermöglichen es in der Attributtabelle leere Werte
+                           einzugeben (&lt;no Value&gt;) <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck13.html" value="0" class="itemRadio"
+                            id="selfCheck13.html_d14e3326" /><div class="itemLabel"><label for="selfCheck13.html_d14e3326">Rechengeschwindigkeit wird erhöht <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck13.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck13.html_solution"
+                             onclick="solutionChoice('selfCheck13.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div><script src="wz_tooltip.js" type="text/javascript">
+                  <!----></script><div id="selfCheck14.html" class="singleChoice">
+                  <div class="itemQuestion">Aus welchen drei fundamentalen Organisationseinheiten/Datenstrukturen
+                     ist eine Geodatabase aufgebaut?
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck14.html" value="0" class="itemRadio"
+                            id="selfCheck14.html_d14e3332" /><div class="itemLabel"><label for="selfCheck14.html_d14e3332">layer, shapefiles, Raster Dataset <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck14.html" value="0" class="itemRadio"
+                            id="selfCheck14.html_d14e3334" /><div class="itemLabel"><label for="selfCheck14.html_d14e3334">layergroups, Tabellen, shapefiles <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck14.html" value="1" class="itemRadio"
+                            id="selfCheck14.html_d14e3336" /><div class="itemLabel"><label for="selfCheck14.html_d14e3336">Feature classes, Raster Datasets, Tabellen <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="radio" name="selfCheck14.html" value="0" class="itemRadio"
+                            id="selfCheck14.html_d14e3338" /><div class="itemLabel"><label for="selfCheck14.html_d14e3338">Feature Datasets, shapefiles, Tabellen <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck14.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck14.html_solution"
+                             onclick="solutionChoice('selfCheck14.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div>
+               <div id="selfCheck15.html" class="multipleChoice">
+                  <div class="itemQuestion">Sie haben ein Polygonshapefile mit mehreren Features als Input und
+                     wollen diese miteinander verbinden, so dass Sie als Output ein
+                     Polygonshapefile erzeugen. Welches Werkzeug nutzen Sie? <span class="multimedia_inline_center"><a href="../image/WC_Abb_1.jpg" target="_blank" class="lightwindow"
+                           rel="Gallery[Praxis - Editieren von Datenentabellen und Geometrien]"><img class="multimedia" id="d14e3344" src="../image/WC_Abb_1.jpg" width="400" alt="" /></a></span></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck15.html" value="1" class="itemRadio"
+                            id="selfCheck15.html_d14e3345" /><div class="itemLabel"><label for="selfCheck15.html_d14e3345">Merge <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp" onmouseover="Tip('Im Editor sonst Dissolve')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck15.html" value="0" class="itemRadio"
+                            id="selfCheck15.html_d14e3347" /><div class="itemLabel"><label for="selfCheck15.html_d14e3347">Union <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck15.html" value="0" class="itemRadio"
+                            id="selfCheck15.html_d14e3349" /><div class="itemLabel"><label for="selfCheck15.html_d14e3349">Intersect <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck15.html" value="1" class="itemRadio"
+                            id="selfCheck15.html_d14e3351" /><div class="itemLabel"><label for="selfCheck15.html_d14e3351">Dissolve <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp" onmouseover="Tip('Als Werkzeug ohne zu Editiren')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck15.html" value="0" class="itemRadio"
+                            id="selfCheck15.html_d14e3353" /><div class="itemLabel"><label for="selfCheck15.html_d14e3353">Clip <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp_disabled">    </div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck15.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck15.html_solution"
+                             onclick="solutionChoice('selfCheck15.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div><script src="wz_tooltip.js" type="text/javascript">
+                  <!----></script><div id="selfCheck16.html" class="multipleChoice">
+                  <div class="itemQuestion"> Sie haben die Datei haapai1.tif in ArcGis eingeladen. Vorher haben
+                     sie die Karte anhand des Koordinatennetzes referenziert und nun wollen Sie
+                     die Insel Tofua nach den Kategorien Landmasse und Calderasee
+                     abdigitalisieren, welche erweiterten Digitalisierwerkzeuge können Sie
+                     nutzen, um die Arbeit zu vereinfachen? Mehrfachnennungen sind
+                     möglich.<span class="multimedia_inline_center"><a href="../image/WC_Abb_3.jpg" target="_blank" class="lightwindow"
+                           rel="Gallery[Praxis - Editieren von Datenentabellen und Geometrien]"><img class="multimedia" id="d14e3359" src="../image/WC_Abb_3.jpg" width="400" alt="" /></a></span></div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck16.html" value="1" class="itemRadio"
+                            id="selfCheck16.html_d14e3360" /><div class="itemLabel"><label for="selfCheck16.html_d14e3360">Clip, modify Feature, Smooth  <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('mit Smooth lassen sich die Kanten glätten, nützlich wenn man nicht viele Passpunkte gesetzt hat und die Inselfläche dadurch stark verzackt ist.')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck16.html" value="0" class="itemRadio"
+                            id="selfCheck16.html_d14e3362" /><div class="itemLabel"><label for="selfCheck16.html_d14e3362">verfolgen Werkzeug, Merge, Union, Divide <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('Merge ist kein geeignetes Werkzeug da keine Flächen zusammengeführt werden sollen, Union ist kein geeignetes Werkzeug da keine Flächen vereinigt werden und Divide kann nur genutzt werden um Polylinien zu teilen')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck16.html" value="0" class="itemRadio"
+                            id="selfCheck16.html_d14e3364" /><div class="itemLabel"><label for="selfCheck16.html_d14e3364">Clip, Merge, Teil fertigstellen, Buffer <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('Merge ist kein geeignetes Werkzeug da keine Flächen zusammengeführt werden sollen, Buffer macht keinen Sinn da keine Bufferflächen erzeugt werden sollen')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck16.html" value="0" class="itemRadio"
+                            id="selfCheck16.html_d14e3366" /><div class="itemLabel"><label for="selfCheck16.html_d14e3366">Clip, Union, verfolgen Werkzeug, Smooth <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('Union ist kein geeignetes Werkzeug da keine Flächen vereinigt werden')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck16.html" value="1" class="itemRadio"
+                            id="selfCheck16.html_d14e3368" /><div class="itemLabel"><label for="selfCheck16.html_d14e3368">verfolgen Werkzeug, Teil fertig stellen, modify Feature, Smooth <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('alle Werkzeuge sind möglich, jedoch ist der korrekte Umgang mit dem verfolgen Werkzeug schwierig und etwas zeitaufwendiger als die anderen Möglichkeiten')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="itemAnswer"><input type="checkbox" name="selfCheck16.html" value="1" class="itemRadio"
+                            id="selfCheck16.html_d14e3370" /><div class="itemLabel"><label for="selfCheck16.html_d14e3370">Cut Polygon
+                           Feature, Smooth, modify Feature <span class="itemFeedback"></span></label></div>
+                     <div class="itemHelp"
+                          onmouseover="Tip('von den angegebenen Möglichkeiten die schnellste')"
+                          onmouseout="UnTip()">?</div>
+                  </div>
+                  <div class="missingMC">Sie haben noch nicht alle richtigen Antworten angekreuzt!</div>
+                  <div class="itemCheck"><button type="submit" class="buttonCheck" onclick="checkChoice('selfCheck16.html');"
+                             onmouseover="this.className='buttonCheck_hover';"
+                             onmouseout="this.className='buttonCheck';">Prüfen</button><button type="submit" class="buttonSolution_disabled" id="selfCheck16.html_solution"
+                             onclick="solutionChoice('selfCheck16.html');"
+                             onmouseover="this.className='buttonSolution_hover';"
+                             onmouseout="this.className='buttonSolution';"
+                             disabled="disabled">Lösung</button></div>
+               </div><script src="wz_tooltip.js" type="text/javascript">
+                  <!----></script></div>
+            <div id="toolnav"><a href="GISBSC_UE2a_summary.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSC_UE2a_furtherReading.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

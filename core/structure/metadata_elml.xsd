@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch" targetNamespace="http://www.elml.ch" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+	<xs:annotation>
+		<xs:documentation> ---------------------------------------------------------------------------------------------------------------------------------------------------- eLML Metadata XML-Structure ---------------------------------------------------------------------------------------------------------------------------------------------------- This Schema is part of the elml.xsd Schema. elml.xsd includes it. The reason for defining the following types outside the basic schema is that it should be possible to replace this set of metadata that is an adaption of an official metadata standard with an metadata standard xsd file such as LOM (Learning Object Metadata), Dublin Core Metadata standard or any other XML based metadata standard. ---------------------------------------------------------------------------------------------------------------------------------------------------- </xs:documentation>
+	</xs:annotation>
+	<!-- ============
+If you want to use eLML.xsd without a project (without a validate.xsd file) then uncomment and change accordingly the following XMLSchema code lines and reference the elml.xsd file directly from your xml files. 
+		============= 
+	<xs:simpleType name="LanguageType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="yourLanguageShortCutsLikeDE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="YesNoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="no"/>
+			<xs:enumeration value="yes"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="InstituteReq">
+		<xs:attribute name="institute" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="yourInstitutes"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="DepartementReq">
+		<xs:attribute name="departement" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="yourDepartments"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="RoleImp">
+		<xs:attribute name="role">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="tutor"/>
+					<xs:enumeration value="student"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="LessonLabelReq">
+		<xs:attribute name="label" use="required">
+			<xs:simpleType>
+				<xs:restriction base="elml:PredefinedLabelsType"/>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:simpleType name="PredefinedLabelsType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="yourLessonLabels"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CopyrightType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="yourCopyrightStatement"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="OrganisationReq">
+		<xs:attribute name="level" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="yourLevels"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="module" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="yourModules"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>-->
+	<!-- ============
+If you want to use metadata_elml.xsd standalone then uncomment the above and the following XMLSchema code lines and reference the metadata_elml.xsd file directly from your xml files. 
+		=============
+	<xs:attributeGroup name="VisibleImp">
+		<xs:attribute name="visible">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="all"/>
+					<xs:enumeration value="online"/>
+					<xs:enumeration value="print"/>
+					<xs:enumeration value="none"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup> -->
+	<!-- ======================== Attribute Definitions ======================== -->
+	<!-- Language required -->
+	<xs:attributeGroup name="LanguageReq">
+		<xs:attribute name="language" type="elml:LanguageType" use="required">
+			<xs:annotation>
+				<xs:documentation>The attribute language defines the language in which the lesson is written. Values to select are de, fr, it and en.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="derived" type="elml:YesNoType" use="required">
+			<xs:annotation>
+				<xs:documentation>The attribute derived contains yes if the lesson is translated from another language or no if the value specified in the attribute language is the original language.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="originalLanguage" type="elml:LanguageType">
+			<xs:annotation>
+				<xs:documentation>The attribute originalLanguage is filled in with one of the values de, fr, it or en depending on the original language of the lesson from which this lesson is translated.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- Did required -->
+	<xs:attributeGroup name="DidReq">
+		<xs:attribute name="responsible" use="required">
+			<xs:annotation>
+				<xs:documentation>The attribute responsible allows to define what a specific person has done for this lesson. The values to select are Overall (did everything), Concept (did only work on concepts for the lesson), Content (wrote/designed content), Specials (only special things like flashs etc.), Translation (if they've done the translation), Revision (if they've done revisions/updates of the lesson) or Contact (to name a specific contact person for a lesson, who should be contacted before making changes to the lesson).</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Overall"/>
+					<xs:enumeration value="Concept"/>
+					<xs:enumeration value="Content"/>
+					<xs:enumeration value="Specials"/>
+					<xs:enumeration value="Translation"/>
+					<xs:enumeration value="Revision"/>
+					<xs:enumeration value="Contact"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- Priority implied -->
+	<xs:attributeGroup name="PriorityImp">
+		<xs:attribute name="priority" type="elml:ScaleType">
+			<xs:annotation>
+				<xs:documentation> The attribute priority defines the priority (low, medium, high) by which the mentioned lesson must be studied before attempting the current lesson.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- Persion required -->
+	<xs:attributeGroup name="PersonReq">
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>The attribute name contains a string defining the name of a contributing person.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="email" type="elml:EmailType" use="required">
+			<xs:annotation>
+				<xs:documentation>The attribute email contains a string defining the email address of a contributing person.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="elml:InstituteReq"/>
+		<xs:attributeGroup ref="elml:DepartementReq"/>
+	</xs:attributeGroup>
+	<!-- Dates required -->
+	<xs:attributeGroup name="DatesReq">
+		<xs:attribute name="creationDate" type="xs:date" use="required">
+			<xs:annotation>
+				<xs:documentation>The attribute creationDate contains the date of creation of this lesson in the form of Year-Month-Day (e.g. 5th March 2004 would be 2004-03-05).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="modificationDate" type="xs:date">
+			<xs:annotation>
+				<xs:documentation>The attribute modificationDate is updated whenever the lesson is updated. It contains the date of of a modification of this lesson in the form of Year-Month-Day (e.g. 5th March 2004 would be 2004-03-05).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- Implementation required -->
+	<xs:attributeGroup name="ImplementationReq">
+		<xs:attribute name="firstImplementation" type="xs:date" use="required"></xs:attribute>
+		<xs:attribute name="lastImplementation" type="xs:date" use="required"></xs:attribute>
+	</xs:attributeGroup>
+	<!-- ======================== Type Definitions for Attributes ======================== -->
+	<!-- ScaleType -->
+	<xs:simpleType name="ScaleType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Medium"/>
+			<xs:enumeration value="Low"/>
+			<xs:enumeration value="High"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- EmailType -->
+	<xs:simpleType name="EmailType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[^@]+@[^\.]+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- ======================== Element Definitions ======================== -->
+	<!-- Element metadata -->
+	<xs:element name="metadata">
+		<xs:annotation>
+			<xs:documentation>The element metadata is the parent element of all metadata information of a lesson.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="elml:organisation"/>
+				<xs:element ref="elml:prerequisites"/>
+				<xs:element ref="elml:keywords"/>
+				<xs:element ref="elml:technical"/>
+				<xs:element ref="elml:lessonInfo"/>
+				<xs:element ref="elml:rights"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="elml:RoleImp"/>
+			<xs:attributeGroup ref="elml:VisibleImp"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element organisation - includes creationPosition, number, previous, following-->
+	<xs:element name="organisation">
+		<xs:annotation>
+			<xs:documentation>The element organisation contains information about the organisational structure around this lesson.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="creationPosition">
+					<xs:annotation>
+						<xs:documentation>The element creationPosition allows to either define a number which specifies on which position in a sequence this lesson sits or the previous and following lesson.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice>
+							<xs:sequence>
+								<xs:element name="posNumber" type="xs:positiveInteger">
+									<xs:annotation>
+										<xs:documentation>The element posNumber allows to define a number which specifies on which position in a sequence this lesson sits.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:sequence>
+								<xs:element name="previous" type="elml:PredefinedLabelsType">
+									<xs:annotation>
+										<xs:documentation>The element previous allows to define which is the lesson just before the current lesson in a sequence.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="following" type="elml:PredefinedLabelsType">
+									<xs:annotation>
+										<xs:documentation>The element following allows to define which is the lesson just after the current lesson in a sequence.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="elml:OrganisationReq"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element prerequisites -->
+	<xs:element name="prerequisites">
+		<xs:annotation>
+			<xs:documentation>The element prerequisites allows to define what the prerequisites for studying this lesson are.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="preReqItem" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Each element preReqItem defines one prerequisite.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attributeGroup ref="elml:LessonLabelReq"/>
+								<xs:attributeGroup ref="elml:PriorityImp"/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element keywords -->
+	<xs:element name="keywords">
+		<xs:annotation>
+			<xs:documentation>The element keywords collects all the keywords of the lesson.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="keywordItem" type="xs:string" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Each element keywordItem defines one keyword of the lesson.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Element technical -->
+	<xs:element name="technical">
+		<xs:annotation>
+			<xs:documentation>The element technical is the parent element of all technical elements containing technical aspects.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="technicalRequirement" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>The element technicalRequirement defines the technical prerequisites for studying this lesson.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="type">
+								<xs:annotation>
+									<xs:documentation>The element type allows to define the type of the prerequisite. Values to select are PlugIn, Software, Browser or OS.</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="PlugIn"/>
+										<xs:enumeration value="Software"/>
+										<xs:enumeration value="Browser"/>
+										<xs:enumeration value="OS"/>
+										<xs:enumeration value="LMS"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="name" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>The element name contains a string with the name of the technical prerequisit.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="minimumVersion" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>The element minimumVersion contains a string with the minimum version of the technical prerequisit that is needed for the current lesson.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="downloadURL" type="xs:anyURI" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The element downloadURL contains an URL from where the needed prerequisit can be downloaded.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="installationRemarks" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The element installationRemarks contains a string with any remarks the author of the lesson has to made to the installation of the prerequisit needed.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lessonInfo">
+		<xs:annotation>
+			<xs:documentation>The element lessonInfo is the parent element of general information about the lesson.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="language">
+					<xs:annotation>
+						<xs:documentation>The element language defines the language of the lesson through attributes.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attributeGroup ref="elml:LanguageReq"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="elml:lifecycle"/>
+				<xs:element ref="elml:educational"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lifecycle">
+		<xs:annotation>
+			<xs:documentation>The element lifecycle is the parent element of the lifecycle information about the lesson.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="version">
+					<xs:annotation>
+						<xs:documentation>The element version contains a number with the current version of the lesson.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:decimal">
+								<xs:attributeGroup ref="elml:DatesReq"/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="contribute">
+					<xs:annotation>
+						<xs:documentation>The element contributes acknowledges the contribution of the different authors of a lesson.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="person" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>The element person gives detailed account about the different authors of the lesson.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attributeGroup ref="elml:DidReq"/>
+											<xs:attributeGroup ref="elml:PersonReq"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="implementation" minOccurs="0">
+					<xs:annotation><xs:documentation>This is an additional element to the lifecycle which should cover when a lesson or Learning object was first online available and when was the last update and also where the resource is in use. If the parent course where the resource is in use is known it can be filled in as well if not is can also be empty.</xs:documentation></xs:annotation>
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="usage">
+								<xs:complexType mixed="true">
+									<xs:attributeGroup ref="elml:InstituteReq"/>
+									<xs:attributeGroup ref="elml:DepartementReq"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:attributeGroup ref="elml:ImplementationReq"></xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="commentsNextVersion" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element commentsNextVersion gives a place where comments can be made what should be included/changed for the next version of the current lesson.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="educational">
+		<xs:annotation>
+			<xs:documentation>The element educational is the parent element of the educational aspects of the lesson.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="difficulty" type="elml:ScaleType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element difficulty allows to describe the difficulty of the content of the lesson.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="typicalLearningTime">
+					<xs:annotation>
+						<xs:documentation>The element typicalLearningTime describes how long it takes for the student to learn this lesson.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="time" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>The element time describes how long it takes for the student to learn this lesson (in hours).</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element ref="elml:description" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="teachingPurpose" minOccurs="0">
+					<xs:annotation><xs:documentation>The purpose for which this learning object can be used in instruction. If the lesson contains several purposes the main purpose should be choosen. The values allowed are motivation, presentation, practice and assessment.</xs:documentation></xs:annotation>
+					<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="motivation"></xs:enumeration>
+								<xs:enumeration value="presentation"></xs:enumeration>
+								<xs:enumeration value="practice"></xs:enumeration>
+								<xs:enumeration value="assessment"></xs:enumeration>
+							</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="learningResourceType" maxOccurs="unbounded" minOccurs="0">
+					<xs:annotation><xs:documentation>This is an feature from the LOM Standard. Specific kind of learning object. The most dominant kind shall be first. There is more information in the final draft of the LOM standard: http://ltsc.ieee.org/wg12/files/LOM_1484_12_1_v1_Final_Draft.pdf</xs:documentation></xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="source" type="xs:string" fixed="LOMv1.0">
+							</xs:element>
+							<xs:element name="value">
+								<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="exercise"></xs:enumeration>
+											<xs:enumeration value="simulation"></xs:enumeration>
+											<xs:enumeration value="questionnaire"></xs:enumeration>
+											<xs:enumeration value="diagram"></xs:enumeration>
+											<xs:enumeration value="figure"></xs:enumeration>
+											<xs:enumeration value="graph"></xs:enumeration>
+											<xs:enumeration value="index"></xs:enumeration>
+											<xs:enumeration value="slide"></xs:enumeration>
+											<xs:enumeration value="table"></xs:enumeration>
+											<xs:enumeration value="narrative"></xs:enumeration>
+											<xs:enumeration value="text"></xs:enumeration>
+											<xs:enumeration value="exam"></xs:enumeration>
+											<xs:enumeration value="experiment"></xs:enumeration>
+											<xs:enumeration value="problem"></xs:enumeration>
+											<xs:enumeration value="statement"></xs:enumeration>
+											<xs:enumeration value="selfassessment"></xs:enumeration>
+											<xs:enumeration value="lecture"></xs:enumeration>
+										</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rights">
+		<xs:annotation>
+			<xs:documentation>The element rights describes legal issues about the current lesson.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="cost" type="elml:YesNoType">
+					<xs:annotation>
+						<xs:documentation>The element cost allows to define if the lesson costs something for external users.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="copyright" type="elml:CopyrightType">
+					<xs:annotation>
+						<xs:documentation>The element 'copyright' contains a fixed phrase (defined in the validate.xsd) stating the copyright information for the material created.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="copyrightURL" type="xs:anyURI" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element copyrightURL allows the definition of an URL to a location with more information about the legal issues of the current lesson.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="elml:description" minOccurs="0"/>
+				<xs:element name="contentCopyrights" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The element contentCopyrights allows specifing differing copyright statements for each labelled element within a unit. The respective elements are referenced using the labelRef attribute.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="copyrightStatement" maxOccurs="unbounded">
+								<xs:complexType mixed="true">
+									<xs:attributeGroup ref="elml:LabelRefReq"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="description" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The element description allows to add additional descriptions.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

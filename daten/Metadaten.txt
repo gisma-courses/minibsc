@@ -1,0 +1,1 @@
+Die Shapefiles Startpunkt.shp und verwaltungsgrenzen.shp liegen in Geokoordinaten WGS84 vor.

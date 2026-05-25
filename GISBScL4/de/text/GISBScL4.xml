@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<lesson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="../../_config/validate.xsd" xmlns="http://www.elml.ch"
+    title="Räumliche Entscheidungsfindung" label="GISBScL4">
+    <entry>
+        <paragraph> Unvollständige Informationen erschweren es belastbare Entscheidungen oder
+            Aussagen zu treffen. Auch eine im wissenschaftlichen Sinne nachvollziehbare
+            Visualisierung von Daten z.B. zur qualitativen Interpretation kontinuierlicher
+            Rauminformationen ist vor diesem Hintergrund von fraglichem Wert. Für die Entwicklung
+            von wissenschaftlich belastbaren Aussagen benötigen wir Hypothesen und nachvollziehbare
+            Argumentationsstränge. Meist sind zur Beantwortung von scheinbar einfachen Fragen wie
+                "<formatted style="italic">Wo ist ein geeigneter Standort für ein
+                Wasserkraftwerk?</formatted>" oder "<formatted style="italic">Welcher Flussabschnitt
+                eignet sich fürs Rafting?</formatted>" mehrere in spezifischer Reihenfolge
+            miteinander zu verknüpfende <formatted style="bold">Entscheidungskriterien</formatted>
+            zu berücksichtigen. So müssen etwa zur Identifikation eines solchen Standorts bezogen
+            auf unsere Rarotonga-Projekt für die Verortung eines Camps Kriterien wie Gefällstufe,
+            Wasserverfügbarkeit, Schonung der Umweltressourcen und Attraktivität des Standorts
+            berücksichtigt und gegeinander abgewogen werden. Oft gilt es zudem, die Ansprüche
+            verschiedener Interessengruppen in Entscheidungsprozesse zu integrieren. Dabei müssen
+            häufig Zielkonflikte berücksichtigt werden. So kann beispielsweise ein möglicher
+            Standort auf einem Höhenrücken nicht gleichzeitig ein hochwertiges naturnahes
+            Outdoorcamp beherbergen und gleichzeitig an der Hauptroute für Quad-Ausflüge
+            liegen.</paragraph>
+        <paragraph>Zur Beantwortung derartiger Fragen gibt es eine Vielzahl von
+            Entscheidungsunterstützungs-Technikenje und unterschiedlich komplexe methodische
+            Ansätze. In unserem Fall betrachten wir ganz allgemein Entscheidungskonzepte, die bei
+            mehreren räumlich wirksamen Merkmalsausprägungen und oder Zielen zu bewertbaren
+            Ergebnissen führen.</paragraph>
+
+        <multimedia type="gif"
+            src="http://dilbert.com/dyn/str_strip/000000000/00000000/0000000/000000/00000/0000/900/915/915.strip.sunday.gif"
+            legend="Dilbert, the boss and geography (http://dilbert.com/strips/comic/2005-07-03/)"
+            align="center"/>
+
+
+        <paragraph>Im vierten Themenblock adressieren wir folgende Fragen und Lernziele:
+        </paragraph>
+    </entry>
+
+    <goals>
+
+        <lObjective>Sie verstehen die grundlegenen Konzepte von
+            Multikriterien-Analysen.</lObjective>
+
+        <lObjective>Sie lernen auf dieser Grundlage Kriterien für ein einfaches GIS-basiertes
+            Entscheidungsunterstützungs-Modell abzuleiten und zu operationalisieren.</lObjective>
+
+
+    </goals>
+
+    <unit navTitle="Konzepte - Entscheidungsfindung"
+        title="Räumlich begründete Entscheidungskonzepte" label="GISBSc_VL4">
+        <entry>
+
+            <paragraph> Geographische Informationssysteme können auf vielerlei Arten helfen,
+                Entscheidungen zu treffen, die von räumlich wirksamen Bedingungen abhängen. Ein
+                häufiger und leicht zugänglicher erster Ansatz ist die Erstellung von Eignungs- oder
+                Gefahrenkarten. Sie zeigen auf, welche Standorte oder Räume für eine Nutzung
+                besonders gut geeignet oder aber von einer Gefahr speziell bedroht sind. Meist
+                werden zur Entscheidungsunterstützung mehrere<formatted style="bold">
+                    Entscheidungskriterien</formatted> berücksichtigt. So könnten etwa zur
+                Identifizierung eines spezifischen Lebensraumes z.B. des Rotmilans verschiedene
+                Kriterien wie Beutedichte, Landschaftgliederung oder Vegetation betrachtet werden.
+                Noch häufiger gilt es allerdings, konkurriende Ansprüche in einer Entscheidung
+                beipielsweise für Schutzgebiete zu berücksichtigen. Dabei kann es durchaus zu
+                Zielkonflikten kommen. So können Felsköpfe in Mittelgebirgen als Rückzugsgebiete für
+                xero-thermophile Pflanzenarten nicht gleichzeitig Schutzzone <formatted style="bold"
+                    >und</formatted> Aussichtspunkt für Wanderer und Kletterer sein.<newLine/> In
+                dieser Lerneinheit kommen einige spezifische Methoden Entscheidungsunterstützung mit
+                GIS zur Anwendung. Die Frage der Eignung eines Raumes für eine bestimmte Nutzung war
+                eine der wichtigsten Motivationen zur Entwicklung von GIS. </paragraph>
+
+
+
+
+        </entry>
+        <goals>
+
+
+            <lObjective>Sie verstehen das Konzept einer Booleschen Verschneidung.</lObjective>
+
+            <lObjective>Sie kennen das Prinzip der Standardisierung von Merkmalsmaßen und können es
+                auf einfache Beispiele selbst anwenden.</lObjective>
+
+            <lObjective>Sie verstehen das Konzept gewichteter Verschneidung.</lObjective>
+            <lObjective>Sie kennen unterschiedliche Gewichtungskonzepte.</lObjective>
+
+
+
+        </goals>
+
+        <learningObject
+            title="Eignungsanalysen - Raumanalysen mit konkurrierenden Kriterien und Zielen"
+            label="V_lo1" navTitle="Eignungsanalysen - Raumanalysen">
+            <clarify>
+                <paragraph> Am leichtesten lassen sich die Anforderungen kombinierter Kriterien zur
+                    Findung räumlicher Merkmalskombinationen anhand eines Fallbeispiels erarbeiten.
+                    So skizziert "<formatted style="italic">Fallbeispiel St. Gittal</formatted>".
+                    die Frage „<formatted style="italic">Welche Flächen der Gemeinde von St. Gittal
+                        eignen sich für die Wiederansiedlung eines großen Raubtieres?</formatted>“
+                    (vgl. <citation bibIDRef="kora_wolf"/>; <citation bibIDRef="facts1995"/>) die
+                    Anforderungen und Komplexität von Eignungsanalysen und den Wirkungen der daraus
+                    abgeleiteten Entscheidungen bzw. Handlungsempfehlungen anschaulich. Die
+                    Grundlage einer derartigen Abfrage sind räumliche Suchtechniken basierend auf
+                    unterschiedlichen Kriterien. Eine einfache Suche nur mit einem Suchkriterium
+                    („Welche Gebiete von St. Gittal sind mit Wald bedeckt?“) ist meist nicht
+                    ausreichend. Erst die Kombination mehrerer Suchkriterien führt zu
+                    Lösungsvorschlägen die dann bewertet werden müssen. Ein GIS ermöglicht solche
+                    Kombinationen durch die Verschneidung mehrerer Informationsebenen. Erst die
+                    Überlagerung von Informationen z. B. zum Bodentyp, der Vegetation und
+                    Topographie erlaubt es die gestellte Frage zu beantworten. Der Begriff <term
+                        glossRef="Eignungsanalyse">Eignungsanalyse</term> bezeichnet die Suche nach
+                    Standorten oder Räumen, die sich durch eine Kombination bestimmter Eigenschaften
+                    auszeichnen. Das Resultat einer Eignungsanalyse ist häufig eine Eignungskarte.
+                    Sie zeigt in Form einer thematischen Karte, welche Standorte oder Räume sich für
+                    die vorgegebene Nutzung besonders gut eignen (z. B. landwirtschaftliche
+                    Eignungskarte). Die negative Variante der Eignungskarte ist die Gefährdungs-
+                    oder Gefahrenkarte. Sie scheidet Gebiete aus, die aufgrund gegebener Kriterien
+                    einer bestimmten Gefahr besonders ausgesetzt sind (z. B.
+                    Lawinengefährdungskarten). </paragraph>
+
+                <paragraph>Die Eignungsanalyse wird vielfach eingesetzt zur Unterstützung der
+                    Entscheidungsfindung in Planungsprozessen, z. B. in der Umweltplanung. Dabei
+                    gilt es oft abzuklären, wo der geeignetste Standort für ein bestimmtes Objekt
+                    liegt (z. B. für ein Kraftwerk, eine Seilbahn, ein Naturschutzgebiet). Für die
+                    Entscheidungsträger der Gemeinde St. Gittal könnte es z. B. nützlich sein, den
+                    Standort eines Kinderspielsplatzes oder Streichelzoos auf mögliche Rückzugsräume
+                    des Wolfes abzustimmen.<newLine/> Eine ganze Reihe mathematischer Methoden
+                    erlaubt es, verschiedene Alternativen einer Entscheidung aufgrund bestimmter
+                    Kriterien und Wertungen gegeneinander abzuwägen. Oft kommt ein Methodenmix zum
+                    Einsatz. Komplexe Entscheidungsunterstützungs-Systeme (Decision Support Systems,
+                    DSS) helfen den Entscheidungsträgern, die verschiedenen Optionen zu
+                    vergleichen.<newLine/> Handelt es sich um ein räumliches Entscheidungsproblem,
+                    so ist die Integration von Entscheidungsunterstützungsmethoden in ein GIS
+                    zielführend. Ein GIS übernimmt das Datenmanagement, erweitert die DSS-Logik um
+                    räumliche Analysefunktionen und ermöglicht den Zugang zu den Eingangsdaten und
+                    den Resultaten durch kartographische Darstellungen. Die Kombination von DSS und
+                    GIS erleichtert es den Entscheidungsträgern, Alternativen gegeneinander
+                    abzuwägen, und sie kann zu transparenten und damit objektiveren Entscheidungen
+                    führen.</paragraph>
+            </clarify>
+            <look title="Zwei typische Beispiele für Eignungskarten">
+                <list listStyle="unordered">
+                    <item>
+                        <link uri="http://www.baselland.ch/boden2-htm.294809.0.html">
+                            Landwirtschaftliche Eignungskarte Gemeinde Pratteln</link>: Die
+                        landwirtschaftlichen Eignungskarten geben Auskunft darüber, welche Kulturen
+                        an einem bestimmten Standort mit gutem Erfolg angebaut werden können, ohne
+                        die Fruchtbarkeit des Bodens zu gefährden. </item>
+                    <item>
+                        <link uri="http://www.fao.org/ag/agl/agll/cropsuit.asp">FAO: Land
+                            Suitability Maps for Rainfed Cropping</link> - Die
+                        Welternährungsorganisation (FAO) bietet Eignungskarten der Welt für
+                        verschiedene Feldfrüchte. </item>
+                </list>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph> Informieren Sie sich über die Sachlage des Fallbeispiels "<formatted
+                            style="italic">St. Gittal</formatted>". Studieren Sie dazu die zwei
+                        angegebenen Texte: KORA: <link uri="../material/wolf_kora.pdf" type="pdf"
+                            size="200kb">Dokumentation Wolf</link> und <citation
+                            bibIDRef="kora_wolf"/> Facts: „<link
+                            uri="../material/facts1995_wolf.pdf" type="pdf" size="700kb">Die Räuber
+                            kommen wieder</link>“<citation bibIDRef="facts1995"/>
+                    </paragraph>
+                    <list listStyle="unordered">
+                        <item>Versuchen Sie die Akteure und ihre Hauptziele zu identifizieren</item>
+                        <item>Welche Kriterien sind aus Ihrer Sicht für eine Interessenabwägung
+                            interessant?</item>
+                    </list>
+                </box>
+            </act>
+        </learningObject>
+
+
+        <learningObject navTitle="Bedingte Verschneidung räumlicher Daten" label="M_lo2"
+            title="Methoden der Kriterienverschneidung">
+            <clarify>
+                <paragraph> Das Prinzip der Verschneidung („overlay“) räumlicher Daten ist
+                    konzeptionell sehr einfach. Zunächst werden zwei oder mehr thematische
+                    Informationsebenen desselben Raumausschnittes überlagert. Da es sich um die
+                    Manipulation von Geometrien handelt wird die Topologie der neuen Datenebene
+                    aufgrund dieser Überlagerung neuberechnet. Bezogen auf ein Vektordatenmodell
+                    sieht das wie folgt aus: Liegt ein betrachteter Punkt innerhalb eines Polygons,
+                    erhält er diese Information als neues Attribut. Schneiden sich zwei Linien, so
+                    wird an ihrem Schnittpunkt ein neuer Knoten eingeführt. Schneiden sich zwei
+                    Polygone, erhält die Schnittmenge eine eigene Identifikationsnummer usw.. Damit
+                    diese räumliche Datenintegration korrekt ist, müssen alle Eingangsebenen ein
+                    identisches Referenzierungssystem aufweisen. Die Integration von Informationen
+                    aus verschiedenen Quellen durch Verschneidung ist eine der bedeutendsten
+                    räumlichen Grundfunktionen eines GIS.</paragraph>
+
+
+            </clarify>
+
+            <paragraph title="Boolesche Verschneidung">In einfachen Eignungsanalysen führt oft
+                bereits die logische Kombination von wahr/falsch-Informationen zur Lösung.
+                Angenommen, der nach St. Gittal zuwandernde Wolf siedelt nur im Wald und nur in
+                steilen Gebieten, so reichen wenige logische Überlegungen, um die geeigneten
+                Lebensräume für den Wolf zu ermitteln. Jedes dieser beiden Kriterien kann mit einer
+                binären Informationsebene modelliert werden (Wald/Nicht-Wald und Steil/Nicht-Steil).
+                Als potenzielle Lebensräume eignen sich nun genau die Gebiete, für die beide
+                Kriterien zutreffen. Mit anderen Worten: Gebiete, die „wahr“ sind für Wald UND für
+                steil. Die dritte <link targetLesson="GISBScL2" targetLabel="V_lo10"
+                    targetLessonLang="de">Lerneinheit </link> hat uns hierzu bereits die möglichen
+                Verknüpfungsmethoden bekannt gemacht.</paragraph>
+
+            <paragraph>Die Boolesche Verschneidung eignet sich v. a. bei Eignungsanalysen mit
+                randscharfen und klar ausschliessenden Kriterien. Kann als Wolfslebensraum das
+                Siedlungsgebiet und die landwirtschaftliche Nutzfläche von Anfang an ausgeschlossen
+                werden, kann das potenzielle Eignungsgebiet mit einer einfachen Booleschen
+                Verschneidung rasch stark und trennscharf eingeschränkt werden. Für viele Fragen ist
+                allerdings die Einteilung der Welt in nur zwei Kategorien unbefriedigend. Weiter
+                lassen sich v. a. für Kriterien der natürlichen Umwelt selten trennscharfe Grenzen
+                angeben. In der nächsten Unit lernen Sie feiner abstimmbare Ansätze der
+                Eignungsanalyse mit GIS kennen. </paragraph>
+            <paragraph title="Die gewichtete Verschneidung">Für viele Fragestellungen stellt die Einteilung der Realität in zwei
+                Kategorien („wahr“ oder „falsch“) allerdings eine unzureichende Abbildung der
+                Realität dar, da die gleiche Gewichtung der Einflussfaktoren meist nicht der
+                Gewichtung von Entscheidungen abbildet. Wer ein neues Mobiltelefon kauft, mag Marke
+                und Funktion höher gewichten als Displaygröße, Preis oder Robustheit. Dieses
+                allgemeine Prinzip der Gewichtung von Einflussfaktoren wird auch bei der
+                Eignungsanalyse mit GIS verwendet. Der entsprechende Ansatz heißt <formatted
+                    style="bold">gewichtete Verschneidung</formatted>.</paragraph>
+
+            <paragraph> In vielen Raumanalysen sind bestimmte Kriterien bezogen auf die Zielsetzung
+                um ein Mehrfaches wichtiger als andere. Oft ist es gerade ein Anspruch an eine
+                Standortsuche, mehrere geeignete Orte darauf hin zu vergleichen, ob und wie stark
+                sie einer Reihe von unterschiedlich wichtigen Kriterien entsprechen. Durch das
+                Ebenenprinzip der GI-Systeme lässt sich die Verschneidung sehr einfach um die Idee
+                unterschiedlich wichtiger Kriterien erweitern. Jeder Themenebene wird entsprechend
+                ihrer relativen Bedeutung gegenüber den anderen ein numerischer Gewichtsfaktor
+                zugeordnet. Anschließend werden die derart gewichteten Informationsebenen
+                verschnitten wie bisher. Wie die Boolesche Verschneidung ist auch die gewichtete
+                Verschneidung grundsätzlich sowohl im Raster- als auch im Vektormodell möglich. Die
+                Tourismusexperten von Rarotonga könnten beispielsweise erklären, die negative
+                Wirkung von Hotels und Bars sei für unser Alternativtourismuskonzept 0,1-mal so
+                wichtig wie Der Störfaktor von Quad-Trek-Routen durchs Binnenland. Die entsprechende
+                Gewichtung ergäbe für die Hotels und Bars einen Gewichtsfaktor von 1, für die die
+                Tracks hingegen von 10. Es gilt zu beachten, dass die Wertebereiche der
+                Eingangs-Informationsebenen normalisiert sein müssen (z. B. von 0 bis 1). In der
+                entstehenden Eignungsebene werden die geeigneten Räume oder Standorte durch
+                besonders hohe Werte identifizierbar. </paragraph>
+            <look>
+                <paragraph title="Wölfe in St. Gittal"> Betrachten Sie das folgende Beispiel. Hier
+                    wird die gewichtete Verschneidung am Beispiel des Wolfslebensraumes in St.
+                    Gittal eingeführt. Im Hinblick auf eine realistischere Modellierung der
+                    geeigneten Lebensräume verwendet das folgende Beispiel nicht mehr ausschließlich
+                    binäre Eingangsdaten wie die Boolesche Verschneidung, sondern sogenannte
+                    Ratiodaten: </paragraph>
+                <list listStyle="unordered">
+                    <item>Vegetationsdichte anstelle „Wald/Nicht-Wald“</item>
+                    <item>Hangneigung anstelle „steil/nicht-steil“</item>
+                    <item>Bevölkerungsdichte anstelle „Siedlung/Nicht-Siedlung“</item>
+                </list>
+                <paragraph> Der wohl einfachste Ansatz für eine gewichtete Verschneidung bildet die
+                    gewichtete lineare Summierung im Rastermodell. Die folgenden Punkte zeigen das
+                    Standardvorgehen bei der Anwendung dieses Algorithmus: </paragraph>
+                <list listStyle="ordered">
+                    <item>
+                        <formatted style="bold">Kriterienwahl</formatted>: Der erste Schritt besteht
+                        in der Wahl der Kriterien, die den gesuchten Raum charakterisieren. </item>
+                    <item>
+                        <formatted style="bold">Standardisierung</formatted>: Nun müssen die
+                        unterschiedlichen Messskalen der Eingangsdatensätze aufeinander abgestimmt
+                        werden. Es wenig sinnvoll, die prozentuale Hangneigung direkt mit einer
+                        Bevölkerungsdichte zu verrechnen. Deshalb weist man den Eingangsdaten völlig
+                        verschiedene Einheiten einer standardisierten numerischen Indexskala zu
+                        (beispielsweise 0–1, 0–100, 0–255). Daraus folgt, dass die Werte der
+                        resultierenden Eignungsebenen keine Einheiten mehr tragen, sondern lediglich
+                        einen numerischen Eignungsindex. Die Zuordnung der Eingangswerte auf die
+                        Indexskala kann auf verschiedene Weise erfolgen, am einfachsten ist eine
+                        lineare Zuordnung. Bei der gewichteten Verschneidung bezeichnet die <term
+                            glossRef="Standardisierung">Standardisierung</term> die
+                        &#x00DC;bersetzung der heterogenen Eingangsdaten in eine für alle Ebenen
+                        einheitliche Skala. </item>
+                    <item>
+                        <formatted style="bold">Verteilung der Gewichte</formatted>: Weiter erhält
+                        jede Informationsebene einen Multiplikator, ein Gewicht. Die Gewichte
+                        widerspiegeln die relative Bedeutung der Informationsebenen zueinander. Die
+                        wichtigste Ebene erhält das größte Gewicht. Die richtige Wahl der Gewichte
+                        wird in „Bestimmung der Gewichte“ behandelt. </item>
+                    <item>
+                        <formatted style="bold">Anwendung des Algorithmus</formatted>: Beim
+                        Algorithmus der gewichteten linearen Summierung werden alle Rasterzellen
+                        einer Informationsebene mit ihrem Gewicht multipliziert und die Ebenen
+                        anschließend addiert. In der resultierenden Eignungsebene weisen die
+                        geeigneten Rasterzellen hohe, die ungeeigneten hingegen tiefe Werte auf.
+                    </item>
+                </list>
+
+
+                <multimedia src="../image/Raster.gif" type="gif" align="center" width="500"
+                    legend="Weighted Overlay im Rastermodell" thumbnail="../image/Raster_thumb.gif"
+                    label="raster"/>
+                <multimedia src="../image/Vector.gif" type="gif" align="center" width="500"
+                    legend="Weighted Overlay im Vektormodell" thumbnail="../image/Vector_thumb.gif"
+                    label="vector"/>
+                <paragraph>In dieser Darstellung erhielten die beiden Eignungskriterien für den
+                    Wolfslebensraum in St. Gittal Gewichte entsprechend ihrer relativen Bedeutung.
+                    Die Infomationsebene „bewaldet“ wird mit dem Faktor 3 gewichtet, diejenige mit
+                    dem Kriterium „steiles Gelände“ mit dem Faktor 2. Nach der Zuweisung der
+                    Gewichte werden die beiden Ebenen addiert. Die Eignungswerte der resultierenden
+                    Informationsebene reichen von 0 (ungeeignet) bis 5 (sehr geeignet). <newLine
+                        space="long"/></paragraph>
+
+                <act>
+                    <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                        <paragraph> Die nachfolgende interaktive Beispielanwendung gibt Ihnen die
+                            Möglichkeit, selbst für die Gemeinde St. Gittal eine Eignungsanalyse zur
+                            Bestimmung potenzieller Lebensräume des Wolfs durchzuführen. Bestimmen
+                            Sie, wie die Eingangs-Layer standardisiert und gewichtet werden sollen.
+                            Nutzen sie hierzu die folgenden Informationen:</paragraph>
+                        <list listStyle="ordered">
+                            <item>
+                                <indexItem>Kriterienwahl</indexItem>: Sie haben bereits früher
+                                gelesen, dass der Wolf dichte Vegetation und steiles, steiniges
+                                Gelände bevorzugt. Neu können Sie nun auch berücksichtigen, dass er
+                                die Nähe zur Siedlung eher meidet. Folgende Informationsebenen
+                                stehen Ihnen zur Verfügung: <list listStyle="unordered">
+                                    <item>
+                                        <indexItem>Walddichte</indexItem> (oberste Zeile): Räume mit
+                                        einem Bewuchs von 0 bis 100% Wald. </item>
+                                    <item>
+                                        <indexItem>Hangneigung</indexItem> (mittlere Zeile):
+                                        Neigungsklassen von &lt;10%, 10% bis 30% und &gt;30%. </item>
+                                    <item>
+                                        <indexItem>Siedlungsdichte</indexItem> (unterste Zeile): Die
+                                        Themenebene der Siedlungsdichte beinhaltet Räume mit 0, 100
+                                        und 200 Einwohnern pro Hektare. </item>
+                                </list>
+                            </item>
+                            <item>
+                                <indexItem>Standardisierung</indexItem>: Alle Eingaberaster müssen
+                                nun auf den Wertebereich von 0 bis 1 umgerechnet werden. In der
+                                Animation müssen Sie die Werte 0 und 1 in die dafür vorgesehenen
+                                Felder eintragen. Beachten Sie, dass bei gewissen Themenebenen
+                                zusätzlich zur Standardisierung auch noch der Wertebereich
+                                invertiert werden muss. Dies geschieht immer dann, wenn ein hoher
+                                Wert der Eingangsebene ungeeignet für den Wolf ist und deshalb den
+                                Wert 0 erhalten muss. </item>
+                            <item>
+                                <indexItem>Verteilung der Gewichte</indexItem>: Nun müssen Sie als
+                                Wolfsexperte oder -expertin den einzelnen Ebenen Gewichte zuweisen.
+                                Tragen Sie dazu die Gewichte in die gewichtssteinförmigen Felder
+                                ein. Weisen Sie dem schützenden Wald die größte Bedeutung zu und
+                                gewichten Sie die Waldebene mit 5. Die Hangneigung erhält das
+                                Gewicht 3, die unbesiedelten Gebiete das Gewicht 2. </item>
+                            <item>
+                                <indexItem>Anwendung des Algorithmus</indexItem>: Die gesuchte
+                                Eignungsebene ergibt sich aus der Multiplikation der Ebenen mit
+                                ihren Gewichten und der abschließenden Summierung der Ebenen. Ein
+                                Klick auf die Taste „Berechnen“ liefert die Resultate. Die nach den
+                                getroffenen Annahmen geeignetsten Lebensräume für den Wolf weisen
+                                nun die Werte zwischen 7,5 und 8,5 auf. Ungeeignete Gebiete tragen
+                                tiefe Werte bis hin zu ungeeignet (= 0). </item>
+                        </list>
+                        <paragraph>Nun liegt es an Ihnen, weitere Standardisierungen und
+                            Gewichtungen auszuprobieren. Experimentieren Sie mit extremen
+                            Gewichtsverteilungen. Achten Sie jeweils darauf, wie sich die
+                            resultierende Eignungskarte verändert und interpretieren Sie die
+                            Resultate. </paragraph>
+                        <multimedia src="../multimedia/ComputeWeight.swf" type="flash"
+                            align="center" width="470" height="300"
+                            legend="Beispiel einer einfachen gewichtete lineare Summation von Kriterien zur Entscheidungsfindung"
+                            bibIDRef="gittadbs"/>
+                        <link uri="../multimedia/ComputeWeight.swf">Starten Sie die Interaktive
+                            Gewichtetes-Overlay-Animation </link>
+                    </box>
+                </act>
+            </look>
+        </learningObject>
+
+
+
+
+
+        <learningObject navTitle="Gewichtungsmethoden" title="Methoden zur Bestimmung der Gewichte"
+            label="V_lo3">
+            <clarify>
+                <paragraph>Im Prozess der Entscheidungsfindung ist, wie bereits angeschnitten wurde,
+                    für verschiedenen Interessengruppen die einzelnen Bewertung und Bedeutung der
+                    einzelnen Kriterien unterschiedlich. Wie sollen solche Bewertungen vergleichbar
+                    gemacht werden? Genau die gleiche Frage stellt sich bei der Suche nach dem
+                    Lebensraum für den Wolf in St. Gittal. Angenommen die Experten und Expertinnen
+                    hätten sich darauf geeinigt, eine gewichtete Verschneidung für ihre
+                    Eignungsanalyse zu verwenden. Wie sollen sie nun die einzelnen Kriterien
+                    gewichten? Wie kommen die Experten darauf, dass etwa das Kriterium
+                    „Rückzugsgebiet Wald“ 1,5-mal so wichtig sein soll wie „steiles und felsiges
+                    Gelände“? Die Verteilung der Gewichte ist bei einer Eignungsanalyse mit
+                    gewichteter Verschneidung genauso wichtig wie schwierig. Diese Unit zeigt drei
+                    Methoden, wie im Dialog mit den Experten eine <indexItem>Gewichtung</indexItem>
+                    der Kriterien erfolgen kann. </paragraph>
+
+            </clarify>
+            <look>
+                <paragraph title="Gewichtung nach Ranglisten"> Am einfachsten erfolgt eine
+                    Gewichtung über eine Rangierung („ranking“) der Kriterien. Dabei kann
+                    aufsteigend oder absteigend rangiert werden. Aufsteigend bedeutet, dass das
+                    wichtigste Kriterium den Rang 1 erhält, das zweitwichtigste den Rang 2 usw.
+                    Durch eine absteigende Rangierung erhält das unwichtigste Kriterium den Rang 1,
+                    das nächst wichtigere den Rang 2 usw. Sind die Ränge einmal verteilt, können die
+                    den Rängen entsprechenden numerischen Gewichte auf verschiedene Weise abgeleitet
+                    werden. </paragraph>
+                <list listStyle="unordered">
+                    <item>
+                        <indexItem>Summierend („rank sum“)</indexItem>: Bei n Kriterien erhält der
+                        Rang r das Gewicht n - r + 1. </item>
+                    <item>
+                        <indexItem>Reziprok („rank reciprocal“)</indexItem>: Bei n Kriterien erhält
+                        der Rang r das Gewicht 1 / r, also seinen Kehrwert. </item>
+                    <item>
+                        <indexItem>Exponentiell („rank exponent“)</indexItem>: Bei n Kriterien
+                        erhält der Rang r das Gewicht (n - r + 1)p. Dabei ist der Exponent p ein
+                        Parameter, um die Verteilung der Gewichte zu steuern. Ist p = 0, erhalten
+                        alle Kriterien das gleiche Gewicht. Der Wert p = 1 gewichtet wie die
+                        summierende Gewichtung. Je höher p wird, desto steiler wird die
+                        Gewichtsverteilung. </item>
+                </list>
+                <paragraph>Meist werden die einzelnen Gewichte um der Vegleichbarkeit willen
+                        <indexItem>normalisiert</indexItem>: Durch die Division der einzelnen
+                    Gewichte durch die Summe aller Gewichte werden die einzelnen Gewichte zu
+                    Bruchzahlen im Wertebereich 0-1 umgerechnet. Die Summe der
+                        <indexItem>normalisierten Gewichte</indexItem> beträgt 1. </paragraph>
+                <popup title="Vertiefung Rangliste" cssClass="optional">
+                    <paragraph>Für die Wolfsexperten und -expertinnen gilt es die Kriterien
+                        Vegetationsbedeckung, Hangneigung, Siedlungsdichte, Distanz zur Strasse und
+                        Beutedichte für eine gewichtete Verschneidung zu bewerten. Dazu werden die
+                        Kriterien nach ihrer relativen Bedeutung rangiert. Die Tabelle zeigt eine
+                        mögliche Rangierung und die daraus resultierenden normalisierten Gewichte.
+                        Sie können jederzeit eine eigene Rangierung vornehmen und den Exponenten p
+                        verändern (farbige Felder). </paragraph>
+                    <multimedia src="../multimedia/WeightByRanklist.swf" type="flash" width="600"
+                        height="216" legend="Gewichtung nach Ranglisten"/>
+
+                </popup>
+
+                <paragraph title="Vor- und Nachteile Rangliste">Die <indexItem>Gewichtung nach
+                        Ranglisten</indexItem> ist sehr beliebt, weil sie so einfach ist. Allerdings
+                    nimmt ihre Aussagekraft mit zunehmender Kriterienzahl rasch ab. Die Resultate
+                    dieses Ansatzes sollten immer äusserst vorsichtig interpretiert und sorgfältig
+                    dokumentiert werden. Sie dürfen höchstens als einfache erste Annäherung
+                    verstanden werden. </paragraph>
+
+                <paragraph title="Gewichtung durch Rating"> Eine andere verbreitete Methode ist die
+                    Einstufung („rating“). Dabei erhalten die rangierten Kritereien je nach ihrer
+                    relativen Bedeutung eine Punktzahl. </paragraph>
+                <list listStyle="unordered">
+                    <item> Bei der Verteilung mit Gesamtpunktzahl („point allocation“) gilt es, eine
+                        Gesamtpunktzahl auf die gewählten Kriterien zu verteilen. Bei einer
+                        Gesamtpunktzahl von z. B. 100 könnten die Kriterien mit abnehmender
+                        Bedeutung die Gewichte 35, 30, 20, 10 und 5 Punkte bekommen. </item>
+                    <item> Bei der Verhältnisschätzung („ratio estimation“) hingegen kann jedes
+                        Kriterium mit einer beliebigen Punktzahl aus einem definierten Wertebereich
+                        versehen werden. Das wichtigste Kriterium erhält die höchste Punktzahl (z.
+                        B. 100), völlig unbedeutende Kriterien dagegen die Punktzahl 0. </item>
+
+                </list>
+                <popup title="Vertiefung Rating...." cssClass="optional">
+                    <paragraph icon="act">Diesmal gilt es, den fünf bekannten Kriterien entsprechend
+                        ihrer relativen Bedeutung eine Punktzahl zuzuweisen. Beachten Sie, dass die
+                            <indexItem>Verteilung der Gesamtpunktzahl</indexItem> so erfolgt, dass
+                        die Summe der Teilpunktzahlen genau der Gesamtpunktzahl entspricht. Wiederum
+                        werden die Gewichte für die bessere Vergleichbarkeit normalisiert. Probieren
+                        Sie selbst eigene Punktverteilungen aus und vergleichen Sie die
+                        resultierenden Gewichtungen. </paragraph>
+                    <multimedia src="../multimedia/WeightByClassification.swf" type="flash"
+                        width="600" height="220" legend="Gewichtung durch Einstufung"/>
+                </popup>
+                <paragraph title="Vor- und Nachteile Rating"> Auch diese Methode ist sehr einfach
+                    umzusetzen und deshalb beliebt. Sie eignet sich besonders für einfache
+                    Fragestellungen mit wenigen Kriterien, deren relative Bedeutung mit etwas
+                    gesundem Menschenverstand oder Sachwissen abgeschätzt werden kann. Allerdings
+                    ist die Verteilung der Punktzahlen wiederum sehr subjektiv und meist nur
+                    schlecht legitimierbar. </paragraph>
+                <popup title="Raster- oder Vektor-Overlay in der Eignungsanalyse?"
+                    cssClass="optional">
+
+                    <paragraph> Verschneidungen im Allgemeinen und die Boolesche Verschneidung im
+                        Speziellen sind grundsätzlich sowohl im Vektor- als auch im Rastermodell
+                        möglich. Dabei gilt das Vektor-Overlay gemeinhin als komplex, zeitaufwendig
+                        und rechenintensiv, während das Raster-Overlay meist als einfach, schnell
+                        und effizient bezeichnet wird. Es gilt allerdings festzuhalten, dass auch
+                        vor dem einfachen Raster-Overlay einige aufwändige Vorverarbeitungsschritte
+                        ausgeführt werden müssen, was den Aufwand für die beiden Methoden angleicht.
+                        Daneben gibt es noch weitere Beweggründe, sich für eines der beiden
+                        Datenmodelle zu entscheiden. Die folgende Liste zeigt, wann welches Modell
+                        zum Zug kommen sollte.</paragraph>
+                    <list listStyle="unordered" title="Vorteile von Vektor-Overlay:">
+                        <item>klare, randscharfen Kriterien, z. B. Freihaltezonen in einer
+                            Gefahrenkarte, die unter keinen Umständen überbaut werden dürfen; </item>
+                        <item>klare, randscharfen Ausgangsdaten; </item>
+                        <item>klare Distanzkriterien, z. B. Einhaltung einer Minimaldistanz,
+                            „Mindestens 100 Meter vom Siedlungsgebiet entfernt“. </item>
+                    </list>
+                    <list listStyle="unordered" title="Vorteile von Raster-Overlay:">
+                        <item>unscharfe oder flauschigen Kriterien, das Kriterium „steil“ ist
+                            beispielsweise nur schwer klar abgrenzbar; </item>
+                        <item>kontinuierliche und unsichere Daten; </item>
+                        <item>die Erstellung von Kostenoberflächen. </item>
+                    </list>
+                </popup>
+
+
+                <paragraph title="Kritische Diskussion der Gewichtungsmethoden"> Auch die gewichtete
+                    Verschneidung hat Schwachpunkte und weist Probleme auf. Das größte Problem
+                    bildet sicher die Wahl der Gewichte. Wie Sie selbst gesehen haben, beeinflussen
+                    sie das Resultat einer Eignungsanalyse erheblich. Mit welcher Rechtfertigung
+                    erhielt die Vegetationsebene im obigen Beispiel das größte Gewicht? Meist nehmen
+                    Experten und Expertinnen diese Gewichtung vor und berufen sich dabei auf Angaben
+                    in der Fachliteratur. Aber unterschiedliche Fachleute werden die Gewichtung der
+                    Kriterien je nach eigenen Interessen unterschiedlich vornehmen. So dürften
+                    Biologen, Touristiker und Jäger die Gewichtungen zur Bestimmung der geeigneten
+                    Wolfslebensräume in St. Gittal sehr unterschiedlich vornehmen. Im obigen
+                    Beispiel erfolgte die Gewichtung willkürlich. Die folgende Unit zeigt, dass es
+                    auch andere Vorgehensweisen gibt. Weiter gilt es festzuhalten, dass in vielen
+                    SDSS-Anwendungen gezielt ein experimenteller Umgang mit der Gewichtsverteilung
+                    gepflegt wird. Im Sinne von „was wäre wenn“-Szenarien kann so der Einfluss
+                    verschiedener Kriterien in einer Eignunsanalyse untersucht werden. Ein weiteres
+                    Problemfeld ist die Wahl des Evaluationsalgorithmus. Anstatt einer linearen
+                    Zuordnung der Eingangs- auf die Indexskala, wären beliebige andere Funktionen
+                    denkbar. Und anstatt die gewichteten Eingangsebenen zu summieren, könnten sie
+                    auch z. B. multipliziert oder verrechnet werden. Die Resultate einer
+                    Eignungsanalyse können selbst bei identischen Eingangsdaten und identischen
+                    Gewichten je nach Wahl des Verrechnungsmodus beträchtlich variieren. Aus diesen
+                    Gründen ist beim Einsatz der gewichteten Verschneidung stets darauf zu achten,
+                    die Entstehungsbedingungen der Resultate klar aufzuzeigen. Nur so können die
+                    Eignungskarten als das dienen, was sie wirklich sind: ein objektives Hilfsmittel
+                    zur Entscheidungsunterstützung. </paragraph>
+                <paragraph> Die gezeigten Methoden unterscheiden sich durch die ihnen zugrunde
+                    liegende Skala. Die Gewichtung nach Ranglisten und die Gewichtung durch
+                    Einstufungstehen weitgehnd ohne theoretische Grundlage da. Welche der Methoden
+                    zum Einsatz kommt, hängt von einer Reihe von Fragen ab: Wie genau muss die
+                    Analyse sein? Wie gross ist die Fachkompetenz und die Erfahrung der Fachleute
+                    mit gewichteter Verschneidung? Oder wie schwierig ist die Integration der
+                    Methode in ein GIS? Die grosse Gefahr beim Einsatz von Gewichtungen in der
+                    räumlichen MCE liegt in der <formatted style="bold">unbedarften</formatted>,
+                        <formatted style="bold">unvorsichtigen</formatted> oder <formatted
+                        style="bold">falschen</formatted> Festlegung der Gewichte. Falsche Gewichte
+                    führen zu falschen Resultaten der Eignungsanalyse und können so zu falschen
+                    Entscheidungen führen. Diese Gefahr besteht bei allen drei Methoden, da die
+                    Gewichtung letztlich immer in der Verantwortung von Fachleuten
+                    liegt.</paragraph>
+                <paragraph icon="important" cssClass="importantbox "> Jede Eignungskarte oder
+                    Raumanalyse muss vollständig Transparenz darstellen wie sie aus welchen Gründen
+                    erzeugt wurde</paragraph>
+
+
+            </look>
+
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph>Betrachten Sie erneut die Übung zur gewichteten Verschneidung. </paragraph>
+                    <list>
+                        <item>Wie würden Sie vorhehen um eine transparente Dokumentation ihrer
+                            gewählten Gewichte vorzunehmen?</item>
+                        <item>Wie würden Sie vorgehen um Ihre Gewichte zu ermitteln?</item>
+                    </list>
+
+                </box>
+            </act>
+
+
+
+        </learningObject>
+
+        <learningObject navTitle="DSS (MCE)"
+            title="Enscheidungsfindung  (MCE) - Ein Ziel, mehrere Kriterien" label="V_lo4">
+            <clarify>
+                <paragraph>Im einfachsten Fall der Entscheidungsunterstützung mit GIS gilt es, Räume
+                    oder Standorte zu finden, die für eine Zielsetzung mehrere Kriterien erfüllen
+                    oder optimieren. Im Fallbeispiel der Gemeinde St. Gittal besteht die Zielsetzung
+                    in einem ersten Ansatz darin, die besten Lebensräume für den Wolf auf dem
+                    Gemeindegebiet zu identifizieren. Angenommen, der Wolf bevorzugt siedlungsferne
+                    und bewaldete Gebiete, so lassen sich daraus zwei Suchkriterien formulieren.
+                    Liegen wie in diesem Fall mehrere Kriterien, aber nur eine Zielsetzung vor, so
+                    spricht man von einer <indexItem>Multikriterien-Evaluation (Multi Criteria
+                        Evaluation, MCE)</indexItem>. </paragraph>
+
+            </clarify>
+            <look>
+                <list listStyle="ordered" title="Schema einer Multikriterien-Analyse (MCE):">
+                    <item>
+                        <formatted style="bold">Problemdefinition</formatted>: Der erste Schritt
+                        einer MCE besteht in der Definition des Problems. Beim Fallbeispiel der
+                        Gemeinde St. Gittal könnte die Problemdefinition wie folgt lauten: „Welche
+                        Teile des Gemeindegebietes eignen sich als Lebensraum für den Wolf?“ </item>
+                    <item>
+                        <formatted style="bold">Kriterienwahl</formatted>: Der nächste Schritt ist
+                        die Wahl der Kriterien. Die gewählten Kriterien sollten die Charakteristik
+                        des gesuchten Standorts oder Raumes möglichst gut widerspiegeln. Kriterien
+                        können sowohl räumlicher Natur (Geometrie, Topologie) als auch sachlicher
+                        Natur sein (Attribute). Ein räumliches Kriterium ist etwa der Abstand des
+                        potenziellen Lebensraumes des Wolfs zur nächsten Siedlung. Die Einschränkung
+                        auf die Bodennutzungsklasse „Wald“ ist hingegen ein sachliches Kriterium.
+                        Weiter gibt es harte, unbedingt zu erfüllende Kriterien („must-have“) und
+                        weiche, lediglich wünschbare („nice-to-have“) Kriterien. </item>
+                    <item>
+                        <formatted style="bold">Operationalisierung der Kriterien</formatted>: Sind
+                        die Kriterien einmal bestimmt, müssen sie in präzise, messbare Kenngrößen
+                        übersetzt werden. Diesen Vorgang nennt man
+                            <indexItem>Operationalisierung</indexItem>. So könnte das Kriterium
+                        „nicht zu nahe am Siedlungsgebiet“ in die Angabe einer Mindestdistanz zur
+                        Bauzone in Meter übersetzt werden. Man spricht davon, dass die Kriterien zu
+                        verrechenbaren Kenngrößen operationalisiert werden. In den meisten Fällen
+                        entsprechen die einzelnen Kriterien je einer Datenschicht im GIS (Layer mit
+                        Siedlungsnähe, Wald-Layer). </item>
+                    <item>
+                        <formatted style="bold">Schaffung eines gemeinsamen Bezugs –
+                            Datenintegration</formatted>: Die Datenintegration schafft
+                        Vergleichbarkeit durch gemeinsame Messskalen, gleiche Datentypen
+                        (Raster/Vektor) sowie gleiche Auflösungen und gleiche Referenzsysteme. </item>
+                    <item>
+                        <formatted style="bold">Verschneidung</formatted>: Identifikation der
+                        geeignetsten Räume: Nun werden die verschiedenen Kriterien miteinander
+                        verrechnet, um die gesuchten Standorte oder Räume zu ermitteln. Dazu gibt es
+                        mehrere mögliche Vorgehensweisen: <list listStyle="unordered">
+                            <item>
+                                <formatted style="bold">Logische (Boolesche)
+                                    Verschneidung</formatted>: In jeder Datenschicht finden sich nur
+                                binäre wahr/falsch-Informationen (true/false, Wald/Nichtwald), aus
+                                deren logischer Verschneidung die gesuchten Standorte und Räume
+                                ermittelt werden. Der Booleschen Verschneidung ist die Unit
+                                „Boolesche Verschneidung“ gewidmet. </item>
+                            <item>
+                                <formatted style="bold">Gewichtete Verschneidung</formatted>: Fast
+                                nie wird die simple Unterscheidung in wahr und falsch der komplexen
+                                Realität gerecht. Eine wesentliche Verbesserung der Resultate kann
+                                erreicht werden, wenn die einzelnen Datenschichten mit Gewichten
+                                versehen werden. Im Fallbeispiel könnte z. B. die Entfernung zur
+                                Siedlung viel weniger wichtig sein als das Rückzugsgebiet Wald. Dazu
+                                könnte die Ebene mit der Entfernung zur Siedlung mit einem
+                                Gewichtsfaktor, z. B. mal fünf, versehen werden. Diese Themen werden
+                                separat behandelt (Units „Gewichtete Verschneidung“ und „Bestimmung
+                                der Gewichte“) </item>
+                            <item>
+                                <formatted style="bold">Fuzzy Overlay</formatted>: Erhebungsfehler
+                                der Eingangsdaten und falsch gewählte Kriterien bergen die Gefahr
+                                von Evaluierungsfehlern. In einer Multikriterien-Evaluation können
+                                geeignete Gebiete verkannt und ungeeignete fälschlicherweise als
+                                geeignet klassifiziert werden. Eine Lösung dieses Problems besteht
+                                in der Auflösung scharfer Grenzen. Für die räumlichen Daten heißt
+                                das, dass Grenzen nicht als scharfe Linien, sondern als
+                                Übergangszonen repräsentiert werden. Bei den Attributen lösen
+                                unscharfe Wertebereiche die scharfen Klassengrenzen ab. Dieses
+                                Konzept beruht auf der Idee der Fuzzy Set Theory („fuzzy“ im Sinne
+                                von „unscharf“). Auf diese Ansätze wird erst im Intermediate Level
+                                vertieft eingegangen. </item>
+                        </list>
+                    </item>
+                    <item>
+                        <formatted style="bold">Verifikation/Evaluation</formatted>: Im letzten
+                        Schritt sollten die Resultate mit einer Referenz verglichen werden. Dies ist
+                        dann möglich, wenn im Feld erhobene Referenzdaten beigezogen werden können
+                        („ground truth“). Der letzte Schritt wird oft vernachlässigt. Aber beachten
+                        Sie: Eine Eignungskarte ohne Abschätzung ihrer Güte und Verlässlichkeit ist
+                        oft das Papier nicht wert, auf das sie gedruckt wurde! </item>
+                </list>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph>Bestimmen Sie die Bewertungskriterien der Multikriterien-Evaluation
+                        des Projektes OuterRaro</paragraph>
+
+                </box>
+            </act>
+        </learningObject>
+
+        <learningObject navTitle="DSS (MOE)"
+            title="Enscheidungsfindung (MOE) - Mehrere Ziele, mehrere Kriterien" label="V_lo5">
+            <clarify>
+                <paragraph>Will die Gemeinde St. Gittal den Dorffrieden wahren, muss sie bestrebt
+                    sein, die Wünsche der Umweltfreunde, der Schafzüchter und der Hoteliers unter
+                    einen Hut zu bringen. Es ist allerdings leicht ersichtlich, dass die Ziele der
+                    verschiedenen Interessengruppen sehr unterschiedlich sind.</paragraph>
+                <list listStyle="unordered">
+                    <item>Es gibt Fälle, bei denen verschiedene Nutzungsansprüche auf der gleichen
+                        Parzelle realisiert werden können. Bei Einhaltung bestimmter Regeln könnten
+                        Wanderwege durchaus durch ein Wolfshabitat führen. </item>
+                    <item>Daneben können sich Landnutzungsansprüche auch gegenseitig ausschliessen.
+                        Eine Parzelle kann nicht gleichzeitig Wolfshabitat, Schafweide und Golfplatz
+                        sein. In solchen Fällen gilt es, verschiedene Planungsvarianten
+                        gegeneinander abzuwägen und schliesslich den Raum entsprechend seiner
+                        Eignung auf die verschiedenen Nutzungen aufzuteilen. </item>
+                </list>
+                <paragraph>Im Gegensatz zur MCE liegen hier also mehrere Ziele vor, man spricht
+                    deshalb von einer <indexItem>Entscheidungsunterstützung mit mehreren Zielen
+                        (Multi Objective Evaluation, MOE)</indexItem>. </paragraph>
+            </clarify>
+            <look>
+                <multimedia src="../image/MOE.gif" type="gif" align="center" width="500"
+                    thumbnail="../image/MOE_thumb.gif"/>
+                <paragraph>Die Abbildung zeigt das Resultat einer Eignungsanalyse bei zwei sich
+                    ausschliessenden Nutzungsansprüchen für das Gemeindegebiet von St. Gittal: Die
+                    beiden Ziele heissen „geeignet als Wolfshabitat“ (Ziel A) und „geeignet für
+                    Schafsweiden“ (Ziel B). Ganz links sehen Sie eine Reihe von Eingangslayern der
+                    Eignungsanalyse, u.a. die Layer „Landnutzung" (oben) und „Hangneigung“ (Mitte).
+                    Die Karte daneben zeigt die räumliche Zuordnung des Gemeindegebietes auf die
+                    beiden Nutzungen. Weiss eignet sich weder für (A) noch für (B). Dunkelgrau wurde
+                    (A) und hellgrau wurde (C) zugeordnet. Dort wo sich Hellgrau und Dunkelgrau
+                    überlagern, besteht ein Nutzungskonflikt (Rot).<newLine/> Im Diagramm rechts
+                    kann jeder Punkt des Raumes entsprechend seiner Eignung für (A) und (B)
+                    eingetragen werden. Je mehr ein Punkt einem Kriterium entspricht, desto höher
+                    ist sein entsprechender Prozentwert. Sowohl für (A) als auch für (B) kann ein
+                    Grenzwert angegeben werden, ab welchem ein Punkt der entsprechenden Nutzung
+                    zugewiesen wird. Im roten Rechteck oben rechts liegen alle Punkte mit einem
+                    Nutzungskonflikt. Für sie muss nun im Einzelnen entschieden werden, welcher
+                    Nutzungsklasse sie zugeordnet werden sollen. Im einfachsten Fall wird ein
+                    Konfliktpixel der Nutzung zugesprochen, für die es besser geeignet ist: Liegt
+                    das Konfliktpixel im Entscheidungsplot über der roten Linie, erhält es die
+                    Nutzung (B), andernfalls (A). </paragraph>
+            </look>
+            <act>
+                <box cssClass="bearbeitensiebox" title="Bearbeiten Sie..." icon="idee">
+                    <paragraph>Bestimmen Sie die Bewertungskriterien der Multikriterien-Evaluation
+                        des Projektes OuterRaro untger Berücksichtigun eines Zielkonflikts zwischen
+                        Outdoortourismus und Eventtourismus</paragraph>
+
+                </box>
+            </act>
+
+        </learningObject>
+
+
+
+
+
+
+        <selfAssessment title="Wissens-Check">
+            <paragraph>Versetzen Sie sich für diese Aufgabe in die Rolle eines/r WissenschaftlerIn
+                mit der Aufgabe, eine Multikriterien-Analyse zur Bestimmung möglicher Lebensräume
+                des Wolfes in der Gemeinde St. Gittal durchzuführen. Ihre Aufgabe ist es, aus
+                verschiedenen Quellen die Kriterien zu bestimmen, die die gesuchten Räume
+                charakterisieren. Studieren Sie dazu die zwei angegebenen Texte: </paragraph>
+            <list listStyle="ordered">
+                <item> KORA: <link uri="../material/wolf_kora.pdf" type="pdf" size="200kb"
+                        >Dokumentation Wolf</link>
+                    <citation bibIDRef="kora_wolf"/>
+                </item>
+                <item>Facts: „<link uri="../material/facts1995_wolf.pdf" type="pdf" size="700kb">Die
+                        Räuber kommen wieder</link>“<citation bibIDRef="facts1995"/>
+                </item>
+            </list>
+            <paragraph title="Aufgabe:">Formulieren Sie mindestens drei Kriterien zur
+                Charakterisierung potenzieller Wolfshabitate für die Gemeinde St. Gittal. Jedes
+                Ihrer Kriterien sollte in einer räumlichen Datenebene repräsentiert werden können.
+                Aus allen Layern soll anschließend die Gesamteignung errechnet werden. Woher Sie die
+                Daten bekommen können, soll Sie im Rahmen dieser Übung nicht interessieren. </paragraph>
+            <popup>
+                <list listStyle="unordered">
+                    <item>Topographie: steile und felsige Gebiete </item>
+                    <item>Vegetation: bewaldete Flächen </item>
+                    <item>Beuteangebot: hohe Dichte von Wildtieren (Gemsen, Rehe, Hirsche,
+                        Steinböcke) </item>
+                </list>
+            </popup>
+            <paragraph title="Addition vs. Multiplikation">Angenommen, die beiden Themenebenen aus
+                der Abbildung <link targetLabel="raster">Weighted Overlay im Raster- bzw.
+                    Vektormodell</link> werden nicht addiert, sondern multipliziert. Welche
+                wesentliche Änderung ergibt sich dann für die Resultatebene? Beurteilen Sie die
+                folgende Aussage: „Zellen mit 0 in der Eingangsebene erhalten einen kleineren
+                Einfluss, weil sie im Gegensatz zur Addition bei der Multiplikation in die
+                resultierende Eignungsebene übertragen werden.“ </paragraph>
+            <list listStyle="ordered">
+                <item>+ weil + (d. h. erster Satzteil richtig, zweiter Satzteil richtig, logische
+                    Verknüpfung richtig)</item>
+                <item>+ / + (d. h. erster Satzteil richtig, zweiter Satzteil richtig, logische
+                    Verknüpfung falsch)</item>
+                <item>+ / - (d. h. erster Satzteil richtig, zweiter Satzteil falsch, logische
+                    Verknüpfung falsch)</item>
+                <item>- / + (d. h. erster Satzteil falsch, zweiter Satzteil richtig, logische
+                    Verknüpfung falsch)</item>
+                <item>- / - (d. h. erster Satzteil falsch, zweiter Satzteil falsch, logische
+                    Verknüpfung falsch)</item>
+            </list>
+            <popup title="Lösung">4. Richtig ist, dass Zellen mit einer 0 bei der Multiplikation
+                einen höheren Einfluss erhalten, weil (b) gilt. </popup>
+            <paragraph title="Gewichte-Rechner">Zur Festigung Ihres Wissens über die gewichtete
+                Verschneidung sind Sie nun aufgefordert die Eignungswerte bestimmter Pixel in der
+                Resultatkarte rechts selbst nachzurechnen. Gesucht sind die Werte der gelben Felder
+                in der Resultatkarte ganz rechts. Tragen Sie die Werte in die Felder ein und klicken
+                Sie die Taste „Prüfen“. Falls Sie ungeübt im Kopfrechner sind, nehmen Sie ein Blatt
+                Papier zu Hilfe. </paragraph>
+            <multimedia src="../multimedia/TestWeight.swf" type="flash" align="center" width="600"
+                height="400" legend="Gewichte-Rechner"/>
+            <link uri="../multimedia/TestWeight.swf">Starten Sie die Interaktive
+                Gewichte-Rechner-Animation </link>
+        </selfAssessment>
+    </unit>
+
+
+
+
+    <unit navTitle="Praxis - Projekt OuterRaro II" title="Projekt OuterRaro II" label="GISBSc_UE4a">
+        <entry>
+            <paragraph>Im Rahmen der Entwicklung der neuen Outdoortourismus-Marke OuterRaro gilt es
+                nun, die letzte These 3 zu überprüfen, welche der Vermutung folgt, dass es möglich
+                ist, (in diesen Gebieten) ein Outdoorangebot zu schaffen, dass sich auf Hiking,
+                Mountainbiking und Raften bezieht und attraktive, "naturnahe" und nachhaltig
+                bewirtschaftete <formatted style="underlined">Camps</formatted> als Stützpunkte
+                nutzt. Basierend auf den von Ihnen bisher durchgeführten Analyseschritten <link
+                    targetLesson="GISBScL7" targetLessonLang="de">Lerneinheit 7</link> und den
+                daraus gewonnen (Teil-)Ergebnissen, bedeutet dies konkret, dass Sie nun im Rahmen
+                der Multikriterienanalyse geeignete Standorte für Versorgungsstützpunkte (Camps)
+                suchen müssen und deren Eignung im Gesamtkontext der Angebotsplanung verifizieren.
+            </paragraph>
+        </entry>
+        <goals>
+            <lObjective> Konkret können Sie Kostenoberflächen erzeugen und daraus z.B. Wege mit
+                geringen Widerständen errechnen</lObjective>
+            <lObjective>Sie können theoretisches GIS-Wissens anwenden und selbständiges
+                erweitern</lObjective>
+            <lObjective>Sie sind in der Lage inhaltliche Fragestellungen zu analysieren und
+                Arbeitsthesen und Arbeitspakte zu gliedern.</lObjective>
+            <lObjective>Sie sind in der Lage auch komplexe Probleme in von Ihnen bearbeitbare
+                Einzelschritte zu gliedern und können so bereits umfangreiche Analysen
+                vornehmen</lObjective>
+        </goals>
+
+
+
+
+
+
+
+
+
+
+        <learningObject title="Hiking- und Mountainbike" navTitle="UE Hiking- und Mountainbike"
+            label="U_lo1">
+            <clarify>
+                <paragraph> Zwar haben Sie bereits eine Vielzahl von interessanten Aspekten für die
+                    Angebotsplanung vorliegen, dennoch fehlen zwei wichtige Kriterien; Sie benötigen
+                    sowohl eine attraktive und möglichst anspruchsvolle Hiking- und als auch eine
+                    möglichst abwechslungsreiche und langandauernde Mountainbike-Strecke. Für die
+                    Frage, welche Eigenschaften die gesuchten Strecken aufweisen müssen, sollten
+                    Angebote wie Etappen mit unterschiedlichen Steigungen für ein sportlich
+                    differenziertes Zielpublikum oder unterschiedliche Streckenlängen für
+                    Tagestouren oder stundenweise Kurztrips berücksichtig werden. </paragraph>
+
+
+            </clarify>
+            <look>
+                <paragraph>Doch wie können Sie die damit verbundenen Parameter aus den vorliegenden
+                    räumlichen Daten extrahieren? Letztendlich suchen ja Sie nach Widerständen oder
+                    'Kosten', welche die Nutzung einer Strecke (Überwinden einer <formatted
+                        style="italic">Distanz</formatted>) leicht oder beschwerlich, billig oder
+                    teuer, attraktiv oder unattraktiv usw. machen.</paragraph>
+            </look>
+            <act>
+                <box title="Bearbeiten Sie..." icon="tools" cssClass="bearbeitensiebox">
+                    <list>
+                        <item>Übersetzen Sie die gewünschten Anforderungen an die beiden
+                            Streckentypen a) Wanderweg und b) Mountainbike in konkrete Variablen
+                            bzw. Werte. </item>
+                        <item>Suchen nach geeigneten Werkzeugen, mit welchem Sie Distanzen in
+                            Abhängigkeit von Kosten errechnen können.</item>
+                        <item> Identifizieren Sie einen Wanderweg, der die Insel durchquert und
+                            gleichzeitig möglichst viele Höhenmeter aufweist. </item>
+                        <item>Identifizieren Sie eine Mountainbike-Strecke, die a) möglichst flache
+                            Teilstücke zur Erwärmung bzw. Entspannung und b) anspruchsvolle
+                            Steigungen aufweist.</item>
+                    </list>
+                </box>
+            </act>
+
+        </learningObject>
+
+
+        <learningObject title="Standortsuche OuterRaro-Camp" navTitle="Standortsuche OuterRaro-Camp"
+            label="U_lo2">
+            <clarify>
+                <paragraph>Um geeignete Camp-Standorte zu finden, müssen Sie Ihre bisherigen
+                    Teilergebnisse (Kriterien für die Standortwahl) miteinander verschneiden.
+                    Konkret bedeutet das, dass Sie durch (sinnvoll) nacheinander ausgeführte
+                    Abfragen, die Menge Ihrer zuvor gewonnenen (Teil-)Ergebnisse soweit reduzieren,
+                    bis Sie eine entsprechende Anzahl von geeigneten Standorten erhalten. </paragraph>
+
+
+            </clarify>
+            <look>
+                <paragraph>Nach Ihrer bisherigen Analyse stehen Ihnen folgende Selektionskriterien
+                    für die Standortsuche zur Verfügung:</paragraph>
+                <list>
+                    <item>ein einfaches Zonenmodell potentieller Nutzungsareale</item>
+                    <item>das hydrologische Netz Rarotongas und geeignete Abschnitte zur
+                        Energiegewinnung (und zum Raften)</item>
+                    <item>aus dem SRTM abgeleitete Größen wie Hangneigung, Exposition usw.</item>
+                    <item>attraktive Aussichtspunkte entlang bestehender Wege</item>
+                    <item>anspruchsvolle Hiking- und Mountainbike-Routen</item>
+                </list>
+
+            </look>
+            <act>
+                <box title="Bearbeiten Sie..." icon="tools" cssClass="bearbeitensiebox">
+                    <list>
+                        <item>Überlegen Sie zunächst, welche Kriterien die gesuchten Camp-Standorte
+                            erfüllen sollten? </item>
+                        <item>Übersetzen Sie diese Kriterien in konkrete Variablen bzw. Werte,
+                            basierend auf Ihren bis dato gewonnen Ergebnissen (Selektionskriterien). </item>
+                        <item> Identifizieren Sie ein mögliches Anfrageschema, nach welchem Sie die
+                            Standortsuche durchführen und geeignete Räume eingrenzen können. </item>
+                        <item>Führen Sie die Standortsuche aus und bestimmen Sie geeignete
+                            Camp-Standorte. </item>
+                        <item>Erzeugen Sie eine thematische Karte, welche die Ergebnisse graphisch
+                            präsentiert und IHR Konzept der Outdoortourismus-Marke OuterRaro
+                            bestmöglich wiederspiegelt. </item>
+                    </list>
+                </box>
+            </act>
+
+        </learningObject>
+        <learningObject title="Lösungshilfen" navTitle="Lösungshilfen" label="U_lo4">
+
+            <clarify>
+                <paragraph title="Aufgabenteil 1: Hiking- und Mountainbike"/>
+                <list>
+                    <item>Kosten anhand von z.B. Neigung errechnen (Neigung als Prozentwert
+                        errechnen, evtl. reklassifizieren um ein Kostenraster zu erzeugen)</item>
+                    <item>Punkte auswählen, die auf dem Wanderweg und der Mountainbike-Strecke
+                        verbunden werden sollen</item>
+                    <item>Punkte in einzelnen Shapefiles abspeichern, damit sie sowohl als Ziel- als
+                        auch Abbruchspunkt gelten können</item>
+                    <item>Cost-Distance-Tool benutzen um die Grundlage für ArcGIS zu schaffen, die
+                        Wanderwege und Mountainbike-Strecken zu erzeugen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.3/tutorials/spatial/Spatial_30.htm"
+                            >Cost Distance</link>)</item>
+                    <item>Den Wanderweg und die Mountainbike-Strecken errechnen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?id=6123&amp;pid=6117&amp;topicname=Cost_Path"
+                            >Cost Path</link>)</item>
+                </list>
+                <paragraph title="Aufgabenteil 2: Standortsuche OuterRaro-Camp">Hinweis: Dies stellt
+                    einen möglichen Lösungsweg dar. Es ist jedoch möglich, diese Aufgabe auf völlig
+                    anderem Wege zu bearbeiten!</paragraph>
+                <list>
+                    <item>Geeignete Nutzungsareale aus dem Zonenmodell extrahieren
+                        (Reclassify)</item>
+                    <item>us diesen Arealen geeignete Gebiete extrahieren, die in der Nähe von zur
+                        Energiegewinnung und zum Rafting geeignete Gewässerstrecken liegen (Raster
+                        to Polyline, Buffer, Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete extrahieren, die eine geeignete Hangneigung
+                        aufweisen (Reclassify, Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete extrahieren, die eine geeignete Exposition
+                        haben (Reclassify, Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete extrahieren, die an schönen Aussichtspunkten
+                        liegen (Puffer um gute Aussichtspunkte erzeugen (<link
+                            uri="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?id=1348&amp;pid=1347&amp;topicname=Buffer_%28Analysis%29"
+                            >Buffer Analysis</link>), Extract by Mask)</item>
+                    <item>Aus diesen Arealen Gebiete suchen, die in der Nähe von den Hiking- und
+                        Mountainbike-Routen liegen (Raster to Polyline, Buffer, Extract by
+                        Mask)</item>
+                    <item>Nun eine thematische Karte erzeugen, die einen Überblick über die Insel
+                        Rarotonga widergibt, sowie auch die Aussichtspunkte, Hiking- und
+                        Mountainbike-Wege, Rafting- und Stromerzeugungsgewässerstrecken und mögliche
+                        Campingplätze zeigt</item>
+                </list>
+            </clarify>
+        </learningObject>
+        <summary>
+            <paragraph>Mit dieser letzten Übung haben Sie nun alle grundlegend konzeptionellen und
+                technischen Arbeitsprozesse und -schritte kennen gelernt, mit deren Hilfe Sie
+                räumliche Information erfassen, verwalten, analysieren und präsentieren können. Auf
+                die Frage was GI-Systeme sind oder was damit anzufangen ist, können Sie nun schon
+                viel präziser antworten. </paragraph>
+            <box title=" Zu guter Letzt ..." cssClass="bearbeitensiebox" icon="idee"> Sie haben Ihrem Chef Ihre Ergebnisse einer nachhaltigen
+                Outdoortourismus-Marke OuterRaro erfolgreich präsentiert. Basierend auf Ihren
+                Ergebnissen wurde ein Vorort-Termin organisiert und Sie hatten Gelegenheit, eine
+                Woche auf Rarotonga das bestehende touristische Angebot zu studieren.<paragraph>
+                    Obwohl Sie den Aufenthalt genießen sind Sie doch einigermaßen erstaunt über die
+                    Tücken Ihrer Analyse und der von Ihnen vorgefundenen Realität...</paragraph>
+            </box>
+                    
+                   <multimedia type="flash"
+                        
+                        src="http://www.youtube.com/v/d5iB41ni3-8" bibIDRef="coconut"
+                        visible="all" width="300"
+                        legend="Coconut tours - new tours and new adventures in Rarotonga"
+                        units="pixels" align="center" height="240"/>
+            
+            
+            
+        </summary>
+    </unit>
+    
+    <selfAssessment title="Wissens-Check">
+        <paragraph>
+            <column>
+                <columnLeft width="50" units="percent">
+                    <multimedia src="../multimedia/VectorBooleanOverlaySelfA.swf" type="flash"
+                        align="center" width="290" height="362"/>
+                    <link uri="../multimedia/VectorBooleanOverlaySelfA.swf">Vergrössern</link>
+                </columnLeft>
+                <columnRight width="50" units="percent">
+                    <multimedia src="../multimedia/BooleanOverlaySelfAssess.swf" type="flash"
+                        align="center" width="290" height="362"/>
+                    <link uri="../multimedia/BooleanOverlaySelfAssess.swf">Vergrössern</link>
+                </columnRight>
+            </column>
+            <paragraph>In diesen Animationen erhalten Sie die Möglichkeit, Ihr Verständnis der
+                Booleschen Verschneidung zu prüfen. Dazu gehen Sie wie folgt vor: </paragraph>
+            <list listStyle="ordered">
+                <item> Als ersten Schritt bestimmen Sie, welche Eingangsgrössen Sie für Ihre
+                    Eignungsanalyse verwenden wollen. Klicken Sie dazu die Legendenkästchen der
+                    entsprechenden Attributklassen aus den beiden Themenebenen Landnutzung und
+                    Hangneigung an. Die selektierten Flächen werden hervorgehoben. </item>
+                <item> Anschliessend wählen Sie den Booleschen Operator der Verknüpfung. </item>
+                <item> Klicken Sie nun in der Resultatkarte diejenigen Teilräume an, welche Ihrer
+                    Abfrage entsprechen. Klicken Sie beim Vektormodel die resultierenden Polygone,
+                    beim Rastermodell die resultierenden Pixel an. </item>
+                <item> Überprüfen Sie abschliessend mit der Taste „Prüfen“, ob Sie die richtigen
+                    Flächen selektiert haben. Verzweifeln Sie nicht vorschnell, nach einigen
+                    Fehlversuchen erhalten Sie Hilfe. </item>
+            </list>
+        </paragraph>
+        <paragraph title="Gewichtete Verschneidung">
+            <paragraph title="Addition vs. Multiplikation">Angenommen, die beiden Themenebenen aus
+                der Abbildung <link targetLabel="raster">Weighted Overlay im Raster- bzw.
+                    Vektormodell</link> werden nicht addiert, sondern multipliziert. Welche
+                wesentliche Änderung ergibt sich dann für die Resultatebene? Beurteilen Sie die
+                folgende Aussage: „Zellen mit 0 in der Eingangsebene erhalten einen kleineren
+                Einfluss, weil sie im Gegensatz zur Addition bei der Multiplikation in die
+                resultierende Eignungsebene übertragen werden.“ </paragraph>
+            <list listStyle="ordered">
+                <item>+ weil + (d. h. erster Satzteil richtig, zweiter Satzteil richtig, logische
+                    Verknüpfung richtig)</item>
+                <item>+ / + (d. h. erster Satzteil richtig, zweiter Satzteil richtig, logische
+                    Verknüpfung falsch)</item>
+                <item>+ / - (d. h. erster Satzteil richtig, zweiter Satzteil falsch, logische
+                    Verknüpfung falsch)</item>
+                <item>- / + (d. h. erster Satzteil falsch, zweiter Satzteil richtig, logische
+                    Verknüpfung falsch)</item>
+                <item>- / - (d. h. erster Satzteil falsch, zweiter Satzteil falsch, logische
+                    Verknüpfung falsch)</item>
+            </list>
+            <popup title="Lösung">4. Richtig ist, dass Zellen mit einer 0 bei der Multiplikation
+                einen höheren Einfluss erhalten, weil (b) gilt. </popup>
+            <paragraph title="Gewichte-Rechner">Zur Festigung Ihres Wissens über die gewichtete
+                Verschneidung sind Sie nun aufgefordert die Eignungswerte bestimmter Pixel in der
+                Resultatkarte rechts selbst nachzurechnen. Gesucht sind die Werte der gelben Felder
+                in der Resultatkarte ganz rechts. Tragen Sie die Werte in die Felder ein und klicken
+                Sie die Taste „Prüfen“. Falls Sie ungeübt im Kopfrechner sind, nehmen Sie ein Blatt
+                Papier zu Hilfe. </paragraph>
+            <paragraph>
+                <multimedia src="../multimedia/TestWeight.swf" type="flash" align="center"
+                    width="600" height="400" legend="Gewichte-Rechner"/>
+            </paragraph>
+            <link uri="../multimedia/TestWeight.swf">Vergrössern</link>
+        </paragraph>
+
+    </selfAssessment>
+    <glossary>
+        <definition term="Eignungsanalyse">Die Eignungsanalyse (engl. Suitability Analysis) ist eine
+            Evaluation der Eignung eines Standortes oder eines Raumes für eine bestimmte Nutzung.
+            Die Eignungsanalyse erfolgt in der Regel durch eine Verschneidung sozialer,
+            ökologischer, ökonomischer, physikalischer, biologischer oder anderer Kriterien. Meist
+            bilden Eignungskarten das Resultat einer Eignungsanalyse. Sie stellen die räumliche
+            Verteilung der ermittelten Eignungswerte grafisch dar. </definition>
+
+        <definition term="Boolesche Verschneidung">Die Boolesche Verschneidung (engl. Boolean
+            Overlay) ist eine Verschneidung von binär codierten Themenebenen unter Verwendung der
+            Booleschen Operatoren AND, OR, XOR und NOT. Resultat einer Booleschen Verschneidung ist
+            wiederum eine Themenebene mit Gebieten, für die „wahr“ resp. „falsch“ gilt.</definition>
+        <definition term="Boolesche Algebra">Die Boolesche Algebra (engl. Boolean algebra) ist eine
+            Art der Mathematik, die nicht mit Zahlen, sondern mit Wahrheitszuständen („wahr“,
+            „falsch“) umgeht. Anstelle der Grundrechenarten kennt die Boolesche Algebra Operationen,
+            die zwei Wahrheitszustände als Eingangswerte miteinander verknüpfen und als Ergebnis
+            wiederum einen Wahrheitszustand ergeben. Die wichtigsten Operatoren sind AND
+            (Schnittmenge), OR (Vereinigung), XOR (exklusive Vereinigung) und NOT
+            (Negation).</definition>
+        <definition term="Standardisierung">Bei der gewichteten Verschneidung bezeichnet
+            Standardisierung die Übersetzung der heterogenen Eingangsdaten in eine für alle Ebenen
+            einheitliche Skala (z. B. 0–1, 0–100, 0–255). </definition>
+        <definition term="Gewichtete Verschneidung">Die gewichtete Verschneidung (engl. Weighted
+            Overlay) ist eine Verschneidung standardisierter und unterschiedlich gewichteter
+            Themenebenen in einer Eignungsanalyse. Die Gewichte beziffern dabei die relative
+            Bedeutung der berücksichtigten Eignungskriterien. </definition>
+    </glossary>
+
+    <bibliography>
+        <map bibID="swisstopo" author="Swisstopo" publicationPlace="Bern" publicationYear="1991"
+            publisher="Swisstopo" downloadUrl="http://www.swisstopo.ch" scale="1:25000"
+            title="Digital Terrain Model DTM/DHM25">Reporduced with authorisation by swisstopo
+            (BA057224)</map>
+
+        <map bibID="swisstopo1111" author="Swisstopo" publicationPlace="Bern" publicationYear="2000"
+            publisher="Swisstopo" downloadUrl="http://www.swisstopo.ch" scale="1:25000"
+            title="Landeskarte der Schweiz - Blatt Albis 1111">Reproduziert mit Bewilligung von
+            swisstopo (BA057224)</map>
+
+        <journalArticle bibID="hard" publicationYear="1970"
+            title="Die Landschaft der Sprache und die Landschaft der Geographen
+            semantische und forschungslogische Studien zu einigen zentralen Denkfiguren in der deutschen geographischen Literatur."
+            journalTitle="Colloquium geographicum " volumeNr="11" author="Hard, G."/>
+
+        <book bibID="bartels" author="Bartels, D."
+            title="Zur wissenschaftstheo-
+            retischen Grundlegung einer Geographie des  Menschen"
+            publicationYear="1968" publisher="Steiner" publicationPlace="Wiesbaden"/>
+
+        <book bibID="burrough" author="Burrough, P.A.,  McDonnell, R.A." publicationYear="1998"
+            title="Principles of Geographical Information Systems"
+            publisher="Oxford University
+            Press" publicationPlace="New York"/>
+
+        <journalArticle bibID="fisher" author="Fisher, P." publicationYear="1996"
+            title="Reconsideration of the Viewshed Function in Terrain Modelling"
+            journalTitle="Geographical Systems" volumeNr="vol. 3, no.1."/>
+
+        <websites bibID="wood" author="Wood, J." url="http://www.landserf.org/" title="LandSerf"
+            accessedDate="2005-10-08"/>
+
+
+        <contributionInBook bibID="mitas" author="Mitas, Lubos; Mitasova, Helena"
+            titleOfContribution="Spatial Interpolation"
+            title="Geographical Information Systems
+            (GIS): Principles, Techniques, Management and Applications"
+            pageNr="481–492" editor="Longley, P. A.; Goodchild, M. F.; Maguire, D. J.; Rhind, D. W."
+            publicationYear="1999" publisher="John Wiley" publicationPlace="New York"
+            downloadUrl="http://altair.physics.ncsu.edu/"/>
+
+
+        <thesis bibID="hugentobler" author="Hugentobler, M." publicationYear="2000"
+            title="Fortpflanzung von Unsicherheiten in dreiecksbasierten digitalen Geländemodellen
+            mit Intervallarithmetik"
+            type="Diplomarbeit"
+            institution="Geographisches Institut der
+            Universität Zürich" published="yes"/>
+
+        <websites bibID="HBS1" author="Harvard Business School" publicationYear="2003"
+            title="The learning model" accessedDate="20 November 2003"
+            url=" http://www.hbs.edu/mba/experience/learn/thelearningmodel/index.html"/>
+
+        <websites bibID="HBS2" author="Harvard Business School" publicationYear="2005"
+            title="The Case Method in Action" accessedDate="14 February 2005"
+            url="http://www.hbs.edu/mba/academics/casemethod.html"/>
+
+        <book bibID="muell" title="Implementation von Problem-based Learning" author="Müller, C."
+            publicationYear="2007" publicationPlace="Bern" publisher="hep-verlag"/>
+
+        <contributionInBook bibID="rrm" publisher="BeltzPVU" editor=" Krapp,  A.   B.  Weidemann"
+            author="Reinmann-Rothmeier,  G. &amp; H. Mandl" publicationYear="2001"
+            publicationPlace="Weinheim"
+            titleOfContribution="Unterrichten und Lernumgebungen gestalten"
+            title="Pädagogische Psychologie.  Ein Lehrbuch."/>
+        <contributionInBook bibID="kanwischer" author="Kanwischer, D., Reudenbach, C., Schulze, U."
+            title="Learning with Geoinformation IV - Lernen mit Geoinformation IV"
+            titleOfContribution="Wie kommt der Transrapid nach Marburg? - GIS und problembasiertes Lernen in der Hochschule"
+            publisher="Wichmann" editor="Jekel, T., Donert, K., Koller, A." pageNr="200-211"
+            publicationPlace="Salzburg" publicationYear="2009"
+            downloadUrl="../material/AGIT_09_Beitrag_Kanwischer_Reudenbach_Schulze.pdf"/>
+        <book bibID="bill" author="Bill, Ralf" publicationYear="1999"
+            title="Grundlagen der
+            Geo-Informationssysteme" publisher="Wichmann Verlag"
+            publicationPlace="Karlsruhe"/>
+
+        <websites bibID="gittadbs" url="http://www.gitta.info/website/en/html/modules_overview.html"
+            publicationYear="2005" accessedDate="19.3.2009" author="GITTA"
+            title="Geographic Information Technology Training Alliance"/>
+        <websites bibID="gisma" author="GIS.MA" title="GISMA" publicationYear="2009"
+            publicationPlace="Marburg" publisher="GISMA"/>
+
+        <conferencePaper bibID="worboys" author="Worboys, Michael F." publicationYear="1996"
+            titleOfContribution="Metrics and topologies for geographic space"
+            publisher="International Geographical Union" editor="Kraak, M. J., Molenaar, M."
+            pageNr="7A.1–7A.11"
+            proceedingsTitle="Advances in Geographical Information Systems
+            Research II: Proceedings of the International Symposium on Spatial Datat handling"
+            downloadUrl="http://www.spatial.maine.edu/~worboys/mywebpapers/sdh1996.pdf"/>
+        <book bibID="hagett" author="Haggett, Peter; Cliff, Andrew D.; Frey, Allan"
+            title="Locational Analysis in Human Geography" publisher="Wiley"
+            publicationPlace="New
+            York" publicationYear="1977"/>
+        <book bibID="boots" author="Boots, Berry" publicationYear="1999"
+            title="Spatial
+            Tessellations"/>
+        <book bibID="jones" author="Jones, Ch." publicationYear="1997"
+            title="Geographical
+            Information Systems and Computer Cartography"
+            publisher="Longman Singapore Publishers
+            (pte) Ltd."/>
+        <newspaperArticle bibID="facts1995" author="Baumgartner, Hansjörg" dayMonth="Nr. 29"
+            downloadUrl="../material/facts1995_wolf.pdf" newspaperTitle="Facts" pageNr="86"
+            publicationYear="1995" title="Wölfe: Die Räuber kommen wieder"/>
+        <publicationCorporateBody bibID="kora_wolf" author="KORA"
+            title=" Koordinierte
+            Forschungsprojekte zur Erhaltung und zum Management der Raubtiere in der Schweiz"
+            downloadUrl="../material/wolf_kora.pdf" publisher="BUWAL" publicationPlace="Bern"
+            publicationYear="2005"/>
+        <journalArticle bibID="wyatt" author="Wyatt, Philip" title="The Interpolation Process"
+            publicationYear="2000" journalTitle="Directions Magazine"
+            downloadUrl="http://www.directionsmag.com/article.php?article_id=52"/>
+        <conferencePaper bibID="shepard" author="Shepard, D."
+            titleOfContribution="A two-dimensional
+            interpolation function for irregularly-spaced data"
+            publicationYear="1968"
+            proceedingsTitle="Proceedings of the 1968 23rd ACM national conference" pageNr="517–523"/>
+        <websites bibID="wikipedia" author="Wikipedia" title="Kriging"
+            url="http://en.wikipedia.org/wiki/Kriging" accessedDate="3. Februar 2006"/>
+
+        <videoFilmBroadcast bibID="coconut" title="Coconut Tours"
+            downloadUrl="http://www.coconuttours.co.ck/" author="Coconut tours"
+            productionPlace="Rarotonga"/>
+
+
+    </bibliography>
+
+    <metadata>
+        <organisation level="Basic" module="AN">
+            <creationPosition>
+                <previous>GISBScL3</previous>
+                <following>none</following>
+            </creationPosition>
+        </organisation>
+        <prerequisites>
+            <preReqItem label="none"/>
+        </prerequisites>
+        <keywords>
+            <keywordItem>Räumliche Entscheidungsfindung</keywordItem>
+            <keywordItem>Entscheidungskriterien </keywordItem>
+            <keywordItem>Standardisierung</keywordItem>
+            <keywordItem>Merkmalsmaße</keywordItem>
+            <keywordItem>Boolsche Verschneidung</keywordItem>
+            <keywordItem>Gewichtete Verschneidung</keywordItem>
+        </keywords>
+        <technical>
+            <technicalRequirement>
+                <type>PlugIn</type>
+                <name>Flash</name>
+                <minimumVersion>5</minimumVersion>
+            </technicalRequirement>
+        </technical>
+        <lessonInfo>
+            <language language="de" derived="no"/>
+            <lifecycle>
+                <version creationDate="2009-11-20" modificationDate="2011-11-30">1</version>
+                <contribute>
+
+                    <person responsible="GISMA contributor" name="Chris Reudenbach"
+                        email="reudenbach@staff.uni-marburg.de" institute="PUM" departement="GISMA"
+                        >concept, content, recompilation of GITTA content, eLML translation. The
+                        lecture part is derived by using the GITTA lessons "Erreichbarkeit", Eignungsanalysen ("Suitability"), "Suitability"
+                        "Kontinuierliche räumliche Variablen"</person>
+                    
+                    <person responsible="GISMA contributor" name="Uwe Schulze"
+                        email="schulze6@staff.uni-marburg.de" institute="PUM" departement="GISMA">
+                        Practice course, concept, practice solutions content, revisions</person>
+                    
+                    <person responsible="GISMA contributor" name="Manuel Sudau"
+                        email="feedback@www.gis-ma.org" institute="PUM" departement="GISMA">Practice
+                        solutions, text revisions</person>
+
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Marco
+                        Hugentobler"
+                        email="mhugent@geo.unizh.ch">Overall GITTA lesson Geländeanalyse </person>
+                    <person responsible="GITTA contributor" name="Moe Myint" institute="UNIFR"
+                        departement="IGUF" email="dontknow@iguf.ch">GITTA lesson "Eignungsanalysen"
+                        overall</person>
+                    <person responsible="GITTA contributor" name="Claude Collet"
+                        email="claude.collet@unifr.ch" institute="UNIFR" departement="IGUF">GITTA
+                        lesson "Eignungsanalysen" Concept</person>
+                    <person responsible="GITTA contributor" name="Sandro Bischof"
+                        email="sbischof@geo.unizh.ch" departement="GIUZ" institute="UNIZH">GITTA
+                        lesson "Erreichbarkeit" Overall</person>
+                    <person responsible="GITTA contributor" name="Robert Weibel"
+                        email="robert.weibel@geo.uzh.ch" institute="UNIZH" departement="GIUZ"
+                        >Overall GITTA lesson Geländeanalyse; Concept GITTA lesson Geländeanalyse </person>
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Suzette Hägi" email="s_haegi@bluemail.ch">GITTA lesson Geländeanalyse
+                        Specials: Flashes; GITTA lesson "Eignungsanalysen" Specials:
+                        Flashes</person>
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Joël 
+                        Fisler" email="fisler@geo.unizh.ch"
+                        >GITTA lesson Geländeanalyse Specials: Responsible for the conversion Word
+                        into XML and transformation into eLML; GITTA lesson "Intermediate Terrain
+                        Analysis" Conversion into eLML format; GITTA lesson "Eignungsanalysen"
+                        Conversion into eLML format; GITTA lesson "Erreichbarkeit" Conversion into
+                        eLML format</person>
+                    <person responsible="GITTA contributor" name="Friedjoff Trautwein"
+                        email="trautwei@geo.uzh.ch" institute="UNIZH" departement="GIUZ">GITTA
+                        lesson Geländeanalyse Specials: Graphics</person>
+                    <person responsible="GITTA contributor" name="Marcel Frehner"
+                        email="frehnerm@swissonline.ch" institute="UNIZH" departement="GIUZ"> GITTA
+                        lesson "Intermediate Terrain Analysis" Content</person>
+                    <person responsible="GITTA contributor" name="Eric Lorup"
+                        email="eric.lorup@sdnag.com" institute="UNIZH" departement="GIUZ">GITTA
+                        lesson "Kontinuierliche räumliche Variablen" Overall </person>
+                    <person responsible="GITTA contributor" institute="UNIZH" departement="GIUZ"
+                        name="Patrick
+                        Laube" email="plaube@geo.unizh.ch"
+                        >GITTA lesson "Eignungsanalysen" Responsible author</person>
+                </contribute>
+            </lifecycle>
+
+            <educational>
+                <difficulty>Medium</difficulty>
+                <typicalLearningTime>
+                    <time>18 hours (feedback welcome).</time>
+                </typicalLearningTime>
+            </educational>
+        </lessonInfo>
+        <rights>
+            <cost>no</cost>
+            <copyright>GISMA Marburg 2009-11</copyright>
+        </rights>
+    </metadata>
+</lesson>

@@ -1,0 +1,545 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="GIS als räumliches Denken in der Geographie: Projektionen. Projektionen - Mehr als nur eine Frage der Darstellung . Bearbeiten Sie. Exkurs Georeferenzieren. Georeferenzieren – Rasterbilder zu geographischen Informationen wandeln. Bearbeiten Sie... Lösungshinweise Georeferenzierung... ArcGIS. Globalmapper. " />
+      <meta name="copyright" content="GISMA Marburg 2009-2011" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (Practice solutions) " />
+      <meta name="keywords"
+            content="GIS als räumliches Denken in der Geographie, definition GIS , information systems, SRTM 90m Digital Elevation Data, NASA, Datenmodell, DGM, Open Source, NUTS, eLML" />
+      <title>Projektionen</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>GIS als räumliches Denken in der Geographie</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_UE1_U_lo2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_UE1_summary.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_UE1_U_lo1.html">Desktop-GIS leicht gemacht</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_UE1_U_lo2.html">Daten ins GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Projektionen</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_UE1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_UE1_U_lo3.html">Projektionen</h1>
+               <div id="d10e1435.html" class="clarify">
+                  <h4>Projektionen - Mehr als nur eine Frage der Darstellung </h4>
+                  <p class="paragraph"
+                     title="Projektionen - Mehr als nur eine Frage der Darstellung "
+                     id="d10e1436">Sie haben
+                     erfahren, dass für die Darstellung und Integration von Geodaten in gewissem
+                     Umfang Expertenwissen notwendig ist. Vor allem das Wissen um die korrekte
+                     räumliche Zuordnung und Projektion Ihrer Daten scheint von Bedeutung zu sein.
+                     Vertiefen sie mit der folgenden Aufgabe diese Kenntnisse.
+                  </p>
+               </div>
+               <div id="d10e1438.html" class="look">
+                  <p class="paragraph" id="d10e1439">Öffnen Sie die Datei &lt;<code>Mein_zweites_ArcGIS_Projekt.mxd</code>&gt; <a class="link" href="../../../material/Datensatz2.zip" title="(Datensatz2.zip)">(Datensatz2.zip)</a>. Informieren
+                     Sie sich über die <code>Eigenschaften</code> der
+                     <code>Layerkontrolle</code> über die genauen
+                     Projektionsparameter des Datenrahmens. Informieren Sie sich anschließend im
+                     ArcCatalog, Menüpunkt <code>Metadaten</code>, über die
+                     zugehörigen räumlichen Informationen (spatial reference) der verwendeten Dateien
+                     (Datenebenen) dieses Projektes. 
+                  </p>
+                  <div class="importantbox" id="d10e1456"><img src="../../../_templates/gisma/icons/important.gif" title="important"
+                          alt="important"
+                          class="icon"
+                          style="padding-right:1.5em" /> Den Check auf die Bezugssysteme des
+                     Datenrahmens und der einzelnen Datenebenen sollten Sie bei Ihrer Arbeit mit
+                     ArcGIS als feste Routine beim Beginn jedes Projekts etablieren <br /><br /></div>
+               </div>
+               <div id="d10e1459.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie" id="d10e1460">
+                     <h4>Bearbeiten Sie</h4><img src="../../../_templates/gisma/icons/tools.gif" title="tools" alt="tools"
+                          class="icon"
+                          style="padding-right:1.5em" /><ol class="list" id="d10e1461">
+                        <li class="itemAlt">Projizieren Sie die Datenebenen <code>Eurasia</code>, <code>Afrika</code> und
+                           <code>Polaramerika</code> in das
+                           Koordinatensystem des aktuellen Datenrahmens.
+                           <p id="d10e1473" class="popupTitle" style="cursor: pointer;"
+                              onclick="onBlock('solutiond10e1473')">Klicken Sie hier für mehr Informationen</p>
+                           <div id="solutiond10e1473text" style="display: none; cursor: pointer;" class="popup"
+                                onclick="off('solutiond10e1473')">
+                              <p> Nutzen Sie zur
+                                 Suche von geeigneten Werkzeugen die ArcGIS-Hilfe (Suchen Reiter
+                                 Toolbox, Hilfe Menüleiste).
+                              </p>
+                           </div>
+                        </li>
+                        <li class="item">Öffnen Sie das Werkzeug <code>Merge</code>
+                           (Toolbox), um die zuvor projizierten Dateien zu einer neuen Datei
+                           zusammenzufügen. 
+                           <p id="d10e1480" class="popupTitle" style="cursor: pointer;"
+                              onclick="onBlock('solutiond10e1480')">Klicken Sie hier für mehr Informationen</p>
+                           <div id="solutiond10e1480text" style="display: none; cursor: pointer;" class="popup"
+                                onclick="off('solutiond10e1480')">
+                              <p> Nutzen Sie zur Suche von geeigneten Werkzeugen
+                                 die ArcGIS-Hilfe (Suchen Reiter Toolbox, Hilfe
+                                 Menüleiste).
+                              </p>
+                           </div>.
+                        </li>
+                     </ol>
+                  </div>
+                  <p id="d10e1483" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond10e1483')">Exkurs Georeferenzieren (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond10e1483text" style="display: none; cursor: pointer;"
+                       class="optional"
+                       title="Exkurs Georeferenzieren"
+                       onclick="off('solutiond10e1483')">
+                     <h4>Georeferenzieren – Rasterbilder zu geographischen Informationen wandeln</h4>
+                     <p class="paragraph"
+                        title="Georeferenzieren – Rasterbilder zu geographischen Informationen wandeln"
+                        id="d10e1484"> Rasterbilddaten in Projektionssysteme zu integrieren erfolgt über eine
+                        Methode die Georeferenzierung genannt wird. Bei der sogenannten
+                        Ähnlichkeitstransformation reichen zwei Passpunkte oder Ground Control
+                        Points (GCP) aus, um einen Bezug (eine Referenz) zum kartesischen Raum
+                        herzustellen. Sie haben die Hintergründe und Techniken bereits im Teilmodul
+                        Digtale Bildverarbeitung unter Verwendung der Software IDRISI kennengelernt.
+                        Nun sollen Sie schnell und effizient weitere als Rasterdaten vorliegende
+                        Informationen über Rarotonga in das GI-System integrieren
+                     </p>
+                     <p class="paragraph" id="d10e1486">Für diese Aufgabe werden Sie zwischen den Softwarepaketen von ArcGIS
+                        und Global Mapper wechseln. 
+                     </p>
+                     <p class="paragraph" id="d10e1488">Rufen Sie sich bitte noch einmal Ihr Wissen zur (Lage-)Qualität und
+                        Quantität von Passpunkten ins Gedächtnis bevor Sie starten. Falls Ihnen der
+                        Umgang mit Global Mapper unvertraut ist können Sie sich anhand folgende
+                        Tutorials und Handreichungen informieren:
+                     </p>
+                     <ul class="list" id="d10e1490">
+                        <li class="itemAlt">Die <a class="link"
+                              href="https://ilias.uni-marburg.de/ilias.php?ref_id=73733&amp;obj_id=6087&amp;cmd=layout&amp;cmdClass=illmpresentationgui&amp;cmdNode=1&amp;baseClass=ilLMPresentationGUI&amp;obj_id=6081"
+                              target="_blank"
+                              title="ILIAS Einführung Global Mapper">ILIAS Einführung Global Mapper</a> bietet einen kurzen Überblick
+                           (auf Deutsch)
+                        </li>
+                        <li class="item"><a class="link"
+                              href="http://www.globalmapperforum.com/tutorial-1-changing-the-coordinate-system-of-a-project.html"
+                              target="_blank"
+                              title="Global Mapper Tutorial 1 ">Global Mapper Tutorial 1 </a> Zuweisung des Koordinatensystems 
+                        </li>
+                        <li class="itemAlt"><a class="link"
+                              href="http://www.globalmapper.com/helpv9/Help_ImageRectification.html"
+                              target="_blank"
+                              title="Global Mapper Tutorial 2 ">Global Mapper Tutorial 2 </a> Rektifizieren 
+                        </li>
+                        <li class="item"><a class="link"
+                              href="http://www.globalmapperforum.com/tutorial-8-georectifying-imagery-101.html"
+                              target="_blank"
+                              title="Global Mapper Video Tutorial 1 ">Global Mapper Video Tutorial 1 </a> Geokodieren 
+                        </li>
+                        <li class="itemAlt"><a class="link"
+                              href="http://www.globalmapper.com/helpv9/Help_ImageRectification.html"
+                              target="_blank"
+                              title=" Tutorial Image rectification in Global Mapper:"> Tutorial Image rectification in Global Mapper:</a></li>
+                     </ul>
+                     <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d10e1511">
+                        <h4>Bearbeiten Sie...</h4>
+                        <p class="paragraph" id="d10e1512">Laden Sie die Datei <a class="link" href="../../../material/Datensatz2.zip"
+                              title="&#xA;                                Datensatz2.zip">
+                              Datensatz2.zip</a> herunter
+                        </p>
+                        <ul class="list" id="d10e1517">
+                           <li class="itemAlt">Georeferenzieren Sie in Global Mapper die Datei "Rarotonga.jpg"
+                              und exportieren/speichern Sie Ihr Ergebnis im GeoTIFF Dateiformat.
+                              Als Referenzobjekt benutzen Sie bitte die SRTM-Datei aus Übung 2 .
+                              Wie viele Passpunkte (GCP) benötigen Sie für die
+                              Ähnlichkeitstransformation und wie können Sie die Anzahl begründen?
+                              Öffnen Sie Ihre neue Datei "Rarotonga.tif" in ArcMap und überprüfen
+                              Sie, ob die Projektion korrekt vorliegt.
+                           </li>
+                           <li class="item">Laden Sie nun die Datei "TK_Rarotonga.jpg" nun in ArcMap ein und
+                              führen die Georeferenzierung mit ArcMap durch. Achtung aktivieren
+                              Sie das Werkzeug <code>Georeferencing</code>
+                              und machen Sie sich mit dessen Funktionsweise vertraut (Nutzen Sie
+                              die ArcGIS-Hilfe).
+                           </li>
+                           <li class="itemAlt">Speichern Sie Ihr Ergebnis zunächst im .JPG Datei-Format.
+                              Versuchen Sie anschließend in Global Mapper, die beiden von Ihnen
+                              georeferenzierten Rasterbilder zu öffnen. Welche der beiden Dateien
+                              kann nicht geöffnet werden? Suchen Sie nach einer Lösung, um diese
+                              Datei dennoch in Global Mapper öffnen zu können. (Die Problemlösung
+                              sollte mit einer Recherche zu den Eigenschaften der jeweiligen
+                              Datei-Typen beginnen. Vermutlich müssen Sie weitere Arbeitsschritte
+                              zur Konvertierung der entsprechenden Dateien in ein anderes Format
+                              vornehmen).
+                           </li>
+                           <li class="item">Georeferenzieren Sie in Global Mapper die Datei
+                              "Rarotonga_physical.jpg" und exportieren/speichern Sie das Ergebnis
+                              im GeoTIFF Datei-Format. Als Referenzobjekt benutzen Sie bitte Ihre
+                              zuvor erstellte Datei "Rarotonga.tif".
+                           </li>
+                           <li class="itemAlt">Informieren Sie sich bitte über die zur Auswahl stehenden,
+                              unterschiedlichen Transformationen. Wie viele Passpunkte (GCP)
+                              benötigen Sie für ein gutes Ergebnis? Tipp: Speichern Sie in jedem
+                              Fall die gesetzten GCP über die Menüleiste als Text-Datei. Welchen
+                              Vorteil bietet Ihnen dieser Arbeitsschritt (nutzen Sie die Global
+                              Mapper Hilfe)? Überprüfen Sie abschließend, ob die Projektion
+                              korrekt vorliegt.
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <p id="d10e1531" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond10e1531')">Lösungshinweise Georeferenzierung... (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond10e1531text" style="display: none; cursor: pointer;" class="popup"
+                       title="Lösungshinweise Georeferenzierung..."
+                       onclick="off('solutiond10e1531')">
+                     <h4>ArcGIS</h4>
+                     <ul class="list" id="d10e1532">
+                        <li class="itemAlt">Informationen zum Begriff <code>Projizieren</code> in der <code>ArcGIS-Hilfe</code>, in der <code>Toolbox</code>, bzw. mittels Internetrecherche suchen.
+                        </li>
+                        <li class="item">Informieren Sie sich mit der Werkzeughilfe über das Werkzeug
+                           <code>Merge</code>. Verwenden Sie es um die
+                           unterschiedlichen Datenebenen zusammenzufügen. Schauen Sie zuvor und
+                           hinterher Geometrie und Tabellen an.
+                        </li>
+                        <li class="itemAlt">Eine geeignete Projektion für die Karte suchen (z.B. auf Google, in
+                           ArcGIS-Hilfe). (1) Koordinatensystem des Datenrahmens über
+                           Datenrahmeneigenschaften umstellen (Rechtsklick auf Datenrahmen). (2)
+                           Einstellen der Darstellungsoptionen der neu erstellten Datenebene mit
+                           Rechtsklick auf Datenebene und Klick auf „Eigenschaften -&gt; Symbologie“.
+                           (3) Wählen der Einstellungen gemäß Aufgabenstellung.
+                        </li>
+                        <li class="item">Karte als z.B. als Layer speichern oder aber Das Projekt als neue
+                           Projektdatei speichern.
+                        </li>
+                     </ul>
+                     <h4>Globalmapper</h4>
+                     <ul class="list" id="d10e1553">
+                        <li class="itemAlt">Laden Sie zuerst die bereits referenzierte Geometrie in Global Mapper
+                           ein. sie bestimmen so das Referenzsystem. Laden Sie dann die zu
+                           referenzierende Geometrie (in diesem Fall z.B. „Rarotonga.jpg“)
+                           Beantworten Sie die Frage ob Sie diese Datei rektifizieren wollen mit
+                           ja.
+                        </li>
+                        <li class="item">Nachdem Sie im Werkzeug <code>Rectify</code>
+                           beide Karten sehen können geben Sie zuerst die Bezugsreferenz ein (als
+                           Vorgabe ist "Geographisch" eingestellt). Dann beginnen sie Punkte auf
+                           dem unreferenzierten Bild mit dem korrespondierenden Punkten im
+                           referenzierten Bild visuell zu identifizieren und einander zuzuordnen.
+                           Exportieren Sie die erstellte Datei aus Global Mapper (z.B. ins GeoTIFF
+                           Format).
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_UE1_U_lo2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_UE1_summary.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL1.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

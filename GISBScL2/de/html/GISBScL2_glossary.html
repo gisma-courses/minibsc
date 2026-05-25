@@ -1,0 +1,548 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Glossar. List of this lessons relevant terms with its definitions and further explanations. " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Glossar</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSC_UE2b_WC_VL.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBScL2_bibliography.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBScL2_glossary.html">Glossar</h1>
+               <dl class="glossary">
+                  <dt id="d14e3827">1. Normalform: </dt>
+                  <dd> Ein Relationenschema befindet sich in der 1. Normalform,
+                     wenn alle seine Attribute einfach und einwertig sind. 
+                  </dd>
+                  <dt id="d14e3829">2. Normalform: </dt>
+                  <dd> Ein Relationenschema ist in der 2. Normalform, wenn es in
+                     der 1. Normalform ist und wenn jedes nicht zum Identifikationsschlüssel gehörige
+                     Attribut von diesem voll funktional abhängig ist. 
+                  </dd>
+                  <dt id="d14e3832">3. Normalform: </dt>
+                  <dd> Ein Relationenschema befindet sich in der 3. Normalform,
+                     wenn es in der 2. Normalform ist und kein Attribut, das nicht zum
+                     Identifikationsschlüssel gehört, von diesem transitiv abhängt. 
+                  </dd>
+                  <dt id="d14e3804">Attribut: </dt>
+                  <dd> Ein Attribut A bezeichnet die Funktion, die eine Domäne D in
+                     einem Relationenschema R ausübt. Es kann auch als Abbildung der Tupel einer Relation auf
+                     den Wert des jeweiligen Tupels (für dieses Attribut) verstanden werden, wobei jeder Wert
+                     di ein Element der Domäne oder NULL sein muss. 
+                  </dd>
+                  <dt id="d14e3800">Commit: </dt>
+                  <dd>Commit ist ein Ausdruck aus der Softwaretechnik, welcher die Idee
+                     beschreibt, aktuelle Änderungen permanent zu machen. Er wird sowohl im Zusammenhang mit
+                     der Persistierung von Daten in einer Datenbank, als auch beim Einchecken von Sourcecode
+                     in Versionsverwaltungssystemen verwendet. Transaktionen [Bearbeiten]
+                  </dd>
+                  <dt id="d14e3796">Datenbank: </dt>
+                  <dd>Stelle, bei der bestimmte Daten und Fakten gespeichert werden
+                     und bei Anfragen nach bestimmten Gesichtspunkten durch Maschinen ermittelt werden
+                     können. Quelle: http://de.wiktionary.org/wiki/Datenbank. Zugriff:
+                     03.09.2009
+                  </dd>
+                  <dt id="d14e3771">Datenbanksystem: </dt>
+                  <dd> Ein Datenbanksystem (DBS) ist ein System zur
+                     elektronischen Datenverwaltung. Die wesentliche Aufgabe eines DBS ist es, große
+                     Datenmengen effizient, widerspruchsfrei und dauerhaft zu speichern und benötigte
+                     Teilmengen in unterschiedlichen, bedarfsgerechten Darstellungsformen für Benutzer und
+                     Anwendungsprogramme bereitzustellen. Ein DBS besteht aus zwei Teilen: der
+                     Verwaltungssoftware, genannt Datenbankmanagementsystem (DBMS) und der Menge der zu
+                     verwaltenden Daten, der eigentlichen Datenbank (DB). 
+                  </dd>
+                  <dt id="d14e3769">Datenbankverwaltungssystem: </dt>
+                  <dd> Das
+                     Datenbankmanagementsystem (DBMS) ist die eingesetzte Software, die für das
+                     Datenbanksystem installiert und konfiguriert wird. Das DBMS legt das Datenbankmodell
+                     fest. Datenbankmanagementsysteme selbst sind hochkomplexe Softwaresysteme.  (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3839">Wikipedia-Autoren</a> 2. November 2011)
+                  </dd>
+                  <dt id="d14e3767">Datenbasis und Datenbank: </dt>
+                  <dd> Eine Datenbasis ist eine Menge von Daten, die
+                     aus Sicht der Systembetreiber in irgendeiner Weise als zusammengehörig betrachtet
+                     werden. Angereichert um weitere Daten, die das DBMS zur Erfüllung seiner Aufgaben
+                     benötigt, bilden sie eine Datenbank (DB). 
+                  </dd>
+                  <dt id="d14e3761">Datenpersistenz: </dt>
+                  <dd>Datenpersistenz heißt, dass in einem DBMS einzelne Daten
+                     solange aufbewahrt werden müssen, bis sie explizit gelöscht werden. Die Lebensdauer von
+                     Daten muss also von den Benutzern direkt oder indirekt bestimmbar sein und darf nicht
+                     von irgendwelchen Systemgegebenheiten abhängen. Ebensowenig dürfen einmal in die
+                     Datenbank aufgenommene Daten verloren gehen.
+                  </dd>
+                  <dt id="d14e3836">Domäne: </dt>
+                  <dd> Eine Domäne besteht aus einem Namen D und einer Menge atomarer
+                     Werte. Ein anderer Name für Domäne ist Wertebereich. Domänen definieren den Wertebereich
+                     von Attributen. 
+                  </dd>
+                  <dt id="d14e3775">Externes Schema: </dt>
+                  <dd> Ein externes Datenschema beschreibt die
+                     Benutzersichtdaten bestimmter Benutzer(gruppen) sowie die damit verbundenen spezifischen
+                     Operationen und Bedingungen. Da das externe Schema Abbild einer konkreten
+                     Nutzer-Anwendung ist, betrifft es im Allgemeinen nur den anwendungsrelevanten
+                     Teilbereich des logischen Schemas (Schnittstellen) <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3845">Zehnder</a> 1998)</span>. 
+                  </dd>
+                  <dt id="d14e3811">Fremdschlüssel: </dt>
+                  <dd>Ein Fremdschlüssel ist ein Attribut oder
+                     eine Attributkombination einer Relation, welches auf einen Primärschlüssel (bzw.
+                     Schlüsselkandidaten) einer anderen oder der gleichen Relation verweist. (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3840">Wikipedia-Autoren</a> 16. Oktober 2011)
+                  </dd>
+                  <dt id="d14e3823">Funktionale Abhängigkeit: </dt>
+                  <dd>Wenn mehrere Attribute (Entitäten) eindeutig die
+                     Werte anderer Attribute bestimmen spricht man von funktionaler Abhängigkeit. 
+                  </dd>
+                  <dt id="d14e3790">Geodaten: </dt>
+                  <dd>Unter Geodaten oder raumbezogenen Daten versteht man
+                     Datenobjekte, die durch eine Position im Raum direkt oder indirekt referenzierbar sind.
+                     Der Raum ist dabei definiert durch ein Koordinatensystem, das den Bezug zur
+                     Erdoberfläche herstellt. Geodaten werden in der Regel grafisch in Papierform oder an
+                     grafikfähigen Bildschirmen präsentiert. Aus informationstechnischer Sicht kann man die
+                     Daten, die wiederum zu Geodaten gehören, einteilen in: · Geometrie (Position und
+                     geometrische Ausprägung) · Topologie (explizit gespeicherte geometrisch-topologische
+                     Beziehungen) · Präsentation (graphische Ausprägungen wie Signaturen, Farbe, Typographie)
+                     · Sachdaten (alphanumerische Daten zur Beschreibung der Semantik). Geodaten stellen in
+                     der Informationsverarbeitung eine besondere Herausforderung dar. Die Gründe dafür sind:
+                     · der hohe Aufwand für die Erfassung · die große Menge der anfallenden Daten · die
+                     geforderten Antwortzeiten beim Zugriff auf Geodaten · die Verarbeitung nach räumlichen
+                     Kriterien sowie · die Komplexität der Beziehungen.
+                  </dd>
+                  <dt id="d14e3819">Identifikationsschlüssel: </dt>
+                  <dd> Ein Attribut, dessen Wert jede Entität einer
+                     Entitätsmenge eindeutig identifiziert. Verändert nach:
+                     http://www.computerlexikon.com/begriff-identifikationsschlüssel. Zugriff:
+                     12.8.2009
+                  </dd>
+                  <dt id="d14e3834">Informationssystem: </dt>
+                  <dd> Ein Informationssystem erweitert die Datenbank um
+                     eine Reihe von Werkzeugen (engl. software tools) zur Abfrage, Darstellung,
+                     Transformation und Analyse von Daten.
+                  </dd>
+                  <dt id="d14e3780">Internes Schema: </dt>
+                  <dd> Das interne Datenschema beschreibt den Inhalt der
+                     Datenbasis und die benötigten Dienstleistungsfunktionen, soweit dies für den Einsatz des
+                     DBMS nötig ist<span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3845">Zehnder</a> 1998)</span>. <br /> Das interne Schema
+                     beschreibt somit die Daten aus technischer Sicht des Systems. Es übersetzt das
+                     zugehörige logische Schema in konkrete datentechnische Aspekte, wie Speichermethoden
+                     oder Hilfskonstrukte zur Steigerung der Effizienz. 
+                  </dd>
+                  <dt id="d14e3786">Konzept: </dt>
+                  <dd>[...] eine gedankliche Zusammenfassung (Vorstellung) von
+                     Gegenständen und Sachverhalten, die sich durch gemeinsame Merkmale auszeichnen. Quelle:
+                     Wikipedia http://de.wikipedia.org/wiki/Konzept Zugriff: 1.11.2009
+                  </dd>
+                  <dt id="d14e3765">Konzeption: </dt>
+                  <dd>Eine Konzeption (w; Verb: konzipieren, Adjektiv:
+                     konzeptionell, aus dem Lateinischen concipere: auffassen, erfassen, begreifen,
+                     empfangen, sich vorstellen) ist eine umfassende Zusammenstellung der Ziele und daraus
+                     abgeleiteten Strategien und Maßnahmen zur Umsetzung eines größeren und deshalb
+                     strategisch zu planenden Vorhabens. Sie beinhaltet die dazu notwendigen Informationen
+                     und Begründungszusammenhänge, häufig darüber hinaus auch eine Chancen-Risiken-Abwägung
+                     sowie einen Zeit- und Maßnahmenplan und eine Ressourcenplanung (Zeit, Geld, Material,
+                     Personal). Konzept und Konzeption werden im allgemeinen Sprachgebrauch häufig synonym
+                     verwendet, wobei eine Konzeption in Tiefe und Breite der Vorüberlegungen und der
+                     theoretischen Auseinandersetzung mit dem Planungsobjekt oder Thema eher umfassender und
+                     detaillierter als ein Konzept ist. Quelle:
+                     http://de.wikipedia.org/wiki/Konzeption#Technik. Zugriff: 12.09.2009.
+                  </dd>
+                  <dt id="d14e3773">Logisches Schema: </dt>
+                  <dd>Das Logische Datenschema erweitert das
+                     Konzeptschema um datentechnische Angaben (z. B. Feldformate, identifizierende
+                     Suchbegriffe etc.). Das logische Datenbankschema gehorcht den Regeln einer durch das zu
+                     verwendende DBMS gegebenen Struktur, z.B. dem relationalen Datenmodell, bei dem alle
+                     Daten in Tabellen abgelegt werden (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3839">Wikipedia-Autoren</a> 2. November 2011)
+                  </dd>
+                  <dt id="d14e3757">Logische Unabhängigkeit: </dt>
+                  <dd> Ebenso können bei (den meisten) Änderungen des
+                     logischen Schemas die externen Schemas unverändert weiterbestehen. Dies ist besonders
+                     deshalb erwünscht, weil dadurch Anwendungsprogramme nicht modifiziert oder neu übersetzt
+                     werden müssen. 
+                  </dd>
+                  <dt id="d14e3792">Metadaten: </dt>
+                  <dd>Meta ist ein Präfix, das in den meisten
+                     informationstechnologischen Anwendungen „eine zugrundeliegende Definition oder
+                     Beschreibung“ meint. Metadaten sind also eine Definition oder Beschreibung von Daten.
+                     Man spricht auch von „Daten über Daten“.
+                  </dd>
+                  <dt id="d14e3755">Physikalische Unabhängigkeit: </dt>
+                  <dd> Das logische Schema kann demnach
+                     unverändert bleiben, wenn sich beispielsweise aus Gründen der Optimierung oder
+                     Reorganisation der Speicherort oder die Speicherform einzelner Daten ändern. 
+                  </dd>
+                  <dt id="d14e3815">Primärschlüssel: </dt>
+                  <dd> Der unter den Schlüsselkandidaten ausgewählte
+                     Identifikationsschlüssel wird zum Primärschlüssel der Relation.<br />
+                     Primärschlüssel werden meist unterstrichen dargestellt. 
+                  </dd>
+                  <dt id="d14e3788">Redundanz: </dt>
+                  <dd>Bezeichnet die mehrfache Speicherung gleicher Daten an
+                     verschiedenen Stellen (einer Datenbank).
+                  </dd>
+                  <dt id="d14e3759">Relation: </dt>
+                  <dd> Eine Relation ist allgemein eine Beziehung, die zwischen Dingen
+                     bestehen kann. Relationen im Sinne der Mathematik sind ausschließlich diejenigen
+                     Beziehungen, bei denen stets klar ist, ob sie bestehen oder nicht. Zwei Gegenstände
+                     können also nicht „bis zu einem gewissen Grade“ in einer Relation zueinander stehen.
+                     Damit ist eine einfache mengentheoretische Definition des Begriffs möglich: Eine
+                     Relation R ist eine Menge von n-Tupeln. Dinge, die in der Relation R zueinander stehen,
+                     bilden ein n-Tupel, das Element von R ist. Quelle: Wikipedia
+                     http://de.wikipedia.org/wiki/Relation_%28Mathematik%29 Zugriff: 1.11.2009 
+                  </dd>
+                  <dt id="d14e3809">Relationales Datenbankschema: </dt>
+                  <dd> Ein relationales Datenbankschema ist eine
+                     Menge von Relationenschemata S = {R1, ..., Rn} zusammen mit einer Menge von
+                     Integritätsbedingungen. Eine relationale Datenbankinstanz ist die Menge {r1, ..., rn} ,
+                     wobei ri Instanz von Ri ist und alle Integritätsbedingungen erfüllt sind. Eine
+                     relationale Datenbank ist ein relationales Datenbankschema mit einer entsprechenden
+                     Datenbankinstanz. 
+                  </dd>
+                  <dt id="d14e3807">Relationenschema: </dt>
+                  <dd> Ein Relationenschema R, Schreibweise: R(A1, A2, ...,
+                     An), bezeichnet eine Menge von Attributen {A1, A2, ..., An}. 
+                  </dd>
+                  <dt id="d14e3798">Rollback: </dt>
+                  <dd>Als Rollback bezeichnet man in EDV-Systemen das „Zurücksetzen“
+                     der einzelnen Verarbeitungsschritte einer Transaktion. Das System wird dadurch
+                     vollständig auf den Zustand vor dem Beginn der Transaktion zurückgeführt. Ein Rollback
+                     wird typischerweise im Fehlerfall angestoßen, falls beispielsweise ein
+                     Verarbeitungsschritt in der betreffenden Transaktion nicht korrekt durchgeführt werden
+                     kann. Quelle Wikipedia: http://de.wikipedia.org/wiki/Rollback Zugriff:
+                     1.11.2009
+                  </dd>
+                  <dt id="d14e3813">Schlüsselkandidat: </dt>
+                  <dd> Jedes Attribut oder jede minimale Attributkombination,
+                     die alle Tupel einer Relation eindeutig identifiziert, ist ein Schlüsselkandidat. Dabei
+                     bedeutet „minimal“, dass kein Attribut ohne Verlust der eindeutigen Identifizierbarkeit
+                     weggelassen werden kann. 
+                  </dd>
+                  <dt id="d14e3794">Strukturierter Datenbestand: </dt>
+                  <dd> Ein Datenbestand wird als strukturiert
+                     bezeichnet, wenn er systematische Untergliederungen und Verknüpfungen zulässt. 
+                  </dd>
+                  <dt id="d14e3763">Syntax: </dt>
+                  <dd>Syntax ist id Lehre vom Satz, Lehre von den Regeln,
+                     wonach in Sprache(n) aus den Wörtern zusammengehörige Wortgruppen gebildet werden, und
+                     die Lehre von der Kombination von Wörtern zu Sätzen. „Syntaxis“ heisst auf Griechisch
+                     Zusammenstellung, Anordnung, Aneinanderreihung. (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3846">WARTH</a>)
+                  </dd>
+                  <dt id="d14e3821">Transitive Abhängigkeit: </dt>
+                  <dd>Abhängigkeit zwischen nicht Schlüsselattributen </dd>
+                  <dt id="d14e3802">Tupel: </dt>
+                  <dd> Ein geordnetes Tupel, auch einfach nur Tupel genannt, ist eine
+                     Erweiterung des Begriffes des mengentheoretisch definierten geordneten Paares (z. B.
+                     nach der Definition von Kuratowski). Man definiert ein Tupel der Länge n oder kurz ein
+                     n-Tupel als eine Aufzählung von n nicht notwendig von einander verschiedenen
+                     mathematischen Objekten in einer vorgegebenen, festen Reihenfolge. Quelle: Wikipedia
+                     http://de.wikipedia.org/wiki/Tupel Zugriff. 1.11.2009
+                  </dd>
+                  <dt id="d14e3825">Volle funktionale Abhängigkeit: </dt>
+                  <dd> Wenn Entität Y voll funktional von X
+                     abhängt, dann müssen in allen Tupeln, in denen sowohl X als auch Y vorkommt, die Werte
+                     der Attribute von X immer den selben Wert besitzen, ebenso wie die Werte von Y 
+                  </dd>
+               </dl>
+            </div>
+            <div id="toolnav"><a href="GISBSC_UE2b_WC_VL.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBScL2_bibliography.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Räumliche Entscheidungsfindung: Methoden der Kriterienverschneidung. Boolesche Verschneidung. Die gewichtete Verschneidung. Wölfe in St. Gittal. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Manuel Sudau (GISMA contributor) , Marco                         Hugentobler (GITTA contributor) , Moe Myint (GITTA contributor) , Claude Collet (GITTA contributor) , Sandro Bischof (GITTA contributor) , Robert Weibel (GITTA contributor) , Suzette Hägi (GITTA contributor) , Joël                          Fisler (GITTA contributor) , Friedjoff Trautwein (GITTA contributor) , Marcel Frehner (GITTA contributor) , Eric Lorup (GITTA contributor) , Patrick                         Laube (GITTA contributor) " />
+      <meta name="keywords"
+            content="Räumliche Entscheidungsfindung, Räumliche Entscheidungsfindung, Entscheidungskriterien , Standardisierung, Merkmalsmaße, Boolsche Verschneidung, Gewichtete Verschneidung, Eignungsanalyse, Boolesche Verschneidung, Boolesche Algebra, Standardisierung, Gewichtete Verschneidung, eLML" />
+      <title>Methoden der Kriterienverschneidung</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Räumliche Entscheidungsfindung</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL4_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL4_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBSc_VL4_V_lo1.html">Eignungsanalysen - Raumanalysen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Bedingte Verschneidung räumlicher Daten</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBSc_VL4_V_lo3.html">Gewichtungsmethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBSc_VL4_V_lo4.html">DSS (MCE)</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBSc_VL4_V_lo5.html">DSS (MOE)</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBSc_VL4_selfAssessment6.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL4_M_lo2.html">Methoden der Kriterienverschneidung</h1>
+               <div id="d15e100.html" class="clarify">
+                  <p class="paragraph" id="d15e101"> Das Prinzip der Verschneidung („overlay“) räumlicher Daten ist
+                     konzeptionell sehr einfach. Zunächst werden zwei oder mehr thematische
+                     Informationsebenen desselben Raumausschnittes überlagert. Da es sich um die
+                     Manipulation von Geometrien handelt wird die Topologie der neuen Datenebene
+                     aufgrund dieser Überlagerung neuberechnet. Bezogen auf ein Vektordatenmodell
+                     sieht das wie folgt aus: Liegt ein betrachteter Punkt innerhalb eines Polygons,
+                     erhält er diese Information als neues Attribut. Schneiden sich zwei Linien, so
+                     wird an ihrem Schnittpunkt ein neuer Knoten eingeführt. Schneiden sich zwei
+                     Polygone, erhält die Schnittmenge eine eigene Identifikationsnummer usw.. Damit
+                     diese räumliche Datenintegration korrekt ist, müssen alle Eingangsebenen ein
+                     identisches Referenzierungssystem aufweisen. Die Integration von Informationen
+                     aus verschiedenen Quellen durch Verschneidung ist eine der bedeutendsten
+                     räumlichen Grundfunktionen eines GIS.
+                  </p>
+               </div>
+               <h4>Boolesche Verschneidung</h4>
+               <p class="paragraph" title="Boolesche Verschneidung" id="d15e103">In einfachen Eignungsanalysen führt oft
+                  bereits die logische Kombination von wahr/falsch-Informationen zur Lösung.
+                  Angenommen, der nach St. Gittal zuwandernde Wolf siedelt nur im Wald und nur in
+                  steilen Gebieten, so reichen wenige logische Überlegungen, um die geeigneten
+                  Lebensräume für den Wolf zu ermitteln. Jedes dieser beiden Kriterien kann mit einer
+                  binären Informationsebene modelliert werden (Wald/Nicht-Wald und Steil/Nicht-Steil).
+                  Als potenzielle Lebensräume eignen sich nun genau die Gebiete, für die beide
+                  Kriterien zutreffen. Mit anderen Worten: Gebiete, die „wahr“ sind für Wald UND für
+                  steil. Die dritte <a class="link" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo10.html"
+                     title="Lerneinheit ">Lerneinheit </a> hat uns hierzu bereits die möglichen
+                  Verknüpfungsmethoden bekannt gemacht.
+               </p>
+               <p class="paragraph" id="d15e108">Die Boolesche Verschneidung eignet sich v. a. bei Eignungsanalysen mit
+                  randscharfen und klar ausschliessenden Kriterien. Kann als Wolfslebensraum das
+                  Siedlungsgebiet und die landwirtschaftliche Nutzfläche von Anfang an ausgeschlossen
+                  werden, kann das potenzielle Eignungsgebiet mit einer einfachen Booleschen
+                  Verschneidung rasch stark und trennscharf eingeschränkt werden. Für viele Fragen ist
+                  allerdings die Einteilung der Welt in nur zwei Kategorien unbefriedigend. Weiter
+                  lassen sich v. a. für Kriterien der natürlichen Umwelt selten trennscharfe Grenzen
+                  angeben. In der nächsten Unit lernen Sie feiner abstimmbare Ansätze der
+                  Eignungsanalyse mit GIS kennen. 
+               </p>
+               <h4>Die gewichtete Verschneidung</h4>
+               <p class="paragraph" title="Die gewichtete Verschneidung" id="d15e110">Für viele Fragestellungen stellt die
+                  Einteilung der Realität in zwei Kategorien („wahr“ oder „falsch“) allerdings eine
+                  unzureichende Abbildung der Realität dar, da die gleiche Gewichtung der
+                  Einflussfaktoren meist nicht der Gewichtung von Entscheidungen abbildet. Wer ein
+                  neues Mobiltelefon kauft, mag Marke und Funktion höher gewichten als Displaygröße,
+                  Preis oder Robustheit. Dieses allgemeine Prinzip der Gewichtung von Einflussfaktoren
+                  wird auch bei der Eignungsanalyse mit GIS verwendet. Der entsprechende Ansatz heißt
+                  <b>gewichtete Verschneidung</b>.
+               </p>
+               <p class="paragraph" id="d15e115"> In vielen Raumanalysen sind bestimmte Kriterien bezogen auf die Zielsetzung
+                  um ein Mehrfaches wichtiger als andere. Oft ist es gerade ein Anspruch an eine
+                  Standortsuche, mehrere geeignete Orte darauf hin zu vergleichen, ob und wie stark
+                  sie einer Reihe von unterschiedlich wichtigen Kriterien entsprechen. Durch das
+                  Ebenenprinzip der GI-Systeme lässt sich die Verschneidung sehr einfach um die Idee
+                  unterschiedlich wichtiger Kriterien erweitern. Jeder Themenebene wird entsprechend
+                  ihrer relativen Bedeutung gegenüber den anderen ein numerischer Gewichtsfaktor
+                  zugeordnet. Anschließend werden die derart gewichteten Informationsebenen
+                  verschnitten wie bisher. Wie die Boolesche Verschneidung ist auch die gewichtete
+                  Verschneidung grundsätzlich sowohl im Raster- als auch im Vektormodell möglich. Die
+                  Tourismusexperten von Rarotonga könnten beispielsweise erklären, die negative
+                  Wirkung von Hotels und Bars sei für unser Alternativtourismuskonzept 0,1-mal so
+                  wichtig wie Der Störfaktor von Quad-Trek-Routen durchs Binnenland. Die entsprechende
+                  Gewichtung ergäbe für die Hotels und Bars einen Gewichtsfaktor von 1, für die die
+                  Tracks hingegen von 10. Es gilt zu beachten, dass die Wertebereiche der
+                  Eingangs-Informationsebenen normalisiert sein müssen (z. B. von 0 bis 1). In der
+                  entstehenden Eignungsebene werden die geeigneten Räume oder Standorte durch
+                  besonders hohe Werte identifizierbar. 
+               </p>
+               <div id="d15e117.html" class="look">
+                  <h4>Wölfe in St. Gittal</h4>
+                  <p class="paragraph" title="Wölfe in St. Gittal" id="d15e118"> Betrachten Sie das folgende Beispiel. Hier
+                     wird die gewichtete Verschneidung am Beispiel des Wolfslebensraumes in St.
+                     Gittal eingeführt. Im Hinblick auf eine realistischere Modellierung der
+                     geeigneten Lebensräume verwendet das folgende Beispiel nicht mehr ausschließlich
+                     binäre Eingangsdaten wie die Boolesche Verschneidung, sondern sogenannte
+                     Ratiodaten: 
+                  </p>
+                  <ul class="list" id="d15e120">
+                     <li class="itemAlt">Vegetationsdichte anstelle „Wald/Nicht-Wald“</li>
+                     <li class="item">Hangneigung anstelle „steil/nicht-steil“</li>
+                     <li class="itemAlt">Bevölkerungsdichte anstelle „Siedlung/Nicht-Siedlung“</li>
+                  </ul>
+                  <p class="paragraph" id="d15e127"> Der wohl einfachste Ansatz für eine gewichtete Verschneidung bildet die
+                     gewichtete lineare Summierung im Rastermodell. Die folgenden Punkte zeigen das
+                     Standardvorgehen bei der Anwendung dieses Algorithmus: 
+                  </p>
+                  <ol class="list" id="d15e129">
+                     <li class="itemAlt"><b>Kriterienwahl</b>: Der erste Schritt besteht
+                        in der Wahl der Kriterien, die den gesuchten Raum charakterisieren. 
+                     </li>
+                     <li class="item"><b>Standardisierung</b>: Nun müssen die
+                        unterschiedlichen Messskalen der Eingangsdatensätze aufeinander abgestimmt
+                        werden. Es wenig sinnvoll, die prozentuale Hangneigung direkt mit einer
+                        Bevölkerungsdichte zu verrechnen. Deshalb weist man den Eingangsdaten völlig
+                        verschiedene Einheiten einer standardisierten numerischen Indexskala zu
+                        (beispielsweise 0–1, 0–100, 0–255). Daraus folgt, dass die Werte der
+                        resultierenden Eignungsebenen keine Einheiten mehr tragen, sondern lediglich
+                        einen numerischen Eignungsindex. Die Zuordnung der Eingangswerte auf die
+                        Indexskala kann auf verschiedene Weise erfolgen, am einfachsten ist eine
+                        lineare Zuordnung. Bei der gewichteten Verschneidung bezeichnet die <a class="term" href="GISBScL4_glossary.html#d15e595"
+                           onmouseover="Tip('Bei der gewichteten Verschneidung bezeichnet            Standardisierung die Übersetzung der heterogenen Eingangsdaten in eine für alle Ebenen            einheitliche Skala (z. B. 0–1, 0–100, 0–255). ', TITLE, 'Standardisierung')"
+                           onmouseout="UnTip()"><img src="../../../_templates/gisma/icons/term.gif" width="12" height="10"
+                                alt="term"
+                                class="term_icon" />Standardisierung</a><script src="wz_tooltip.js" type="text/javascript">
+                           <!----></script> die
+                        Übersetzung der heterogenen Eingangsdaten in eine für alle Ebenen
+                        einheitliche Skala. </li>
+                     <li class="itemAlt"><b>Verteilung der Gewichte</b>: Weiter erhält
+                        jede Informationsebene einen Multiplikator, ein Gewicht. Die Gewichte
+                        widerspiegeln die relative Bedeutung der Informationsebenen zueinander. Die
+                        wichtigste Ebene erhält das größte Gewicht. Die richtige Wahl der Gewichte
+                        wird in „Bestimmung der Gewichte“ behandelt. 
+                     </li>
+                     <li class="item"><b>Anwendung des Algorithmus</b>: Beim
+                        Algorithmus der gewichteten linearen Summierung werden alle Rasterzellen
+                        einer Informationsebene mit ihrem Gewicht multipliziert und die Ebenen
+                        anschließend addiert. In der resultierenden Eignungsebene weisen die
+                        geeigneten Rasterzellen hohe, die ungeeigneten hingegen tiefe Werte auf.
+                        
+                     </li>
+                  </ol><span class="multimedia_paragraph_center"><a href="../image/Raster.gif" target="_blank" class="lightwindow"
+                        rel="Gallery[Bedingte Verschneidung räumlicher Daten]"
+                        title="Weighted Overlay im Rastermodell"><img class="multimedia" id="_raster.html" src="../image/Raster_thumb.gif"
+                             width="500"
+                             title="Weighted Overlay im Rastermodell"
+                             alt="Weighted Overlay im Rastermodell" /></a><span class="legend" style="display:block">Weighted Overlay im Rastermodell</span></span><span class="multimedia_paragraph_center"><a href="../image/Vector.gif" target="_blank" class="lightwindow"
+                        rel="Gallery[Bedingte Verschneidung räumlicher Daten]"
+                        title="Weighted Overlay im Vektormodell"><img class="multimedia" id="_vector.html" src="../image/Vector_thumb.gif"
+                             width="500"
+                             title="Weighted Overlay im Vektormodell"
+                             alt="Weighted Overlay im Vektormodell" /></a><span class="legend" style="display:block">Weighted Overlay im Vektormodell</span></span><p class="paragraph" id="d15e151">In dieser Darstellung erhielten die beiden Eignungskriterien für den
+                     Wolfslebensraum in St. Gittal Gewichte entsprechend ihrer relativen Bedeutung.
+                     Die Infomationsebene „bewaldet“ wird mit dem Faktor 3 gewichtet, diejenige mit
+                     dem Kriterium „steiles Gelände“ mit dem Faktor 2. Nach der Zuweisung der
+                     Gewichte werden die beiden Ebenen addiert. Die Eignungswerte der resultierenden
+                     Informationsebene reichen von 0 (ungeeignet) bis 5 (sehr geeignet). <br /><br /></p>
+                  <div id="d15e154.html" class="act">
+                     <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d15e155">
+                        <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                             class="icon"
+                             style="padding-right:1.5em" /><p class="paragraph" id="d15e156"> Die nachfolgende interaktive Beispielanwendung gibt Ihnen die
+                           Möglichkeit, selbst für die Gemeinde St. Gittal eine Eignungsanalyse zur
+                           Bestimmung potenzieller Lebensräume des Wolfs durchzuführen. Bestimmen
+                           Sie, wie die Eingangs-Layer standardisiert und gewichtet werden sollen.
+                           Nutzen sie hierzu die folgenden Informationen:
+                        </p>
+                        <ol class="list" id="d15e158">
+                           <li class="itemAlt"><span id="d15e160" class="indexItem">Kriterienwahl</span>: Sie haben bereits früher
+                              gelesen, dass der Wolf dichte Vegetation und steiles, steiniges
+                              Gelände bevorzugt. Neu können Sie nun auch berücksichtigen, dass er
+                              die Nähe zur Siedlung eher meidet. Folgende Informationsebenen
+                              stehen Ihnen zur Verfügung: 
+                              <ul class="list" id="d15e163">
+                                 <li class="itemAlt"><span id="d15e165" class="indexItem">Walddichte</span> (oberste Zeile): Räume mit
+                                    einem Bewuchs von 0 bis 100% Wald. 
+                                 </li>
+                                 <li class="item"><span id="d15e169" class="indexItem">Hangneigung</span> (mittlere Zeile):
+                                    Neigungsklassen von &lt;10%, 10% bis 30% und &gt;30%. 
+                                 </li>
+                                 <li class="itemAlt"><span id="d15e173" class="indexItem">Siedlungsdichte</span> (unterste Zeile): Die
+                                    Themenebene der Siedlungsdichte beinhaltet Räume mit 0, 100
+                                    und 200 Einwohnern pro Hektare. 
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="item"><span id="d15e177" class="indexItem">Standardisierung</span>: Alle Eingaberaster müssen
+                              nun auf den Wertebereich von 0 bis 1 umgerechnet werden. In der
+                              Animation müssen Sie die Werte 0 und 1 in die dafür vorgesehenen
+                              Felder eintragen. Beachten Sie, dass bei gewissen Themenebenen
+                              zusätzlich zur Standardisierung auch noch der Wertebereich
+                              invertiert werden muss. Dies geschieht immer dann, wenn ein hoher
+                              Wert der Eingangsebene ungeeignet für den Wolf ist und deshalb den
+                              Wert 0 erhalten muss. 
+                           </li>
+                           <li class="itemAlt"><span id="d15e181" class="indexItem">Verteilung der Gewichte</span>: Nun müssen Sie als
+                              Wolfsexperte oder -expertin den einzelnen Ebenen Gewichte zuweisen.
+                              Tragen Sie dazu die Gewichte in die gewichtssteinförmigen Felder
+                              ein. Weisen Sie dem schützenden Wald die größte Bedeutung zu und
+                              gewichten Sie die Waldebene mit 5. Die Hangneigung erhält das
+                              Gewicht 3, die unbesiedelten Gebiete das Gewicht 2. 
+                           </li>
+                           <li class="item"><span id="d15e185" class="indexItem">Anwendung des Algorithmus</span>: Die gesuchte
+                              Eignungsebene ergibt sich aus der Multiplikation der Ebenen mit
+                              ihren Gewichten und der abschließenden Summierung der Ebenen. Ein
+                              Klick auf die Taste „Berechnen“ liefert die Resultate. Die nach den
+                              getroffenen Annahmen geeignetsten Lebensräume für den Wolf weisen
+                              nun die Werte zwischen 7,5 und 8,5 auf. Ungeeignete Gebiete tragen
+                              tiefe Werte bis hin zu ungeeignet (= 0). 
+                           </li>
+                        </ol>
+                        <p class="paragraph" id="d15e188">Nun liegt es an Ihnen, weitere Standardisierungen und
+                           Gewichtungen auszuprobieren. Experimentieren Sie mit extremen
+                           Gewichtsverteilungen. Achten Sie jeweils darauf, wie sich die
+                           resultierende Eignungskarte verändert und interpretieren Sie die
+                           Resultate. 
+                        </p><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="d15e190" width="470" height="300"
+                                   class="multimedia"
+                                   title="Beispiel einer einfachen gewichtete lineare Summation von Kriterien zur Entscheidungsfindung"
+                                   data="../multimedia/ComputeWeight.swf">
+                              <param name="movie" value="../multimedia/ComputeWeight.swf" />
+                              <param name="quality" value="best" />
+                              <param name="scale" value="exactfit" />
+                              <param name="menu" value="true" />
+                              <param name="play" value="false" />
+                              <param name="wmode" value="opaque" />
+                              <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                     type="application/x-shockwave-flash"
+                                     quality="best"
+                                     scale="exactfit"
+                                     menu="true"
+                                     play="false"
+                                     wmode="opaque"
+                                     src="../multimedia/ComputeWeight.swf"
+                                     width="470"
+                                     height="300"
+                                     class="multimedia"
+                                     title="Beispiel einer einfachen gewichtete lineare Summation von Kriterien zur Entscheidungsfindung"></embed></object><span class="legend" style="display:block">Beispiel einer einfachen gewichtete lineare Summation von Kriterien zur Entscheidungsfindung (<a class="bibLink" href="GISBScL4_bibliography.html#d15e618">GITTA</a> 2005)</span></span><p class="link"><a class="link" href="../multimedia/ComputeWeight.swf" title="">Starten Sie die Interaktive
+                              Gewichtetes-Overlay-Animation </a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL4_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL4_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL4.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

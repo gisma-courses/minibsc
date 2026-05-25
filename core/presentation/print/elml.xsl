@@ -1,0 +1,2565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:elml="http://www.elml.ch" version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2004/07/xpath-functions" xmlns:xdt="http://www.w3.org/2004/07/xpath-datatypes" xmlns:fox="http://xml.apache.org/fop/extensions">
+    <!--DO NOT TOUCH ANYTHING IN THIS FILE! THESE ARE DEFAULT VALUES! -->
+    <!--To personalize use the config and templates file of your project. See documentation. -->
+    <!--The name of the file with the default titles (and other) names -->
+    <xsl:import href="../terms.xsl"/>
+    <xsl:import href="../params.xsl"/>
+    <!--The name of the default bibliography file. Do change it in your online.xsl if you want to use another one! -->
+    <xsl:import href="biblio_harvard.xsl"/>
+    <!--The name of the default metadata file. Do change it in your online.xsl if you want to use another one! -->
+    <xsl:import href="metadata_elml.xsl"/>
+    <xsl:param name="tablestyle" select="'normal'"/>
+    <xsl:param name="external_link_color" select="'blue'"/>
+    <xsl:param name="internal_link_color" select="'black'"/>
+    <xsl:param name="external_link_weight" select="'bold'"/>
+    <xsl:param name="internal_link_weight" select="'bold'"/>
+    <xsl:variable name="filename_suffix">
+        <xsl:choose>
+            <xsl:when test="//elml:multimedia/@type='mathml'">
+                <xsl:text>.xml</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>.html</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+    <xsl:strip-space elements="*"/>
+    <!--Default Parameters (used if no personalization is defined) -->
+    <!-- Beginning with template definitions -->
+    <xsl:template match="/">
+        <fo:root font-family="Times">
+            <xsl:if test="$hyphenation='yes'">
+                <xsl:attribute name="hyphenate" select="'true'"/>
+                <xsl:attribute name="language" select="$lang"/>
+            </xsl:if>
+            <fo:layout-master-set>
+                <fo:simple-page-master master-name="title-page" page-height="{$pageheight}" page-width="{$pagewidth}" margin-top="15mm" margin-bottom="15mm" margin-left="20mm" margin-right="20mm">
+                    <fo:region-body margin-top="5mm" margin-bottom="5mm"/>
+                </fo:simple-page-master>
+                <fo:simple-page-master master-name="default-page" page-height="{$pageheight}" page-width="{$pagewidth}" margin-top="15mm" margin-bottom="15mm" margin-left="20mm" margin-right="20mm">
+                    <fo:region-body margin-top="12mm" margin-bottom="15mm"/>
+                    <fo:region-before extent="10mm"/>
+                    <fo:region-after extent="10mm"/>
+                </fo:simple-page-master>
+                <fo:simple-page-master master-name="twocolumn" page-height="{$pageheight}" page-width="{$pagewidth}" margin-top="15mm" margin-bottom="15mm" margin-left="20mm" margin-right="20mm">
+                    <fo:region-body margin-top="12mm" margin-bottom="15mm" column-count="2" column-gap="13pt"/>
+                    <fo:region-before extent="10mm"/>
+                    <fo:region-after extent="10mm"/>
+                </fo:simple-page-master>
+            </fo:layout-master-set>
+            <xsl:if test="not($fop_version='0.2')">
+                <fo:bookmark-tree>
+                    <xsl:choose>
+                        <xsl:when test="$multiple='on' and document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title">
+                            <fo:bookmark internal-destination="coverpage">
+                                <fo:bookmark-title font-weight="bold">
+                                    <xsl:value-of select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title"/>
+                                </fo:bookmark-title>
+                            </fo:bookmark>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <fo:bookmark internal-destination="coverpage">
+                                <fo:bookmark-title font-weight="bold">
+                                    <xsl:choose>
+                                        <xsl:when test="/elml:lesson/@navTitle">
+                                            <xsl:value-of select="/elml:lesson/@navTitle"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="/elml:lesson/@title"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </fo:bookmark-title>
+                            </fo:bookmark>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <fo:bookmark internal-destination="content">
+                        <fo:bookmark-title>
+                            <xsl:value-of select="$name_content"/>
+                        </fo:bookmark-title>
+                    </fo:bookmark>
+                    <xsl:call-template name="elml:navigation_pdf"/>
+                </fo:bookmark-tree>
+            </xsl:if>
+            <fo:page-sequence master-reference="title-page">
+                <fo:flow flow-name="xsl-region-body">
+                    <xsl:call-template name="elml:coverpage"/>
+                </fo:flow>
+            </fo:page-sequence>
+            <fo:page-sequence master-reference="default-page" initial-page-number="1" format="1">
+                <xsl:choose>
+                    <xsl:when test="$multiple='on'">
+                        <xsl:if test="$fop_version='0.2'">
+                            <xsl:choose>
+                                <xsl:when test="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title">
+                                    <fox:outline internal-destination="coverpage">
+                                        <fox:label>
+                                            <xsl:value-of select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title"/>
+                                        </fox:label>
+                                    </fox:outline>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <fox:outline internal-destination="coverpage">
+                                        <fox:label>
+                                            <xsl:choose>
+                                                <xsl:when test="/elml:lesson/@navTitle">
+                                                    <xsl:value-of select="/elml:lesson/@navTitle"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select="/elml:lesson/@title"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </fox:label>
+                                    </fox:outline>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <fox:outline internal-destination="content">
+                                <fox:label>
+                                    <xsl:value-of select="$name_content"/>
+                                </fox:label>
+                            </fox:outline>
+                            <xsl:call-template name="elml:navigation_pdf_fox"/>
+                        </xsl:if>
+                        <xsl:call-template name="elml:header_footer"/>
+                        <fo:flow flow-name="xsl-region-body" text-align="justify" font-size="{$fontsize}" line-height="{$lineheight}" orphans="3" widows="3">
+                            <fo:block id="content" font-size="{$fontsize}*2.0" font-weight="{$fontweighttitle}" break-before="page" keep-with-next.within-page="always" space-after="{$lineheight}*1.5">
+                                <xsl:value-of select="$name_content"/>
+                            </fo:block>
+                            <xsl:call-template name="elml:navigation"/>
+                            <xsl:for-each select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/elml:labelname">
+                                <xsl:apply-templates select="document(concat(substring-before($config_file,'_config'),text(),'/',$lang,'/text/',text(),'.xml'))/elml:lesson"/>
+                            </xsl:for-each>
+                        </fo:flow>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:if test="$fop_version='0.2'">
+                            <fox:outline internal-destination="content">
+                                <fox:label>
+                                    <xsl:value-of select="$name_content"/>
+                                </fox:label>
+                            </fox:outline>
+                            <xsl:call-template name="elml:navigation_pdf_fox"/>
+                        </xsl:if>
+                        <xsl:call-template name="elml:header_footer"/>
+                        <fo:flow flow-name="xsl-region-body" text-align="justify" font-size="{$fontsize}" line-height="{$lineheight}" orphans="3" widows="3">
+                            <fo:block id="content" font-size="{$fontsize}*2.0" font-weight="{$fontweighttitle}" break-before="page" keep-with-next.within-page="always" space-after="{$lineheight}*1.5">
+                                <xsl:value-of select="$name_content"/>
+                            </fo:block>
+                            <xsl:call-template name="elml:navigation"/>
+                            <xsl:apply-templates/>
+                        </fo:flow>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </fo:page-sequence>
+            <xsl:apply-templates select="/elml:lesson/elml:index" mode="generate_index"/>
+            <xsl:apply-templates select="/elml:lesson/elml:listOfFigures" mode="generate_index"/>
+            <xsl:apply-templates select="/elml:lesson/elml:listOfTables" mode="generate_index"/>
+        </fo:root>
+    </xsl:template>
+    <xsl:template name="elml:header_footer">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-weight="bold" color="black" border-after-style="solid">
+                <xsl:choose>
+                    <xsl:when test="$multiple='on' and document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title">
+                        <xsl:value-of select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="/elml:lesson/@title"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </fo:block>
+        </fo:static-content>
+        <fo:static-content flow-name="xsl-region-after" display-align="after">
+            <fo:block font-weight="bold" color="black" border-before-style="solid" text-align-last="justify">
+                <xsl:value-of select="$server"/>
+                <xsl:text> - </xsl:text>
+                <xsl:value-of select="$name_printed"/>
+                <xsl:value-of select="day-from-date(current-date())"/>
+                <xsl:text>.</xsl:text>
+                <xsl:value-of select="month-from-date(current-date())"/>
+                <xsl:text>.</xsl:text>
+                <xsl:value-of select="year-from-date(current-date())"/>
+                <fo:leader leader-pattern="space"/>
+                <fo:page-number/>
+            </fo:block>
+        </fo:static-content>
+        <fo:static-content flow-name="xsl-footnote-separator">
+            <fo:block>
+                <fo:leader leader-pattern="rule" leader-length="30%" rule-thickness="0.5pt" rule-style="solid" color="black" display-align="before"/>
+            </fo:block>
+        </fo:static-content>
+    </xsl:template>
+    <xsl:template name="elml:coverpage">
+        <fo:table id="coverpage" table-layout="fixed" text-align="center" width="100%">
+            <fo:table-column column-width="proportional-column-width(1)"/>
+            <fo:table-body>
+                <fo:table-row>
+                    <fo:table-cell border-style="solid" border-width="1pt" border-color="white" height="50pt" text-align="center" padding="3pt" display-align="center">
+                        <fo:block>
+                            <fo:block>
+                                <fo:leader leader-pattern="space"/>
+                            </fo:block>
+                            <xsl:if test="contains($pathRoot, 'gitta')">
+                                <fo:inline font-style="italic">Geographic Information Technology Training Alliance (GITTA) presents:</fo:inline>
+                            </xsl:if>
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+                <fo:table-row>
+                    <fo:table-cell border-style="solid" border-width="1pt" border-color="white" padding="3pt" display-align="center">
+                        <fo:block>
+                            <fo:block border-style="solid" border-width="1pt" border-color="#808080" padding="3pt">
+                                <fo:block>
+                                    <fo:block text-align="center">
+                                        <fo:block>
+                                            <fo:block font-size="{$fontsize}*2.5" font-weight="{$fontweighttitle}" line-height="{$lineheight}*3">
+                                                <fo:block>
+                                                    <fo:block>
+                                                        <fo:leader leader-pattern="space"/>
+                                                    </fo:block>
+                                                    <xsl:choose>
+                                                        <xsl:when test="$multiple='on' and document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title">
+                                                            <xsl:value-of select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@title"/>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:value-of select="/elml:lesson/@title"/>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
+                                                    <fo:block>
+                                                        <fo:leader leader-pattern="space"/>
+                                                    </fo:block>
+                                                    <fo:block>
+                                                        <xsl:text>&#xA;</xsl:text>
+                                                    </fo:block>
+                                                </fo:block>
+                                            </fo:block>
+                                            <xsl:choose>
+                                                <xsl:when test="$multiple='on' and document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@authors">
+                                                    <fo:block font-size="{$fontsize}*2" font-weight="{$fontweighttitle}" line-height="{$lineheight}*2.5">
+                                                        <fo:block>
+                                                            <fo:block>
+                                                                <xsl:value-of select="$name_responsible"/>
+                                                            </fo:block>
+                                                            <fo:block>
+                                                                <fo:leader leader-pattern="space"/>
+                                                                <xsl:value-of select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/@authors"/>
+                                                            </fo:block>
+                                                            <fo:block>
+                                                                <fo:leader leader-pattern="space"/>
+                                                            </fo:block>
+                                                        </fo:block>
+                                                    </fo:block>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:if test="/elml:lesson/elml:metadata/elml:lessonInfo/elml:lifecycle/elml:contribute/elml:person">
+                                                        <fo:block font-size="{$fontsize}*2" font-weight="{$fontweighttitle}" line-height="{$lineheight}*2.5">
+                                                            <fo:block>
+                                                                <fo:block>
+                                                                    <xsl:value-of select="$name_responsible"/>
+                                                                </fo:block>
+                                                                <xsl:for-each select="/elml:lesson/elml:metadata/elml:lessonInfo/elml:lifecycle/elml:contribute/elml:person">
+                                                                    <fo:block>
+                                                                        <fo:leader leader-pattern="space"/>
+                                                                        <xsl:value-of select="@name"/>
+                                                                    </fo:block>
+                                                                    <xsl:if test="@responsible">
+                                                                        <fo:block font-size="{$fontsize}" font-weight="{$fontweighttitle}" line-height="{$lineheight}" space-after="{$lineheight}*1.5">
+                                                                            <fo:leader leader-pattern="space"/>
+                                                                            <xsl:text>(</xsl:text>
+                                                                            <xsl:value-of select="@responsible"/>
+                                                                            <xsl:text>)</xsl:text>
+                                                                        </fo:block>
+                                                                    </xsl:if>
+                                                                </xsl:for-each>
+                                                                <fo:block>
+                                                                    <fo:leader leader-pattern="space"/>
+                                                                </fo:block>
+                                                            </fo:block>
+                                                        </fo:block>
+                                                    </xsl:if>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </fo:block>
+                                    </fo:block>
+                                </fo:block>
+                            </fo:block>
+                        </fo:block>
+                    </fo:table-cell>
+                </fo:table-row>
+            </fo:table-body>
+        </fo:table>
+    </xsl:template>
+    <xsl:template match="elml:lesson">
+        <xsl:call-template name="elml:generate_Title"/>
+        <fo:block>
+            <xsl:apply-templates/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template name="elml:generate_Title">
+        <xsl:param name="factor">
+            <xsl:choose>
+                <xsl:when test="name()='lesson'">
+                    <xsl:text>2.0</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='unit' or name()='glossary' or name()='index' or name()='bibliography' or name(.)='listOfFigures' or name(.)='listOfTables' or name()='metadata' ">
+                    <xsl:text>1.6</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='learningObject'">
+                    <xsl:text>1.3</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='clarify' or name()='look' or name()='act'">
+                    <xsl:text>1.0</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='entry' or name()='goals' or name()='summary' or name()='selfAssessment' or name()='furtherReading'">
+                    <xsl:choose>
+                        <xsl:when test="name(parent::*)='lesson'">
+                            <xsl:text>1.6</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>1.3</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:param>
+        <fo:block line-height="{$fontsize}*{$factor}*1.3" font-size="{$fontsize}*{$factor}" font-weight="{$fontweighttitle}" keep-with-next.within-page="always" text-align="left" span="all">
+            <xsl:attribute name="space-after">
+                <xsl:choose>
+                    <xsl:when test="name()='clarify' or name()='look' or name()='act'">
+                        <xsl:text>0pt</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$lineheight"/>
+                        <xsl:text>*0.4</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="$pagebreak_level='lo' and $factor&gt;1.1 and not(name()='entry' or name()='goals')">
+                    <xsl:attribute name="break-before">
+                        <xsl:text>page</xsl:text>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="$pagebreak_level='unit' and $factor&gt;1.4 and not(name()='entry' or name()='goals')">
+                    <xsl:attribute name="break-before">
+                        <xsl:text>page</xsl:text>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="$pagebreak_level='lesson' and $factor&gt;1.7 and not(name()='entry' or name()='goals')">
+                    <xsl:attribute name="break-before">
+                        <xsl:text>page</xsl:text>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="space-before">
+                        <xsl:value-of select="$lineheight"/>
+                        <xsl:text>*0.7*</xsl:text>
+                        <xsl:value-of select="$factor"/>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:call-template name="elml:Label"/>
+            <xsl:call-template name="elml:Kapitel"/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template match="elml:unit">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <xsl:call-template name="elml:generate_Title"/>
+            <xsl:if test="name(.)='unit' and contains($optional_units, @label)">
+                <fo:block border-style="solid" border-color="red" border-width="0.5pt" background-color="lightgrey" padding="3pt" margin="5pt">
+                    <xsl:value-of select="$name_optionalunits_text"/>
+                </fo:block>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:learningObject">
+        <xsl:call-template name="elml:generate_Title"/>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="elml:clarify | elml:look | elml:act">
+        <xsl:if test="@title">
+            <xsl:call-template name="elml:generate_Title"/>
+        </xsl:if>
+        <xsl:if test="@metaSetUpInfo and not(@metaSetUpInfo ='none') and not(@metaSetUpInfo='nothing') and    ($role='tutor')">
+            <fo:block border-style="solid" border-color="red" border-width="0.5pt" background-color="lightgrey" padding="3pt" margin="5pt">
+                <fo:inline color="red" font-weight="bold">
+                    <xsl:value-of select="$name_metaSetUpInfo"/>
+                </fo:inline>
+                <xsl:value-of select="@metaSetUpInfo"/>
+            </fo:block>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="elml:entry">
+        <xsl:if test="@title">
+            <xsl:call-template name="elml:generate_Title"/>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="elml:goals">
+        <xsl:choose>
+            <xsl:when test="@presentation='table'">
+                <!-- The following table hack is needed to keep the goals on one page -->
+                <fo:table table-layout="fixed" width="100%" border-width="0pt" border-color="white">
+                    <fo:table-column keep-together.within-column="always"/>
+                    <fo:table-body>
+                        <fo:table-row keep-together.within-column="always">
+                            <fo:table-cell>
+                                <xsl:call-template name="elml:generate_Title"/>
+                                <xsl:if test="@intStatement">
+                                    <fo:block>
+                                        <xsl:value-of select="@intStatement"/>
+                                    </fo:block>
+                                    <fo:block> </fo:block>
+                                </xsl:if>
+                            </fo:table-cell>
+                        </fo:table-row>
+                        <xsl:for-each select="elml:lObjective">
+                            <xsl:if test="(@role='student') or (@role=$role) or (not (@role))">
+                                <fo:table-row keep-together.within-column="always">
+                                    <fo:table-cell>
+                                        <xsl:choose>
+                                            <xsl:when test="position() mod 2 != 0">
+                                                <xsl:attribute name="background-color">
+                                                    <xsl:text>lightgrey</xsl:text>
+                                                </xsl:attribute>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:attribute name="background-color">
+                                                    <xsl:text>white</xsl:text>
+                                                </xsl:attribute>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                        <fo:block>
+                                            <xsl:if test="@role='tutor'">
+                                                <xsl:attribute name="color">red</xsl:attribute>
+                                            </xsl:if>
+                                            <xsl:apply-templates/>
+                                        </fo:block>
+                                    </fo:table-cell>
+                                </fo:table-row>
+                            </xsl:if>
+                        </xsl:for-each>
+                    </fo:table-body>
+                </fo:table>
+            </xsl:when>
+            <xsl:when test="elml:lObjective">
+                <!-- The following table hack is needed to keep the goals on one page -->
+                <fo:table table-layout="fixed" width="100%" border-width="0pt" border-color="white">
+                    <fo:table-column keep-together.within-column="always"/>
+                    <fo:table-body>
+                        <fo:table-row keep-together.within-column="always">
+                            <fo:table-cell>
+                                <xsl:call-template name="elml:generate_Title"/>
+                                <xsl:if test="@intStatement">
+                                    <fo:block>
+                                        <xsl:value-of select="@intStatement"/>
+                                    </fo:block>
+                                    <fo:block> </fo:block>
+                                </xsl:if>
+                                <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                                    <xsl:for-each select="elml:lObjective">
+                                        <xsl:if test="(@role='student') or (@role=$role) or (not (@role))">
+                                            <fo:list-item>
+                                                <fo:list-item-label end-indent="label-end()">
+                                                    <fo:block font-family="Courier" font-size="{$fontsize}*1.5" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
+                                                </fo:list-item-label>
+                                                <fo:list-item-body start-indent="body-start()">
+                                                    <fo:block>
+                                                        <xsl:if test="@role='tutor'">
+                                                            <xsl:attribute name="color">red</xsl:attribute>
+                                                        </xsl:if>
+                                                        <xsl:apply-templates/>
+                                                    </fo:block>
+                                                </fo:list-item-body>
+                                            </fo:list-item>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                </fo:list-block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:selfAssessment">
+        <xsl:call-template name="elml:generate_Title"/>
+        <xsl:if test="(@metaSetUpInfo) and (not(@metaSetUpInfo ='none')) and (not(@metaSetUpInfo='nothing')) and ($role='tutor')">
+            <fo:block border-style="solid" border-color="red" border-width="0.5pt" background-color="lightgrey" padding="3pt" margin="5pt">
+                <fo:inline color="red" font-weight="bold">
+                    <xsl:value-of select="$name_metaSetUpInfo"/>
+                </fo:inline>
+                <xsl:value-of select="@metaSetUpInfo"/>
+            </fo:block>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="elml:summary">
+        <xsl:call-template name="elml:generate_Title"/>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <!-- ***** Glossary and Index Elements *****-->
+    <xsl:template match="elml:glossary">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <xsl:call-template name="elml:generate_Title"/>
+            <xsl:apply-templates>
+                <xsl:sort select="@term" order="ascending" lang="{$lang}"/>
+            </xsl:apply-templates>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:definition">
+        <xsl:param name="term"/>
+        <fo:block font-weight="bold">
+            <xsl:if test="not($term)">
+                <xsl:attribute name="id">
+                    <xsl:value-of select="generate-id()"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$term">
+                    <xsl:value-of select="$term"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="@term"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:text>: </xsl:text>
+        </fo:block>
+        <fo:block start-indent="15pt">
+            <xsl:apply-templates/>
+            <xsl:call-template name="elml:BibliographyRef"/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template match="elml:definition" mode="icon">
+        <xsl:param name="term"/>
+        <fo:block font-weight="bold">
+            <xsl:if test="not($term)">
+                <xsl:attribute name="id">
+                    <xsl:value-of select="generate-id()"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$term">
+                    <xsl:value-of select="$term"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="@term"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:text>: </xsl:text>
+        </fo:block>
+        <fo:block start-indent="15pt">
+            <xsl:apply-templates mode="#default"/>
+            <xsl:call-template name="elml:BibliographyRef"/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template match="elml:listOfFigures | elml:listOfTables"/>
+    <xsl:template match="elml:listOfFigures | elml:listOfTables" mode="generate_index">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <fo:page-sequence master-reference="default-page">
+                <xsl:call-template name="elml:header_footer"/>
+                <fo:flow flow-name="xsl-region-body" text-align="left" font-size="{$fontsize}" line-height="{$lineheight}" orphans="3" widows="3">
+                    <xsl:call-template name="elml:generate_Title"/>
+                    <xsl:choose>
+                        <xsl:when test="name(.)='listOfTables' and not(//elml:table)">
+                            <fo:block>
+                                <xsl:value-of select="$name_tables"/>
+                                <xsl:value-of select="$name_glossary_empty"/>
+                            </fo:block>
+                        </xsl:when>
+                        <xsl:when test="name(.)='listOfTables'">
+                            <xsl:for-each select="//elml:table">
+                                <!-- <xsl:sort select="@legend" order="ascending"/> -->
+                                <xsl:variable name="id_nav">
+                                    <xsl:call-template name="elml:Label_param"/>
+                                </xsl:variable>
+                                <fo:block text-align="left" text-align-last="justify" text-indent="-5mm" start-indent="5mm">
+                                    <fo:inline>
+                                        <fo:basic-link color="black" internal-destination="{$id_nav}">
+                                            <xsl:call-template name="elml:Legend_listof"/>
+                                            <xsl:if test="@bibIDRef">
+                                                <xsl:call-template name="elml:BibliographyRef"/>
+                                            </xsl:if>
+                                        </fo:basic-link>
+                                        <fo:leader leader-pattern="dots"/>
+                                        <fo:page-number-citation ref-id="{$id_nav}"/>
+                                    </fo:inline>
+                                </fo:block>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:when test="name(.)='listOfFigures' and not(//elml:multimedia)">
+                            <fo:block>
+                                <xsl:value-of select="$name_figures"/>
+                                <xsl:value-of select="$name_glossary_empty"/>
+                            </fo:block>
+                        </xsl:when>
+                        <xsl:when test="name(.)='listOfFigures'">
+                            <xsl:for-each select="//elml:multimedia">
+                                <!-- <xsl:sort select="@legend" order="ascending"/> -->
+                                <xsl:variable name="id_nav">
+                                    <xsl:call-template name="elml:Label_param"/>
+                                </xsl:variable>
+                                <xsl:if test="not(@type='div')">
+                                    <fo:block text-align="left" text-align-last="justify" text-indent="-5mm" start-indent="5mm">
+                                        <fo:inline>
+                                            <fo:basic-link color="black" internal-destination="{$id_nav}">
+                                                <xsl:call-template name="elml:Legend_listof"/>
+                                                <xsl:if test="@bibIDRef">
+                                                    <xsl:call-template name="elml:BibliographyRef"/>
+                                                </xsl:if>
+                                                <xsl:text> (</xsl:text>
+                                                <xsl:value-of select="@type"/>
+                                                <xsl:text>)</xsl:text>
+                                            </fo:basic-link>
+                                            <fo:leader leader-pattern="dots"/>
+                                            <fo:page-number-citation ref-id="{$id_nav}"/>
+                                        </fo:inline>
+                                    </fo:block>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </xsl:when>
+                    </xsl:choose>
+                </fo:flow>
+            </fo:page-sequence>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:index"/>
+    <xsl:template match="elml:index" mode="generate_index">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes' and //elml:indexItem">
+            <fo:page-sequence master-reference="twocolumn">
+                <xsl:call-template name="elml:header_footer"/>
+                <fo:flow flow-name="xsl-region-body" text-align="left" font-size="{$fontsize}" line-height="{$lineheight}" orphans="3" widows="3">
+                    <xsl:call-template name="elml:generate_Title"/>
+                    <fo:block padding-top="{$lineheight}" span="all"/>
+                    <fo:block>
+                        <xsl:for-each-group select="//elml:indexItem" group-by="(if (@affiliatedTo) then  @affiliatedTo else .)">
+                            <xsl:sort select="." order="ascending" case-order="lower-first"/>
+                            <xsl:if test="not(ancestor::*/@visible='none') and not(ancestor::*/@visible='online')">
+                                <fo:block>
+                                    <xsl:value-of select="current-grouping-key()"/>
+                                    <xsl:text>: </xsl:text>
+                                    <xsl:for-each select="current-group()">
+                                        <xsl:variable name="indexID">
+                                            <xsl:value-of select="generate-id()"/>
+                                        </xsl:variable>
+                                        <xsl:if test="not(ancestor::*/@visible='none') and not(ancestor::*/@visible='online')">
+                                            <fo:basic-link>
+                                                <xsl:attribute name="internal-destination">
+                                                    <xsl:value-of select="$indexID"/>
+                                                </xsl:attribute>
+                                                <xsl:choose>
+                                                    <xsl:when test="@mainEntry='yes'">
+                                                        <fo:inline font-weight="bold">
+                                                            <fo:page-number-citation ref-id="{$indexID}"/>
+                                                        </fo:inline>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <fo:page-number-citation ref-id="{$indexID}"/>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                                <xsl:if test="not(position()=last())">
+                                                    <xsl:text>, </xsl:text>
+                                                </xsl:if>
+                                            </fo:basic-link>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                </fo:block>
+                            </xsl:if>
+                        </xsl:for-each-group>
+                    </fo:block>
+                </fo:flow>
+            </fo:page-sequence>
+        </xsl:if>
+    </xsl:template>
+    <!-- ***** Bibliography Elements (most stuff in external file biblio_*.xsl) *****-->
+    <xsl:template name="elml:BibliographyRef">
+        <!--A template used to generate bibliography references within the lesson, eg. (Fisler 2004)-->
+        <xsl:if test="@bibIDRef">
+            <fo:inline>
+                <xsl:attribute name="hyphenate" select="'false'"/>
+                <xsl:variable name="id" select="@bibIDRef"/>
+                <xsl:variable name="author">
+                    <xsl:choose>
+                        <xsl:when test="/elml:lesson/elml:bibliography/*[@bibID=$id]/@author">
+                            <xsl:value-of select="/elml:lesson/elml:bibliography/*[@bibID=$id]/@author"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$name_anon"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:text> </xsl:text>
+                <xsl:if test="not(@yearOnly='yes')">
+                    <xsl:text>(</xsl:text>
+                </xsl:if>
+                <fo:basic-link>
+                    <xsl:attribute name="internal-destination">
+                        <xsl:value-of select="generate-id(/elml:lesson/elml:bibliography/*[@bibID=$id])"/>
+                    </xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="contains($author, ',')">
+                            <xsl:value-of select="substring-before($author, ',')"/>
+                            <xsl:if test="contains(substring-after($author, ','), ',')">
+                                <xsl:text> et al.</xsl:text>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$author"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fo:basic-link>
+                <xsl:if test="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr">
+                    <xsl:choose>
+                        <xsl:when test="@yearOnly='yes'">
+                            <xsl:text> (</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text> </xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:value-of select="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear"/>
+                    <xsl:if test="@pageNr">
+                        <xsl:choose>
+                            <xsl:when test="$lang='de'">
+                                <xsl:text>, S. </xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>, p. </xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:value-of select="@pageNr"/>
+                    </xsl:if>
+                </xsl:if>
+                <xsl:if test="/elml:lesson/elml:bibliography/*[@bibID=$id]/@publicationYear or @pageNr or not(@yearOnly='yes')">
+                    <xsl:text>)</xsl:text>
+                </xsl:if>
+            </fo:inline>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:furtherReading">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <xsl:call-template name="elml:generate_Title"/>
+            <fo:block hyphenate="false">
+                <xsl:choose>
+                    <xsl:when test="@sorting='off'">
+                        <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                            <xsl:for-each select="elml:resItem">
+                                <xsl:apply-templates select="/elml:lesson/elml:bibliography/*[@bibID=current()/@bibIDRef]">
+                                    <xsl:with-param name="comment" select="text()"/>
+                                    <xsl:with-param name="furtherReading" select="@bibIDRef"/>
+                                    <xsl:with-param name="pageNr" select="@pageNr"/>
+                                </xsl:apply-templates>
+                            </xsl:for-each>
+                        </fo:list-block>
+                    </xsl:when>
+                    <xsl:when test="@sorting='byYear'">
+                        <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                            <xsl:for-each select="elml:resItem">
+                                <xsl:sort select="/elml:lesson/elml:bibliography/*[@bibID=current()/@bibIDRef]/@publicationYear" order="descending" lang="{$lang}"/>
+                                <xsl:apply-templates select="/elml:lesson/elml:bibliography/*[@bibID=current()/@bibIDRef]">
+                                    <xsl:with-param name="comment" select="text()"/>
+                                    <xsl:with-param name="furtherReading" select="@bibIDRef"/>
+                                    <xsl:with-param name="pageNr" select="@pageNr"/>
+                                </xsl:apply-templates>
+                            </xsl:for-each>
+                        </fo:list-block>
+                    </xsl:when>
+                    <xsl:when test="@sorting='groupByType'">
+                        <xsl:for-each-group select="elml:resItem/@bibIDRef" group-by="/elml:lesson/elml:bibliography/*[@bibID=current()]/name()">
+                            <xsl:sort select="/elml:lesson/elml:bibliography/*[@bibID=current()]/name()" order="ascending" lang="{$lang}"/>
+                            <fo:block font-size="{$fontsize}*1.3" line-height="{$lineheight}*1.3" space-before="{$lineheight}*0.5" font-weight="{$fontweighttitle}" keep-with-next.within-page="always" text-align="left">
+                                <xsl:call-template name="elml:name_biblio">
+                                    <xsl:with-param name="itemname" select="name(/elml:lesson/elml:bibliography/*[@bibID=current()])"/>
+                                </xsl:call-template>
+                            </fo:block>
+                            <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                                <xsl:for-each select="current-group()">
+                                    <xsl:sort select="/elml:lesson/elml:bibliography/*[@bibID=current()]/@author" order="ascending" lang="{$lang}"/>
+                                    <xsl:apply-templates select="/elml:lesson/elml:bibliography/*[@bibID=current()]">
+                                        <xsl:with-param name="comment" select="../text()"/>
+                                        <xsl:with-param name="furtherReading" select="current()"/>
+                                        <xsl:with-param name="pageNr" select="../@pageNr"/>
+                                    </xsl:apply-templates>
+                                </xsl:for-each>
+                            </fo:list-block>
+                        </xsl:for-each-group>
+                    </xsl:when>
+                    <xsl:when test="@sorting='groupByYear'">
+                        <xsl:for-each-group select="elml:resItem/@bibIDRef" group-by="/elml:lesson/elml:bibliography/*[@bibID=current()]/@publicationYear">
+                            <xsl:sort select="/elml:lesson/elml:bibliography/*[@bibID=current()]/@publicationYear" order="descending" lang="{$lang}"/>
+                            <fo:block font-size="{$fontsize}*1.3" line-height="{$lineheight}*1.3" space-before="{$lineheight}*0.5" font-weight="{$fontweighttitle}" keep-with-next.within-page="always" text-align="left">
+                                <xsl:value-of select="/elml:lesson/elml:bibliography/*[@bibID=current()]/@publicationYear"/>
+                            </fo:block>
+                            <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                                <xsl:for-each select="current-group()">
+                                    <xsl:sort select="/elml:lesson/elml:bibliography/*[@bibID=current()]/@author"/>
+                                    <xsl:apply-templates select="/elml:lesson/elml:bibliography/*[@bibID=current()]">
+                                        <xsl:with-param name="comment" select="../text()"/>
+                                        <xsl:with-param name="furtherReading" select="current()"/>
+                                        <xsl:with-param name="pageNr" select="../@pageNr"/>
+                                    </xsl:apply-templates>
+                                </xsl:for-each>
+                            </fo:list-block>
+                        </xsl:for-each-group>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                            <xsl:for-each select="elml:resItem">
+                                <xsl:sort select="/elml:lesson/elml:bibliography/*[@bibID=current()/@bibIDRef]/@author" order="ascending" lang="{$lang}"/>
+                                <xsl:apply-templates select="/elml:lesson/elml:bibliography/*[@bibID=current()/@bibIDRef]">
+                                    <xsl:with-param name="comment" select="text()"/>
+                                    <xsl:with-param name="furtherReading" select="@bibIDRef"/>
+                                    <xsl:with-param name="pageNr" select="@pageNr"/>
+                                </xsl:apply-templates>
+                            </xsl:for-each>
+                        </fo:list-block>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </fo:block>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:bibliography">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <xsl:call-template name="elml:generate_Title"/>
+            <fo:block hyphenate="false">
+                <xsl:choose>
+                    <xsl:when test="@sorting='off'">
+                        <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                            <xsl:apply-templates/>
+                        </fo:list-block>
+                    </xsl:when>
+                    <xsl:when test="@sorting='byYear'">
+                        <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                            <xsl:apply-templates>
+                                <xsl:sort select="@publicationYear" order="descending" lang="{$lang}"/>
+                            </xsl:apply-templates>
+                        </fo:list-block>
+                    </xsl:when>
+                    <xsl:when test="@sorting='groupByType'">
+                        <xsl:for-each-group select="node()" group-by="name()">
+                            <xsl:sort select="name()" order="ascending" lang="{$lang}"/>
+                            <fo:block font-size="{$fontsize}*1.3" line-height="{$lineheight}*1.3" space-before="{$lineheight}*0.5" font-weight="{$fontweighttitle}" keep-with-next.within-page="always" text-align="left">
+                                <xsl:call-template name="elml:name_biblio">
+                                    <xsl:with-param name="itemname" select="name()"/>
+                                </xsl:call-template>
+                            </fo:block>
+                            <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                                <xsl:apply-templates select="current-group()">
+                                    <xsl:sort select="@author" order="ascending" lang="{$lang}"/>
+                                </xsl:apply-templates>
+                            </fo:list-block>
+                        </xsl:for-each-group>
+                    </xsl:when>
+                    <xsl:when test="@sorting='groupByYear'">
+                        <xsl:for-each-group select="node()" group-by="@publicationYear">
+                            <xsl:sort select="@publicationYear" order="descending" lang="{$lang}"/>
+                            <fo:block font-size="{$fontsize}*1.3" line-height="{$lineheight}*1.3" space-before="{$lineheight}*0.5" font-weight="{$fontweighttitle}" keep-with-next.within-page="always" text-align="left">
+                                <xsl:value-of select="@publicationYear"/>
+                            </fo:block>
+                            <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                                <xsl:apply-templates select="current-group()">
+                                    <xsl:sort select="@author" order="ascending" lang="{$lang}"/>
+                                </xsl:apply-templates>
+                            </fo:list-block>
+                        </xsl:for-each-group>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:list-block provisional-distance-between-starts="8mm" provisional-label-separation="2mm" start-indent="2mm" space-before="4pt" space-after="4pt">
+                            <xsl:apply-templates>
+                                <xsl:sort select="@author" order="ascending" lang="{$lang}"/>
+                            </xsl:apply-templates>
+                        </fo:list-block>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </fo:block>
+        </xsl:if>
+    </xsl:template>
+    <!-- ***** "Paragraph" Elements like colum, table, multimedia, link etc. *****-->
+    <xsl:template match="elml:column">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <fo:table table-layout="fixed" width="100%" border-style="solid" border-width="1pt" border-color="white">
+                <xsl:call-template name="elml:Label"/>
+                <fo:table-column>
+                    <xsl:choose>
+                        <xsl:when test="elml:columnLeft/@width">
+                            <xsl:attribute name="column-width">
+                                <xsl:choose>
+                                    <xsl:when test="elml:columnLeft/@units='percent'">
+                                        <xsl:text>proportional-column-width(</xsl:text>
+                                        <xsl:value-of select="elml:columnLeft/@width"/>
+                                        <xsl:text>)</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="(elml:columnLeft/@width) * $converter_pixel_mm"/>
+                                        <xsl:text>mm</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="column-width">
+                                <xsl:text>proportional-column-width(1)</xsl:text>
+                            </xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fo:table-column>
+                <xsl:if test="elml:columnMiddle">
+                    <fo:table-column>
+                        <xsl:choose>
+                            <xsl:when test="elml:columnMiddle/@width">
+                                <xsl:attribute name="column-width">
+                                    <xsl:choose>
+                                        <xsl:when test="elml:columnMiddle/@units='percent'">
+                                            <xsl:text>proportional-column-width(</xsl:text>
+                                            <xsl:value-of select="elml:columnMiddle/@width"/>
+                                            <xsl:text>)</xsl:text>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="(elml:columnMiddle/@width) * $converter_pixel_mm"/>
+                                            <xsl:text>mm</xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="column-width">
+                                    <xsl:text>proportional-column-width(1)</xsl:text>
+                                </xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </fo:table-column>
+                </xsl:if>
+                <fo:table-column>
+                    <xsl:choose>
+                        <xsl:when test="elml:columnRight/@width">
+                            <xsl:attribute name="column-width">
+                                <xsl:choose>
+                                    <xsl:when test="elml:columnRight/@units='percent'">
+                                        <xsl:text>proportional-column-width(</xsl:text>
+                                        <xsl:value-of select="elml:columnRight/@width"/>
+                                        <xsl:text>)</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="(elml:columnRight/@width) * $converter_pixel_mm"/>
+                                        <xsl:text>mm</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="column-width">
+                                <xsl:text>proportional-column-width(1)</xsl:text>
+                            </xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fo:table-column>
+                <fo:table-body>
+                    <fo:table-row>
+                        <xsl:choose>
+                            <xsl:when test="elml:columnLeft/@height">
+                                <xsl:attribute name="height">
+                                    <xsl:choose>
+                                        <xsl:when test="elml:columnLeft/@units='percent'">
+                                            <xsl:value-of select="elml:columnLeft/@height"/>
+                                            <xsl:text>%</xsl:text>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="(elml:columnLeft/@height) * $converter_pixel_mm"/>
+                                            <xsl:text>mm</xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                            </xsl:when>
+                            <xsl:when test="elml:columnMiddle/@height">
+                                <xsl:attribute name="height">
+                                    <xsl:choose>
+                                        <xsl:when test="elml:columnMiddle/@units='percent'">
+                                            <xsl:value-of select="elml:columnMiddle/@height"/>
+                                            <xsl:text>%</xsl:text>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="(elml:columnMiddle/@height) * $converter_pixel_mm"/>
+                                            <xsl:text>mm</xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                            </xsl:when>
+                            <xsl:when test="elml:columnRight/@height">
+                                <xsl:attribute name="height">
+                                    <xsl:choose>
+                                        <xsl:when test="elml:columnRight/@units='percent'">
+                                            <xsl:value-of select="elml:columnRight/@height"/>
+                                            <xsl:text>%</xsl:text>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="(elml:columnRight/@height) * $converter_pixel_mm"/>
+                                            <xsl:text>mm</xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                            </xsl:when>
+                        </xsl:choose>
+                        <xsl:apply-templates/>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:columnLeft | elml:columnMiddle | elml:columnRight">
+        <fo:table-cell padding="3pt">
+            <xsl:call-template name="elml:Alignment"/>
+            <fo:block>
+                <xsl:call-template name="elml:Alignment"/>
+                <xsl:apply-templates/>
+            </fo:block>
+        </fo:table-cell>
+    </xsl:template>
+    <xsl:template name="elml:columncreate">
+        <xsl:param name="columnamount"/>
+        <fo:table-column>
+            <xsl:choose>
+                <xsl:when test="@width">
+                    <xsl:attribute name="column-width">
+                        <xsl:choose>
+                            <xsl:when test="@units='percent'">
+                                <xsl:text>proportional-column-width(</xsl:text>
+                                <xsl:value-of select="@width"/>
+                                <xsl:text>)</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="(@width) * $converter_pixel_mm"/>
+                                <xsl:text>mm</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="column-width">
+                        <xsl:text>proportional-column-width(1)</xsl:text>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+        </fo:table-column>
+        <xsl:if test="not($columnamount=1)">
+            <xsl:call-template name="elml:columncreate">
+                <xsl:with-param name="columnamount" select="$columnamount - 1"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="elml:icons">
+        <xsl:choose>
+            <xsl:when test="not($layout='none')">
+                <fo:table table-layout="fixed" width="100%" border-style="solid" border-width="0.5pt" border-color="white">
+                    <fo:table-column column-width="40px"/>
+                    <fo:table-column/>
+                    <fo:table-body>
+                        <fo:table-row>
+                            <fo:table-cell padding-right="6pt" display-align="before" width="30px">
+                                <fo:block>
+                                    <fo:external-graphic scaling="uniform" content-height="30px" content-width="30px" height="30px" width="30px">
+                                        <xsl:attribute name="src">
+                                            <xsl:value-of select="$pathRoot"/>
+                                            <xsl:text>/_templates/</xsl:text>
+                                            <xsl:value-of select="$layout"/>
+                                            <xsl:text>/icons/</xsl:text>
+                                            <xsl:value-of select="@icon"/>
+                                            <xsl:text>.</xsl:text>
+                                            <xsl:value-of select="$icon_filetype"/>
+                                        </xsl:attribute>
+                                    </fo:external-graphic>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell padding="3pt" display-align="before">
+                                <xsl:apply-templates select="." mode="icon"/>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="." mode="icon"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:table | elml:list | elml:popup | elml:box | elml:term | elml:paragraph | elml:citation | elml:multimedia">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <xsl:call-template name="elml:Title"/>
+            <xsl:choose>
+                <xsl:when test="@icon">
+                    <xsl:call-template name="elml:icons"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="." mode="icon"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:table" mode="icon">
+        <fo:table table-layout="fixed">
+            <xsl:call-template name="elml:Label"/>
+            <xsl:choose>
+                <xsl:when test="$tablestyle='modern'">
+                    <xsl:attribute name="border-color" select="'black'"/>
+                    <xsl:attribute name="space-before" select="'3.5mm'"/>
+                    <xsl:attribute name="space-after" select="'3.5mm'"/>
+                    <xsl:attribute name="font-family" select="'TheSans, Arial, Helvetica, Verdana, sans-serif'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="border-style" select="'solid'"/>
+                    <xsl:attribute name="border-width" select="'0.5pt'"/>
+                    <xsl:attribute name="border-color" select="'black'"/>
+                    <xsl:attribute name="border-collapse" select="'collapse'"/>
+                    <xsl:attribute name="space-after" select="$lineheight"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:if test="@height">
+                <xsl:attribute name="height">
+                    <xsl:choose>
+                        <xsl:when test="@units='percent'">
+                            <xsl:value-of select="@height"/>
+                            <xsl:text>%</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="(@height) * $converter_pixel_mm"/>
+                            <xsl:text>mm</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@width">
+                    <xsl:attribute name="width">
+                        <xsl:choose>
+                            <xsl:when test="@units='percent'">
+                                <xsl:value-of select="@width"/>
+                                <xsl:text>%</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="(@width) * $converter_pixel_mm"/>
+                                <xsl:text>mm</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="width">
+                        <xsl:text>100%</xsl:text>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:for-each select="elml:tablerow[not(child::node()/@colspan)][1]/elml:tabledata">
+                <xsl:choose>
+                    <xsl:when test="@colspan">
+                        <xsl:call-template name="elml:columncreate">
+                            <xsl:with-param name="columnamount" select="@colspan"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="elml:columncreate">
+                            <xsl:with-param name="columnamount" select="1"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+            <fo:table-body>
+                <xsl:apply-templates mode="#default"/>
+            </fo:table-body>
+        </fo:table>
+        <xsl:call-template name="elml:Legend"/>
+    </xsl:template>
+    <xsl:template match="elml:tablerow">
+        <fo:table-row>
+            <xsl:if test="elml:tableheading or position()=1">
+                <xsl:attribute name="keep-with-next">
+                    <xsl:text>always</xsl:text>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$tablestyle='modern' and elml:tableheading">
+                    <xsl:attribute name="border-after-style" select="'solid'"/>
+                    <xsl:attribute name="border-after-width" select="'1pt'"/>
+                    <xsl:attribute name="font-weight" select="'bold'"/>
+                </xsl:when>
+                <xsl:when test="$tablestyle='modern'">
+                    <xsl:attribute name="border-after-style" select="'solid'"/>
+                    <xsl:attribute name="border-after-width" select="'0.3pt'"/>
+                    <xsl:attribute name="font-weight" select="'normal'"/>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="elml:tableheading[1]/@height">
+                    <xsl:attribute name="height">
+                        <xsl:choose>
+                            <xsl:when test="elml:tableheading[1]/@units='percent'">
+                                <xsl:value-of select="elml:tableheading[1]/@height"/>
+                                <xsl:text>%</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="(elml:tableheading[1]/@height) * $converter_pixel_mm"/>
+                                <xsl:text>mm</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="elml:tabledata[1]/@height">
+                    <xsl:attribute name="height">
+                        <xsl:choose>
+                            <xsl:when test="elml:tabledata[1]/@units='percent'">
+                                <xsl:value-of select="elml:tabledata[1]/@height"/>
+                                <xsl:text>%</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="(elml:tabledata[1]/@height) * $converter_pixel_mm"/>
+                                <xsl:text>mm</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:apply-templates/>
+        </fo:table-row>
+    </xsl:template>
+    <xsl:template match="elml:tableheading">
+        <fo:table-cell>
+            <xsl:choose>
+                <xsl:when test="$tablestyle='modern'"/>
+                <xsl:otherwise>
+                    <xsl:attribute name="padding" select="'3pt'"/>
+                    <xsl:attribute name="background-color" select="'#D9D9D9'"/>
+                    <xsl:attribute name="font-weight" select="'bold'"/>
+                    <xsl:attribute name="border-style" select="'solid'"/>
+                    <xsl:attribute name="border-width" select="'0.5pt'"/>
+                    <xsl:attribute name="border-color" select="'black'"/>
+                    <xsl:attribute name="border-collapse" select="'collapse'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:if test="@colspan">
+                <xsl:attribute name="number-columns-spanned">
+                    <xsl:value-of select="@colspan"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@rowspan">
+                <xsl:attribute name="number-rows-spanned">
+                    <xsl:value-of select="@rowspan"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:call-template name="elml:WidthHeight"/>
+            <xsl:call-template name="elml:Alignment"/>
+            <fo:block>
+                <xsl:call-template name="elml:Alignment"/>
+                <xsl:apply-templates/>
+            </fo:block>
+        </fo:table-cell>
+    </xsl:template>
+    <xsl:template match="elml:tabledata">
+        <fo:table-cell>
+            <xsl:choose>
+                <xsl:when test="$tablestyle='modern'">
+                    <xsl:attribute name="font-family" select="'Palatino Linotype, Palatino, Times, serif'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="padding" select="'3pt'"/>
+                    <xsl:attribute name="border-style" select="'solid'"/>
+                    <xsl:attribute name="border-width" select="'0.5pt'"/>
+                    <xsl:attribute name="border-color" select="'black'"/>
+                    <xsl:attribute name="border-collapse" select="'collapse'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:if test="@colspan">
+                <xsl:attribute name="number-columns-spanned">
+                    <xsl:value-of select="@colspan"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@rowspan">
+                <xsl:attribute name="number-rows-spanned">
+                    <xsl:value-of select="@rowspan"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:call-template name="elml:WidthHeight"/>
+            <xsl:call-template name="elml:Alignment"/>
+            <fo:block>
+                <xsl:call-template name="elml:Alignment"/>
+                <xsl:apply-templates/>
+            </fo:block>
+        </fo:table-cell>
+    </xsl:template>
+    <xsl:template match="elml:list" mode="icon">
+        <fo:list-block start-indent="inherited-property-value(&apos;start-indent&apos;) + 2mm" provisional-distance-between-starts="8mm" provisional-label-separation="2mm" space-before="4pt" space-after="4pt" display-align="before">
+            <xsl:call-template name="elml:Label"/>
+            <xsl:apply-templates mode="#default"/>
+        </fo:list-block>
+        <xsl:call-template name="elml:Legend"/>
+    </xsl:template>
+    <xsl:template match="elml:item">
+        <fo:list-item>
+            <fo:list-item-label end-indent="label-end()">
+                <xsl:choose>
+                    <xsl:when test="../@listStyle='ordered'">
+                        <fo:block>
+                            <xsl:number level="single" count="elml:item" format="1."/>
+                        </fo:block>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:block font-family="Courier" font-size="{$fontsize}" line-height="{$lineheight}" padding-before="2pt">&#x2022;</fo:block>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </fo:list-item-label>
+            <fo:list-item-body start-indent="body-start()">
+                <fo:block>
+                    <xsl:apply-templates select="*[not(name()='list')] | text()"/>
+                </fo:block>
+                <xsl:apply-templates select="elml:list"/>
+            </fo:list-item-body>
+        </fo:list-item>
+    </xsl:template>
+    <xsl:template match="elml:popup | elml:box" mode="icon">
+        <fo:block border-style="solid" border-width="1pt" border-color="black" padding="3pt" start-indent="{$lineheight}" end-indent="{$lineheight}" space-after="{$lineheight}" background-color="lightgrey" margin="5pt">
+            <xsl:call-template name="elml:Label"/>
+            <xsl:if test="not(@icon)">
+                <xsl:attribute name="space-before">
+                    <xsl:value-of select="$lineheight"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates mode="#default"/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template match="elml:term" mode="icon">
+        <xsl:param name="id" select="@glossRef"/>
+        <xsl:param name="term">
+            <xsl:choose>
+                <xsl:when test="text()">
+                    <xsl:value-of select="."/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="/elml:lesson/elml:glossary/elml:definition[@term=$id]/@term"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:choose>
+            <xsl:when test="((boolean(name(preceding-sibling::node()[1])) or boolean(name(following-sibling::node()[1]))) and not(../text())) or (count(../*)=number('1') and     (name(parent::node())='look' or name(parent::node())='act' or name(parent::node())='clarify'))">
+                <xsl:apply-templates select="/elml:lesson/elml:glossary/elml:definition[@term=$id]" mode="#default">
+                    <xsl:with-param name="term" select="$term"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:inline font-style="italic">
+                    <xsl:call-template name="elml:Label"/>
+                    <xsl:value-of select="$term"/>
+                </fo:inline>
+                <xsl:if test="not(preceding::elml:term[@glossRef=$id])">
+                    <fo:footnote>
+                        <fo:inline vertical-align="super" font-size="0.6em">
+                            <xsl:number level="any" count="elml:term[not(@glossRef=preceding::elml:term/@glossRef)]"/>
+                        </fo:inline>
+                        <fo:footnote-body>
+                            <fo:block font-size="0.8em">
+                                <fo:inline vertical-align="super" font-size="0.6em">
+                                    <xsl:number level="any" count="elml:term[not(@glossRef=preceding::elml:term/@glossRef)]"/>
+                                </fo:inline>
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="/elml:lesson/elml:glossary/elml:definition[@term=$id]"/>
+                            </fo:block>
+                        </fo:footnote-body>
+                    </fo:footnote>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:annotation">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <fo:block>
+                <xsl:call-template name="elml:Label"/>
+                <xsl:apply-templates/>
+            </fo:block>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:paragraph" mode="icon">
+        <fo:block>
+            <xsl:call-template name="elml:Label"/>
+            <xsl:apply-templates mode="#default"/>
+        </fo:block>
+    </xsl:template>
+    <xsl:template match="elml:newLine">
+        <xsl:choose>
+            <xsl:when test="@space='long'">
+                <fo:block/>
+                <fo:block/>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:block/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:formatted">
+        <xsl:choose>
+            <xsl:when test="@style='bold'">
+                <fo:inline font-weight="bold">
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:when test="@style='subscript'">
+                <fo:inline vertical-align="sub" font-size="0.8em">
+                    <xsl:value-of select="."/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:when test="@style='superscript'">
+                <fo:inline vertical-align="super" font-size="0.8em">
+                    <xsl:value-of select="."/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:when test="@style='italic'">
+                <fo:inline font-style="italic">
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:when test="@style='underlined'">
+                <fo:inline text-decoration="underline">
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:when test="@style='crossedOut'">
+                <fo:inline text-decoration="line-through">
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <!-- ***** NOT implemented in FOP: text-transform="uppercase" *****-->
+            <xsl:when test="@style='upperCase'">
+                <fo:inline>
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <!-- ***** NOT implemented in FOP: text-transform="lowercase" *****-->
+            <xsl:when test="@style='lowerCase'">
+                <fo:inline>
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:when test="@style='code'">
+                <fo:inline font-family="Courier, monospace" white-space="pre" font-size="110%">
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="not(starts-with(following-sibling::node()[1]/self::text(), '.')) or not(starts-with(following-sibling::node()[1]/self::text(), ',')) or not(starts-with(following-sibling::node()[1]/self::text(), ';'))">
+                <xsl:text/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text> </xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:link">
+        <xsl:param name="label" select="@targetLabel"/>
+        <xsl:param name="TempURL">
+            <xsl:choose>
+                <xsl:when test="not((@role='student') or (@role=$role) or (not (@role)))">
+                    <xsl:text>none</xsl:text>
+                </xsl:when>
+                <xsl:when test="starts-with(@uri, 'http') or starts-with(@uri, 'mailto:')">
+                    <xsl:value-of select="@uri"/>
+                </xsl:when>
+                <xsl:when test="@uri">
+                    <xsl:value-of select="$server"/>
+                    <xsl:text>/</xsl:text>
+                    <xsl:value-of select="/elml:lesson/@label"/>
+                    <xsl:text>/</xsl:text>
+                    <xsl:value-of select="$lang"/>
+                    <xsl:choose>
+                        <xsl:when test="starts-with(@uri, '..')">
+                            <xsl:value-of select="substring-after(@uri, '..')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>/text/</xsl:text>
+                            <xsl:value-of select="@uri"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:choose>
+                        <xsl:when test="@targetLesson and not(@targetLesson = /elml:lesson/@label)">
+                            <xsl:value-of select="$server"/>
+                            <xsl:text>/</xsl:text>
+                            <xsl:value-of select="@targetLesson"/>
+                            <xsl:text>/</xsl:text>
+                            <xsl:value-of select="$lang"/>
+                            <xsl:text>/</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="name(//*[@label=$label])='unit'">
+                            <xsl:value-of select="/elml:lesson/@label"/>
+                            <xsl:text>_</xsl:text>
+                            <xsl:text>unit_</xsl:text>
+                            <xsl:value-of select="@targetLabel"/>
+                            <xsl:value-of select="$filename_suffix"/>
+                        </xsl:when>
+                        <xsl:when test="name(//*[@label=$label])='learningObject'">
+                            <xsl:value-of select="/elml:lesson/@label"/>
+                            <xsl:text>_</xsl:text>
+                            <xsl:value-of select="//*[@label=$label]/../@label"/>
+                            <xsl:text>_</xsl:text>
+                            <xsl:value-of select="@targetLabel"/>
+                            <xsl:value-of select="$filename_suffix"/>
+                        </xsl:when>
+                        <xsl:when test="@targetLabel">
+                            <xsl:value-of select="/elml:lesson/@label"/>
+                            <xsl:text>_</xsl:text>
+                            <xsl:value-of select="//*[@label=$label]/../@label"/>
+                            <xsl:text>_</xsl:text>
+                            <xsl:value-of select="@targetLabel"/>
+                            <xsl:value-of select="$filename_suffix"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="/elml:lesson/@label"/>
+                            <xsl:text>_</xsl:text>
+                            <xsl:text>index</xsl:text>
+                            <xsl:value-of select="$filename_suffix"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:param name="linktype">
+            <xsl:choose>
+                <xsl:when test="starts-with($TempURL, 'http') or starts-with($TempURL, 'mailto:')">
+                    <xsl:text>external</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>internal</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:param>
+        <xsl:choose>
+            <xsl:when test="((boolean(name(preceding-sibling::node()[1])) or boolean(name(following-sibling::node()[1]))) and not(../text())) or (count(../*)=number('1') and (name(parent::node())='look' or name(parent::node())='act' or name(parent::node())='clarify'))">
+                <fo:table table-layout="fixed" width="100%" border-style="solid" border-width="0.5pt" border-color="white">
+                    <fo:table-column column-width="proportional-column-width(5)"/>
+                    <fo:table-column column-width="proportional-column-width(50)"/>
+                    <fo:table-column column-width="proportional-column-width(10)"/>
+                    <fo:table-column column-width="proportional-column-width(10)"/>
+                    <fo:table-column column-width="proportional-column-width(25)"/>
+                    <fo:table-body>
+                        <fo:table-row>
+                            <xsl:if test="@icon and not($layout='none')">
+                                <fo:table-cell padding="3pt" display-align="before" width="30px">
+                                    <fo:block>
+                                        <fo:external-graphic scaling="uniform" content-height="30px" content-width="30px" height="30px" width="30px">
+                                            <xsl:attribute name="src">
+                                                <xsl:value-of select="$pathRoot"/>
+                                                <xsl:text>/_templates/</xsl:text>
+                                                <xsl:value-of select="$layout"/>
+                                                <xsl:text>/icons/</xsl:text>
+                                                <xsl:value-of select="@icon"/>
+                                                <xsl:text>.</xsl:text>
+                                                <xsl:value-of select="$icon_filetype"/>
+                                            </xsl:attribute>
+                                        </fo:external-graphic>
+                                    </fo:block>
+                                </fo:table-cell>
+                            </xsl:if>
+                            <fo:table-cell padding="3pt" display-align="before">
+                                <xsl:if test="not(@icon) or $layout='none'">
+                                    <xsl:attribute name="number-columns-spanned">2</xsl:attribute>
+                                </xsl:if>
+                                <fo:block>
+                                    <xsl:choose>
+                                        <xsl:when test="not((@role='student') or (@role=$role) or (not (@role)))">
+                                            <xsl:apply-templates/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <fo:basic-link>
+                                                <xsl:choose>
+                                                    <xsl:when test="$linktype='external'">
+                                                        <xsl:attribute name="external-destination">
+                                                            <xsl:value-of select="$TempURL"/>
+                                                        </xsl:attribute>
+                                                        <xsl:attribute name="color">
+                                                            <xsl:value-of select="$external_link_color"/>
+                                                        </xsl:attribute>
+                                                        <xsl:attribute name="font-weight">
+                                                            <xsl:value-of select="$external_link_weight"/>
+                                                        </xsl:attribute>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <xsl:attribute name="internal-destination">
+                                                            <xsl:value-of select="$TempURL"/>
+                                                        </xsl:attribute>
+                                                        <xsl:attribute name="color">
+                                                            <xsl:value-of select="$internal_link_color"/>
+                                                        </xsl:attribute>
+                                                        <xsl:attribute name="font-weight">
+                                                            <xsl:value-of select="$internal_link_weight"/>
+                                                        </xsl:attribute>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                                <xsl:apply-templates/>
+                                            </fo:basic-link>
+                                            <xsl:if test="$display_links='yes'">
+                                                <fo:block font-size="0.8em">
+                                                    <xsl:text> [</xsl:text>
+                                                    <xsl:choose>
+                                                        <xsl:when test="$linktype='external'">
+                                                            <xsl:value-of select="$TempURL"/>
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:value-of select="$name_internalLink"/>
+                                                            <xsl:text> </xsl:text>
+                                                            <xsl:choose>
+                                                                <xsl:when test="@targetLesson">
+                                                                    <xsl:value-of select="$name_lesson"/>
+                                                                    <xsl:text> </xsl:text>
+                                                                    <xsl:value-of select="$TempURL"/>
+                                                                </xsl:when>
+                                                                <xsl:when test="@targetLabel">
+                                                                    <xsl:value-of select="$name_page"/>
+                                                                    <xsl:text> </xsl:text>
+                                                                    <fo:page-number-citation>
+                                                                        <xsl:attribute name="ref-id">
+                                                                            <xsl:value-of select="$TempURL"/>
+                                                                        </xsl:attribute>
+                                                                    </fo:page-number-citation>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <xsl:text> URI </xsl:text>
+                                                                    <xsl:value-of select="@uri"/>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
+                                                    <xsl:text>] </xsl:text>
+                                                </fo:block>
+                                            </xsl:if>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell padding="3pt" display-align="before" text-align="end">
+                                <fo:block>
+                                    <xsl:if test="@size">
+                                        <xsl:value-of select="@size"/>
+                                    </xsl:if>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell padding="3pt" display-align="before">
+                                <fo:block>
+                                    <xsl:if test="@type">
+                                        <xsl:value-of select="@type"/>
+                                    </xsl:if>
+                                </fo:block>
+                            </fo:table-cell>
+                            <fo:table-cell padding="3pt" display-align="before">
+                                <fo:block>
+                                    <xsl:if test="@legend">
+                                        <xsl:value-of select="@legend"/>
+                                    </xsl:if>
+                                </fo:block>
+                            </fo:table-cell>
+                        </fo:table-row>
+                    </fo:table-body>
+                </fo:table>
+            </xsl:when>
+            <xsl:when test="not((@role='student') or (@role=$role) or (not (@role)))">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="empty(text()) and empty(node())">
+                        <fo:basic-link color="blue">
+                            <xsl:choose>
+                                <xsl:when test="$linktype='external'">
+                                    <xsl:attribute name="external-destination">
+                                        <xsl:value-of select="$TempURL"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$external_link_color"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="font-weight">
+                                        <xsl:value-of select="$external_link_weight"/>
+                                    </xsl:attribute>
+                                    <xsl:text>ERROR: Please define link text!</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="internal-destination">
+                                        <xsl:value-of select="$TempURL"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$internal_link_color"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="font-weight">
+                                        <xsl:value-of select="$internal_link_weight"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="//*[@label=$label]/@title"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </fo:basic-link>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:basic-link>
+                            <xsl:choose>
+                                <xsl:when test="$linktype='external'">
+                                    <xsl:attribute name="external-destination">
+                                        <xsl:value-of select="$TempURL"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$external_link_color"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="font-weight">
+                                        <xsl:value-of select="$external_link_weight"/>
+                                    </xsl:attribute>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="internal-destination">
+                                        <xsl:value-of select="$TempURL"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="color">
+                                        <xsl:value-of select="$internal_link_color"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="font-weight">
+                                        <xsl:value-of select="$internal_link_weight"/>
+                                    </xsl:attribute>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:apply-templates/>
+                        </fo:basic-link>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="$display_links='yes'">
+                    <fo:inline font-size="0.8em">
+                        <xsl:text> [</xsl:text>
+                        <xsl:choose>
+                            <xsl:when test="$linktype='external'">
+                                <xsl:value-of select="$TempURL"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when test="@targetLesson and not(@targetLesson = /elml:lesson/@label)">
+                                        <xsl:value-of select="$name_internalLink"/>
+                                        <xsl:text> </xsl:text>
+                                        <xsl:value-of select="$name_lesson"/>
+                                        <xsl:text> </xsl:text>
+                                        <xsl:value-of select="$TempURL"/>
+                                    </xsl:when>
+                                    <xsl:when test="@targetLabel">
+                                        <xsl:value-of select="$name_page"/>
+                                        <xsl:text> </xsl:text>
+                                        <fo:page-number-citation>
+                                            <xsl:attribute name="ref-id">
+                                                <xsl:value-of select="$TempURL"/>
+                                            </xsl:attribute>
+                                        </fo:page-number-citation>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$name_internalLink"/>
+                                        <xsl:text> URI </xsl:text>
+                                        <xsl:value-of select="@uri"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:if test="@size or @type or @legend">
+                            <xsl:text> </xsl:text>
+                            <xsl:if test="@legend">
+                                <xsl:value-of select="@legend"/>
+                                <xsl:text>. </xsl:text>
+                            </xsl:if>
+                            <xsl:if test="@size">
+                                <xsl:value-of select="$name_size"/>
+                                <xsl:text>: </xsl:text>
+                                <xsl:value-of select="@size"/>
+                                <xsl:text>. </xsl:text>
+                            </xsl:if>
+                            <xsl:if test="@type">
+                                <xsl:value-of select="$name_type"/>
+                                <xsl:text>: </xsl:text>
+                                <xsl:value-of select="@type"/>
+                                <xsl:text>. </xsl:text>
+                            </xsl:if>
+                        </xsl:if>
+                        <xsl:text>] </xsl:text>
+                    </fo:inline>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:selfCheck">
+        <xsl:call-template name="elml:Title"/>
+        <fo:table table-layout="fixed" width="100%" space-after="1em">
+            <xsl:call-template name="elml:Label"/>
+            <fo:table-column column-width="proportional-column-width(1)"/>
+            <fo:table-column column-width="proportional-column-width(20)"/>
+            <fo:table-body>
+                <xsl:apply-templates/>
+                <!-- Shuffle not implemented yet -->
+            </fo:table-body>
+        </fo:table>
+    </xsl:template>
+    <xsl:template match="elml:multipleChoice">
+        <xsl:apply-templates select="elml:question|elml:answer"/>
+        <xsl:apply-templates select="elml:solution"/>
+    </xsl:template>
+    <xsl:template match="elml:fillInBlanks">
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="elml:question">
+        <fo:table-row keep-together.within-column="always">
+            <fo:table-cell number-columns-spanned="2">
+                <fo:block font-weight="bold" font-style="italic">
+                    <xsl:apply-templates/>
+                </fo:block>
+            </fo:table-cell>
+        </fo:table-row>
+    </xsl:template>
+    <xsl:template match="elml:answer">
+        <fo:table-row>
+            <fo:table-cell>
+                <fo:block>
+                    <xsl:choose>
+                        <xsl:when test="($role='tutor') and (@correct='yes')">
+                            <fo:character character="&#10003;" font-family="ZapfDingbats"/>
+                        </xsl:when>
+                        <xsl:when test="$role='tutor'">
+                            <fo:character character="&#10007;" font-family="ZapfDingbats"/>
+                        </xsl:when>
+                        <xsl:when test="count(../elml:answer[@correct='yes'])=1">
+                            <fo:character character="&#10061;" font-family="ZapfDingbats"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <fo:character character="&#10063;" font-family="ZapfDingbats"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fo:block>
+            </fo:table-cell>
+            <fo:table-cell>
+                <fo:block>
+                    <xsl:apply-templates/>
+                    <xsl:if test="@feedback!='' and $role='tutor'">
+                        <xsl:text> </xsl:text>
+                        <fo:character character="&#10142;" font-family="ZapfDingbats"/>
+                        <xsl:value-of select="$name_hint"/>
+                        <xsl:text>: </xsl:text>
+                        <xsl:value-of select="@feedback"/>
+                    </xsl:if>
+                </fo:block>
+            </fo:table-cell>
+        </fo:table-row>
+    </xsl:template>
+    <xsl:template match="elml:gapText">
+        <fo:table-row>
+            <fo:table-cell number-columns-spanned="2">
+                <fo:block>
+                    <xsl:apply-templates/>
+                </fo:block>
+            </fo:table-cell>
+        </fo:table-row>
+    </xsl:template>
+    <xsl:template match="elml:gap">
+        <xsl:choose>
+            <xsl:when test="$role='tutor'">
+                <fo:inline font-style="italic">
+                    <xsl:apply-templates/>
+                </fo:inline>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text> ___________ </xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:solution">
+        <xsl:if test="$role='tutor'">
+            <fo:table-row keep-together.within-column="always">
+                <fo:table-cell number-columns-spanned="2">
+                    <fo:block>
+                        <fo:character character="&#9758;" font-family="ZapfDingbats"/>
+                        <xsl:apply-templates/>
+                    </fo:block>
+                </fo:table-cell>
+            </fo:table-row>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:multimedia" mode="icon">
+        <xsl:choose>
+            <xsl:when test="(@type='gif') or (@type='jpeg') or (@type='png') or @thumbnail">
+                <xsl:choose>
+                    <xsl:when test="((boolean(name(preceding-sibling::node()[1])) or boolean(name(following-sibling::node()[1]))) and not(../text())) or (count(../*)=number('1') and (name(parent::node())='look' or name(parent::node())='act' or name(parent::node())='clarify'))">
+                        <fo:block>
+                            <xsl:call-template name="elml:Alignment"/>
+                            <fo:external-graphic scaling="uniform">
+                                <xsl:call-template name="elml:Label"/>
+                                <xsl:if test="not(@type='svg')">
+                                    <xsl:call-template name="elml:WidthHeight"/>
+                                </xsl:if>
+                                <xsl:call-template name="elml:Alignment"/>
+                                <xsl:attribute name="src">
+                                    <xsl:value-of select="$pathRoot"/>
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:value-of select="/elml:lesson/@label"/>
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:value-of select="$lang"/>
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:choose>
+                                        <xsl:when test="not(@thumbnail)">
+                                            <xsl:value-of select="substring-after(@src, '../')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="substring-after(@thumbnail, '../')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                            </fo:external-graphic>
+                            <xsl:call-template name="elml:Legend"/>
+                        </fo:block>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <fo:inline>
+                            <xsl:call-template name="elml:Alignment"/>
+                            <fo:external-graphic scaling="uniform">
+                                <xsl:call-template name="elml:Label"/>
+                                <xsl:if test="not(@type='svg') and (@width or @height)">
+                                    <xsl:call-template name="elml:WidthHeight"/>
+                                </xsl:if>
+                                <xsl:call-template name="elml:Alignment"/>
+                                <xsl:attribute name="src">
+                                    <xsl:value-of select="$pathRoot"/>
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:value-of select="/elml:lesson/@label"/>
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:value-of select="$lang"/>
+                                    <xsl:text>/</xsl:text>
+                                    <xsl:choose>
+                                        <xsl:when test="not(@thumbnail)">
+                                            <xsl:value-of select="substring-after(@src, '../')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="substring-after(@thumbnail, '../')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                            </fo:external-graphic>
+                            <xsl:call-template name="elml:Legend"/>
+                        </fo:inline>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="(@type='mathml' or @type='svg') and @src">
+                <fo:instream-foreign-object>
+                    <xsl:choose>
+                        <xsl:when test="starts-with(@src, 'http')">
+                            <xsl:copy-of select="document(@src)/*"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:copy-of select="document(concat($pathRoot,'/',/elml:lesson/@label,'/',$lang,'/text/',@src))/*"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fo:instream-foreign-object>
+            </xsl:when>
+            <xsl:when test="@type='mathml' or @type='svg'">
+                <fo:instream-foreign-object>
+                    <xsl:copy-of select="child::*"/>
+                </fo:instream-foreign-object>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:block border-width="0pt" padding="10pt">
+                    <fo:block border-style="solid" border-color="red" border-width="0.5pt" background-color="lightgrey" width="100%" margin="5pt" padding="10pt" color="red" font-weight="bold" end-indent="inherited-property-value('end-indent') + 15pt" start-indent="inherited-property-value('start-indent') + 15pt">
+                        <xsl:call-template name="elml:Label"/>
+                        <xsl:value-of select="$name_notanimage"/>
+                        <fo:basic-link>
+                            <xsl:attribute name="external-destination">
+                                <xsl:value-of select="$server"/>
+                                <xsl:text>/</xsl:text>
+                                <xsl:value-of select="/elml:lesson/@label"/>
+                                <xsl:text>/</xsl:text>
+                                <xsl:value-of select="$lang"/>
+                                <xsl:text>/</xsl:text>
+                                <xsl:value-of select="substring-after(@src, '../')"/>
+                            </xsl:attribute>
+                            <xsl:text> [link]</xsl:text>
+                        </fo:basic-link>
+                    </fo:block>
+                </fo:block>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:citation" mode="icon">
+        <xsl:choose>
+            <xsl:when test="not(node())">
+                <xsl:call-template name="elml:BibliographyRef"/>
+            </xsl:when>
+            <xsl:when test="((boolean(name(preceding-sibling::node()[1])) or boolean(name(following-sibling::node()[1]))) and not(../text())) or (count(../*)=number('1') and     (name(parent::node())='look' or name(parent::node())='act' or name(parent::node())='clarify'))">
+                <fo:block>
+                    <xsl:call-template name="elml:Label"/>
+                    <xsl:choose>
+                        <xsl:when test="@yearOnly='yes'">
+                            <xsl:call-template name="elml:BibliographyRef"/>
+                            <xsl:text> "</xsl:text>
+                            <fo:inline font-style="italic">
+                                <xsl:apply-templates mode="#default"/>
+                            </fo:inline>
+                            <xsl:text>"</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>"</xsl:text>
+                            <fo:inline font-style="italic">
+                                <xsl:apply-templates mode="#default"/>
+                            </fo:inline>
+                            <xsl:text>"</xsl:text>
+                            <xsl:call-template name="elml:BibliographyRef"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fo:block>
+            </xsl:when>
+            <xsl:otherwise>
+                <fo:inline>
+                    <xsl:call-template name="elml:Label"/>
+                    <xsl:choose>
+                        <xsl:when test="@yearOnly='yes'">
+                            <xsl:call-template name="elml:BibliographyRef"/>
+                            <xsl:text> "</xsl:text>
+                            <fo:inline font-style="italic">
+                                <xsl:apply-templates mode="#default"/>
+                            </fo:inline>
+                            <xsl:text>"</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>"</xsl:text>
+                            <fo:inline font-style="italic">
+                                <xsl:apply-templates mode="#default"/>
+                            </fo:inline>
+                            <xsl:text>"</xsl:text>
+                            <xsl:call-template name="elml:BibliographyRef"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fo:inline>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:indexItem">
+        <fo:inline>
+            <xsl:attribute name="id">
+                <xsl:value-of select="generate-id()"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </fo:inline>
+    </xsl:template>
+    <!-- ***** General Functions used in various templates *****-->
+    <xsl:template name="elml:display">
+        <xsl:choose>
+            <xsl:when test="((@role='student') or (@role=$role) or (not (@role))) and not(@visible='online') and not(@visible='none')">
+                <xsl:text>yes</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>no</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="elml:WidthHeight">
+        <xsl:choose>
+            <xsl:when test="name()='multimedia'">
+                <xsl:choose>
+                    <xsl:when test="@width">
+                        <xsl:attribute name="content-width">
+                            <xsl:choose>
+                                <xsl:when test="@units='percent'">
+                                    <xsl:value-of select="@width"/>
+                                    <xsl:text>%</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="(@width) * $converter_pixel_mm"/>
+                                    <xsl:text>mm</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <xsl:attribute name="width">
+                            <xsl:choose>
+                                <xsl:when test="@units='percent'">
+                                    <xsl:value-of select="@width"/>
+                                    <xsl:text>%</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="(@width) * $converter_pixel_mm"/>
+                                    <xsl:text>mm</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="content-width">
+                            <xsl:text>scale-to-fit</xsl:text>
+                        </xsl:attribute>
+                        <xsl:attribute name="width">
+                            <xsl:text>100%</xsl:text>
+                        </xsl:attribute>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@height">
+                        <xsl:attribute name="content-height">
+                            <xsl:choose>
+                                <xsl:when test="@units='percent'">
+                                    <xsl:value-of select="@height"/>
+                                    <xsl:text>%</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="(@height) * $converter_pixel_mm"/>
+                                    <xsl:text>mm</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                        <xsl:attribute name="height">
+                            <xsl:choose>
+                                <xsl:when test="@units='percent'">
+                                    <xsl:value-of select="@height"/>
+                                    <xsl:text>%</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="(@height) * $converter_pixel_mm"/>
+                                    <xsl:text>mm</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="content-height">
+                            <xsl:text>100%</xsl:text>
+                        </xsl:attribute>
+                        <xsl:attribute name="height">
+                            <xsl:text>100%</xsl:text>
+                        </xsl:attribute>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="@width">
+                    <xsl:attribute name="width">
+                        <xsl:choose>
+                            <xsl:when test="@units='percent'">
+                                <xsl:value-of select="@width"/>
+                                <xsl:text>%</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="(@width) * $converter_pixel_mm"/>
+                                <xsl:text>mm</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="@height">
+                    <xsl:attribute name="height">
+                        <xsl:choose>
+                            <xsl:when test="@units='percent'">
+                                <xsl:value-of select="@height"/>
+                                <xsl:text>%</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="(@height) * $converter_pixel_mm"/>
+                                <xsl:text>mm</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="elml:Alignment">
+        <xsl:param name="istd"/>
+        <xsl:if test="@align">
+            <xsl:choose>
+                <xsl:when test="@align='center'">
+                    <xsl:attribute name="text-align">center</xsl:attribute>
+                    <xsl:attribute name="display-align">center</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@align='left'">
+                    <xsl:attribute name="text-align">start</xsl:attribute>
+                    <xsl:attribute name="display-align">before</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@align='right'">
+                    <xsl:attribute name="text-align">end</xsl:attribute>
+                    <xsl:attribute name="display-align">before</xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="text-align">justify</xsl:attribute>
+                    <xsl:attribute name="display-align">before</xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+        <xsl:if test="@valign">
+            <xsl:attribute name="vertical-align" select="@valign"/>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="elml:Label_param">
+        <xsl:param name="Label_param_temp">
+            <xsl:choose>
+                <xsl:when test="name(.)='selfCheck'">
+                    <xsl:choose>
+                        <xsl:when test="@label">
+                            <xsl:value-of select="@label"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="name(.)"/>
+                            <xsl:value-of select="position()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:when test="name(.)='unit'">
+                    <xsl:text>unit_</xsl:text>
+                    <xsl:value-of select="@label"/>
+                </xsl:when>
+                <xsl:when test="name(.)='lesson'">
+                    <xsl:text>index</xsl:text>
+                </xsl:when>
+                <xsl:when test="@label">
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:value-of select="@label"/>
+                </xsl:when>
+                <xsl:when test="name()='glossary'">
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:text>glossary</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='listOfFigures'">
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:text>listoffigures</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='listOfTables'">
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:text>listoftables</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='index'">
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:text>index</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='bibliography'">
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:text>bibliography</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='metadata'">
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:text>metadata</xsl:text>
+                </xsl:when>
+                <xsl:when test="name()='clarify' or name()='look' or name()='act' or name()='multimedia' or name()='table'">
+                    <xsl:value-of select="generate-id()"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="../@label"/>
+                    <xsl:text>_</xsl:text>
+                    <xsl:value-of select="name(.)"/>
+                    <xsl:if test="name(.)='learningObject' or name(.)='selfAssessment'">
+                        <xsl:number level="single" count="elml:selfAssessment | elml:learningObject"/>
+                    </xsl:if>
+                    <xsl:if test="name(.)='entry' and (preceding-sibling::node()[1]/name()='entry' or preceding-sibling::node()[2]/name()='entry')">
+                        <xsl:number level="single" count="elml:entry"/>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:value-of select="$filename_suffix"/>
+        </xsl:param>
+        <xsl:value-of select="string(concat(/elml:lesson/@label,'_',$Label_param_temp[1],$Label_param_temp[2],$Label_param_temp[3],$Label_param_temp[4],$Label_param_temp[5],$Label_param_temp[6],$Label_param_temp[7],$Label_param_temp[8]))"/>
+    </xsl:template>
+    <xsl:template name="elml:Label">
+        <xsl:if test="(@label or name(.)='entry' or name(.)='goals' or name(.)='summary' or name(.)='furtherReading' or name(.)='learningObject' or name(.)='selfAssessment' or name(.)='bibliography' or name(.)='glossary' or name(.)='listOfFigures' or name(.)='listOfTables' or name(.)='index' or name(.)='metadata' or name(.)='clarify' or name(.)='look' or name(.)='act' or name(.)='table' or name(.)='multimedia') and not(ancestor::node()/name()='glossary')">
+            <xsl:attribute name="id">
+                <xsl:call-template name="elml:Label_param"/>
+            </xsl:attribute>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="elml:Kapitel">
+        <xsl:param name="isnavigation"/>
+        <xsl:call-template name="elml:Kapitel_Number">
+            <xsl:with-param name="isnavigation" select="$isnavigation"/>
+        </xsl:call-template>
+        <xsl:call-template name="elml:Kapitel_Title">
+            <xsl:with-param name="isnavigation" select="$isnavigation"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template name="elml:Kapitel_Number">
+        <xsl:param name="isnavigation"/>
+        <xsl:param name="actual_lesson">
+            <xsl:value-of select="/elml:lesson/@label"/>
+        </xsl:param>
+        <xsl:if test="not($isnavigation='path_full') and ($chapter_numeration='yes') and (not(name(.)='goals')) and (not(name(.)='clarify')) and (not(name(.)='look')) and (not(name(.)='act')) and not(name(.)='entry')">
+            <xsl:choose>
+                <xsl:when test="$multiple='on'">
+                    <xsl:for-each select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/elml:labelname">
+                        <xsl:if test="text()=$actual_lesson">
+                            <xsl:value-of select="position()"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                    <xsl:text>.</xsl:text>
+                    <xsl:number level="multiple" count="elml:unit[(@role eq 'student') or (@role eq $role) or (not (@role))] | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary[not(@visible eq 'online') and not(@visible eq 'none')] | elml:listOfFigures[not(@visible eq 'online') and not(@visible eq 'none')] | elml:listOfTables[not(@visible eq 'online') and not(@visible eq 'none')] | elml:index[not(@visible eq 'online') and not(@visible eq 'none')] | elml:bibliography[not(@visible eq 'online') and not(@visible eq 'none')] | elml:metadata[not(@visible eq 'online') and not(@visible eq 'none')] | elml:learningObject"/>
+                    <xsl:if test="name()='entry'">
+                        <xsl:text>.0</xsl:text>
+                    </xsl:if>
+                    <xsl:text> </xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:number level="multiple" count="elml:lesson | elml:unit[(@role eq 'student') or (@role eq $role) or (not (@role))] | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary[not(@visible eq 'online') and not(@visible eq 'none')] | elml:listOfFigures[not(@visible eq 'online') and not(@visible eq 'none')] | elml:listOfTables[not(@visible eq 'online') and not(@visible eq 'none')] | elml:index[not(@visible eq 'online') and not(@visible eq 'none')] | elml:bibliography[not(@visible eq 'online') and not(@visible eq 'none')] | elml:metadata[not(@visible eq 'online') and not(@visible eq 'none')] | elml:learningObject"/>
+                    <xsl:if test="name()='entry'">
+                        <xsl:text>.0</xsl:text>
+                    </xsl:if>
+                    <xsl:text>. </xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="elml:Kapitel_Title">
+        <xsl:param name="isnavigation"/>
+        <xsl:choose>
+            <xsl:when test="(($isnavigation='yes') or ($isnavigation='path_full')) and (@navTitle)">
+                <xsl:value-of select="@navTitle"/>
+            </xsl:when>
+            <xsl:when test="name()='entry' and $isnavigation='yes'">
+                <xsl:value-of select="$name_entry"/>
+            </xsl:when>
+            <xsl:when test="@title">
+                <xsl:value-of select="@title"/>
+            </xsl:when>
+            <xsl:when test="name()='glossary'">
+                <xsl:value-of select="$name_glossary"/>
+            </xsl:when>
+            <xsl:when test="name()='listOfFigures'">
+                <xsl:value-of select="$name_figures"/>
+            </xsl:when>
+            <xsl:when test="name()='listOfTables'">
+                <xsl:value-of select="$name_tables"/>
+            </xsl:when>
+            <xsl:when test="name()='index'">
+                <xsl:value-of select="$name_index"/>
+            </xsl:when>
+            <xsl:when test="name()='entry'">
+                <xsl:value-of select="$name_entry"/>
+            </xsl:when>
+            <xsl:when test="name()='goals'">
+                <xsl:value-of select="$name_lObjectives"/>
+            </xsl:when>
+            <xsl:when test="name()='summary'">
+                <xsl:value-of select="$name_summary"/>
+            </xsl:when>
+            <xsl:when test="name()='selfAssessment'">
+                <xsl:value-of select="$name_selfAssessment"/>
+            </xsl:when>
+            <xsl:when test="name()='bibliography'">
+                <xsl:value-of select="$name_bibliography"/>
+            </xsl:when>
+            <xsl:when test="name()='furtherReading'">
+                <xsl:value-of select="$name_furtherReading"/>
+            </xsl:when>
+            <xsl:when test="name()='metadata' and $isnavigation='yes'">
+                <xsl:value-of select="$name_metadata"/>
+            </xsl:when>
+            <xsl:when test="name()='metadata'">
+                <xsl:value-of select="$name_metadata"/>
+                <xsl:text> "</xsl:text>
+                <xsl:value-of select="/elml:lesson/@title"/>
+                <xsl:text>"</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>An ERROR occurred, please contact the webmaster! </xsl:text>
+                <xsl:value-of select="$contact"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="elml:Title">
+        <xsl:if test="@title">
+            <fo:block font-size="{$fontsize}" line-height="{$lineheight}" font-weight="{$fontweighttitle}" space-before="{$lineheight}" keep-with-next.within-page="always">
+                <xsl:value-of select="@title"/>
+            </fo:block>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="elml:Legend">
+        <xsl:if test="@legend or @bibIDRef">
+            <fo:block font-size="{$fontsize}*0.8" line-height="{$lineheight}" space-after="{$lineheight}" keep-with-previous.within-page="always">
+                <fo:inline font-style="italic">
+                    <xsl:value-of select="@legend"/>
+                </fo:inline>
+                <xsl:call-template name="elml:BibliographyRef"/>
+            </fo:block>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="elml:Legend_listof">
+        <xsl:choose>
+            <xsl:when test="@title and @legend">
+                <xsl:value-of select="@title"/>
+                <xsl:text>: </xsl:text>
+                <xsl:value-of select="@legend"/>
+            </xsl:when>
+            <xsl:when test="@legend">
+                <xsl:value-of select="@legend"/>
+            </xsl:when>
+            <xsl:when test="@title">
+                <xsl:value-of select="@title"/>
+            </xsl:when>
+            <xsl:when test="@src">
+                <xsl:value-of select="tokenize(@src,'/')[last()]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$name_nolegend"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <!-- ***** Navigation with Links *****-->
+    <xsl:template name="elml:navigation">
+        <xsl:choose>
+            <xsl:when test="$multiple='on'">
+                <xsl:for-each select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/elml:labelname">
+                    <xsl:apply-templates select="document(concat(substring-before($config_file,'_config'),text(),'/',$lang,'/text/',text(),'.xml'))/elml:lesson" mode="navigation"/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="/elml:lesson" mode="navigation"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:lesson | elml:unit | elml:learningObject | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary | elml:index | elml:bibliography | elml:listOfFigures | elml:listOfTables" mode="navigation">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <xsl:call-template name="elml:nav_item"/>
+            <xsl:apply-templates select="elml:unit | elml:learningObject | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary | elml:index | elml:bibliography | elml:listOfFigures | elml:listOfTables" mode="navigation"/>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template name="elml:nav_item">
+        <xsl:variable name="ancestors">
+            <xsl:value-of select="number(count(ancestor-or-self::*))"/>
+        </xsl:variable>
+        <xsl:variable name="id_nav">
+            <xsl:call-template name="elml:Label_param"/>
+        </xsl:variable>
+        <fo:block text-align-last="justify" margin-left="{$ancestors}em">
+            <fo:basic-link color="black" internal-destination="{$id_nav}">
+                <xsl:call-template name="elml:Kapitel"/>
+                <xsl:if test="(name()='unit') and contains($optional_units, @label)">
+                    <xsl:value-of select="$name_optionalunits_symbol"/>
+                </xsl:if>
+            </fo:basic-link>
+            <fo:leader leader-pattern="dots"/>
+            <fo:page-number-citation ref-id="{$id_nav}"/>
+        </fo:block>
+    </xsl:template>
+    <!-- ***** Navigation PDF *****-->
+    <xsl:template name="elml:navigation_pdf">
+        <xsl:choose>
+            <xsl:when test="$multiple='on'">
+                <xsl:for-each select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/elml:labelname">
+                    <xsl:apply-templates select="document(concat(substring-before($config_file,'_config'),text(),'/',$lang,'/text/',text(),'.xml'))/elml:lesson" mode="navigation_pdf"/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="/elml:lesson/*" mode="navigation_pdf"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:lesson | elml:unit | elml:learningObject | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary | elml:index | elml:bibliography | elml:listOfFigures | elml:listOfTables" mode="navigation_pdf">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <fo:bookmark>
+                <xsl:attribute name="internal-destination">
+                    <xsl:call-template name="elml:Label_param"/>
+                </xsl:attribute>
+                <fo:bookmark-title>
+                    <xsl:call-template name="elml:Kapitel">
+                        <xsl:with-param name="isnavigation">yes</xsl:with-param>
+                    </xsl:call-template>
+                    <xsl:if test="(name()='unit') and contains($optional_units, @label)">
+                        <xsl:value-of select="$name_optionalunits_symbol"/>
+                    </xsl:if>
+                </fo:bookmark-title>
+                <xsl:apply-templates select="elml:unit | elml:learningObject | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary | elml:index | elml:bibliography | elml:listOfFigures | elml:listOfTables" mode="navigation_pdf"/>
+            </fo:bookmark>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:metadata | elml:goals | elml:entry" mode="navigation_pdf"/>
+    <!-- ***** Navigation PDF FOX *****-->
+    <xsl:template name="elml:navigation_pdf_fox">
+        <xsl:choose>
+            <xsl:when test="$multiple='on'">
+                <xsl:for-each select="document($config_file)/elml:config/elml:modules/elml:course[child::node()=$transformlesson_label]/elml:labelname">
+                    <xsl:apply-templates select="document(concat(substring-before($config_file,'_config'),text(),'/',$lang,'/text/',text(),'.xml'))/elml:lesson" mode="navigation_pdf_fox"/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="/elml:lesson/*" mode="navigation_pdf_fox"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="elml:lesson | elml:unit | elml:learningObject | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary | elml:index | elml:bibliography | elml:listOfFigures | elml:listOfTables" mode="navigation_pdf_fox">
+        <xsl:param name="display">
+            <xsl:call-template name="elml:display"/>
+        </xsl:param>
+        <xsl:if test="$display='yes'">
+            <fox:outline>
+                <xsl:attribute name="internal-destination">
+                    <xsl:call-template name="elml:Label_param"/>
+                </xsl:attribute>
+                <fox:label>
+                    <xsl:call-template name="elml:Kapitel">
+                        <xsl:with-param name="isnavigation">yes</xsl:with-param>
+                    </xsl:call-template>
+                    <xsl:if test="(name()='unit') and contains($optional_units, @label)">
+                        <xsl:value-of select="$name_optionalunits_symbol"/>
+                    </xsl:if>
+                </fox:label>
+                <xsl:apply-templates select="elml:unit | elml:learningObject | elml:selfAssessment | elml:summary | elml:furtherReading | elml:glossary | elml:index | elml:bibliography | elml:listOfFigures | elml:listOfTables" mode="navigation_pdf_fox"/>
+            </fox:outline>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="elml:metadata | elml:goals | elml:entry" mode="navigation_pdf_fox">
+        <!-- *****	<xsl:if test="(@role='student') or (@role=$role) or (not (@role))">
+            <fox:outline>
+            <xsl:attribute name="internal-destination">
+            <xsl:call-template name="elml:Label_param"/>
+            </xsl:attribute>
+            <fox:label>
+            <xsl:call-template name="elml:Kapitel">
+            <xsl:with-param name="isnavigation">yes</xsl:with-param>
+            </xsl:call-template>
+            <xsl:if test="(name()='unit') and contains($optional_units, @label)">
+            <xsl:value-of select="$name_optionalunits_symbol"/>
+            </xsl:if>
+            </fox:label>
+            </fox:outline>
+            </xsl:if> *****-->
+    </xsl:template>
+    <!-- ***** Templates used in the online but not the print version *****-->
+    <xsl:template name="elml:LayoutBodyContent"/>
+    <xsl:template name="elml:prev_file"/>
+    <xsl:template name="elml:next_file"/>
+    <xsl:template name="elml:footer"/>
+    <xsl:template name="elml:Label_param_withfilename"/>
+</xsl:stylesheet>

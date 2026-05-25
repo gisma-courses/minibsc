@@ -1,0 +1,518 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Topologische Abfragen. Typisierung topologischer Beziehungen. Topologische Beziehungen kompakt. Bearbeiten Sie... . " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Topologische Abfragen</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL2b_V_lo2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2b_V_lo4.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo10.html">Abfragen in Relationen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo1.html">Thematische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo2.html">Geometrische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Topologische Abfragen</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo4.html">Topologische Operatoren</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_W_check_VL.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2b_V_lo3.html">Topologische Abfragen</h1>
+               <div id="d14e2124.html" class="clarify">
+                  <p class="paragraph" id="d14e2125">Während geometrische Selektionskriterien Geoobjekte anhand ihrer Position
+                     und thematische Abfragen Elemente bezüglich ihrer Eigenschaften identifizieren,
+                     basieren die topologischen Suchkriterien auf der relativen Anordnung der
+                     Geoobjekte im Raum. Ein typisches Merkmal relativer Verortung ist der Vergleich
+                     mit anderen Geoobjekten z. B. wie „nächster“, „Teil von“ oder „innerhalb“. Die
+                     räumlichen <i>Lagebeziehungen</i> werden in
+                     GI-Systemen als Topologie bezeichnet. Topologische Beziehungen werden aus den
+                     geometrischen Primitiven aufgebaut: Punkte (einfachstes Element), Linien (Reihe
+                     von verbundenen Punkten), Flächen (Reihe von verbundenen Linien). Anhand dieser
+                     geordneten Struktur ist das GI-System in der Lage, die topologischen Beziehungen
+                     zu erkennen und entsprechende Analysen durchzuführen. 
+                  </p>
+                  <p class="paragraph" id="d14e2130"> Folglich beschäftigt sich die Topologie mit den räumlichen und
+                     strukturellen Eigenschaften der geometrischen Objekte <b>unabhängig</b> von ihrer <b>Ausdehnung</b> und ihrer geometrischen <b>Form</b>. Zu den topologischen Eigenschaften gehören die Anzahl der
+                     Dimensionen eines Objektes und die möglichen Beziehungen zwischen den
+                     Dimensionen. Die Topologie ermöglicht Analysefunktionen wie die Verfolgung einer
+                     Strömung entlang verbundenen Linien eines Netzwerkes, das Vereinigen
+                     benachbarter Flächen mit ähnlichen Eigenschaften etc.. 
+                  </p>
+                  <p class="paragraph" id="d14e2141">Es ist allerdings essentiell zwischen den zwei üblichen Datenformaten zu
+                     unterscheiden: Topologische Operationen auf Vektordaten sind völlig
+                     unterschiedlich zu topologischen Operationen auf Rasterdaten. Daher sind die
+                     Algorithmen, die für Vektordaten gültig sind, nicht ohne weiteres auf
+                     Rasterdaten anwendbar. In der Folge beschränken wir uns auf die topologischen
+                     Operationen bei Vektordaten. 
+                  </p>
+                  <h4>Typisierung topologischer Beziehungen</h4>
+                  <p class="paragraph" title="Typisierung topologischer Beziehungen" id="d14e2143"> Eine einfache Methode zur
+                     Typisierung topologischer Beziehungen wurde von <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3851">1993</a>)</span> vorgeschlagen. Sie wird als 9-Intersection Schema
+                     bezeichnet. Das Intersection-Schema ist ein elegantes Konzept zur Klassifikation
+                     von topologischen Konfigurationen. Die grundsätzliche Idee basiert auf dem
+                     Konzept, dass jedes Element aus einem Rand (<i>b</i>), einem Inneren (<i>i</i>) und
+                     einem Komplement (<i>e</i>) besteht. Die Konzepte
+                     von Innerem, Rand und Komplement (Äußerem) sind in der allgemeinen Topologie
+                     definiert. 
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2156" src="../image/i9schema.jpg" width="560"
+                          height="88"
+                          alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="paragraph" id="d14e2157"> Wenn die der äußeren Umgebung (Komplement) entsprechende Zeile und
+                     Spalte aus der Matrix weglassen wird, erhält man das 4-Intersection-Schema,
+                     welches häufig als vereinfachte Grundlage für die Untersuchung topologischer
+                     Beziehungen verwendet wird, aber nicht so mächtig wie das 9-Intersection-Schema
+                     ist.
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2159" src="../image/i4schema.jpg" width="415"
+                          height="65"
+                          alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span></div>
+               <div class="look">
+                  <h2 id="d14e2160.html">Topologische Beziehungen kompakt</h2>
+                  <p class="paragraph" id="d14e2161"> Versuchen Sie anhand der folgenden Tabelle das 9-I-Schema und das
+                     4-I-Schema <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3851">Egenhofer et al.</a> 1993)</span> für einige typische
+                     topologische Beziehungen zwischen zwei Flächen nachzuvollziehen. Die Beziehungen
+                     sind durch die Werte 0 oder 1 gegeben. Jedes Paar hat eine leere (0) oder eine
+                     belegte (1) Schnittmenge. 
+                  </p>
+                  <table class="table" id="d14e2165">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e2167"><b>Topologische Beziehungen </b></th>
+                           <th class="tableheading" id="d14e2170"><b>Graphische Darstellung</b></th>
+                           <th class="tableheading" id="d14e2173"><b>4-Intersection-Matrix</b></th>
+                           <th class="tableheading" id="d14e2176"><b>9-Intersection-Matrix</b></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2180"><b>Disjoint</b></td>
+                           <td class="tabledata" id="d14e2183"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2184" src="../image/disjoint.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2185"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2186" src="../image/disjoint_I4.jpg" width="120"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2187"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2188" src="../image/disjoint_I9.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2190"><b>Meet</b></td>
+                           <td class="tabledata" id="d14e2193"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2194" src="../image/meet.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2195"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2196" src="../image/meet_I4.jpg" width="120"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2197"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2198" src="../image/meet_I9.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2200"><b>Overlap</b></td>
+                           <td class="tabledata" id="d14e2203"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2204" src="../image/intersect.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2205"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2206" src="../image/overlap_I4.jpg" width="120"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2207"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2208" src="../image/overlap_I9.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2210"><b>Contains</b></td>
+                           <td class="tabledata" id="d14e2213"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2214" src="../image/contains.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2215"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2216" src="../image/contains_I4.jpg" width="120"
+                                      height="150"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2217"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2218" src="../image/contains_I9.jpg" width="150"
+                                      height="150"
+                                      alt="" /></span></td>
+                        </tr>
+                     </tbody>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></div>
+               <div id="d14e2219.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e2220">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><h4></h4>
+                     <p class="paragraph" title="" id="d14e2221"><br />Betrachten Sie die nachfolgende Abbildung und versuchen Sie die
+                        korrekte 4- bzw. 9-Intersection-Matrix zuzuordnen. Können Sie ein Problem
+                        artikulieren?
+                     </p>
+                     <table class="table" id="d14e2224">
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2226"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2227" src="../image/overlap1.jpg" width="130" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2228"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2229" src="../image/overlap2.jpg" width="130" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2230"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2231" src="../image/overlap3.jpg" width="130" alt="" /></span></td>
+                        </tr>
+                     </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><p id="d14e2232" class="popupTitle" style="cursor: pointer;"
+                        onclick="onBlock('solutiond14e2232')">Klicken Sie hier für mehr Informationen</p>
+                     <div id="solutiond14e2232text" style="display: none; cursor: pointer;" class="popup"
+                          onclick="off('solutiond14e2232')">
+                        <p class="paragraph" id="d14e2233">Die drei dargestellten Situationen entsprechen der folgenden
+                           Matrizen:
+                        </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2235" src="../image/overlap_I4.jpg" width="120"
+                                height="150"
+                                alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2236" src="../image/overlap_I9.jpg" width="150"
+                                height="150"
+                                alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span><p class="paragraph" id="d14e2237">Es ist nicht möglich, konzeptionell unterschiedliche Situationen
+                           voneinander zu trennen. 
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL2b_V_lo2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2b_V_lo4.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv=Content-Type content="text/html;  charset=ISO-8859-1">
+<TITLE>SQL-SelfAss2</TITLE>
+</HEAD>
+<BODY bgcolor="#999999">
+<!-- URL's used in the movie-->
+<!-- text used in the movie-->
+<!--099. 099AusgangslageIn dieser Übung lernen Sie die Anwendung von SQL-Befehlen. 
+Bei allen vier Aufgaben können mehrere Antworten richtig sein.
+Wählen Sie ihre Antwort(en) aus und drücken Sie auf "Check Answer", um zu sehen, ob Sie die richtige Lösung ausgewählt haben. 
+Für jede Aufgabe haben sie einen Versuch.
+WohungWohngemeinschaftBesuch099. 099Feedback PlatzhalterFrage Platzhalter3Wieviele Tupel sind im Ergebnis der folgenden Anfrage enthalten?4215SELECT
+FROM
+WHEREGast
+Besuch
+Datum = "4.9.1998"099. 099"Tanja" ist im Ergebnis enthaltenDie Anfrage ist fehlerhaft und führt zu keinem Ergebnis ("error")"Wolfgang" ist im Ergebnis enthaltenDas Ergebnis der Anfrage ist leer"Müller" ist im Ergebnis enthalten"Andreas" ist im Ergebnis enthalten"Nicole" ist im Ergebnis enthalten"Schulze ist im Ergebnis EnthaltenWelche Aussagen über die folgende Anfrage sind korrekt?Mieter
+Wohnung, Wohngemeinschaft
+Mieter = Hauptmieter
+Hauptmieter, Mieter, Wohnung.Miete
+SUM(Wohngemeinschaft.Miete) < Wohnung.MieteSELECT
+FROM
+WHERE
+GROUP BY
+HAVING099. 099Gast
+Besuch, Wohngemeinschaft
+(Gastgeber = "Nicole") OR
+(Gastgeber = Untermieter AND Hauptmieter = "Nicole")Gast
+Besuch, Wohngemeinschaft
+(Haupmieter = Gastgeber OR Untermieter = Gastgeber)
+AND Haupmieter ="Nicole"Gast
+Besuch
+Gastgeber INWelche der folgenden Anfragen fragt nach allen Gästen, die jemals eine der Personen besucht haben, die in der von Nicole als Hauptmieterin bewohnten Wohnung wohnen?(SELECT
+FROM
+WHEREUntermieter
+Wohngemeinschaft
+Haupmieter = "Nicole")Gast
+Besuch, Wohngemeinschaft
+Haupmieter = "Nicole" OR Gastgeber = "Nicole"099. 099Wohnung
+Miete = 1045
+Vermieter = "Schulze"Wohnung
+Miete = Miete * 0.95
+Vermieter = "Schulze"Miete
+Miete = Miete * 0.95
+Vermieter = "Schulze"Vermieter Schulze senkt alle Mieten für seine Wohnugen um 5% (das bedeutet nicht, dass seine Haupmieter diese Mietsenkung auch an ihre Untermieter weitergeben). Welches ist der richtige SQL-Befehl zur Aktualisierung der Datenbasis?UPDATE
+SET
+WHEREWohngemeinschaft
+Miete = Miete * 0.95
+Hauptmieter = "Andreas" OR Hauptmieter ="Nicole"--><OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+ codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+ WIDTH="650" HEIGHT="900" id="SQL-SelfAss2" ALIGN="">
+ <PARAM NAME=movie VALUE="SQL-SelfAss2.swf"> <PARAM NAME=quality VALUE=high> <PARAM NAME=bgcolor VALUE=#999999> <EMBED src="SQL-SelfAss2.swf" quality=high bgcolor=#999999  WIDTH="650" HEIGHT="900" NAME="SQL-SelfAss2" ALIGN=""
+ TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"></EMBED>
+</OBJECT>
+</BODY>
+</HTML>

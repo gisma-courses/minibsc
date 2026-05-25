@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This file contains some terms like default titles etc. used in eLML.
+    Some of these terms are only used when the "title" attribute is missing,
+    others are used only for the PDF version etc. 
+    
+    The structure of this file is based on the Google Gadgets API Developer Guide: 
+    http://www.google.com/apis/gadgets/i18n.html
+    
+    The possible fields you can include in a terms file are as follows:
+    - messagebundle: A group of messages for translation.
+    - msg: A single piece of translatable content (title, sentence etc.)
+    - name attribute: A human-readable ID for each term (the key of the term)
+      (Please note that there is a corresponding XSLT variable for each name.
+      So for the name attribute "name_entry" there is a variable $name_entry
+      that can be used within the XSLT code for the title of an entry element.)
+      
+    There is one terms xml file per language (and country - but this is not used 
+    in eLML at the moment). By convention these files are named as follows:
+    terms_<language>_<country>.xml
+    Since <country> is not used at the moment, just use "ALL". The default terms
+    file is the English (fallback if language is not available) and it is named:
+    terms_en_ALL.xml
+    
+-->
+<messagebundle>
+    <msg name="name_content">Inhaltsverzeichnis</msg>
+    <msg name="name_entry">Einführung</msg>
+    <msg name="name_lObjectives">Lernziele</msg>
+    <msg name="name_glossary">Glossar</msg>
+    <msg name="name_glossary_empty"> ist noch leer.</msg>
+    <msg name="name_keywords">Schlüsselwörter</msg>
+    <msg name="name_summary">Zusammenfassung</msg>
+    <msg name="name_selfAssessment">Übung</msg>
+    <msg name="name_furtherReading">Literaturempfehlungen</msg>
+    <msg name="name_bibliography">Bibliographie</msg>
+    <msg name="name_metaSetUpInfo">Installationshinweise (Tutoren): </msg>
+    <msg name="name_metadata">Metadaten</msg>
+    <msg name="name_solution">Lösung</msg>
+    <msg name="name_solutiontext">Klicken Sie hier für mehr Informationen</msg>
+    <msg name="name_anon">Anonym</msg>
+    <msg name="name_size">Grösse</msg>
+    <msg name="name_type">Typ</msg>
+    <msg name="name_internalLink">Link zur</msg>
+    <msg name="name_lesson">Lektion</msg>
+    <msg name="name_page">Seite</msg>
+    <msg name="name_page_of">von</msg>
+    <msg name="name_hint">Hinweis</msg>
+    <msg name="name_nolegend">Legende fehlt</msg>
+    <msg name="name_notanimage">Dieses Element (Animation, Video etc.) kann nicht dargestellt werden und ist nur in der Onlineversion sichtbar.</msg>
+    <msg name="name_download">Herunterladen</msg>
+    <msg name="name_annotation">Anmerkung</msg>
+    <msg name="name_selfCheckCorrect">Prüfen</msg>
+    <msg name="name_selfCheckSolve">Lösung</msg>
+    <msg name="name_selfCheckMissing">Sie haben noch nicht alle richtigen Antworten angekreuzt!</msg>
+    <msg name="name_optionalunits_symbol"> *</msg>
+    <msg name="name_optionalunits_text">Diese Unit wurde als fakultativ markiert.</msg>
+    <msg name="name_index">Stichwortverzeichnis</msg>
+    <msg name="name_appendix">Anhang</msg>
+    <msg name="name_figures">Abbildungsverzeichnis</msg>
+    <msg name="name_tables">Tabellenverzeichnis</msg>
+    <msg name="name_bugtracker">Fehler gefunden?</msg>
+    <msg name="name_contact">Kontakt</msg>
+    <msg name="name_print">Drucken</msg>
+    <msg name="name_printed">Stand vom: </msg>
+    <msg name="name_responsible">Verantwortliche Personen:</msg>
+    <msg name="name_tutoronly">Diese Unit ist nur für Tutoren und nicht für Studierende sichtbar.</msg>
+    <msg name="name_biblio_book">Monographien (Bücher)</msg>
+    <msg name="name_biblio_contributionInBook">Beiträge aus Sammelbänden</msg>
+    <msg name="name_biblio_journalArticle">Beiträge aus Zeitschriften</msg>
+    <msg name="name_biblio_newspaperArticle">Beiträge aus Zeitungen</msg>
+    <msg name="name_biblio_map">Kartenmaterialien</msg>
+    <msg name="name_biblio_conferencePaper">Beiträge zu einer Konferenz</msg>
+    <msg name="name_biblio_publicationCorporateBody">Publikationen von Körperschaften</msg>
+    <msg name="name_biblio_thesis">Dissertationen, Diplomarbeiten etc.</msg>
+    <msg name="name_biblio_patent">Patente</msg>
+    <msg name="name_biblio_videoFilmBroadcast">Audiovisuelle Medien</msg>
+    <msg name="name_biblio_websites">Veröffentlichungen im Internet</msg>
+    <msg name="name_biblio_eJournals">Beiträge in eJournals</msg>
+    <msg name="name_biblio_mailLists">Veröffentlichungen in Mailing-Listen</msg>
+    <msg name="name_biblio_personalMail">Persönliche E-Mails</msg>
+    <msg name="name_biblio_cdRom">CD-ROM</msg>
+</messagebundle>

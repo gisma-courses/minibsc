@@ -1,0 +1,455 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="GIS als räumliches Denken in der Geographie: Raum im GIS. Die Raumrichtungen. Die Lage im Raum. Geometrie, Dimensionen und Topologie - eine Synthese im GIS. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-2011" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (Practice solutions) " />
+      <meta name="keywords"
+            content="GIS als räumliches Denken in der Geographie, definition GIS , information systems, SRTM 90m Digital Elevation Data, NASA, Datenmodell, DGM, Open Source, NUTS, eLML" />
+      <title>Raum im GIS</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>GIS als räumliches Denken in der Geographie</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="unit_GISBSc_VL2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2_V_lo6.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Raum im GIS</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2_V_lo5.html">Raum im GIS</h1>
+               <div id="d10e563.html" class="clarify">
+                  <p class="paragraph" id="d10e564">Wir haben bislang ständig und ohne besondere Vorüberlegungen mit den
+                     Begriffen <i>Raum</i> und <i>Zeit</i> gearbeitet. Betrachtet man die in der
+                     vorausgegangenen Lektion entwickelten Raumkonzepte etwas genauer, wird deutlich,
+                     dass der Begriff Raum definiert werden muss, um ihn für GI-Systeme nutzbar zu
+                     machen. Der Raum in GI-Systemen wird, in Anlehnung an die Mathematik und Physik,
+                     als dreidimensionaler <b>euklidischer Raum</b>
+                     verstanden. Aus dem Mathematikunterricht kennen wir die euklidische Ebene (mit 2
+                     Dimensionen, vgl. Abb. 13) und den euklidischen Raum (mit 3 Dimensionen, vgl.
+                     abb. 14). Am einfachsten kann der euklidische Raum mit Hilfe eines kartesischen
+                     Koordinatensystems als Bezugssystem, in dem die Koordinaten entlang senkrecht
+                     aufeinander stehender Achsen gemessen werden, beschrieben werden.
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d10e575" src="../image/Cartesian-coordinate-system.png"
+                          width="500"
+                          title="Abbildung 13: Ausschnitt aus einem zweidimensionalen kartesischen Koordinatensystem mit 3 eingetragenen Punkten in Koordinatenschreibweise. "
+                          alt="Abbildung 13: Ausschnitt aus einem zweidimensionalen kartesischen Koordinatensystem mit 3 eingetragenen Punkten in Koordinatenschreibweise. " /><span class="legend" style="display:block">Abbildung 13: Ausschnitt aus einem zweidimensionalen kartesischen Koordinatensystem mit 3 eingetragenen Punkten in Koordinatenschreibweise.
+                         (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1999">Bolino</a> 2008)</span></span><span class="multimedia_paragraph_center"><img class="multimedia" id="d10e576" src="../image/3D_coordinate_system.png"
+                          width="500"
+                          title="Abbildung 14: Allgemeine Abbildung eines dreidimensionales kartesischen Koordinatensystem mit euklidischen Ebenen durch den Ursprungspunkt."
+                          alt="Abbildung 14: Allgemeine Abbildung eines dreidimensionales kartesischen Koordinatensystem mit euklidischen Ebenen durch den Ursprungspunkt." /><span class="legend" style="display:block">Abbildung 14: Allgemeine Abbildung eines dreidimensionales kartesischen Koordinatensystem mit euklidischen Ebenen durch den
+                        Ursprungspunkt. (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1997">Sakurambo</a> 2007)</span></span><h4>Die Raumrichtungen</h4>
+                  <p class="paragraph" title="Die Raumrichtungen" id="d10e577">Bislang haben wir von Geoobjekten als
+                     definierten Objekten mit eindeutiger Position (Koordinaten) gesprochen. Mit
+                     Hilfe der Koordinate (x- und y-Wert) kann im zweidimensionalen Raum die Position
+                     eines Punktes eindeutig festgelegt werden. Da Objekte aber auch eine
+                     dreidimensionale Ausprägung haben können, ist es sinnvoll auch die Raumdimension
+                     zu berücksichtigen. Erst mit Hilfe ihrer dreidimensionalen Koordinaten können
+                     Geoobjekte räumlich exakt beschrieben und abgebildet werden. Als Dimension eines
+                     Geoobjektes werden die voneinander unabhängigen Raumrichtungen bezeichnet. Diese
+                     korrespondieren mit den geometrischen Eigenschaften von Punkten Strecken und
+                     Flächen und Körpern in einem Kartesischen Koordinatensystem: 0D Geoobjekte:
+                     Punkte (Orte); keine Länge und Fläche (z.B. Messstation, Bohrpunkt) 1D
+                     Geoobjekte: Strecken; definiert durch eine (endliche) Länge aber keine Fläche
+                     (Gewässerlängsprofil, vertikales Bodenprofil) 2D Geoobjekte: Flächen; definieren
+                     einen geschlossenen Linienzug (Einzugsgebiet, Stadtgebiet) 3D Geoobjekte:
+                     Körper; werden z.B. als Solide (Volumen-Körper) oder Polyeder
+                     (Grenzflächen-Körper) definiert (Grundwasserkörper,Atmosphäre) Die Merkmale
+                     (Attribute) eines Geoobjektes werden als thematische Dimension bezeichnet (nD)
+                     Die zeitliche Veränderung von Geoobjekten oder Teilsystemen wird in der Regel
+                     4.Dimension genannt (Abb. 15). 
+                  </p><span class="multimedia_paragraph_center"><a href="../image/123d_bartelme.png" target="_blank" class="lightwindow"
+                        rel="Gallery[other]"
+                        title="Abbildung 15: Dimensionalität von Geoobjekten. Verändert nach "><img class="multimedia" id="_123d_bartelme.html" src="../image/123d_bartelme.png"
+                             width="600"
+                             title="Abbildung 15: Dimensionalität von Geoobjekten. Verändert nach "
+                             alt="Abbildung 15: Dimensionalität von Geoobjekten. Verändert nach " /></a><span class="legend" style="display:block">Abbildung 15: Dimensionalität von Geoobjekten. Verändert nach  (<a class="bibLink" href="GISBScL1_bibliography.html#d10e2006">Bartelme</a> 2005)</span></span><h4>Die Lage im Raum</h4>
+                  <p class="paragraph" title="Die Lage im Raum" id="d10e580">Wir benötigen für die vollständige und korrekte
+                     Repräsentation neben dem Ort (Geometrie), den Raumrichtungen (Dimensionen) auch
+                     noch die (relative) Lage (Topologie) der Objekte zueinander. Die Lage von
+                     Punkten zueinander ist zunächst schlicht. Wir können die geometrische Situation
+                     nutzen, um Sie zu berechnen. Schwieriger ist es wenn diese Punkte exakt die
+                     gleichen Raumkoordinaten aufweisen und sich nur in der Höhenangabe
+                     (Dimensionalität) unterscheiden, wie etwa in einem Gebäudeplan die Ausgänge
+                     eines Aufzugs oder wenn es nicht auf die exakte Lage zueinander ankommt, sondern
+                     auf Information was ist benachbart (vgl. Abb. 16). 
+                  </p><span class="multimedia_paragraph_center"><a href="../image/netzmarburg.png" target="_blank" class="lightwindow"
+                        rel="Gallery[other]"
+                        title="Abbildung 16: Tagesliniennetzplan der Stadtwerke Marburg. Nur die wenigsten Menschen würden einen Netzfahrplan nutzen, um etwa eine Stadtbesichtigung zu Fuß zu planen oder aber die geometrisch exakte Lage der Haltestellen zueinander zu ermitteln"><img class="multimedia" id="d10e582" src="../image/netzmarburg.png" width="600"
+                             title="Abbildung 16: Tagesliniennetzplan der Stadtwerke Marburg. Nur die wenigsten Menschen würden einen Netzfahrplan nutzen, um etwa eine Stadtbesichtigung zu Fuß zu planen oder aber die geometrisch exakte Lage der Haltestellen zueinander zu ermitteln"
+                             alt="Abbildung 16: Tagesliniennetzplan der Stadtwerke Marburg. Nur die wenigsten Menschen würden einen Netzfahrplan nutzen, um etwa eine Stadtbesichtigung zu Fuß zu planen oder aber die geometrisch exakte Lage der Haltestellen zueinander zu ermitteln" /></a><span class="legend" style="display:block">Abbildung 16: Tagesliniennetzplan der Stadtwerke Marburg. Nur die wenigsten Menschen würden einen Netzfahrplan nutzen, um
+                        etwa eine Stadtbesichtigung zu Fuß zu planen oder aber die geometrisch exakte Lage der Haltestellen zueinander zu ermitteln (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1985">Stadwerke Marburg</a> 2008)</span></span><h4>Geometrie, Dimensionen und Topologie - eine Synthese im GIS</h4>
+                  <p class="paragraph"
+                     title="Geometrie, Dimensionen und Topologie - eine Synthese im GIS"
+                     id="d10e583">In
+                     vielen, ja den meisten Situationen ist jedoch die korrekte Verknüpfung von
+                     Geometrie, Topologie und Dimension unerlässlich. Verbindet man unterschiedliche
+                     Geoobjekte zu komplexen Einheiten kann es zu Überschneidungen, Lücken oder
+                     anderen irregulären räumlichen Zuständen der Repräsentation der Wirklichkeit
+                     kommen. Bei Karten kennen wir dieses Problem nicht, da die bildhafte Wiedergabe
+                     der repräsentierten Welt zwangsweise zweidimensional ist und kartographische
+                     Symbolik zur Darstellung dieses Mangels verfügbar ist (z.B. Schraffen für
+                     Dimensionen). Im GIS bilden wir die Welt hingegen multidimensional ab. So können
+                     sich zum Beispiel zwei Streckenabschnitte, die durch jeweils zwei Koordinaten
+                     bestimmt sind, kreuzen. Sind dies eine Bundesstraße und eine Autobahn, findet
+                     diese Kreuzung mit einer Brücke ohne Verbindung statt. Hier kommt es auf eine
+                     exakte Geometrie, Topologie und Dimension an. Wird eins dieser Gebote verletzt,
+                     verlangt das Navigationsgerät vielleicht die direkte Auffahrt auf die Autobahn,
+                     weil es die Brücke für eine Kreuzung hält oder leitet gegen die Fahrtrichtung
+                     auf die Bundesstraße...(Abb. 17)
+                  </p><span class="multimedia_paragraph_center"><a href="../image/JOSM-ss.png" target="_blank" class="lightwindow"
+                        rel="Gallery[other]"
+                        title="Abbildung 17: Screenshot einer JOSM einem  Openstreetmap Editor bearbeiteten Straßenkarte. Von Interesse ist der Krezungsbereich der obwohl zweidimensional dargestellt, dreidimensional modelliert wird."><img class="multimedia" id="d10e585" src="../image/JOSM-ss.png" width="600"
+                             title="Abbildung 17: Screenshot einer JOSM einem  Openstreetmap Editor bearbeiteten Straßenkarte. Von Interesse ist der Krezungsbereich der obwohl zweidimensional dargestellt, dreidimensional modelliert wird."
+                             alt="Abbildung 17: Screenshot einer JOSM einem  Openstreetmap Editor bearbeiteten Straßenkarte. Von Interesse ist der Krezungsbereich der obwohl zweidimensional dargestellt, dreidimensional modelliert wird." /></a><span class="legend" style="display:block">Abbildung 17: Screenshot einer JOSM einem  Openstreetmap Editor bearbeiteten Straßenkarte. Von Interesse ist der Krezungsbereich
+                        der obwohl zweidimensional dargestellt, dreidimensional modelliert wird. (<a class="bibLink" href="GISBScL1_bibliography.html#d10e1996">Scholz</a> 2009)</span></span><p class="paragraph" id="d10e586">Eine geeignete räumliche und zeitliche Beschreibung von Geoobjekten und
+                     ihrer Eigenschaften macht es also erforderlich, neben der Geometrie auch die
+                     Topologie und Dimension des Objektes bzw. des räumlichen Kontinuums zu kennen
+                     und adäquat abzubilden.
+                  </p>
+               </div>
+               <div id="d10e588.html" class="look">
+                  <p class="paragraph" id="d10e589">Besuchen Sie die folgenden Webseiten. Analysieren Sie vor dem Hintergrund
+                     Ihres neu erworbenen Wissens folgendes:
+                  </p>
+                  <ul class="list" id="d10e591">
+                     <li class="itemAlt"> Was wird repräsentiert? Geoobjekte oder Raumkontinua?</li>
+                     <li class="item"> Welche Dimension und Geometrie liegt der Repräsentation ihrer Meinung
+                        nach zugrunde?
+                     </li>
+                  </ul>
+                  <ul class="list" id="d10e596">
+                     <li class="itemAlt"><a class="link" href="http://www.rast.de/standorte/suche/detail.html?ID=209"
+                           target="_blank"
+                           title="http://www.rast.de/standorte/suche/detail.html?ID=209">http://www.rast.de/standorte/suche/detail.html?ID=209</a></li>
+                     <li class="item"><a class="link" href="http://www.wetterbote.de/wetter/pegel/lahn.htm"
+                           target="_blank"
+                           title="http://www.wetterbote.de/wetter/pegel/lahn.htm">http://www.wetterbote.de/wetter/pegel/lahn.htm</a></li>
+                     <li class="itemAlt"><a class="link"
+                           href="http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115"
+                           target="_blank"
+                           title="http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115">http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115</a></li>
+                     <li class="item"><a class="link" href="http://www.cineplex.de/kino/home/city32/" target="_blank"
+                           title="http://www.cineplex.de/kino/home/city32/">http://www.cineplex.de/kino/home/city32/</a></li>
+                  </ul>
+               </div>
+               <div id="d10e609.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d10e610">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><p class="paragraph" id="d10e611">Versuchen Sie einige weitere alltägliche Beispiele für die Bedeutung
+                        von Lage und Dimensionalität zu finden. Überlegen Sie sich unterschiedliche
+                        Konzepte wie die Höhe eines bestimmten Raumausschnitts repräsentiert werden
+                        kann.
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="unit_GISBSc_VL2.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2_V_lo6.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL1.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

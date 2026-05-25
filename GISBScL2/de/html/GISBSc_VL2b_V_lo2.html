@@ -1,0 +1,891 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Geometrische Abfragen. Distanzen im Vektormodell. Rastermodell. Ausdehnung Vektormodell. Rastermodell. Distanzzonen: Distanzpuffer und Distanztransformation. Vektormodell. Rastermodell. Erstellen eines Distanzpuffers im Vektormodell. Erstellen eines Distanzpuffers im Rastermodell. Weitere Beispiele für die Verwendung von Proximity. Beschirmung einiger Bäume. Berechnung einer Überschwemmungsfläche. Gefährdungszone durch eine Lawine. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Geometrische Abfragen</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL2b_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2b_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo10.html">Abfragen in Relationen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo1.html">Thematische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Geometrische Abfragen</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo3.html">Topologische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo4.html">Topologische Operatoren</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_W_check_VL.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2b_V_lo2.html">Geometrische Abfragen</h1>
+               <div id="d14e1837.html" class="clarify">
+                  <p class="paragraph" id="d14e1838"> Anders als die konventionellen Auskunfts- und Suchmöglichkeiten
+                     bezüglich der Thematik einer Relation geometrischen Selektionskriterien von
+                     zentraler Bedeutung in einem GI-System. Geometrische Abfragen messen wie Fläche
+                     oder Perimeter eines Objektes bzw. die Distanz oder Richtung zwischen zwei
+                     Objekten ist. Bei der Erörterung geometrischer Abfragen müssen die Raster- und
+                     Vektordatenmodell aufgrund ihres völlig unterschiedlichen Raumkonzepts getrennt
+                     betrachtet werden. Im Sinne einer Relation ist die Geometrie eine weitere
+                     Eigenschaft eines Geoobjektes. 
+                  </p>
+                  <p class="paragraph" id="d14e1840"> Die wichtigsten geometrischen Abfragen (Messfunktionen) sind in der
+                     Folge beschrieben: 
+                  </p>
+                  <h4>Distanzen im Vektormodell</h4>
+                  <p class="paragraph" title="Distanzen im Vektormodell" id="d14e1842">Für Vektordaten wird die Distanz
+                     zwischen zwei Objekten einfach nach dem Theorem von Pythagoras berechnet und
+                     entspricht dem kürzesten Abstand. 
+                  </p>
+                  <table class="table" id="d14e1844" width="600">
+                     <tr class="tablerowAlt">
+                        <td class="tabledata" id="d14e1846" width="400"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1847" src="../image/pit_distanz_vector.jpg"
+                                   width="350"
+                                   height="350"
+                                   title=" Euklidische Distanz"
+                                   alt=" Euklidische Distanz" /><span class="legend" style="display:block"> Euklidische Distanz</span></span></td>
+                        <td class="tabledata" id="d14e1848" width="250"> Distanz zwischen den Punkten A und B <br /><br /><span class="multimedia_inline_center"><img class="multimedia" id="d14e1851" src="../image/formula.jpg" width="144"
+                                   height="36"
+                                   alt="" /></span><br /><br /><b>Beispiel:</b> Die Distanz beträgt
+                           <b>11,3 cm.</b></td>
+                     </tr>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><h4>Rastermodell</h4>
+                  <p class="paragraph" title="Rastermodell" id="d14e1858"><br /><br />Im Rastermodell können drei verschiedene Ansätze zur
+                     Messung von Distanzen zwischen Punkten angewandt werden. <br /><br /></p>
+                  <table class="table" id="d14e1862" width="600">
+                     <tr class="tablerowAlt">
+                        <td class="tabledata" id="d14e1864" width="400"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1865" src="../image/pit_distanz.jpg" width="200"
+                                   height="200"
+                                   title="Euklidische Distanz"
+                                   alt="Euklidische Distanz" /><span class="legend" style="display:block">Euklidische Distanz</span></span></td>
+                        <td class="tabledata" id="d14e1866" width="250"> Gerade Linie zwischen Punkt A und Punkt B <br /><br /><span class="multimedia_inline_center"><img class="multimedia" id="d14e1869" src="../image/formula.jpg" width="144"
+                                   height="36"
+                                   alt="" /></span><br /><br /><b>Beispiel: </b><br />Mit einer Auflösung von 2 cm beträgt die Distanz <b>11,3 cm.</b></td>
+                     </tr>
+                     <tr class="tablerow">
+                        <td class="tabledata" id="d14e1878" width="400"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1879" src="../image/manhattan_distanz.jpg"
+                                   width="200"
+                                   height="200"
+                                   title="Manhattan Distance"
+                                   alt="Manhattan Distance" /><span class="legend" style="display:block">Manhattan Distance</span></span></td>
+                        <td class="tabledata" id="d14e1880" width="250"> Distanz entlang dem Zellenrand zwischen Punkt A und
+                           Punkt B<br /><br /><b>Beispiel: </b><br />Mit einer Auflösung von 2 cm beträgt die Distanz <b>16 cm.</b></td>
+                     </tr>
+                     <tr class="tablerowAlt">
+                        <td class="tabledata" id="d14e1891" width="400"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1892" src="../image/proximity.jpg" width="200"
+                                   height="200"
+                                   title="Nachbarschaft"
+                                   alt="Nachbarschaft" /><span class="legend" style="display:block">Nachbarschaft</span></span></td>
+                        <td class="tabledata" id="d14e1893" width="250"> Konzentrische, gleich entfernte Zonen werden um den
+                           Punkt A gesetzt.<br /><br /><b>Beispiel:</b><br />Mit einer Auflösung von 2 cm beträgt die Distanz <b>11,3 cm.</b></td>
+                     </tr>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><h4>Ausdehnung Vektormodell</h4>
+                  <p class="paragraph" title="Ausdehnung Vektormodell" id="d14e1903"></p>
+                  <table class="table" id="d14e1904">
+                     <tr class="tablerowAlt">
+                        <td class="tabledata" id="d14e1906" width="400"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1907" src="../image/area_vektor.jpg" width="380"
+                                   height="380"
+                                   alt="" /></span></td>
+                        <td class="tabledata" id="d14e1908" width="250"><span class="multimedia_inline"><img class="multimedia" id="d14e1909" src="../image/formula4.jpg" width="156"
+                                   height="113"
+                                   alt="" /></span><br /><br /><b>PERIMETER</b><br />Summe der Länge aller Streckenabschnitte.<br /><br /><b>FLÄCHE</b><br />Summe der Flächen der einfachen geometrischen Formen, in die
+                           das Hauptobjekt zerlegt werden kann. 
+                        </td>
+                     </tr>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><h4>Rastermodell</h4>
+                  <p class="paragraph" title="Rastermodell" id="d14e1921"></p>
+                  <table class="table" id="d14e1922">
+                     <tr class="tablerowAlt">
+                        <td class="tabledata" id="d14e1924" width="400"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e1925" src="../image/perimeter_raster.jpg"
+                                   width="140"
+                                   height="140"
+                                   alt="" /></span></td>
+                        <td class="tabledata" id="d14e1926"><b>PERIMETER</b><br />Anzahl der Zellenkanten, welche das Objekt abgrenzen,
+                           multipliziert mit der Auflösung der Zellen. <br /><b>Beispiel:</b><br /> Mit einer Auflösung von 2 cm beträgt der Perimeter <b>32 cm</b>. <br /><br /><b>FLÄCHE</b><br />Anzahl Zellen, welche das Objekt bilden, multipliziert mit der
+                           Fläche einer Zelle.<br /><b>Beispiel:</b><br /> Mit einer Auflösung von 2 cm wird das
+                           Flächenergebnis<b> 60 cm<sup>2</sup>.</b></td>
+                     </tr>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><h4>Distanzzonen: Distanzpuffer und Distanztransformation</h4>
+                  <p class="paragraph" title="Distanzzonen: Distanzpuffer und Distanztransformation"
+                     id="d14e1956"> Neben der
+                     Ermittlung von (kürzesten) Distanzen zwischen Objekten ist eine weitere wichtige
+                     Anwendung in einem GIS das Festlegen von Distanzzonen. Mit dieser Funktion wird
+                     jeder Raumstelle ein Distanzwert zum entsprechend nächsten Bezugsobjekt
+                     zugewiesen. Die Bildung von Distanzzonen ist für Vektor- und Rastermodell in der
+                     Lösung sowie in der Verwendung verschieden. 
+                  </p>
+                  <h4>Vektormodell</h4>
+                  <p class="paragraph" title="Vektormodell" id="d14e1959"> Vektormodelle werden meist zur Modellierung von
+                     randscharfen Phänomenen verwendet. Distanzzonen im Vektormodell ergeben wiederum
+                     klare, randscharfe Polygone. Es wird deshalb der Begriff Distanzpuffer (engl.
+                     buffer) anstelle des allgemeineren Begriffs Distanzzone verwendet. Die
+                     Berechnung eines solchen Distanzpuffers ergibt als Resultat immer eine Fläche
+                     (d. h. ein Polygon), egal, ob von Punkten, Linien oder Flächen ausgegangen wird.
+                     Gesucht ist die Umrißlinie (Grenzlinie) dieser resultierenden Fläche, die in
+                     einem definierten Abstand das Ausgangsobjekt umrandet (vgl. untenstehende
+                     Animation). Der Berechnung von Distanzpuffern liegt eine euklidische Metrik
+                     zugrunde. Weitergehende Möglichkeiten, wie sie im Rastermodell einfach
+                     realisiert werden können, sind nur aufwendig erreichbar. So können ineinander
+                     geschachtelte Distanzzonen (z. B. 0–500 m, 501–1000 m, 1001–2000 m) nur durch
+                     wiederholte Berechnung und anschliessendes Verschneiden der Puffer als Polygone
+                     (engl. polygon overlay) realisiert werden. Die Möglichkeiten der Pufferbildung
+                     im Vektormodell sind beschränkter als beim Rastermodell. Dennoch gibt es einige
+                     Möglichkeiten, Distanzpuffer zu variieren (Animation unten): 
+                  </p>
+                  <ul class="list" id="d14e1961">
+                     <li class="itemAlt">Die Form eines Puffers kann variiert werden. So kann z. B. das Ende von
+                        Puffern um Linien entweder flach oder rund sein.
+                     </li>
+                     <li class="item">Pufferdistanzen können abhängig von einem Attributwert der Ausgangsobjekte
+                        berechnet werden. Beispielsweise bestimmt die Sendeleistung von
+                        Mobilfunkantennen ihre Reichweite.
+                     </li>
+                     <li class="itemAlt">Puffer können auch nur einseitig gebildet werden, z. B. Bauverbotszone um
+                        einen See.
+                     </li>
+                  </ul>
+                  <h4>Rastermodell</h4>
+                  <p class="paragraph" title="Rastermodell" id="d14e1968"> Die Bildung von Distanzzonen im Rastermodell weist
+                     jeder einzelnen Rasterzelle einen Distanzwert entsprechend ihrer Distanz zur
+                     nächstgelegenen „Quellenzelle“ zu. Dadurch ergibt sich ein
+                     quasi-kontinuierliches Resultat. Da der Raum also entsprechend der Distanz zu
+                     bestimmten Objekten transformiert wird, kann im Rastermodell von einer
+                     Distanztransformation gesprochen werden: Im Rastermodell kann für die
+                     Distanztransformation eine geeignete Metrik gewählt werden: euklidische Metrik,
+                     Manhattan-Metrik oder eine Metrik, die zusätzlich zur Manhattan-Metrik
+                     (4er-Nachbarschaft der Rasterzellen) auch die diagonalen Nachbarn
+                     (8er-Nachbarschaft) einbezieht. Zusätzlich können auch Wegkosten oder Wegzeiten
+                     als Kostenoberflächen berücksichtigt werden. Kostenoberflächen enthalten
+                     Informationen über den pro Zelle variierenden Aufwand, der geleistet werden
+                     muss, um eine Distanz zurückzulegen. Eine quasi-kontinuierliche
+                     Raster-Distanztransformation kann man elegant durch eine einfache Einordnung in
+                     klassierte Distanzzonen umformen (z. B. Distanzzonen bis 250m, bis 500m usw.).
+                     Die Genauigkeit des Resultats richtet sich allerdings direkt nach der Auflösung
+                     (Maschenweite) des Rasters. 
+                  </p>
+                  <table class="table" id="d14e1970">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e1972"></th>
+                           <th class="tableheading" id="d14e1973"> Vektormodell </th>
+                           <th class="tableheading" id="d14e1975"> Rastermodell </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1978"><b>Bezeichnung</b></td>
+                           <td class="tabledata" id="d14e1981"> Distanzpuffer </td>
+                           <td class="tabledata" id="d14e1983"> Distanztransformation </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e1986"><b>Metrik</b></td>
+                           <td class="tabledata" id="d14e1989"> euklidische Metrik liegt der Berechnung zugrunde </td>
+                           <td class="tabledata" id="d14e1991"> verschiedene Metriken sind möglich </td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e1994"><b>Modellierung</b></td>
+                           <td class="tabledata" id="d14e1997"> randscharfe und klare definierbare Phänomene </td>
+                           <td class="tabledata" id="d14e1999"> Phänomene, die eher kontinuierlich über den Raum variieren
+                              
+                           </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2002"><b>Distanzzonen</b></td>
+                           <td class="tabledata" id="d14e2005"> Verschneidung der Distanzpuffer mit polygon overlay. Zusätzliche
+                              Variationen: 
+                              <ul class="list" id="d14e2007">
+                                 <li class="itemAlt"> Einseitige Puffer</li>
+                                 <li class="item"> Gewichtete Puffer<br />(abhängig vom Attributwert des
+                                    Ausgangsobjekts)
+                                 </li>
+                                 <li class="itemAlt"> Form (flache/runde Enden) bei Linien</li>
+                              </ul>
+                           </td>
+                           <td class="tabledata" id="d14e2016"> Klassierung der Distanztransformation (reclassify) </td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2019"><b>variable Kosten</b></td>
+                           <td class="tabledata" id="d14e2022"> unmöglich </td>
+                           <td class="tabledata" id="d14e2024"> Einbezug von Kostenoberfläche als Aufwand der Distanzüberwindung
+                              möglich 
+                           </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2027"><b>Genauigkeit</b></td>
+                           <td class="tabledata" id="d14e2030"> abhängig von der Datengenauigkeit und Rechenpräzision </td>
+                           <td class="tabledata" id="d14e2032"> von der Auflösung des Rasters abhängig </td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <p class="paragraph" id="d14e2034"><br /><br /></p>
+                  <h4>Erstellen eines Distanzpuffers im Vektormodell</h4>
+                  <p class="paragraph" title="Erstellen eines Distanzpuffers im Vektormodell"
+                     id="d14e2036"> Die konkrete
+                     Lösung für einen Distanzpuffer um eine Linie oder um Polygone besteht nicht
+                     einfach in der Bildung paralleler Linien im Abstand <i>l</i> vom Ausgangsobjekt, sondern benötigt in den Stützpunkten
+                     zusätzlich Kreisbögen mit dem Radius <i>l</i>.
+                     Die Animation zeigt die Konstruktion eines Distanzpuffers um einen
+                     Linienzug.
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d14e2044" width="527" height="350"
+                             class="multimedia"
+                             title="Konstruktion eines      Distanzpuffers"
+                             data="../multimedia/distpuff_erstellen.swf">
+                        <param name="movie" value="../multimedia/distpuff_erstellen.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/distpuff_erstellen.swf"
+                               width="527"
+                               height="350"
+                               class="multimedia"
+                               title="Konstruktion eines      Distanzpuffers"></embed></object><span class="legend" style="display:block">Konstruktion eines      Distanzpuffers</span></span><p class="paragraph" id="d14e2045">Distanzpuffer um Punkte sind Kreisflächen. Die Punkte in der folgenden
+                     Abbildung repräsentieren Standorte von Mobilfunkantennen mit unterschiedlicher
+                     Sendeleistung. Dabei ist die äusserste Linie die maximale Reichweite bei
+                     gegebener Sendeleistung. Die Distanzpuffer sind hier mit Attributwerten der
+                     Ausgangsobjekte gewichtet. Auf der Karte wird ersichtlich, welche Teile der
+                     Siedlungsfläche mit einem Empfang abgedeckt sind und welche nicht.
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2047" src="../image/distpuff_punkte.gif" width="550"
+                          height="400"
+                          title="Distanzpuffer um Punkte mit      Attributdaten"
+                          alt="Distanzpuffer um Punkte mit      Attributdaten" /><span class="legend" style="display:block">Distanzpuffer um Punkte mit      Attributdaten</span></span><p class="paragraph" id="d14e2048">Die nächsten beiden Beispiele beschäftigen sich mit Distanzpuffern
+                     entlang von Linien. Die Linien sind in diesem Fall Strassen unterschiedlicher
+                     Klassen. Durch die Einteilung der Strassen ist die Höchstgeschwindigkeit
+                     bekannt: Autobahnen 120 km/h und Hauptstrassen 80 km/h. Über ein
+                     Immissions-/Emissionsmodell für Strassenlärm (vgl. <a class="link" href="http://www.laermorama.ch/" target="_blank" title="Lärmorama">Lärmorama</a>) wurden die Distanzpuffer
+                     für einen Grenzwert von 70 dB abhängig von der erlaubten Höchstgeschwindigkeit
+                     berechnet. In das Modell fliessen hauptsächlich drei Parameter ein:
+                     durchschnittliche Geschwindigkeit, durchschnittliche Anzahl Fahrzeuge pro
+                     Stunden und der Lastwagenanteil. Hindernisse usw. wurden keine berücksichtigt.
+                     Es wird davon ausgegangen, dass der Schall sich ungehindert im Raum ausbreiten
+                     kann. Die so entstandenen Flächen decken ein Gebiet ab von 85,1 dB an der
+                     Verkehrsachse und bis 70 dB an der Umrisslinie des Distanzpuffers
+                     (beziehungsweise von 82,9 dB bis 70 dB). Dies bedeutet, dass Pufferfläche nicht
+                     homogen ist bezüglich der Beschallung (Immissionswert). Häufig interessiert die
+                     Grenzlinie bzw. ein Grenzwert, der mit der Umrisslinie der Pufferfläche markiert
+                     ist. Interessant ist diese Fläche aber, wenn z. B. herausgefunden werden möchte,
+                     wie groß die Fläche (bzw. Anzahl Einwohner) des Siedlungsgebiets ist, die einem
+                     Lärm von 85,1 dB bis 70 dB ausgesetzt ist.
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2053" src="../image/distpuff_linie.gif" width="550"
+                          height="400"
+                          title="Distanzpuffer um einen      Linienzug"
+                          alt="Distanzpuffer um einen      Linienzug" /><span class="legend" style="display:block">Distanzpuffer um einen      Linienzug</span></span><p class="paragraph" id="d14e2055">Möchte man eine Abstufung bzw. Verschachtelung der Immissionswerte
+                     darstellen, müssen mehrere Distanzpuffer mit den jeweiligen Immissionswerten
+                     berechnet werden. Damit die Flächen nicht immer bei 85,1 dB beginnen, müssen sie
+                     miteinander verschnitten werden (engl. polygon overlay). Wie Flächen bzw.
+                     Polygone verschnitten werden, wird in der Lektion Eignungsanalyse
+                     besprochen.
+                  </p><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2057" src="../image/distpuff_polygone.gif"
+                          width="550"
+                          height="400"
+                          title="Einseitiger Distanzpuffer      um Fläche"
+                          alt="Einseitiger Distanzpuffer      um Fläche" /><span class="legend" style="display:block">Einseitiger Distanzpuffer      um Fläche</span></span><p class="paragraph" id="d14e2058"> Das letzte Beispiel zeigt einseitige Distanzpuffer, die aufgrund eines
+                     Gesetzes festlegt wurden, das bestimmt welche Abstände um ein Naturschutzgebiet
+                     für extensive Landwirtschaft (schonender Umgang mit der Natur) und einem
+                     allgemeinem Bauverbot gelten. 
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d14e2060" width="550" height="430"
+                             class="multimedia"
+                             title="Distanzpuffer um einen      Linienzug mit Polygon overlay"
+                             data="../multimedia/distpuff_overlay.swf">
+                        <param name="movie" value="../multimedia/distpuff_overlay.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/distpuff_overlay.swf"
+                               width="550"
+                               height="430"
+                               class="multimedia"
+                               title="Distanzpuffer um einen      Linienzug mit Polygon overlay"></embed></object><span class="legend" style="display:block">Distanzpuffer um einen      Linienzug mit Polygon overlay</span></span><h4>Erstellen eines Distanzpuffers im Rastermodell</h4>
+                  <p class="paragraph" title="Erstellen eines Distanzpuffers im Rastermodell"
+                     id="d14e2061"> In der
+                     Startabbildung der folgenden Animation sind Tramhaltestellen mit dem Zellenwert
+                     7 dargestellt. Ausgehend von diesen beiden „Quellenzellen“ wird nun für jede
+                     einzelne Zelle des Rasters die Distanz zur nächstgelegenen Ausgangszelle
+                     berechnet. Am Schluss resultiert ein Raster, das aus Distanzen besteht. Die
+                     ursprünglichen Haltestellen erhalten somit die Distanz 0. Bei der dargestellten
+                     Distanztransformation liegt eine euklidische Metrik zugrunde. Die Werte können
+                     in der Animation zu Klassen zusammengefasst werden (engl. reclassify). Ein
+                     solcher distanztransformierter Raster könnte beispielsweise als Grundlage
+                     dienen, um die von der Distanz abhängigen Immissionswerte des Lärmmodells
+                     zuzuweisen. Damit würde eine quasi-kontinuierliche Oberfläche mit Lärmwerten
+                     entstehen. Die Genauigkeit und die Kontinuität des Lärmrasters sind nur von der
+                     Auflösung des Rasters abhängig. Lärmzonen könnten einfach mit einer neuen
+                     Klassierung der Immissionswerte erreicht werden. 
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d14e2063" width="600" height="333"
+                             class="multimedia"
+                             title="Distanz-Berechnung      und Umkodierung (reclassification)"
+                             data="../multimedia/disttrans_reclassify.swf">
+                        <param name="movie" value="../multimedia/disttrans_reclassify.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/disttrans_reclassify.swf"
+                               width="600"
+                               height="333"
+                               class="multimedia"
+                               title="Distanz-Berechnung      und Umkodierung (reclassification)"></embed></object><span class="legend" style="display:block">Distanz-Berechnung      und Umkodierung (reclassification)</span></span><p class="link"><a class="link" href="../multimedia/disttrans_reclassify.swf" title="">Grösser</a></p>
+                  <p class="paragraph" id="d14e2066">In einem Rastermodell ist es auch möglich, eine Distanztransformation für
+                     Flächen oder eine beliebige Anordnung von Quellenzellen durchzuführen. Bei der
+                     hier dargestellten Zone handelt es sich um Rasterzellen gleicher Thematik, die
+                     einen Wald, codiert mit dem Wert 99, darstellen. Für jede Rasterzelle kann man
+                     nun den kürzesten Abstand zum Waldrand (gemäss der gewählten Metrik) ermitteln.
+                     Die Ergebnisse werden in einem neuen Raster eingetragen. In diesem Raster
+                     entsprechen die Werte dem Abstand vom Waldrand. Am Rand des Waldes werden die
+                     Werte kleiner sein und werden gegen das Innere des Waldes hoch sein. In unserem
+                     Beispiel wurde eine Manhattan-Metrik gewählt. Gemäss dieser Metrik, bei der nur
+                     die direkten Nachbarn einer Zelle (4er-Nachbarschaft) berücksichtigt werden,
+                     wird diese Region schrittweise jeweils um eine Zellenbreite verdünnt, bis keine
+                     Zellen mehr übrig sind. Jeder Verdünnungsschritt wird am Schluss zu einem
+                     gemeinsamen Rasterbild addiert. Wie verschiedene Raster kombiniert werden, zeigt
+                     die Lektion Eignungsanalyse. 
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d14e2068" width="600" height="417"
+                             class="multimedia"
+                             title="Distanztransformation      einer Waldfläche"
+                             data="../multimedia/disttrans_zone.swf">
+                        <param name="movie" value="../multimedia/disttrans_zone.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/disttrans_zone.swf"
+                               width="600"
+                               height="417"
+                               class="multimedia"
+                               title="Distanztransformation      einer Waldfläche"></embed></object><span class="legend" style="display:block">Distanztransformation      einer Waldfläche</span></span><p class="link"><a class="link" href="../multimedia/disttrans_zone.swf" title="">Grösser</a></p>
+                  <p class="paragraph" id="d14e2071"> In der Startabbildung der folgenden Animation sind Tramhaltestellen mit
+                     dem Zellenwert 7 dargestellt. Ausgehend von diesen beiden "Quellenzellen" wird
+                     nun für jede einzelne Zelle des Rasters die Distanz zur nächstgelegenen
+                     Ausgangszelle berechnet. Am Schluss resultiert ein Raster, das aus Distanzen
+                     besteht. Die ursprünglichen Haltestellen erhalten somit die Distanz 0. Bei der
+                     dargestellten Distanztransformation liegt eine euklidische Metrik zugrunde. Die
+                     Werte können in der Animation zu Klassen zusammengefasst werden (engl.
+                     reclassify). Ein solcher distanztransformierter Raster könnte beispielsweise als
+                     Grundlage dienen, um die von der Distanz abhängigen Immissionswerte des
+                     Lärmmodells zuzuweisen. Damit würde eine quasi-kontinuierliche Oberfläche mit
+                     Lärmwerten entstehen. Die Genauigkeit und die Kontinuität des Lärmrasters ist
+                     nur von der Auflösung des Rasters abhängig. Lärmzonen könnten einfach mit einer
+                     neuen Klassierung der Immissionswerte erreicht werden. 
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d14e2074" width="600" height="333"
+                             class="multimedia"
+                             title="Distanz-Berechnung und Umkodierung (reclassification)"
+                             data="../multimedia/disttrans_reclassify.swf">
+                        <param name="movie" value="../multimedia/disttrans_reclassify.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/disttrans_reclassify.swf"
+                               width="600"
+                               height="333"
+                               class="multimedia"
+                               title="Distanz-Berechnung und Umkodierung (reclassification)"></embed></object><span class="legend" style="display:block">Distanz-Berechnung und Umkodierung (reclassification)</span></span><p class="link"><a class="link" href="../multimedia/disttrans_reclassify.swf" target="_blank"
+                        title="">Grösser</a></p>
+                  <p class="paragraph" id="d14e2077">In einem Rastermodell ist es auch möglich, eine Distanztransformation für
+                     Flächen oder eine beliebige Anordnung von Quellenzellen durchzuführen. Bei der
+                     hier dargestellten Zone handelt es sich um Rasterzellen gleicher Thematik, die
+                     einen Wald, codiert mit dem Wert 99, darstellen. Für jede Rasterzelle kann man
+                     nun den kürzesten Abstand zum Waldrand (gemäss der gewählten Metrik) ermitteln.
+                     Die Ergebnisse werden in einem neuen Raster eingetragen. In diesem Raster
+                     entsprechen die Werte dem Abstand vom Waldrand. Am Rand des Waldes werden die
+                     Werte kleiner sein und werden gegen das Innere des Waldes hoch sein. In unserem
+                     Beispiel wurde eine Manhattan-Metrik gewählt. Gemäss dieser Metrik, bei der nur
+                     die direkten Nachbarn einer Zelle (4er-Nachbarschaft) berücksichtigt werden,
+                     wird diese Region schrittweise jeweils um eine Zellenbreite verdünnt, bis keine
+                     Zellen mehr übrig sind. Jeder Verdünnungsschritt wird am Schluss zu einem
+                     gemeinsamen Rasterbild addiert. Wie verschiedene Raster kombiniert werden, zeigt
+                     die Lektion Eignungsanalyse. 
+                  </p><span class="multimedia_paragraph_left"><object type="application/x-shockwave-flash" id="d14e2079" width="600" height="417"
+                             class="multimedia"
+                             title="Distanztransformation einer Waldfläche"
+                             data="../multimedia/disttrans_zone.swf">
+                        <param name="movie" value="../multimedia/disttrans_zone.swf" />
+                        <param name="quality" value="best" />
+                        <param name="scale" value="exactfit" />
+                        <param name="menu" value="true" />
+                        <param name="play" value="false" />
+                        <param name="wmode" value="opaque" />
+                        <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                               type="application/x-shockwave-flash"
+                               quality="best"
+                               scale="exactfit"
+                               menu="true"
+                               play="false"
+                               wmode="opaque"
+                               src="../multimedia/disttrans_zone.swf"
+                               width="600"
+                               height="417"
+                               class="multimedia"
+                               title="Distanztransformation einer Waldfläche"></embed></object><span class="legend" style="display:block">Distanztransformation einer Waldfläche</span></span><p class="link"><a class="link" href="../multimedia/disttrans_zone.swf" target="_blank" title="">Grösser</a></p>
+               </div>
+               <div class="look">
+                  <h2 id="d14e2082.html">Weitere Beispiele für die Verwendung von Proximity</h2>
+                  <h4>Beschirmung einiger Bäume</h4>
+                  <p class="paragraph" title="Beschirmung einiger Bäume" id="d14e2083"></p>
+                  <table class="column" id="d14e2084">
+                     <tr valign="top">
+                        <td class="columnLeft" width="20"> Vektormodell </td>
+                        <td class="columnRight" width="440"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2088" src="../image/buffer_vector_point.jpg"
+                                   width="440"
+                                   height="140"
+                                   alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+                  <table class="column" id="d14e2089">
+                     <tr valign="top">
+                        <td class="columnLeft" width="20"> Rastermodell </td>
+                        <td class="columnRight" width="440"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2093" src="../image/buffer_raster_point.jpg"
+                                   width="440"
+                                   height="140"
+                                   alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+                  <h4>Berechnung einer Überschwemmungsfläche</h4>
+                  <p class="paragraph" title="Berechnung einer Überschwemmungsfläche" id="d14e2094"></p>
+                  <table class="column" id="d14e2095">
+                     <tr valign="top">
+                        <td class="columnLeft" width="20"> Vektormodell </td>
+                        <td class="columnRight" width="440"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2099" src="../image/buffer_vector_line.jpg"
+                                   width="440"
+                                   height="140"
+                                   alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+                  <table class="column" id="d14e2100">
+                     <tr valign="top">
+                        <td class="columnLeft" width="20"> Rastermodell </td>
+                        <td class="columnRight" width="440"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2104" src="../image/buffer_raster_line.jpg"
+                                   width="440"
+                                   height="140"
+                                   alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+                  <h4>Gefährdungszone durch eine Lawine</h4>
+                  <p class="paragraph" title="Gefährdungszone durch eine Lawine" id="d14e2105"></p>
+                  <table class="column" id="d14e2106">
+                     <tr valign="top">
+                        <td class="columnLeft" width="20"> Vektormodell </td>
+                        <td class="columnRight" width="440"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2110" src="../image/buffer_vector_poly.jpg"
+                                   width="440"
+                                   height="140"
+                                   alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+                  <table class="column" id="d14e2111">
+                     <tr valign="top">
+                        <td class="columnLeft" width="20"> Rastermodell </td>
+                        <td class="columnRight" width="440"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2115" src="../image/buffer_raster_poly.jpg"
+                                   width="440"
+                                   height="140"
+                                   alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+               </div>
+               <div id="d14e2116.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e2117">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d14e2118">
+                        <li class="itemAlt">Was ist zur Berechnung der Euklidischen Distanz in einem
+                           Rasterdatensatz zwingend notwendig? (mehrere Möglichkeiten) 
+                        </li>
+                        <li class="item">Welches Datenmodell ist für geometrische Abfragen Ihrer Meinung nach
+                           geeigneter? Berücksichtigen Sie bitte auch die Dimensionalität bei Ihrer
+                           Antwort.
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL2b_V_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2b_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

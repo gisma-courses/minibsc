@@ -1,0 +1,862 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Datenbanksprachen und Datenbankschnittstellen. Funktionsprinzip einer Datenbankschnittstelle. Typische interaktive Nutzerschnittstellen für SQL-Anfragen an Datenbanken.  Beispiel einer Internet formular-basierten GUI. Beispiel einer softwarespezifischen formular-basierten GUI (GIS). Text-basierte Interaktion. Exkurs: SQL als Sprache zur Datendefinition (DDL)... Manipulation von Relationsstrukturen. Löschen von Relationen. Wirkungsweise von CREATE und ALTER. Exkurs SQL als Sprache zur Datenmanipulation (DML)... Einfache Abfragen mit Hilfe der SQL. Verschachtelte Abfragen mit Hilfe der SQL. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Datenbanksprachen und Datenbankschnittstellen</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL2a_V_lo5.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2a_summary.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo1.html">Komponenten eines Informationssystems</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo2.html">Eigenschaften von Datenbanksystemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo3.html">Schemata und Instanzen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo4.html"> Das relationale Datenmodell</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2a_V_lo5.html">Datenintegrität</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Datenbanksprachen und Datenbankschnittstellen</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2a_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2a_V_lo7.html">Datenbanksprachen und Datenbankschnittstellen</h1>
+               <div id="d14e758.html" class="clarify">
+                  <p class="paragraph" id="d14e759">In der bisherigen Lerneinheit haben wir uns mit dem relationalen
+                     Datenmodell, strukturierter und konsistenten Datenbeschreibungen vertraut
+                     gemacht. In Lerneinheit 4 wurde bereits die Trennung von Daten und
+                     Datenbankmanagementsystem begründet. Aus Sicht eines Anwenders drängen sich nun
+                     die beiden Fragen auf, wie das relationale Datenmodell "in Echt" in das
+                     Datenbanksystem integriert wird und wie die Daten (als Informationen) zwischen
+                     den Anwendern und der Datenbank ausgetauscht werden. Für den Arbeitsalltag mit
+                     Datenbanken bzw. GI-Systemen sind die folgende Fragen von evident:
+                  </p>
+                  <ul class="list" id="d14e761">
+                     <li class="itemAlt"> Wie erfolgt die Interaktion zwischen einer Anwendung und einem
+                        Datenbank-Verwaltungssystem? 
+                     </li>
+                     <li class="item"> Wie stellt sich ein Datenbanksystem gegenüber einer Benutzerin dar? </li>
+                     <li class="itemAlt"> Wie können Anfragen durchgeführt und Resultate in einer Anwendung
+                        dargestellt werden? 
+                     </li>
+                  </ul>
+                  <p class="paragraph" id="d14e768"><span class="multimedia_inline_right"><a href="../image/schnittstelle.gif" target="_blank" class="lightwindow"
+                           rel="Gallery[Datenbanksprachen und Datenbankschnittstellen]"
+                           title="Funktionsprinzip einer Datenbankschnittstelle. Schnittstellen dienen einem standardisierten Ausstausch zwischen unterschidlichen Datenbaken, Anwenungen Nutzern etc.. Datenbankenschnittstellen sind vor allem hinsischtlich des Datenmodells und der Abfragestruktur normiert."><img class="multimedia" id="d14e769" src="../image/schnittstelle.gif" width="400"
+                                title="Funktionsprinzip einer Datenbankschnittstelle. Schnittstellen dienen einem standardisierten Ausstausch zwischen unterschidlichen Datenbaken, Anwenungen Nutzern etc.. Datenbankenschnittstellen sind vor allem hinsischtlich des Datenmodells und der Abfragestruktur normiert."
+                                alt="Funktionsprinzip einer Datenbankschnittstelle. Schnittstellen dienen einem standardisierten Ausstausch zwischen unterschidlichen Datenbaken, Anwenungen Nutzern etc.. Datenbankenschnittstellen sind vor allem hinsischtlich des Datenmodells und der Abfragestruktur normiert." /></a><span class="legend" style="display:block">Funktionsprinzip einer Datenbankschnittstelle. Schnittstellen dienen einem standardisierten Ausstausch zwischen unterschidlichen
+                           Datenbaken, Anwenungen Nutzern etc.. Datenbankenschnittstellen sind vor allem hinsischtlich des Datenmodells und der Abfragestruktur
+                           normiert.</span></span></p>
+                  <h4>Funktionsprinzip einer Datenbankschnittstelle</h4>
+                  <p class="paragraph" title="Funktionsprinzip einer Datenbankschnittstelle"
+                     id="d14e770"> Eine Anwendung
+                     stellt mit Hilfe einer spezifischen Datenbanksprache, eine Anfrage an das
+                     Datenbanksystem. Dort wird die entsprechende Antwort bereitgestellt und
+                     ebenfalls mittels der Datenbanksprache an die Anwendung zurückgegeben. Diese
+                     Kommunikation kann interaktiv oder automatisiert stattfinden. Das Prinzip ist
+                     auf nachfolgender Abbildung verdeutlicht. 
+                  </p>
+                  <p class="paragraph" id="d14e772"> Wie zuvor gezeigt sind in der Realität der GI-Systeme die Sprachentwürfe
+                     für Definition und Manipulation von Datenbanken in der Structured Query Language
+                     implementiert. Im Alltag von Nutzern wird SQL überwiegend<i> interaktiv</i> als Anfragesprache an eine Datenbank
+                     eingesetzt. 
+                  </p>
+               </div>
+               <div class="look">
+                  <h2 id="d14e777.html">Typische interaktive Nutzerschnittstellen für SQL-Anfragen an Datenbanken</h2>
+                  <p class="paragraph" id="d14e778">Eine Benutzungsoberfläche ist das sogenannte Frontend also die
+                     Bedienoberfläche der Datenbankschnittstelle die dem Benutzer zur Verfügung
+                     steht. Gerade für den interaktiven Betrieb ist diese häufig grafisch als
+                     graphische Nutzerschnittstelle (graphical user interface GUI) angelegt. eine GUI
+                     bietet normalerweise Hilfsmittel zur Vereinfachung der Datenbanknutzung. In der
+                     Regel werden entweder Formulare oder Schaltflächen angeboten mit deren Hilfe
+                     dann von der Software die syntaktisch korrekten Befehle in SQL aufgebaut
+                     werden.
+                  </p>
+                  <p class="paragraph" id="d14e780"><span class="multimedia_inline_right"><a href="../image/formularbasierteoberflaeche.png" target="_blank"
+                           class="lightwindow"
+                           rel="Gallery[Datenbanksprachen und Datenbankschnittstellen]"
+                           title="Die Abfragemaske der Deutschen Bahn als Beispiel einer formular-basierten Benutzungsoberfläche"><img class="multimedia" id="d14e781" src="../image/formularbasierteoberflaeche.png"
+                                width="400"
+                                title="Die Abfragemaske der Deutschen Bahn als Beispiel einer formular-basierten Benutzungsoberfläche"
+                                alt="Die Abfragemaske der Deutschen Bahn als Beispiel einer formular-basierten Benutzungsoberfläche" /></a><span class="legend" style="display:block">Die Abfragemaske der Deutschen Bahn als Beispiel einer formular-basierten Benutzungsoberfläche (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3843">GIS.MA</a> 2009)</span></span></p>
+                  <h4> Beispiel einer Internet formular-basierten GUI</h4>
+                  <p class="paragraph" title=" Beispiel einer Internet formular-basierten GUI"
+                     id="d14e782"> Diese
+                     Oberflächen bestehen Formularen die den Benutzern angepasst sind. Der Benutzer
+                     kann entweder alle Felder ausfüllen und so neue Einträge machen, oder er kann
+                     einzelne Felder ausfüllen und auf diese Weise eine Anfrage für die restlichen
+                     Felder machen. Formular-basierte Benutzungsoberflächen sind vor allem im
+                     Internet stark verbreitet und machen die wichtigste Interaktionsmöglichkeit mit
+                     DBMS aus. Formular-basierte Oberflächen sind sehr einfach zu bedienen und haben
+                     den großen Vorteil, dass die Anwender keinerlei Kenntnisse einer
+                     Datenbanksprache (z. B. SQL) benötigen.
+                  </p>
+                  <p class="paragraph" id="d14e784"><span class="multimedia_inline_right"><a href="../image/auschnittgisoberflaeche.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Datenbanksprachen und Datenbankschnittstellen]"
+                           title="Beispiel einer interaktiven graphischen Abfrage realisiert über eine GIS-Software. Mit dem graphischen Selektionswerzeug wurden alle rot markierten Datensätze ausgewählt."><img class="multimedia" id="d14e785" src="../image/auschnittgisoberflaeche.png"
+                                width="400"
+                                title="Beispiel einer interaktiven graphischen Abfrage realisiert über eine GIS-Software. Mit dem graphischen Selektionswerzeug wurden alle rot markierten Datensätze ausgewählt."
+                                alt="Beispiel einer interaktiven graphischen Abfrage realisiert über eine GIS-Software. Mit dem graphischen Selektionswerzeug wurden alle rot markierten Datensätze ausgewählt." /></a><span class="legend" style="display:block">Beispiel einer interaktiven graphischen Abfrage realisiert über eine GIS-Software. Mit dem graphischen Selektionswerzeug wurden
+                           alle rot markierten Datensätze ausgewählt. (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3843">GIS.MA</a> 2009)</span></span></p>
+                  <p class="paragraph" id="d14e786"><span class="multimedia_inline_right"><a href="../image/querywizard.png" target="_blank" class="lightwindow"
+                           rel="Gallery[Datenbanksprachen und Datenbankschnittstellen]"
+                           title="Beispiel der in ArcGIS integrierten sogenannten Query-Wizards zur adressbasierten, räumlichen und attributiven Datenbankabfrage"><img class="multimedia" id="d14e787" src="../image/querywizard.png" width="400"
+                                title="Beispiel der in ArcGIS integrierten sogenannten Query-Wizards zur adressbasierten, räumlichen und attributiven Datenbankabfrage"
+                                alt="Beispiel der in ArcGIS integrierten sogenannten Query-Wizards zur adressbasierten, räumlichen und attributiven Datenbankabfrage" /></a><span class="legend" style="display:block">Beispiel der in ArcGIS integrierten sogenannten Query-Wizards zur adressbasierten, räumlichen und attributiven Datenbankabfrage (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3843">GIS.MA</a> 2009)</span></span></p>
+                  <h4>Beispiel einer softwarespezifischen formular-basierten GUI (GIS)</h4>
+                  <p class="paragraph"
+                     title="Beispiel einer softwarespezifischen formular-basierten GUI (GIS)"
+                     id="d14e788">
+                     Eine GIS-Benutzungsoberfläche integriert in aller Regel auch Elemente einer
+                     Datenbankschnittstelle. Die Datenbankinteraktion erfolgt dabei über eine
+                     Kombination von verschiedenen graphischen Nutzerschnittstellen. In diesem
+                     Beispiel sind die Auswahlmöglichkeiten von ArcGIS 9.3.1 dargestellt:: 
+                  </p>
+                  <ul class="list" id="d14e790">
+                     <li class="itemAlt"> grafische Nutzer-Abfrage mit Hilfe interaktiver Selektionen innerhalb der
+                        Kartendarstellung 
+                     </li>
+                     <li class="item"> Verwendung sogenannter Query-Wizards (Assistenten) als ergebisorientierte
+                        Kombination von formular-basierter und text-basierter Interaktion:
+                     </li>
+                     <li class="itemAlt"> Finde Maske</li>
+                     <li class="item">Select by Attribute Maske</li>
+                     <li class="itemAlt">Select bei Location Maske</li>
+                  </ul>
+                  <h4>Text-basierte Interaktion</h4>
+                  <p class="paragraph" title="Text-basierte Interaktion" id="d14e801"> Letztlich generieren alle zuvor
+                     genannten GUIs den SQL-Befehlstext der auch (die notwendigen Kenntnisse
+                     vorausgesetzt) über ein textbasiertes Ein- und Ausgabefenster (Terminal) direkt
+                     in SQL an die Datenbank gerichtet wird. Text-basierte Abfragen erschliessen den
+                     vollen Umfang der Abfragesprache da GUIs normalerweise nur einen Teilumfang
+                     abdecken. Ihre Bedienung erfordert aber aktive Kenntnisse der entsprechenden
+                     Datenbanksprache (z. B. SQL). 
+                  </p><span class="multimedia_paragraph_center"><a href="../image/codeoberflaeche.png" target="_blank" class="lightwindow"
+                        rel="Gallery[Datenbanksprachen und Datenbankschnittstellen]"
+                        title="Beispiel einer text-basierten Benutzungsoberfläche"><img class="multimedia" id="d14e803" src="../image/codeoberflaeche.png" width="400"
+                             title="Beispiel einer text-basierten Benutzungsoberfläche"
+                             alt="Beispiel einer text-basierten Benutzungsoberfläche" /></a><span class="legend" style="display:block">Beispiel einer text-basierten Benutzungsoberfläche (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3843">GIS.MA</a> 2009)</span></span><p class="paragraph" id="d14e804"><br /><br /></p>
+                  <p id="d14e806" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond14e806')">Exkurs: SQL als Sprache zur Datendefinition (DDL)... (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond14e806text" style="display: none; cursor: pointer;"
+                       class="optional"
+                       title="Exkurs: SQL als Sprache zur Datendefinition (DDL)..."
+                       onclick="off('solutiond14e806')">
+                     <p class="paragraph" id="d14e807"> In SQL werden die Begriffe <code>TABLE</code>, <code>ROW</code> und <code>COLUMN</code> synonym für <i>Relation, Tupel</i> und <i>Attribut</i> gebraucht. Mit Hilfe des <code>CREATE TABLE</code>-Befehls wird ein <i>neues</i> Relationenschema in der Datenbank definiert. Das
+                        Relationenschema muss genau spezifiziert werden, oder in anderen Worten, die
+                        zur Relation gehörenden Attribute sowie deren Domänen müssen angegeben
+                        werden. 
+                     </p>
+                     <p class="paragraph" id="d14e831"> Mit <code>CREATE TABLE</code> wird in einer
+                        Datenbank eine neue Relation (Tabelle) angelegt. Der Befehl hat folgende
+                        Grundstruktur:<br /><br /><code>CREATE TABLE &lt;Tabellenname&gt;
+                           (&lt;Attributdefinitionen und Beschränkungen&gt;);</code></p><span class="multimedia_paragraph_center"><a href="../image/code_createTable.gif" target="_blank" class="lightwindow"
+                           rel="Gallery[Datenbanksprachen und Datenbankschnittstellen]"
+                           title="Code-Beispiel: CREATE TABLE als ein Beispiel, wie eine Datenbanktabelle mit Hilfe von SQL                         definiert werden kann."><img class="multimedia" id="d14e839" src="../image/code_createTable.gif" width="500"
+                                title="Code-Beispiel: CREATE TABLE als ein Beispiel, wie eine Datenbanktabelle mit Hilfe von SQL                         definiert werden kann."
+                                alt="Code-Beispiel: CREATE TABLE als ein Beispiel, wie eine Datenbanktabelle mit Hilfe von SQL                         definiert werden kann." /></a><span class="legend" style="display:block">Code-Beispiel: CREATE TABLE als ein Beispiel, wie eine Datenbanktabelle mit Hilfe von SQL                         definiert
+                           werden kann.</span></span><p class="paragraph" id="d14e840"><b>Attributdefinition:</b> Attribute
+                        werden mit einem Namen und einem Datentyp definiert, wobei der Namen
+                        innerhalb der Tabelle eindeutig sein muss. Diese Angaben sind für alle
+                        Attribute zwingend notwendig. <br /> Die Reihenfolge der Attribute bei
+                        der Definition entspricht der Reihenfolge der Spalten in der erstellten
+                        Tabelle. Wird eine bestimmte Ordnung angestrebt ist diese bereits bei der
+                        Erstellung der Tabelle zu definieren. Danach bleibt sie, sofern keine
+                        Änderungen an der Struktur der Tabelle vorgenommen werden bestehen.<br /></p>
+                     <p class="paragraph" id="d14e847"><b>Beschränkungen:</b> Es gibt zwei Arten von
+                        Beschränkungen: Tabellenbeschränkungen und Attributbeschränkungen. Der
+                        Unterschied liegt darin, dass Attributbeschränkungen sich auf nur ein
+                        Attribut beziehen und Tabellenbeschränkungen sich auf mehrere Attribute
+                        beziehen können, dies aber nicht müssen. Mit diesen Beschränkungen kann der
+                        Wertebereich der Attribute eingeschränkt werden oder es wird verhindert,
+                        dass Werte eingegeben werden, die nicht erlaubt sind. Ein Datensatz kann
+                        nicht erfasst werden, wenn er eine Beschränkung verletzt.<br /> Es gibt vier Arten von Beschränkungen:
+                     </p>
+                     <ul class="list" id="d14e853">
+                        <li class="itemAlt"><code>UNIQUE</code> - das Attribut oder die
+                           Attributkombination muss innerhalb der Tabelle eindeutig sein
+                        </li>
+                        <li class="item"><code>PRIMARY KEY</code> - das Attribut oder die
+                           Attributkombination ist Primärschlüssel der Tabelle
+                        </li>
+                        <li class="itemAlt"><code>FOREIGN KEY</code> - das Attribut ist ein
+                           Fremdschlüssel
+                        </li>
+                        <li class="item"><code>CHECK</code> - Bedingung die für ein
+                           Attribut oder eine Attributkombination erfüllt sein muss
+                        </li>
+                     </ul>
+                     <p class="paragraph" id="d14e870">Zusätzlich sind noch eine Reihe weiterer Deklarationen möglich wie z.
+                        B. die Domänendeklaration die in SQL die Datentypen <code>CHAR, NUMBER, LONG </code> und <code>
+                           DATE</code> kennt. Durch die Deklaration <code>NOT NULL</code> wird festgelegt, dass für das jeweilige Attribut
+                        keine NULL-Werte zulässig sind. Folglich muss beim Einfügen eines Tupels
+                        grundsätzlich ein Wert für dieses Attribut angegeben werden.
+                     </p>
+                     <h4>Manipulation von Relationsstrukturen</h4>
+                     <p class="paragraph" title="Manipulation von Relationsstrukturen" id="d14e881"> Mit <code>ALTER TABLE</code> kann die Struktur einer Relation
+                        geändert werden. Es können die mit CREATE TABLE
+                        erzeugten Attribute und Beschränkungen geändert, neue hinzugefügt oder
+                        vorhandene gelöscht werden. Der Befehl hat folgende Syntax:<br /><br /><code>ALTER TABLE &lt;Tabellenname&gt;
+                           &lt;Änderung&gt;;</code><br /><br /> wobei <code>&lt;Änderung&gt;</code> verschieden Befehle beinhalten
+                        kann:
+                     </p>
+                     <ul class="list" id="d14e897">
+                        <li class="itemAlt"><code>ADD [COLUMN]
+                              &lt;Attributdefintion&gt;</code><br />Attribut hinzufügen (Attributdefiniton wie bei CREATE)
+                        </li>
+                        <li class="item"><code>ALTER [COLUMN] &lt;Attributname&gt; SET DEFAULT
+                              &lt;Standardwert&gt;</code><br />neuer Standardwert festlegen
+                        </li>
+                        <li class="itemAlt"><code>ALTER [COLUMN] &lt;Attributname&gt; DROP
+                              DEFAULT</code><br />aktuellen Standardwert löschen
+                        </li>
+                        <li class="item"><code>DROP [COLUMN] &lt;Attributname&gt; {RESTRICT |
+                              CASCADE}</code><br />löschen eines Attributes
+                        </li>
+                        <li class="itemAlt"><code>ADD &lt;Tabellenbeschränkung&gt;</code><br />neue Tabellenbeschränkung hinzufügen (Tabellenbeschränkung wie
+                           bei CREATE)
+                        </li>
+                        <li class="item"><code>DROP CONSTRAINT
+                              &lt;Tabellenbeschränkung&gt;</code><br />löschen einer Tabellenbeschränkung
+                        </li>
+                     </ul>
+                     <p class="paragraph" id="d14e928">Mit den oben genannten Befehlen können Attribute und Beschränkungen
+                        hinzugefügt bzw. gelöscht werden. Zudem können die Standardwerte für die
+                        Attribute gesetzt oder gelöscht werden. <br /> SQL beinhaltet im
+                        Standard keine Befehle um Attribute zu ändern oder umzubenennen. Dies würde
+                        auch zu Problemen führen, wenn bereits Daten vorhanden sind. Dennoch sind
+                        diese Befehle in einigen Datenbanken vorhanden (z.B. MODIFY oder RENAME).
+                        Die Syntax unterscheidet sich jedoch von System zu System. Wenn keine Daten
+                        vorhanden sind, kann das Attribut, das geändert werden soll, gelöscht und
+                        neu hinzugefügt werden.
+                     </p>
+                     <h4>Löschen von Relationen</h4>
+                     <p class="paragraph" title="Löschen von Relationen" id="d14e932">Mit DROP TABLE
+                        kann eine bestehende Tabelle gelöscht werden. Dabei werden die Daten und die
+                        Struktur der Tabelle gelöscht.<br /> Der Befehl hat folgende
+                        Syntax:
+                     </p><img src="../../../_templates/gisma/icons/important.gif" title="important"
+                          alt="important"
+                          class="icon" /><p class="paragraph" id="d14e940"> Mit <code>DROP TABLE
+                           &lt;Tabellenname&gt;;</code> wird die Tabellenstruktur samt den
+                        Daten gelöscht. Dies kann in den meisten Fällen nicht mehr rückgängig
+                        gemacht werden. 
+                     </p>
+                     <p class="paragraph" id="d14e945"><br /><br /></p>
+                     <h4>Wirkungsweise von CREATE und ALTER</h4>
+                     <p class="paragraph" title="Wirkungsweise von CREATE und ALTER" id="d14e947"> NAchvollziehen Sie anhand
+                        der nachfolgenden Beipiele die Wirkungsweise von SQL auf
+                        Relationen
+                     </p>
+                     <p class="paragraph" id="d14e949"> Im animierten Beispiel wird einer Datenbank eine Tabelle
+                        hinzugefügt, die mit einer bereits bestehenden Tabelle verknüpft ist. Im SQL
+                        Befehl kommt der Unterschied zwischen Attribut- und Tabellenbeschränkung zum
+                        Ausdruck. projekt_ID und leiter_ID haben eine Attributbeschränkung
+                        (Beschränkung wird direkt hinter die Attributdefiniton geschrieben).
+                        projekt_ID hat die Beschränkung PRIMARY KEY, ist also Primärschlüssel dieser
+                        Tabelle, d.h. das Attribut muss eindeutig und nicht NULL sein. leiter_ID hat
+                        die Beschränkung NOT NULL (Spezialfall einer CHECK Beschränkung), muss also
+                        immer einen Wert enthalten.<br /> Der Verknüpfung mit der bestehenden
+                        Tabelle ist als Tabellenbeschränkung definiert (FOREIGN KEY) und hat einen
+                        Namen (projektleiter). Diese Beschränkung könnte jedoch auch als
+                        Attributbeschränkung definiert werden, da sie nur ein Attribut
+                        beinhaltet.<br /> Das Beispiel zeigt, dass grundsätzlich kein
+                        Unterschied zwischen Attribut- und Tabellenbeschränkungen besteht, sofern
+                        nur ein Attribut betroffen ist.
+                     </p><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="_BspCreate.html" width="600"
+                                height="350"
+                                class="multimedia"
+                                title="Die Wirkungsweise des CREATE TABLE Befehls"
+                                data="../multimedia/SQL_create.swf">
+                           <param name="movie" value="../multimedia/SQL_create.swf" />
+                           <param name="quality" value="best" />
+                           <param name="scale" value="exactfit" />
+                           <param name="menu" value="true" />
+                           <param name="play" value="false" />
+                           <param name="wmode" value="opaque" />
+                           <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                  type="application/x-shockwave-flash"
+                                  quality="best"
+                                  scale="exactfit"
+                                  menu="true"
+                                  play="false"
+                                  wmode="opaque"
+                                  src="../multimedia/SQL_create.swf"
+                                  width="600"
+                                  height="350"
+                                  class="multimedia"
+                                  title="Die Wirkungsweise des CREATE TABLE Befehls"></embed></object><span class="legend" style="display:block">Die Wirkungsweise des CREATE TABLE Befehls</span></span><p class="paragraph" id="d14e956">Im animierten Beispiel wird einer Tabelle ein neues Attribut
+                        hinzugefügt. Der angezeigte Datensatz enthält danach NULL für dieses
+                        Attribut, weil noch kein Wert zugewiesen wurde. Anschliessend wird dieses
+                        Attribut wieder aus der Tabelle gelöscht. Das Schlüsselwort <code>RESTRICT</code> bewirkt, dass nur Attribute gelöscht
+                        werden können, die nicht mit anderen Tabellen verbunden sind
+                        (Fremdschüssel). Alternativ kann das Schlüsselwort <code>CASCADE</code> verwendet werden. Dabei wird nicht nur die
+                        gewünschte Spalte, sondern auch die verbundene Spalte in der anderen Tabelle
+                        gelöscht.
+                     </p><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="_BspAlter.html" width="600"
+                                height="350"
+                                class="multimedia"
+                                title="Die Wirkungsweise des ALTER TABLE Befehls"
+                                data="../multimedia/SQL_alter.swf">
+                           <param name="movie" value="../multimedia/SQL_alter.swf" />
+                           <param name="quality" value="best" />
+                           <param name="scale" value="exactfit" />
+                           <param name="menu" value="true" />
+                           <param name="play" value="false" />
+                           <param name="wmode" value="opaque" />
+                           <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                  type="application/x-shockwave-flash"
+                                  quality="best"
+                                  scale="exactfit"
+                                  menu="true"
+                                  play="false"
+                                  wmode="opaque"
+                                  src="../multimedia/SQL_alter.swf"
+                                  width="600"
+                                  height="350"
+                                  class="multimedia"
+                                  title="Die Wirkungsweise des ALTER TABLE Befehls"></embed></object><span class="legend" style="display:block">Die Wirkungsweise des ALTER TABLE Befehls</span></span></div>
+                  <p id="d14e966" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond14e966')">Exkurs SQL als Sprache zur Datenmanipulation (DML)... (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond14e966text" style="display: none; cursor: pointer;"
+                       class="optional"
+                       title="Exkurs SQL als Sprache zur Datenmanipulation (DML)..."
+                       onclick="off('solutiond14e966')">
+                     <p class="paragraph" id="d14e967"> Zum besseren Verständnis des Unterschieds von <i>Datendefinition</i> und <i>Datenmaipulation</i> ist es sinnvoll Anfragen bzw. Abfragen
+                        hinsichtlich ihrer Wirkungsweise bzw. Zielsetzung zu unterschieden. Während
+                        mit der Datendefinition Relationsstrukturen <b>erzeugt</b> werden wird mit der Datenmanipulation eine
+                        (temporäre) Veränderung des Datenbestands, also der Inhalte der Relationen
+                        benannt. Allerdings gilt es hier genau zu differenzieren:
+                     </p>
+                     <ul class="list" id="d14e978">
+                        <li class="itemAlt"><b>Einfache Abfragen:</b><br />rufen Daten aus einer Datenbank ab. Spezifische
+                           Abfragebedingungen identifizieren eine Teilmenge der Daten und
+                           extrahieren diese in der gewünschten Präsentationsform ohne die
+                           Ausgangsdaten zu verändern.
+                        </li>
+                        <li class="item"><b>Manipulative Abfragen:</b><br /> erzeugen neue Relationen oder manipulieren die Inhalte
+                           existierender Relationen. 
+                        </li>
+                     </ul><span class="multimedia_paragraph_center"><a href="../image/overview2.jpg" target="_blank" class="lightwindow"
+                           rel="Gallery[Datenbanksprachen und Datenbankschnittstellen]"
+                           title="Manipulative bzw. nicht manipulative Abfragen"><img class="multimedia" id="d14e989" src="../image/overview2.jpg" width="500"
+                                title="Manipulative bzw. nicht manipulative Abfragen"
+                                alt="Manipulative bzw. nicht manipulative Abfragen" /></a><span class="legend" style="display:block">Manipulative bzw. nicht manipulative Abfragen</span></span><p class="paragraph" id="d14e990"> Ziel der raumbezogenen Selektion und Analyse ist es, räumliche
+                        Beziehungen zwischen Elementen eines oder mehrerer Themen zu ermitteln.
+                        Selektionen sind nichts anderes als an eine Relation gerichtete Anfragen.
+                        Hierzu wird ein Set von Kriterien formuliert, um gesuchte
+                        Merkmalsausprägungen zu identifizieren. Prinzipiell sind in GI-Systemen drei
+                        Ansätze möglich: 
+                     </p>
+                     <ul class="list" id="d14e992">
+                        <li class="itemAlt"> Thematische Abfrage: <br />Selektiert die Objekte, deren
+                           Eigenschaften (Attribute) die gestellten Bedingungen erfüllen. Z. B.:
+                           „Selektiere alle Bäume der Art Fichte.“ 
+                        </li>
+                        <li class="item"> Geometrische Abfrage: <br /> Selektiert die Objekte, welche die
+                           gestellten räumlichen Bedingungen erfüllen. Z. B.: „Selektiere alle
+                           Häuser, die weniger als 250 m vom Fluss entfernt sind.“ 
+                        </li>
+                        <li class="itemAlt"> Topologische Abfrage: <br /> Selektiert die Objekte, welche die
+                           gestellten Bedingungen bezüglich den räumlichen Beziehungen zwischen den
+                           Objekten erfüllen. Z. B.: „Selektiere alle Gebäude, die vollständig in
+                           der Wohnzone II (WII) liegen.“ 
+                        </li>
+                     </ul>
+                     <p class="paragraph" id="d14e1005"><br /></p>
+                     <h4>Einfache Abfragen mit Hilfe der SQL</h4>
+                     <p class="paragraph" title="Einfache Abfragen mit Hilfe der SQL" id="d14e1007"><code> SELECT * FROM produkte WHERE produkt-ID IN (SELECT
+                           produkt-ID FROM bestellungen WHERE rabatt &gt;= .25); </code></p>
+                     <p class="paragraph" id="d14e1010">Mit Hilfe der SELECT-FROM-WHERE Struktur können Anfragen an eine
+                        Dabenbank gestellt werden. Anfragen bestehen aus einer Auswahl der
+                        gewünschten Spalten (SELECT) und einer Liste mit einer oder mehreren
+                        Relationen (FROM). In dieser einfachen Form werden immer alle Datensätze
+                        zurückgeben. Zusätzlich kann ein Suchkriterium übergeben werden (WHERE).
+                        Damit können gezielt Datensätze selektiert werden. Eine SQL Anfrage gibt als
+                        Resultat wiederum eine Relationen zurück. <br /><br />Die
+                        Standardform einer Datenbankanfrage mittels SQL ist wie folgt
+                        aufgebaut:<br /><br /><code>SELECT &lt;Attributliste&gt;</code><br /><br /><code>FROM &lt;Relationenliste&gt;</code><br /><br /><code>WHERE &lt;Bedingungen&gt;;</code><br /><br />Wobei:
+                     </p>
+                     <ul class="list" id="d14e1025">
+                        <li class="itemAlt"> &lt;Attributliste&gt; besteht aus den Namen der Attribute, deren
+                           Werte man durch die Anfrage erhalten möchte. 
+                        </li>
+                        <li class="item"> &lt;Relationenliste&gt; ist die Aufführung der Namen der Relationen,
+                           die für die Anfrage gebraucht werden. 
+                        </li>
+                        <li class="itemAlt"> &lt;Bedingungen&gt; die jene Tupel identifizieren, die durch die
+                           Anfrage zurückgegeben werden sollen. 
+                        </li>
+                     </ul>
+                     <h4>Verschachtelte Abfragen mit Hilfe der SQL</h4>
+                     <p class="paragraph" title="Verschachtelte Abfragen mit Hilfe der SQL"
+                        id="d14e1032"> Wie obiges
+                        Beispiel zeigt können Abfragen auf die gesamte Datenbasis angewendet werden.
+                        Dieser Leistungsumfang lässt sich sehr wirkungsvoll durch die Möglichkeit
+                        dynamisch Teilrelationen durch Abfragen zu generieren und diese wiederum in
+                        die eigentliche Abfrage zu integrieren, steigern. Auf diese Weise können
+                        Abfragen sehr tief verschachtelt werden. Eine Abfrage in einer Abfrage wird
+                        <i>Subquery</i> genannt. 
+                     </p>
+                     <p class="paragraph" id="d14e1037">Damit haben wir die Grundstruktur von SQL als Anfragesprache bereits
+                        gezeigt. Es gibt nun eine Reihe von möglichen Erweiterungen des obigen
+                        Grundschemas, die die Flexibilität von Anfragen massiv erhöhen. Wir
+                        unterscheiden folgende Fälle:
+                     </p>
+                     <ul class="list" id="d14e1040">
+                        <li class="itemAlt"> mehrere Bedingungen (konjunktiv oder disjunktiv verknüpft) </li>
+                        <li class="item"> komplexere Bedingungen (Unteranfragen, Bereichsanfragen,
+                           Verbundoperatoren) 
+                        </li>
+                        <li class="itemAlt"> spezielle Selektionen (Verknüpfung von Attributen) </li>
+                        <li class="item"> nicht-relationale Konstrukte (Sortieren, Gruppierungen,
+                           Aggregatfunktionen) 
+                        </li>
+                        <li class="itemAlt"> Mengenoperationen (Vereinigung, Durchschnitt, Differenz) </li>
+                     </ul>
+                     <p class="paragraph" id="d14e1051"> Versuchen Sie sich den Ablauf und die Wirkungsweise einer
+                        Datenbankanfrage mit Hilfe von SQL anhand des nachfolgenden animierten
+                        Beispiels zu verdeutlichen. zu 
+                     </p><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="_BspStdanfr.html" width="600"
+                                height="350"
+                                class="multimedia"
+                                title="Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer Standardabfrage an eine Relation mit Hilfe von SQL"
+                                data="../multimedia/SQL_Basic1b.swf">
+                           <param name="movie" value="../multimedia/SQL_Basic1b.swf" />
+                           <param name="quality" value="best" />
+                           <param name="scale" value="exactfit" />
+                           <param name="menu" value="true" />
+                           <param name="play" value="false" />
+                           <param name="wmode" value="opaque" />
+                           <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                  type="application/x-shockwave-flash"
+                                  quality="best"
+                                  scale="exactfit"
+                                  menu="true"
+                                  play="false"
+                                  wmode="opaque"
+                                  src="../multimedia/SQL_Basic1b.swf"
+                                  width="600"
+                                  height="350"
+                                  class="multimedia"
+                                  title="Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer Standardabfrage an eine Relation mit Hilfe von SQL"></embed></object><span class="legend" style="display:block">Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer Standardabfrage an eine Relation mit Hilfe von SQL</span></span><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="_BspVerketAnf.html" width="600"
+                                height="350"
+                                class="multimedia"
+                                title="Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer verketteten Abfrage an eine Relation mit Hilfe von SQL"
+                                data="../multimedia/SQL_Basic2.swf">
+                           <param name="movie" value="../multimedia/SQL_Basic2.swf" />
+                           <param name="quality" value="best" />
+                           <param name="scale" value="exactfit" />
+                           <param name="menu" value="true" />
+                           <param name="play" value="false" />
+                           <param name="wmode" value="opaque" />
+                           <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                  type="application/x-shockwave-flash"
+                                  quality="best"
+                                  scale="exactfit"
+                                  menu="true"
+                                  play="false"
+                                  wmode="opaque"
+                                  src="../multimedia/SQL_Basic2.swf"
+                                  width="600"
+                                  height="350"
+                                  class="multimedia"
+                                  title="Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer verketteten Abfrage an eine Relation mit Hilfe von SQL"></embed></object><span class="legend" style="display:block">Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer verketteten Abfrage an eine Relation mit Hilfe von SQL</span></span><span class="multimedia_paragraph_center"><object type="application/x-shockwave-flash" id="_BspVerschAnf.html" width="600"
+                                height="500"
+                                class="multimedia"
+                                title="Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer verschachtelten Abfrage an eine Relation mit Hilfe von SQL"
+                                data="../multimedia/SQL_Basic3.swf">
+                           <param name="movie" value="../multimedia/SQL_Basic3.swf" />
+                           <param name="quality" value="best" />
+                           <param name="scale" value="exactfit" />
+                           <param name="menu" value="true" />
+                           <param name="play" value="false" />
+                           <param name="wmode" value="opaque" />
+                           <embed pluginspage="http://www.macromedia.com/go/getflashplayer"
+                                  type="application/x-shockwave-flash"
+                                  quality="best"
+                                  scale="exactfit"
+                                  menu="true"
+                                  play="false"
+                                  wmode="opaque"
+                                  src="../multimedia/SQL_Basic3.swf"
+                                  width="600"
+                                  height="500"
+                                  class="multimedia"
+                                  title="Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer verschachtelten Abfrage an eine Relation mit Hilfe von SQL"></embed></object><span class="legend" style="display:block">Schrittweise Darstellung des Ablaufs und der Wirkungsweise einer verschachtelten Abfrage an eine Relation mit Hilfe von SQL</span></span></div>
+               </div>
+               <div id="d14e1056.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e1057">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d14e1058">
+                        <li class="itemAlt"> Besuchen sie die Web-Repräsentanzen aus <a class="link" href="../../../GISBScL1/de/html/index.html" title="Lerneinheit 1">Lerneinheit 1</a> und versuchen Sie die
+                           Datenbankschnittstelle zu analysieren. 
+                           <ul class="list" id="d14e1064">
+                              <li class="itemAlt"><a class="link" href="http://www.rast.de/standorte/suche/detail.html?ID=209"
+                                    target="_blank"
+                                    title="http://www.rast.de/standorte/suche/detail.html?ID=209">http://www.rast.de/standorte/suche/detail.html?ID=209</a></li>
+                              <li class="item"><a class="link" href="http://www.wetterbote.de/wetter/pegel/lahn.htm"
+                                    target="_blank"
+                                    title="http://www.wetterbote.de/wetter/pegel/lahn.htm">http://www.wetterbote.de/wetter/pegel/lahn.htm</a></li>
+                              <li class="itemAlt"><a class="link"
+                                    href="http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115"
+                                    target="_blank"
+                                    title="http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115">http://www.hlug.de/medien/luft/recherche/recherche.php?station=1115</a></li>
+                              <li class="item"><a class="link" href="http://www.cineplex.de/kino/home/city32/" target="_blank"
+                                    title="http://www.cineplex.de/kino/home/city32/">http://www.cineplex.de/kino/home/city32/</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL2a_V_lo5.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2a_summary.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch" targetNamespace="http://www.elml.ch" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+	<xs:annotation>
+		<xs:documentation>
+
+		--------------------------------------------------------------------------------------
+
+                             default_validate.xsd		
+
+		
+
+		The file default_validate.xsd provides default type and attribute definitions for the various eLML schemas. Each definition is redefined in the respective schema which uses the definition. The default definitions in this files are used to avoid validation errors in the various eLML schemas.
+
+		--------------------------------------------------------------------------------------
+
+		v. 1.0 - 14.03.06 - Susanne Bleisch (susannebleisch[at]users.sourceforge.net)
+
+		</xs:documentation>
+	</xs:annotation>
+	<!-- ======================== Include the other schemas ======================== -->
+	<!--The name of the main eLML schema file.-->
+	<xs:include schemaLocation="../../core/structure/elml.xsd"/>
+	<!--The name of your metadata schema. If you use your own metadata standard, insert the according xsd file here.-->
+	<xs:include schemaLocation="../../core/structure/metadata_elml.xsd"/>
+	<!--The name of your bibliography schema. If you use your own referencing schema, insert the according xsd file here.-->
+	<xs:include schemaLocation="../../core/structure/biblio_harvard.xsd"/>
+
+	<!-- cssClass Definition -->
+	<xs:attributeGroup name="CSSClassImp">
+		<xs:attribute name="cssClass" type="xs:string" use="optional"/>
+	</xs:attributeGroup>
+	<!-- Organisation required -->
+	<xs:attributeGroup name="OrganisationReq">
+		<xs:attribute name="level" type="xs:string" use="required"/>
+		<xs:attribute name="module" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<!-- Icon implied -->
+	<xs:attributeGroup name="IconImp">
+		<xs:attribute name="icon" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="InstituteReq">
+		<xs:attribute name="institute" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<!-- Departement required -->
+	<xs:attributeGroup name="DepartementReq">
+		<xs:attribute name="departement" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<!-- LessonLabel required -->
+	<xs:attributeGroup name="LessonLabelReq">
+		<xs:attribute name="label" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<!-- PredefinedLabelsType -->
+	<xs:simpleType name="PredefinedLabelsType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<!-- LanguageType -->
+	<xs:simpleType name="LanguageType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<!-- Copyright Type -->
+	<xs:simpleType name="CopyrightType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<!-- YesNoType -->
+	<xs:simpleType name="YesNoType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<!-- Role implied -->
+	<xs:attributeGroup name="RoleImp">
+		<xs:attribute name="role" type="xs:string"/>
+	</xs:attributeGroup>
+	<!-- BibIDRef required -->
+	<xs:attributeGroup name="BibIDRefReq">
+		<xs:attribute name="bibIDRef" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<!-- BibIDRef implied -->
+	<xs:attributeGroup name="BibIDRefImp">
+		<xs:attribute name="bibIDRef" type="xs:string"/>
+	</xs:attributeGroup>
+	<!-- BibPageNr -->
+	<xs:attributeGroup name="BibPageNr">
+		<xs:attribute name="pageNr" type="xs:string"/>
+	</xs:attributeGroup>
+	<!-- Sorting -->
+	<xs:attributeGroup name="SortingImp">
+		<xs:attribute name="sorting" type="xs:string"/>
+	</xs:attributeGroup>
+	<!-- Visible -->
+	<xs:attributeGroup name="VisibleImp">
+		<xs:attribute name="visible" type="xs:string"/>
+	</xs:attributeGroup>
+</xs:schema>

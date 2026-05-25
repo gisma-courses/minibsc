@@ -1,0 +1,2 @@
+GISBScL3/de/material/Geodatabase.zip filter=lfs diff=lfs merge=lfs -text
+_templates/gisma/material/Geodatabase.zip filter=lfs diff=lfs merge=lfs -text

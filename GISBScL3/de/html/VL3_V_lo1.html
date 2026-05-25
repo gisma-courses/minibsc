@@ -1,0 +1,511 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Räumliche Analysemethoden: Distanzbeziehugnen: Voronoi Polygone als Ableitung von Entfernung und Nachbarschft. Voronoi-Polygone. Thiessen-Polygone. Wie werden Thiessen-Polygone konstruiert? Thiessen-Polygonen im Raster. Bearbeiten Sie... Konstruktion von Thiessen-Polygonen. " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Marco                         Hugentobler (GITTA contributor) , Moe Myint (GITTA contributor) , Claude Collet (GITTA contributor) , Sandro Bischof (GITTA contributor) , Robert Weibel (GITTA contributor) , Suzette Hägi (GITTA contributor) , Joël                          Fisler (GITTA contributor) , Friedjoff Trautwein (GITTA contributor) , Marcel Frehner (GITTA contributor) , Eric Lorup (GITTA contributor) , Patrick                         Laube (GITTA contributor) " />
+      <meta name="keywords"
+            content="Räumliche Analysemethoden, Terrain Analysis, Eignungsanalyse, Entscheidungsunterstützung mit GIS, Boolesche Verschneidung, Boolesche Algebra, Standardisierung, Gewichtete Verschneidung, Proxyvariable, eLML" />
+      <title>Distanzbeziehugnen: Voronoi Polygone als Ableitung von Entfernung und Nachbarschft</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Räumliche Analysemethoden</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="unit_VL3.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="VL3_V_lo2.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Distanzbeziehungen</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo2.html">Distanz-basierte Interpolation</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo3.html">Informationen und Ableitungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo4.html">Ableitung kontinuierlicher Datenfelder</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo5.html">Sichtbarkeitsanalyse</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo6.html">Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo7.html">Vertiefung Abflussnetzwerke</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL3/de/html/VL3_V_lo8.html">Ableitungen aus Abflussnetzwerken</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/VL3_selfAssessment9.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="VL3_V_lo1.html">Distanzbeziehugnen: Voronoi Polygone als Ableitung von Entfernung und Nachbarschft</h1>
+               <div id="d8e58.html" class="clarify">
+                  <p class="paragraph" id="d8e59"> Wir erweitern nun unser Wissen über die Analyse von Distanzen zwischen
+                     räumlichen Objekten. Es ist häufig sinnvoll, in einer ersten Analyse ohne
+                     räumlich einschränkende Bedingungen zu arbeiten, z.B. dann wenn diese
+                     Informationen fehlen. Die Bezeichnung „Nähe“ (Proximität) verweist auf eine
+                     gewisse <span style="text-decoration:underline;">Ungenauigkeit</span>. Als qualitative
+                     Begriffe können hierfür verwendet werden: „<i>nah</i>“, „<i>weit</i>“ oder
+                     „<i>in der Nachbarschaft von</i>“. Für
+                     GI-Systeme müssen diese Begriffe objektiviert und operationalisiert werden.
+                     Diesem Maß muss folglich ein <span style="text-decoration:underline;">Distanzkonzept</span> zugrunde gelegt werden z. B. die euklidische
+                     Distanz oder Wegzeiten. In einem zweiten <span style="text-decoration:underline;">interpretativen</span> Schritt muss anschließend entschieden werden,
+                     welche Einheiten diese Art der Nähe definieren. Es gibt im Sinne der Zielsetzung
+                     einer Fragestellung nur geeignete und weniger geeignete Maße, nicht aber
+                     richtige oder falsche. Daher ist es von zentraler Bedeutung, dass man für die
+                     untersuchten Objekte eine sinnvolle Nachbarschaftsbeziehung definiert. In
+                     Abbildung 1 ist das Objekt B groß, und seine Nachbarschaft (grau eingefärbt) ist
+                     hauptsächlich bestimmt durch benachbarte große Objekte, während Objekt A
+                     (Abbildung 2) kleiner ist und sich auf eine andere Nachbarschaft bezieht,
+                     hauptsächlich bestimmt durch lokale kleinere Objekte. Es ist ersichtlich, dass A
+                     in die lokale Umgebung von B gehört, aber es ist nicht unbedingt der Fall, dass
+                     B in die lokale Umgebung von A gehört. 
+                  </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e80" src="../image/distanz-kontext1.gif" width="350"
+                          title="Distanz und Nähe  ist                     kontextabhängig und nicht symmetrisch"
+                          alt="Distanz und Nähe  ist                     kontextabhängig und nicht symmetrisch" /><span class="legend" style="display:block">Distanz und Nähe  ist                     kontextabhängig und nicht symmetrisch (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1301">Worboys</a> 1996)</span></span><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e81" src="../image/distanz-kontext2.gif" width="350"
+                          title="Distanz und Nähe  ist                     kontextabhängig und nicht symmetrisch"
+                          alt="Distanz und Nähe  ist                     kontextabhängig und nicht symmetrisch" /><span class="legend" style="display:block">Distanz und Nähe  ist                     kontextabhängig und nicht symmetrisch (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1301">Worboys</a> 1996)</span></span><p class="paragraph" id="d8e82">In Analysen der Nähe oder Nachbarschaft geht es häufig um Einflussgebiete
+                     oder Einzugsgebiete also um räumliche Wirkungs- oder Prozessmuster. Häufige
+                     Fragen in diesem Zusammenhang sind: 
+                  </p>
+                  <ul class="list" id="d8e84">
+                     <li class="itemAlt"> Welche oder wie viele Diskotheken liegen im Umkreis von 300m um einen
+                        bestimmten Standort (Outdoorcamp)?
+                     </li>
+                     <li class="item"> Wie viele Täler können von einem Aussichtspunkt eingesehen werden?</li>
+                     <li class="itemAlt"> Liegt ein bestimmter Standort in der Lärmzone eines Quad-Tracks?</li>
+                  </ul>
+                  <p class="paragraph" id="d8e91"> In der Folge werden einige Methoden zur Berechnung von Distanzen
+                     zwischen Raumobjekten etwas ausführlicher als bisher erörtert. Wegen der
+                     unterschiedlichen Art der Diskretisierung des Raums muss -wie bereits gewohnt-
+                     zwischen Vektor- und Rastermodell unterschieden werden. 
+                  </p>
+               </div>
+               <div id="d8e93.html" class="look">
+                  <h4>Voronoi-Polygone</h4>
+                  <p class="paragraph" title="Voronoi-Polygone" id="d8e94">Thiessen-Polygone – auch Voronoi-Polygone oder
+                     Voronoi-Diagramme genannt – sind eine wesentliche Methode, um Nähe (Proximität)
+                     bzw. Nachbarschaften zu analysieren. Thiessen-Polygone (vgl. Abbildung unten
+                     rechts) können verwendet werden, wenn Regionen gesucht sind, die am nächsten zu
+                     einem Punkt aus einer Menge von unregelmäßig verteilten Punkten liegen. Ein
+                     Thiessen-Polygon definiert im zweidimensionalen Fall eine Fläche um einen Punkt,
+                     in der jede Raumstelle näher an diesem Punkt liegt als an irgendeinem anderen
+                     Punkt. Solche Konstrukte können auch in höheren Dimensionen gebildet werden,
+                     wobei dann Thiessen- oder Voronoi-Polyeder entstehen statt Polygone. 
+                  </p>
+                  <table class="column" id="d8e96">
+                     <tr valign="top">
+                        <td class="columnLeft"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e98" src="../image/thiessen-punkte.gif"
+                                   title="Unregelmäßig                             verteilte Punkte oder Stichproben"
+                                   alt="Unregelmäßig                             verteilte Punkte oder Stichproben" /><span class="legend" style="display:block">Unregelmäßig                             verteilte Punkte oder Stichproben (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span></td>
+                        <td class="columnRight"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e100" src="../image/thiessen-polygone2.gif"
+                                   title="Punkte mit den                             dazugehörenden Thiessen-Polygonen"
+                                   alt="Punkte mit den                             dazugehörenden Thiessen-Polygonen" /><span class="legend" style="display:block">Punkte mit den                             dazugehörenden Thiessen-Polygonen (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+                  <p class="paragraph" id="d8e101">Man kann Voronoi-Diagramme auch um Linien bilden, was dann zu komplexeren
+                     Formen führt (siehe unten stehende Abbildung). In dieser Unit beschränken wir
+                     uns jedoch auf den einfachsten und am häufigsten verwendeten Fall von
+                     Thiessen-Polygonen für Punkte. Eine weiterführende Diskussion bietet <span class="citation"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1317">Boots</a> 1999)</span>.
+                  </p>
+                  <h4>Thiessen-Polygone</h4>
+                  <p class="paragraph" title="Thiessen-Polygone" id="d8e105">Da Thiessen-Polygone einem in der Natur (z. B.
+                     Pflanzenzellen) und in den Raumwissenschaften häufig beobachteten
+                     Organisationsprinzip (z.B. zentralle Orte nach Christaller) entsprechen, sind
+                     die Anwendungsmöglichkeiten mannigfaltig. Zum Beispiel können Thiessen-Polygone
+                     in erster Näherung verwendet werden, um aus unregelmäßig und isoliert erhobenen
+                     Bodenproben Bodenkarten zu erstellen. Dabei muß die Annahme getroffen werden,
+                     dass nichts weiter über den Raum zwischen den beprobten Orten bekannt ist und
+                     die Grenzlinie zwischen zwei Stichproben mit unterschiedlichem Bodentyp
+                     willkürlich auf halben Weg zwischen ihnen liegt (Beispiel aus <span class="citation"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1306">Jones</a> 1997, S. 48)</span>. Die Thiessen-Polygone können
+                     auch verwendet werden, um Einzugsgebiete von Geschäften oder
+                     Dienstleistungseinrichtungen abzugrenzen, wenn keine weiteren Informationen zur
+                     Verfügung stehen.
+                  </p>
+                  <table class="column" id="d8e109">
+                     <tr valign="top">
+                        <td class="columnLeft">
+                           <h4>Wie werden Thiessen-Polygone konstruiert?</h4>
+                           <p class="paragraph" title="Wie werden Thiessen-Polygone konstruiert?" id="d8e111"> Da
+                              Thiessen-Polygone jeweils alle Raumstellen enthalten, die näher beim
+                              dazugehörigen Zentrum liegen als bei irgendeinem anderen Zentrum, bildet
+                              jede Kante eines Thiessen-Polygons jeweils die Isolinie der Entfenungen
+                              zu allen benachbarten Zentren. Weil dem so ist, können die Kanten von
+                              Thiessen-Polygonen als Mittelsenkrechte auf die Verbindungslinie
+                              <i>d</i> zwischen jeweils zwei
+                              Zentren gebildet werden. Mittelsenkrechte konstruiert man durch
+                              Schneiden zweier Kreise mit Radius <i>d</i> um die betroffenen Paare von Zentren, wie dies die
+                              Abbildung unten zeigt. Die Schnittpunkte der verschiedenen
+                              Mittelsenkrechten bilden die Eckpunkte eines
+                              Thiessen-Polygons.
+                           </p>
+                        </td>
+                        <td class="columnRight" width="240"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e120" src="../image/thiessen-polgone.gif"
+                                   title="Konstruktion von                             Thiessen-Polygonen"
+                                   alt="Konstruktion von                             Thiessen-Polygonen" /><span class="legend" style="display:block">Konstruktion von                             Thiessen-Polygonen (<a class="bibLink" href="GISBScL3_bibliography.html#">Anonym</a>)</span></span></td>
+                     </tr>
+                  </table>
+                  <table class="column" id="d8e121">
+                     <tr valign="top">
+                        <td class="columnLeft">
+                           <h4>Thiessen-Polygonen im Raster</h4>
+                           <p class="paragraph" title="Thiessen-Polygonen im Raster" id="d8e123"> Die Ermittlung von
+                              Thiessen-Polygonen im Raster ist übrigens auch möglich. Im Raster kann
+                              zwar nicht mehr von Polygonen gesprochen werden, doch ist die Berechnung
+                              von Proximitätszonen sehr einfach zu bewerkstelligen. Von einer Anzahl
+                              von Punkten aus, gegeben als einzelne Zellen in einem Raster, kann ganz
+                              einfach eine Distanztransformation berechnet werden. Die Berechnung im
+                              Raster hat den Vorteil, dass auch sehr einfach nicht euklidische
+                              Metriken, Gewichtungsfaktoren usw. eingeführt werden können.
+                              
+                           </p>
+                        </td>
+                        <td class="columnRight" width="240"><span class="multimedia_paragraph_left"><img class="multimedia" id="d8e126" src="../image/thiessen-polygone4.gif"
+                                   title="Thiessen-Polygone in einem Raster mit                             kleiner Auflösung"
+                                   alt="Thiessen-Polygone in einem Raster mit                             kleiner Auflösung" /><span class="legend" style="display:block">Thiessen-Polygone in einem Raster mit                             kleiner Auflösung (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span></td>
+                     </tr>
+                  </table>
+               </div>
+               <div id="d8e127.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d8e128">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><h4>Konstruktion von Thiessen-Polygonen</h4>
+                     <p class="paragraph" title="Konstruktion von Thiessen-Polygonen" id="d8e129"> Konstruieren Sie auf der
+                        folgenden Grafik aus den gegebenen Punkten auf einem Papier (ausdrucken) die
+                        dazugehörenden Thiessen-Polygone. Was für eine Metrik ist der Konstruktion
+                        unterlegt? 
+                     </p><span class="multimedia_paragraph_center"><img class="multimedia" id="d8e131" src="../image/voronoi_test.jpg" width="400"
+                             alt="" /><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL3_bibliography.html#d8e1299">GITTA</a> 2005)</span></span></div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="unit_VL3.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="VL3_V_lo2.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 5.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL3.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

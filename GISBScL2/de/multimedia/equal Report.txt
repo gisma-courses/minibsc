@@ -1,0 +1,14 @@
+Movie Report
+-------------
+FrameFrame #    Frame Bytes    Total Bytes    Page
+------------    -----------    -----------    ---------------
+    1           396            396        Scene 1
+
+Page                       Shape Bytes    Text Bytes
+-----------------------    -----------    ----------
+Scene 1                          93            40
+
+
+Sound name                 Bytes        Format    
+-----------------------    ---------    ----------
+Lucida Sans Unicode           217        =AB

@@ -1,0 +1,766 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Topologische Operatoren. Topologische Kommandosyntax in ArcMap. Topologische Beziehungen. Bearbeiten Sie... " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Topologische Operatoren</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSc_VL2b_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSc_VL2b_summary.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo5.html">Raum im GIS</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBSc_VL2_V_lo6.html">Datenmodelle</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo10.html">Abfragen in Relationen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo1.html">Thematische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo2.html">Geometrische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSc_VL2b_V_lo3.html">Topologische Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Topologische Operatoren</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSc_VL2b_W_check_VL.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSc_VL2b_V_lo4.html">Topologische Operatoren</h1>
+               <div id="d14e2240.html" class="clarify">
+                  <p class="paragraph" id="d14e2241"> Die topologischen Operatoren sind Bestandteile der räumlichen
+                     Analysefunktionen eines GIS und dementsprechend grundlegend. Diese sind in den
+                     kommerziellen GIS wie ArcView, ArcInfo, Geomedia, MapInfo u. a. aber auch in den
+                     Open Source Paketen wie QGIS implementiert. Jedes System verfügt über eine
+                     eigene Formulierung der topologischen Abfragen; einige davon erlauben es, die
+                     topologischen Abfragen mittels SQL auszuführen. Geographische Datenbanken
+                     („spatial databases“) wie z.B. Oracle werden laufend weiterentwickelt und
+                     stellen solche Werkzeuge für die Datenverwaltung und ihre Funktionalitäten den
+                     GIS zur Verfügung. Sie implementieren weitere topologische Operatoren aus dem
+                     GIS-Bereich, welche effizient auf die entsprechende Datenstruktur anwendbar
+                     sind. Die folgende Tabelle listet einige Funktionen auf sowie den entsprechenden
+                     Operator, der von Geomedia, Oracle Spatial, ArcGIS und QGIS angeboten wird. 
+                  </p>
+                  <table class="table" id="d14e2243">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e2245"><b>TOPOLOGISCHE BEZIEHUNG</b></th>
+                           <th class="tableheading" id="d14e2248"><b>ORACLE</b></th>
+                           <th class="tableheading" id="d14e2251"><b>GEOMEDIA</b></th>
+                           <th class="tableheading" id="d14e2254"><b>ARCVIEW</b></th>
+                           <th class="tableheading" id="d14e2257"><b>QGIS</b></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2261"><b>Disjoint</b></td>
+                           <td class="tabledata" id="d14e2264"> disjoint </td>
+                           <td class="tabledata" id="d14e2266"> - </td>
+                           <td class="tabledata" id="d14e2268"> are within a distance of </td>
+                           <td class="tabledata" id="d14e2270"> außerhalb</td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2273"><b>Meet</b></td>
+                           <td class="tabledata" id="d14e2276"> touch </td>
+                           <td class="tabledata" id="d14e2278"> meet </td>
+                           <td class="tabledata" id="d14e2280"> - </td>
+                           <td class="tabledata" id="d14e2282"> berührt </td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2285"><b>Overlap</b></td>
+                           <td class="tabledata" id="d14e2288"> overlap by intersect </td>
+                           <td class="tabledata" id="d14e2290"> overlap </td>
+                           <td class="tabledata" id="d14e2292"> intersect </td>
+                           <td class="tabledata" id="d14e2294"> überlappt </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2297"><b>Contains</b></td>
+                           <td class="tabledata" id="d14e2300"> contains </td>
+                           <td class="tabledata" id="d14e2302"> entirely contains </td>
+                           <td class="tabledata" id="d14e2304"> completely contains </td>
+                           <td class="tabledata" id="d14e2306"> enthält </td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2309"><b>Inside</b></td>
+                           <td class="tabledata" id="d14e2312"> covers </td>
+                           <td class="tabledata" id="d14e2314"> are entirely contained by </td>
+                           <td class="tabledata" id="d14e2316"> contains the center of </td>
+                           <td class="tabledata" id="d14e2318"> innerhalb </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2321"><b>Covers</b></td>
+                           <td class="tabledata" id="d14e2324"> inside </td>
+                           <td class="tabledata" id="d14e2326"> contain </td>
+                           <td class="tabledata" id="d14e2328"> have their center in </td>
+                           <td class="tabledata" id="d14e2330"> innerhalb </td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2333"><b>Coverered by</b></td>
+                           <td class="tabledata" id="d14e2336"> coveredby </td>
+                           <td class="tabledata" id="d14e2338"> are contained by </td>
+                           <td class="tabledata" id="d14e2340"> are completely within </td>
+                           <td class="tabledata" id="d14e2342"> innerhalb </td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2345"><b>Equal</b></td>
+                           <td class="tabledata" id="d14e2348"> equal </td>
+                           <td class="tabledata" id="d14e2350"> are spatially equal </td>
+                           <td class="tabledata" id="d14e2352"> - </td>
+                           <td class="tabledata" id="d14e2354"> gleich </td>
+                        </tr>
+                     </tbody>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></div>
+               <div class="look">
+                  <h2 id="d14e2356.html">Topologische Kommandosyntax in ArcMap</h2>
+                  <p class="paragraph" id="d14e2357"><b>SelectLayerByLocation_management </b><i>&lt;in_layer&gt;</i> {INTERSECT |
+                     WITHIN_A_DISTANCE | COMPLETELY_CONTAINS | COMPLETELY_WITHIN |
+                     HAVE_THEIR_CENTER_IN | SHARE_A_LINE_SEGMENT_WITH | BOUNDARY_TOUCHES |
+                     ARE_IDENTICAL_TO | CROSSED_BY_THE_OUTLINE_OF | CONTAINS | CONTAINED_BY}
+                     {select_features} {search_distance} {NEW_SELECTION | ADD_TO_SELECTION |
+                     REMOVE_FROM_SELECTION | SUBSET_SELECTION | SWITCH_SELECTION} 
+                  </p>
+                  <p class="paragraph" id="d14e2363">Beispiel: <br /><br /><code>SelectLayerByLocation seen WITHIN_A_DISTANCE TibetOrte
+                        100 NEW_SELECTION</code></p>
+                  <h4>Topologische Beziehungen</h4>
+                  <p class="paragraph" title="Topologische Beziehungen" id="d14e2368"> Die wichtigsten topologischen
+                     Beziehungen zwischen Geoobjekten, die im GIS-Bereich genutzt werden, sind in der
+                     Folge aufgelistet. Dabei ist zu beachten, dass grundsätzlich alle drei
+                     Geometrietypen (Punkt, Linie und Fläche) des Vektordatenmodells berücksichtigt
+                     werden. <br /><br /><b>Disjunkt (Disjoint)</b>: <i>Objekt A und Objekt B weisen keine Schnittfläche
+                        auf.</i> Test auf Getrenntheit (Disjoint) der Ausgangsgeometrie und
+                     einer anderen Geometrie. <br /><br /><b>Meet</b>:<i> Objekt A und
+                        Objekt B berühren sich an den Grenzlinien.</i> Test auf Berührung
+                     (Touch) der Ausgangsgeometrie und einer anderen Geometrie. Die Ränder schneiden
+                     sich, nicht aber das Innere der beiden Geometrien. Zwei Geometrien berühren
+                     sich, wenn sich nur die Ränder schneiden. <br /><br /><b>Overlap</b>: <i>Objekt A
+                        und Objekt B überschneiden sich</i>. Test auf Überschneidung
+                     (Intersect) der Ausgangsgeometrie und einer anderen Geometrie (Umkehrung von
+                     Disjunkt). <br /><i>Überlappung mit Getrenntheit:</i> Das Innere
+                     eines Objekts schneidet den Rand und das Innere des anderen Objekts, die beiden
+                     Ränder schneiden sich aber nicht. Das ist der Fall, z. B. wenn eine Linie
+                     außerhalb eines Polygons (Fläche) beginnt und im Inneren des Polygons endet. <br /><i>Überlappung mit Überschneidung:</i> Die Ränder
+                     sowie das Innere der beiden Objekte schneiden sich. Wenn eine Geometrie eine
+                     andere schneiden soll, so muss die Geometrie des Schnittes einer kleineren
+                     Dimension in der größeren vorhanden sein; d. h.: 
+                  </p>
+                  <ul class="list" id="d14e2400">
+                     <li class="itemAlt"><i>Punkte</i><br /> - Können keine
+                        Punkte, Linien oder Flächen schneiden. 
+                     </li>
+                     <li class="item"><i>Linien</i><br /> - Können keine Punkte
+                        schneiden.<br /> - Können weitere Linien schneiden » Schnitt =
+                        Punkte.<br /> - Können Polygonen schneiden » Schnitt = Linien
+                        (Punkte).<br /></li>
+                  </ul>
+                  <p class="paragraph" id="d14e2416"><b>Contains</b>: <i>Objekt A
+                        enthält Objekt B.</i> Test, ob die Ausgangsgeometrie eine andere
+                     Geometrie umschließt (Contains). Das Innere und der Rand eines Objekts sind
+                     vollständig im Inneren eines anderen Objekts enthalten. Eine Geometrie kann
+                     keine Geometrie höherer Ordnung (Dimension) enthalten; d. h.: 
+                  </p>
+                  <ul class="list" id="d14e2423">
+                     <li class="itemAlt"> Punkte können keine Linien oder Fläche enthalten. </li>
+                     <li class="item"> Linien können keine Fläche enthalten. </li>
+                  </ul>
+                  <p class="paragraph" id="d14e2428"><b>Inside</b>: <i>Objekt B
+                        liegt innerhalb Objekt A.</i> Das Gegenteil zu „enthalten“. Wenn A
+                     innerhalb B liegt, so enthält B A. <br /><br /><b>Covers</b>: <i>Objekt A
+                        deckt Objekt B.</i> Das Innere eines Objekts liegt vollständig im
+                     Inneren des anderen Objekts, und die Ränder schneiden sich. Eine Geometrie kann
+                     keine Geometrie höherer Ordnung (Dimension) enthalten; d. h.: 
+                  </p>
+                  <ul class="list" id="d14e2442">
+                     <li class="itemAlt"> Punkte können keine Linien oder Flächen enthalten. </li>
+                     <li class="item"> Linien können keine Fläche enthalten. </li>
+                  </ul>
+                  <p class="paragraph" id="d14e2447"><b>Covered by</b>: <i>Objekt
+                        B ist von Objekt A bedeckt.</i> Das Gegenteil zu „decken“. Wenn A
+                     von B gedeckt ist, so deckt B A. <br /><br /><b>Equal</b>: <i>Objekt B
+                        und Objekt A stimmen überein.</i> Test auf Gleichheit (Equals) der
+                     Ausgangsgeometrie und einer anderen Geometrie. Das Innere und der Rand eines
+                     Objekts liegen auf dem Rand des zweiten Objekts (und das zweite bedeckt das
+                     erste Objekt). Diese Beziehung besteht z. B., wenn eine Linie genau auf den Rand
+                     einer Fläche fällt. Die Koordinaten aller einzelnen Bestandpunkte müssen gleich
+                     sein. Die verglichenen Geometrien müssen ebenfalls gleich sein; d. h.: 
+                  </p>
+                  <ul class="list" id="d14e2461">
+                     <li class="itemAlt"> Punkte = Punkte </li>
+                     <li class="item"> Linien = Linien </li>
+                     <li class="itemAlt"> Polygone = Polygone </li>
+                  </ul>
+                  <p class="paragraph" id="d14e2468"> Sie können die topologischen Beziehungen anhand der folgenden Tabelle
+                     nachvollziehen. Die Auflistung zeigt die am häufigsten vorkommenden
+                     topologischen Beziehungen: 
+                  </p>
+                  <table class="table" id="d14e2471">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e2473"><b></b></th>
+                           <th class="tableheading" id="d14e2475"><b>poly-poly</b></th>
+                           <th class="tableheading" id="d14e2478"><b>line-line</b></th>
+                           <th class="tableheading" id="d14e2481"><b>point-point</b></th>
+                           <th class="tableheading" id="d14e2484"><b>poly-line</b></th>
+                           <th class="tableheading" id="d14e2487"><b>poly-point</b></th>
+                           <th class="tableheading" id="d14e2490"><b>line-point</b></th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2494"><b>Disjoint</b></td>
+                           <td class="tabledata" id="d14e2497"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2498" src="../image/disjoint1.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2499"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2500" src="../image/disjoint2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2501"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2502" src="../image/disjoint3.jpg" width="60"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2503"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2504" src="../image/disjoint4.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2505"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2506" src="../image/disjoint5.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2507"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2508" src="../image/disjoint6.jpg" width="60"
+                                      height="50"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2510"><b>Meet</b></td>
+                           <td class="tabledata" id="d14e2513"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2514" src="../image/meet1.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2515"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2516" src="../image/meet2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2517"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2518" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2519"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2520" src="../image/meet3.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2521"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2522" src="../image/meet5.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2523"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2524" src="../image/meet4.jpg" width="60"
+                                      height="50"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2526"><b>Overlap</b></td>
+                           <td class="tabledata" id="d14e2529"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2530" src="../image/intersect1.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2531"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2532" src="../image/intersect3.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2533"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2534" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2535"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2536" src="../image/intersect2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2537"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2538" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2539"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2540" src="../image/blankForTable.gif" alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2542"><b>Contains</b></td>
+                           <td class="tabledata" id="d14e2545"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2546" src="../image/contains1.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2547"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2548" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2549"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2550" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2551"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2552" src="../image/contains3.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2553"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2554" src="../image/contains2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2555"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2556" src="../image/meet4.jpg" width="60"
+                                      height="50"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2558"><b>Inside</b></td>
+                           <td class="tabledata" id="d14e2561"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2562" src="../image/inside1.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2563"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2564" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2565"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2566" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2567"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2568" src="../image/inside3.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2569"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2570" src="../image/inside2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2571"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2572" src="../image/blankForTable.gif" alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2574"><b>Covers</b></td>
+                           <td class="tabledata" id="d14e2577"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2578" src="../image/covers1.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2579"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2580" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2581"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2582" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2583"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2584" src="../image/covers2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2585"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2586" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2587"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2588" src="../image/blankForTable.gif" alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2590"><b>Covered by</b></td>
+                           <td class="tabledata" id="d14e2593"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2594" src="../image/covered_by1.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2595"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2596" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2597"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2598" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2599"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2600" src="../image/covered_by2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2601"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2602" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2603"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2604" src="../image/blankForTable.gif" alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2606"><b>Equal</b></td>
+                           <td class="tabledata" id="d14e2609"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2610" src="../image/equal3.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2611"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2612" src="../image/equal2.jpg" width="70"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2613"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2614" src="../image/equal1.jpg" width="60"
+                                      height="50"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2615"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2616" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2617"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2618" src="../image/blankForTable.gif" alt="" /></span></td>
+                           <td class="tabledata" id="d14e2619"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2620" src="../image/blankForTable.gif" alt="" /></span></td>
+                        </tr>
+                     </tbody>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span><p class="paragraph" id="d14e2621"> Die Beziehungen zwischen Flächenobjekten und anderen Objekten kommen am
+                     häufigsten vor. Nachfolgend einige mögliche topologische Abfragen in diesem
+                     Zusammenhang. 
+                  </p>
+                  <table class="table" id="d14e2623" width="620">
+                     <thead>
+                        <tr class="tablerowAlt">
+                           <th class="tableheading" id="d14e2625" width="80">Ebene 1</th>
+                           <th class="tableheading" id="d14e2627" width="80">Ebene 2</th>
+                           <th class="tableheading" id="d14e2629" width="80">Input</th>
+                           <th class="tableheading" id="d14e2631" width="140">Abfrage</th>
+                           <th class="tableheading" id="d14e2633" width="150">Resultat Tabelle</th>
+                           <th class="tableheading" id="d14e2635" width="130">Resultat Geometrie</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2638"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2639" src="../image/houses.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2640"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2641" src="../image/wald_feld.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2642"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2643" src="../image/wald_feld_houses.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2644"> Suche die Gebäude, die vollständig im
+                              Wald liegen. 
+                           </td>
+                           <td class="tabledata" id="d14e2649"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2650" src="../image/tab3_1.jpg" width="140"
+                                      height="179"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2651"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2652" src="../image/voll_enhaelt.jpg" width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerow">
+                           <td class="tabledata" id="d14e2654"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2655" src="../image/houses.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2656"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2657" src="../image/wald_feld.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2658"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2659" src="../image/wald_feld_houses.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2660"> Suche die Gebäude, die den Waldrand schneiden. </td>
+                           <td class="tabledata" id="d14e2662"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2663" src="../image/tab3_2.jpg" width="140"
+                                      height="179"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2664"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2665" src="../image/schneidet.jpg" width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                        <tr class="tablerowAlt">
+                           <td class="tabledata" id="d14e2667"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2668" src="../image/houses.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2669"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2670" src="../image/wald_feld.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2671"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2672" src="../image/wald_feld_houses.jpg" width="50"
+                                      height="70"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2673"> Suche die Gebäude, die ihren Schwerpunkt im Wald haben. </td>
+                           <td class="tabledata" id="d14e2675"><span class="multimedia_paragraph_left"><img class="multimedia" id="d14e2676" src="../image/tab3_3.jpg" width="140"
+                                      height="179"
+                                      alt="" /></span></td>
+                           <td class="tabledata" id="d14e2677"><span class="multimedia_paragraph_center"><img class="multimedia" id="d14e2678" src="../image/schwerpunkt.jpg" width="70"
+                                      height="70"
+                                      alt="" /></span></td>
+                        </tr>
+                     </tbody>
+                  </table><span class="legend" style="display:block"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3847">GITTA</a> 2005)</span></div>
+               <div id="d14e2679.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e2680">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/idee.gif" title="idee" alt="idee"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d14e2681">
+                        <li class="itemAlt">Versuchen Sie zu identifizieren welche der topologischen Operatoren
+                           Elemente der logischen und vergleichenden/arithmetischen Operatoren
+                           beinhalten 
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSc_VL2b_V_lo3.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSc_VL2b_summary.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

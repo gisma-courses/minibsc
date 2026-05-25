@@ -1,0 +1,536 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta name="description"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme: Digitalisieren von Geometrien. Bearbeiten Sie... Lösungshilfen Digitalisieren von Geometrien... Exkurs Editieren.... Bearbeiten Sie... Lösungshilfen Erweitertes Editieren. Aufgabenteil 1: Erweiterte Geometriebearbeitung. " />
+      <meta name="copyright" content="GISMA Marburg 2009-11" />
+      <meta name="author"
+            content="Chris Reudenbach (GISMA contributor) , Uwe Schulze (GISMA contributor) , Sebastian Wieneke (GISMA contributor) , Nils Räder (GISMA contributor) , Manuel Sudau (GISMA contributor) , Daniel Lee (GISMA contributor) , Anca Dobre (GITTA contributor) , Susanne Bleisch (GITTA contributor) , Stephan Nebiker (GITTA contributor) , Adrian Moser (GITTA contributor) , Dante Salvini (GITTA contributor) , Claudia Dolci (GITTA contributor) , Robert Weibel (GITTA contributor) " />
+      <meta name="keywords"
+            content="Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme, , , Physikalische Unabhängigkeit, Logische Unabhängigkeit, Relation, Datenpersistenz, Syntax, Konzeption, Datenbasis und Datenbank, Datenbankverwaltungssystem, Datenbanksystem, Logisches Schema, Externes Schema, Internes Schema, Konzept, Redundanz, Geodaten, Metadaten, Strukturierter Datenbestand, Datenbank, Rollback, Commit, Tupel, Attribut, Relationenschema, Relationales Datenbankschema, Fremdschlüssel, Schlüsselkandidat, Primärschlüssel, Identifikationsschlüssel, Transitive Abhängigkeit, Funktionale Abhängigkeit, Volle funktionale Abhängigkeit, 1. Normalform, 2. Normalform, 3. Normalform, Informationssystem, Domäne, eLML" />
+      <title>Digitalisieren von Geometrien</title>
+      <link rel="stylesheet" href="../../../_templates/gisma/elml.css" type="text/css"
+            media="screen" />
+      <link rel="stylesheet" href="../../../_templates/gisma/elml_print.css"
+            type="text/css"
+            media="print,handheld" /><script src="../../../_templates/gisma/elml.js" type="text/javascript">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/prototype.js"
+              id="lwloader_prototype_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/effects.js"
+              id="lwloader_effects_js">
+         <!----></script><script type="text/javascript"
+              src="../../../_templates/gisma/lightwindow/javascript/lightwindow_loader.js"
+              id="lwloader">
+         <!----></script><script type="text/javascript" language="JavaScript1.2" src="scorm_generic.js">
+         <!----></script></head>
+   <body xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:elml="http://www.elml.ch"
+         xmlns:xhtml="http://www.w3.org/1999/xhtml"
+         xmlns:functx="http://www.functx.com"
+         onunload="finish()">
+      <div class="bodywidth"><a accesskey="1" href="#navigation" title="Zur Navigation springen">
+                    <!----> </a><a accesskey="2" href="#content" title="Zum Inhalt springen">
+                    <!----> </a><a name="top"> <!----> </a><div id="breadcrumbnav"><a href="http://www.uni-marburg.de">
+               <h2>Philipps Universität Marburg</h2></a><a href="http://www.uni-marburg.de/fb19">
+               <h4>Fachbereich Geographie</h4></a></div>
+         <div id="headerarea">
+            <div style="float:right;width:195px;">
+               <div class="imgunilogo"><a href="http://www.uni-marburg.de/fb19/einrichtung/gisma"><img alt="PUM Logo" height="90" width="180"
+                          src="../../../_templates/gisma/images/think_gisma_logo.png" /></a></div>
+               <div class="imginstitute"></div>
+            </div>
+            <div id="headertitelpos">
+               <div id="servicenavpos"><a accesskey="0" href="http://minibsc.gis-ma.org/">Home</a> | <a accesskey="3" href="mailto:feedback@gis-ma.org">Kontakt</a> | 
+               </div>
+               <h1>Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</h1>
+            </div>
+         </div>
+         <div class="floatclear"> <!----> </div>
+         <div id="breadcrumbnav"></div>
+         <div class="floatclear"> <!----> </div>
+         <div class="endheaderline"><img alt="separation line" height="1"
+                 src="../../../_templates/gisma/authoring/images/1.gif"
+                 width="1" /></div>
+         <div id="toolnav"><a href="GISBSC_UE2a_U_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                    alt="Go to previous page"
+                    border="0" /> zurück </a><a href="GISBSC_UE2a_U_lo5.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                    alt="Go to next page"
+                    border="0" /> vor </a></div>
+         <div class="floatclear"> <!----> </div>
+         <div id="col1">
+            <div id="secnav">
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL1/de/html/index.html">GIS als räumliches Denken in der Geographie</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL1.html">Konzepte - Geographische Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL2.html"> Konzepte - GIS-Räume</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_VL3.html">Konzepte - Raumreferenzierung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/unit_GISBSc_UE1.html"> Praxis -  Ein Einstieg</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_W_UE.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL1/de/html/GISBScL1_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL1/de/html/GISBScL1_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL2/de/html/index.html">Relationen und Datenbanken - Grundlage  räumlicher Informationssysteme</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2a.html">Konzepte - Datenverwaltung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSc_VL2b.html">Konzepte - Relationale Abfragen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2a.html">Praxis - Editieren von Datenentabellen und Geometrien</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2a_U_lo1.html">Konzeptioneller Entwurf von Datenbanken</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><span class="navigationActual">Digitalisieren von Geometrien</span></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2a_U_lo5.html">Einführung in die Geodatabase</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSC_UE2a_summary.html">Zusammenfassung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBSC_UE2a_UE_WC.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent: 0px; margin-right:10px; margin-left: 45px; margin-top: 3px; margin-bottom: 3px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBSC_UE2a_furtherReading.html">Literaturempfehlungen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/unit_GISBSC_UE2b.html">Praxis - Angewandte Informationgewinnung - Abfragen in GI-Systemen</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL2/de/html/GISBScL2_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL2/de/html/GISBScL2_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL3/de/html/index.html">Räumliche Analysemethoden</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_VL3.html">Konzepte - Analysemethoden</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/unit_GISBSc_UE3.html">Praxis - OuterRaro I</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL3/de/html/GISBScL3_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL3/de/html/GISBScL3_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL4/de/html/index.html">Räumliche Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_VL4.html">Konzepte - Entscheidungsfindung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/unit_GISBSc_UE4a.html">Praxis - Projekt OuterRaro II</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_selfAssessment1.html">Wissens-Check</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_glossary.html">Glossar</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL4/de/html/GISBScL4_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL4/de/html/GISBScL4_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="text-align:left; line-height: 100%; text-indent:0px;margin-right:10px; margin-left:0px; margin-top: 5px; margin-bottom: 5px;"><a class="navigationLink" href="../../../GISBScL5/de/html/index.html">Die Projektarbeit</a></p>
+                  </td>
+                  <td width="28" height="34" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/unit_GISBSc_VL5.html">Projekte und ihre Umsetzung</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink"
+                           href="../../../GISBScL5/de/html/GISBScL5_bibliography.html">Bibliographie</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+               <tr align="left" valign="top">
+                  <td width="215" height="34" class="background_nav">
+                     <p style="font-size:11.5px;text-align:left; line-height: 100%; text-indent: 0px; margin-left: 15px; margin-top: 4px; margin-bottom: 4px;"><a class="navigationLink" href="../../../GISBScL5/de/html/GISBScL5_metadata.html">Metadaten</a></p>
+                  </td>
+                  <td width="28" class="background"></td>
+               </tr>
+                        <!----> 
+            </div> <!--
+            <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://web.resource.org/cc/"
+                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+               <Work rdf:about="">
+                  <license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/"></license>
+                  <dc:type rdf:resource="http://purl.org/dc/dcmitype/InteractiveResource"></dc:type>
+               </Work>
+               <License rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+                  <permits rdf:resource="http://web.resource.org/cc/Reproduction"></permits>
+                  <permits rdf:resource="http://web.resource.org/cc/Distribution"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/Notice"></requires>
+                  <requires rdf:resource="http://web.resource.org/cc/Attribution"></requires>
+                  <prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"></prohibits>
+                  <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"></permits>
+                  <requires rdf:resource="http://web.resource.org/cc/ShareAlike"></requires>
+               </License>
+            </rdf:RDF> --> 
+         </div>
+         <div class="contcol2"><a accesskey="2" class="namedanchor" name="content">
+                        <!----> </a><div class="content">
+               <h1 id="GISBSC_UE2a_U_lo2.html">Digitalisieren von Geometrien</h1>
+               <div id="d14e2804.html" class="clarify">
+                  <p class="paragraph" id="d14e2805"> Haben Sie nicht die finanziellen Möglichkeiten, um fertige
+                     Vektordatensätze zu kaufen oder finden Sie einfach keine geeigneten Vektordaten
+                     (was wesentlich häufiger der Fall ist!), müssen Sie diese Daten selbst von Hand
+                     erzeugen. Dieser Prozess wird allgemein als „<i>Digitalisieren</i>“ bezeichnet. Dabei erzeugen Sie auf Grundlage
+                     von Rasterbilddateien wie Satellitenbildszenen, Luftbildern, thematischen und
+                     topographischen Karten, einfachen Screenshots oder anderen Vorlagen Ihre eigenen
+                     Vektordaten, in erster Linie sogenannte <a class="link" href="../../../material/Kurzinfo_Shapefiles.pdf" target="_blank"
+                        title="Filetype: PDF">
+                        Kurzinfo_Shapefile</a> (Wer mehr will lese <a class="link" href="../../../material/All_about_Shapefiles.pdf" target="_blank"
+                        title="Filetype: PDF">All about Shape
+                        Files</a>) 
+                  </p>
+               </div>
+               <div id="d14e2816.html" class="look">
+                  <p class="paragraph" id="d14e2817"> Die technischen Grundlagen, Tipps und Kniffe der Geometriebearbeitung
+                     mit Hilfe von ArcGIS können Sie bei <span class="citation" style="display:inline">"<i>Geometriebearbeitung</i>" (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3844">2008</a>, S. 182-206)</span> nachlesen. 
+                  </p>
+               </div>
+               <div id="d14e2822.html" class="act">
+                  <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e2823">
+                     <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/tools.gif" title="tools" alt="tools"
+                          class="icon"
+                          style="padding-right:1.5em" /><ul class="list" id="d14e2824">
+                        <li class="itemAlt">Digitalisieren Sie auf Grundlage der bereits georeferenzierten Karte
+                           &lt;TK_Rarotonga.tif&gt; die Küstenlinie sowie alle befestigten (sealed
+                           road) Straßen von Rarotonga.
+                        </li>
+                        <li class="item">Digitalisieren Sie auf Grundlage der elektronischen Quelle
+                           &lt;Rarotonga_Districts.png&gt; <a class="link" href="../../../material/Datensatz3.zip" title="(Datensatz3.zip)">(Datensatz3.zip)</a> die
+                           Verwaltungseinheiten <i>districts</i> und
+                           <i>tapere</i> (sub-districts)
+                           <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3848">Wikipedia contributors</a> 22 July 2011)</span>. <b>Achtung</b> Vergegenwärtigen Sie sich die Notwendigkeit
+                           <i>überschneidungsfreie</i> und
+                           <i>lückenlose</i> gemeinsame Grenzen
+                           von Distrikten zu digialisieren <span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3844">Liebig et al.</a> 2008, S. 200ff)</span>. 
+                        </li>
+                     </ul><img src="../../../_templates/gisma/icons/important.gif" title="important"
+                          alt="important"
+                          class="icon" /><p class="infobox " id="d14e2852">Wie viele Shapefiles müssen Sie
+                        mindestens anlegen? Wieviele erscheinen Ihnen sinnvoll? Entwerfen Sie bei
+                        der Generierung der Shapedateien also jeweils bevor Sie mit der
+                        Digitalisierung beginnen ein geeignetes Relationsschema. Klären Sie welche
+                        Daten und welche Informationen Sie mit welchem Datentyp abbilden
+                        können/wollen. Weisen Sie den jeweiligen Geo(metrie)objekten die von Ihnen
+                        definierten Attributausprägungen zu. 
+                     </p>
+                  </div>
+                  <p id="d14e2854" class="popupTitle" style="cursor: pointer;"
+                     onclick="onBlock('solutiond14e2854')">Lösungshilfen Digitalisieren von Geometrien... (Klicken Sie hier für mehr Informationen) </p>
+                  <div id="solutiond14e2854text" style="display: none; cursor: pointer;" class="popup"
+                       title="Lösungshilfen Digitalisieren von Geometrien..."
+                       onclick="off('solutiond14e2854')">
+                     <ul class="list" id="d14e2855">
+                        <li class="itemAlt">Shapefile für die Küstenlinie von Rarotonga anlegen (Linie? Punkt?
+                           Polygon?)
+                        </li>
+                        <li class="item">Weisen Sie dem neuen Shapefile ein Koordinatensystem zu</li>
+                        <li class="itemAlt">Lesen Sie nach, wie digitalisiert wird</li>
+                        <li class="item"> Digitalisieren Sie die Inselfläche</li>
+                        <li class="itemAlt">Legen Sie ein Shapefile für die Straßen von Rarotonga an</li>
+                        <li class="item">Weisen Sie auch diesem Shapefile ein Koordinatensystem zu</li>
+                        <li class="itemAlt">Digitalisieren Sie die versiegelten Straßen</li>
+                        <li class="item">Legen Sie ein Shapefile für die Tampere von Rarotonga an</li>
+                        <li class="itemAlt">Weisen Sie diesem ein Koordinatensystem zu</li>
+                        <li class="item">Legen Sie ein Shapefile für die Verwaltungsgrenzen an</li>
+                        <li class="itemAlt">Kontrollieren Sie den Raumbezug</li>
+                        <li class="item">Digitalisieren Sie die Districts oder die Tamperen auf der
+                           Insel
+                        </li>
+                        <li class="itemAlt">Erzeugen Sie ein Shapefile von den Verwaltungseinheiten, die Sie noch
+                           nicht digitalisiert haben, indem entweder die Tamperen zusammengefügt
+                           oder die Districts getrennt werden. Gibt es einen Weg das zu tun, ohne
+                           alles von vorne wieder digitalisieren zu müssen?
+                        </li>
+                        <li class="item">Den Editiermodus beenden und die notwendigen Felder den
+                           Attributtabellen der Shapefiles hinzufügen, falls noch nicht
+                           vorhanden
+                        </li>
+                        <li class="itemAlt"> Im Editiermodus die zugehörigen Eigenschaften für jedes Feature in
+                           die Attributtabelle eintragen
+                        </li>
+                     </ul>
+                  </div>
+                  <div id="d14e2887.html" class="clarify">
+                     <p id="d14e2888" class="popupTitle" style="cursor: pointer;"
+                        onclick="onBlock('solutiond14e2888')">Exkurs Editieren.... (Klicken Sie hier für mehr Informationen) </p>
+                     <div id="solutiond14e2888text" style="display: none; cursor: pointer;"
+                          class="optional"
+                          title="Exkurs Editieren...."
+                          onclick="off('solutiond14e2888')">
+                        <p class="paragraph" id="d14e2889"> Nach dem Sie in <a class="link" href="../../../GISBScL4/de/html/GISBSc_UE4a_U_lo2.html"
+                              title="Lektion 4">Lektion 4</a>
+                           Digitalisieren von Geometrien) den Einstieg in das Digitalisieren
+                           vollzogen haben, gilt es nun, handwerkliche Routine bzw. Geschick zu
+                           erlangen. Hierfür sollen Sie die Arbeit an Ihren bisherigen Daten
+                           fortsetzen und weitere Möglichkeiten der Editierung von Geometrien in
+                           ArcGIS anwenden. 
+                        </p>
+                        <p class="paragraph" id="d14e2894">Informieren Sie sich zur <i>Erweiterten
+                              Geometriebearbeitung</i><span class="citation"> (<a class="bibLink" href="GISBScL2_bibliography.html#d14e3841">Liebig et al.</a> 2008, S. 97-131)</span>.Informieren Sie sich zusätzlich über die Funktionsweise der Werkzeuge
+                           Merge, Union, Intersect und Clip, die Sie im Kontext-Menü des Editors
+                           finden. (Nutzen Sie die ArcGIS-Hilfe)
+                        </p>
+                        <div class="bearbeitensiebox" title="Bearbeiten Sie..." id="d14e2900">
+                           <h4>Bearbeiten Sie...</h4><img src="../../../_templates/gisma/icons/tools.gif" title="tools" alt="tools"
+                                class="icon"
+                                style="padding-right:1.5em" /><ul class="list" id="d14e2901">
+                              <li class="itemAlt">etzen Sie die Arbeit an Ihren Flächen- und Liniengeometrien
+                                 fort und probieren Sie die Möglichkeiten der erweiterten
+                                 Geometriebearbeitung sowie der Werkzeuge im Kontextmenü des
+                                 Editor aus. 
+                              </li>
+                              <li class="item"> Identifizieren Sie auf Grundlage der &lt;TK_Rarotonga.tif&gt;
+                                 wichtige infrastrukturelle Objekte, die im Kontext der
+                                 Entwicklung einer umweltschonenden Outdoor-Reisemarke von
+                                 Interesse sein könnten. Welche thematische Strukturierung ist
+                                 sinnvoll?
+                              </li>
+                              <li class="itemAlt">Digitalisieren Sie diese Objekte als Punkt-Geometrien und
+                                 weisen Sie die entsprechenden Namensattribute zu. Wie viele
+                                 Shapefiles müssen Sie anlegen? Wie müssen die Datentabellen
+                                 strukturiert sein?
+                              </li>
+                              <li class="item">Georeferenzieren Sie die Karte <a class="link" href="../material/gewaessernetz.tif" title="&lt;gewaessernetz.tif&gt;">&lt;gewaessernetz.tif&gt;</a> und erfassen Sie auf deren
+                                 Grundlage das hydrologische Netz Rarotongas hierarchisch nach
+                                 Flussordnungszahl. Beachten Sie die Mündung der Bäche in den
+                                 Pazifik! Wie müssen die Datentabellen strukturiert sein?
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <p id="d14e2913" class="popupTitle" style="cursor: pointer;"
+                        onclick="onBlock('solutiond14e2913')">Lösungshilfen Erweitertes Editieren (Klicken Sie hier für mehr Informationen) </p>
+                     <div id="solutiond14e2913text" style="display: none; cursor: pointer;"
+                          class="optional"
+                          title="Lösungshilfen Erweitertes Editieren"
+                          onclick="off('solutiond14e2913')">
+                        <h4>Aufgabenteil 1: Erweiterte Geometriebearbeitung</h4>
+                        <p class="paragraph" title="Aufgabenteil 1: Erweiterte Geometriebearbeitung"
+                           id="d14e2914"></p>
+                        <ul class="list" id="d14e2915">
+                           <li class="itemAlt">Relevante infrastrukturelle Objekte in der TK_Rarotonga.tif
+                              identifizieren
+                           </li>
+                           <li class="item">Ein Punkt-Shapefile anlegen um sie zu digitalisieren</li>
+                           <li class="itemAlt">Dem neuen Shapefile ein Koordinatensystem geben</li>
+                           <li class="item">Punkt-Geodaten in ein Punkt-Shapefile digitalisieren</li>
+                           <li class="itemAlt">Relevante Felder der Attributtabelle hinzufügen</li>
+                           <li class="item">Im Editiermodus die dazugehörigen Informationen in der Tabelle
+                              eintragen
+                           </li>
+                           <li class="itemAlt">Eine thematische Strukturierung entwickeln. Wie möchten Sie die
+                              Informationen speichern? Wie viele Datensätze brauchen Sie
+                              dafür?
+                           </li>
+                           <li class="item">Die dazugehörigen Punkte jetzt in thematisch organisierte
+                              Shapefiles exportieren (z.B. öffentliche Infrastruktur, technische
+                              Infrastruktur, Freizeitinfrastruktur, Sonstiges) (<a class="link"
+                                 href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?id=2463&amp;pid=2459&amp;topicname=Exporting_selected_features_and_records_in_ArcMap"
+                                 target="_blank"
+                                 title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?id=2463&amp;pid=2459&amp;topicname=Exporting_selected_features_and_records_in_ArcMap">http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?id=2463&amp;pid=2459&amp;topicname=Exporting_selected_features_and_records_in_ArcMap</a>)
+                           </li>
+                           <li class="itemAlt">Nun, da Ihre Punktdaten thematisch abgespeichert sind, können Sie
+                              Ihr ursprüngliches Shapefile löschen (Datenkonsistenz)
+                              Gewässernetz.tif georeferenzieren (Global Mapper? ArcMap?)
+                           </li>
+                           <li class="item">Ein Linienshapefile für die Gewässer anlegen</li>
+                           <li class="itemAlt">Dem neuen Shapefile ein Koordinatensystem zuweisen</li>
+                           <li class="item"> Mit der Editor-Werkzeugleiste die Gewässer digitalisieren</li>
+                           <li class="itemAlt">Den Editiermodus beenden</li>
+                           <li class="item">Ein Feld in der Attributtabelle anlegen, in der die
+                              Flussordnungszahl eingetragen wird (Datentyp?)
+                           </li>
+                           <li class="itemAlt">Im Editiermodus die Flussordnungszahl für jedes Gewässer
+                              eintragen
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="toolnav"><a href="GISBSC_UE2a_U_lo1.html"><img src="../../../_templates/gisma/images/arrow_left.gif" height="13" width="9"
+                       alt="Go to previous page"
+                       border="0" />
+                  zurück </a><a href="GISBSC_UE2a_U_lo5.html"><img src="../../../_templates/gisma/images/arrow_right.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> vor </a><a href="#top"><img src="../../../_templates/gisma/images/arrow_weiss.gif" height="13" width="9"
+                       border="0" /><img src="../../../_templates/gisma/images/arrow_up.gif" height="13" width="9"
+                       alt="Go to next page"
+                       border="0" /> top </a></div>
+            <div class="footermargintop"> <!----> </div>
+            <div class="solidline"><img alt="separation line" height="1"
+                    src="../../../_templates/gisma/authoring/images/1.gif"
+                    width="1" /></div>
+            <div id="footer">
+               <p class="footer"> Update: 6.12.2011<a href="http://www.elml.ch/" target="_blank"> powered by eLML - &amp; - </a><a href="http://www.gitta.info/" target="_blank"> GITTA </a> - <a href="../text/GISBScL2.pdf">Drucken (PDF)</a> - <a rel="license" target="_blank"
+                     href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de">  CC by-nc-sa <img alt="Creative Commons License © " border="0"
+                          src="../../../_templates/gisma/icons/creativecommons.png"
+                          height="22"
+                          align="bottom" /></a> - <a href="mailto:feedback@gis-ma.org">Kontakt</a></p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
